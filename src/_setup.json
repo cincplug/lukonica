@@ -107,13 +107,15 @@
   {
     "id": "showsFaces",
     "description": "",
-    "value": true,
+    "value": false,
+    "isHidden": true,
     "type": "checkbox"
   },
   {
     "id": "showsHands",
     "description": "",
-    "value": true,
+    "value": false,
+    "isHidden": true,
     "type": "checkbox"
   }
 ]

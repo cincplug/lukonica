@@ -8,6 +8,7 @@ import Webcam from "react-webcam";
 import { runDetector, processColor } from "./utils";
 import defaultSetup from "./_setup.json";
 import Menu from "./Menu";
+import Splash from "./Splash";
 import "./App.scss";
 
 const inputResolution = {
@@ -21,7 +22,8 @@ const videoConstraints = {
 };
 
 function App() {
-  const [loaded, setLoaded] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [points, setPoints] = useState([]);
 
   const storageSetupItem = "kwastjeSetup";
@@ -54,13 +56,18 @@ function App() {
   };
 
   const handleVideoLoad = (videoNode) => {
+    const { showsFaces, showsHands } = setup;
     const video = videoNode.target;
     if (video.readyState !== 4) return;
-    if (loaded) return;
-    runDetector(video, setPoints);
-    // if (detectedPoints) setPoints(detectedPoints);
-    setLoaded(true);
+    if (isLoaded) return;
+    runDetector(video, setPoints, showsFaces, showsHands);
+    setIsLoaded(true);
   };
+
+  if (!isStarted) {
+    return <Splash {...{ setIsStarted, setSetup }} />;
+  }
+
   return (
     <div className="wrap">
       <Webcam
@@ -90,7 +97,7 @@ function App() {
                   key={`c-${index}`}
                   cx={point.x}
                   cy={point.y}
-                  r={Math.max(0, point.z + setup.radius) * setup.growth}
+                  r={Math.max(0, index + setup.radius) * setup.growth}
                   stroke="none"
                   fill={processColor(setup.color, setup.opacity)}
                 >
@@ -205,7 +212,7 @@ function App() {
           setSetup
         }}
       />
-      {loaded ? <></> : <header>Loading...</header>}
+      {isLoaded ? <></> : <header>Loading...</header>}
     </div>
   );
 }

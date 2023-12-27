@@ -1,7 +1,7 @@
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 
-export const runDetector = async (video, setPoints) => {
+export const runDetector = async (video, setPoints, showsFaces, showsHands) => {
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
     runtime: "tfjs",
@@ -11,18 +11,7 @@ export const runDetector = async (video, setPoints) => {
     facesModel,
     facesDetectorConfig
   );
-  const detectFaces = async (net) => {
-    const estimationConfig = { flipHorizontal: true };
-    const faces = await net.estimateFaces(video, estimationConfig);
-    requestAnimationFrame(() => {
-      if (faces && faces[0] && faces[0].keypoints) {
-        setPoints(faces[0].keypoints);
-      }
-    });
-    detectFaces(facesDetector);
-  };
-  detectFaces(facesDetector);
-  
+
   const handsModel = handPoseDetection.SupportedModels.MediaPipeHands;
   const handsDetectorConfig = {
     runtime: "tfjs",
@@ -32,17 +21,25 @@ export const runDetector = async (video, setPoints) => {
     handsModel,
     handsDetectorConfig
   );
-  const detectHands = async (net) => {
+
+  const detect = async () => {
     const estimationConfig = { flipHorizontal: true };
-    const hands = await net.estimateHands(video, estimationConfig);
-    requestAnimationFrame(() => {
-      if (hands && hands[0] && hands[0].keypoints) {
-        setPoints(hands[0].keypoints);
-      }
-    });
-    detectHands(handsDetector);
+    const faces = await facesDetector.estimateFaces(video, estimationConfig);
+    const hands = await handsDetector.estimateHands(video, estimationConfig);
+
+    let points = [];
+    if (showsFaces && faces && faces[0] && faces[0].keypoints) {
+      points = points.concat(faces[0].keypoints);
+    }
+    if (showsHands && hands && hands[0] && hands[0].keypoints) {
+      points = points.concat(hands[0].keypoints);
+    }
+
+    setPoints(points);
+    requestAnimationFrame(detect);
   };
-  detectHands(handsDetector);
+
+  detect();
 };
 
 export const processColor = (color, opacity) => {
