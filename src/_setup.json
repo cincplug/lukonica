@@ -103,5 +103,17 @@
     "description": "",
     "value": true,
     "type": "checkbox"
+  },
+  {
+    "id": "showsFaces",
+    "description": "",
+    "value": true,
+    "type": "checkbox"
+  },
+  {
+    "id": "showsHands",
+    "description": "",
+    "value": true,
+    "type": "checkbox"
   }
 ]
