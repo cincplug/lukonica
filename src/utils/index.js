@@ -1,5 +1,6 @@
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
+import defaultFacePoints from "../default-face-points.json";
 
 export const runDetector = async (video, setPoints, showsFaces, showsHands) => {
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
@@ -47,3 +48,11 @@ export const processColor = (color, opacity) => {
     .toString(16)
     .padStart(2, "0")}`;
 };
+
+export const renderPath = (area, facePoints = defaultFacePoints) =>
+  area.map(
+    (activeAreaPoint, activeAreaPointIndex) =>
+      `${activeAreaPointIndex === 0 ? "M" : "L"}${
+        facePoints[activeAreaPoint].x
+      }, ${facePoints[activeAreaPoint].y}`
+  );

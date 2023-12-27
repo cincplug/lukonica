@@ -5,10 +5,12 @@ import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
 import "@mediapipe/hands";
 import Webcam from "react-webcam";
-import { runDetector, processColor } from "./utils";
+import { runDetector, processColor, renderPath } from "./utils";
 import defaultSetup from "./_setup.json";
 import Menu from "./Menu";
 import Splash from "./Splash";
+import FaceEditor from "./FaceEditor";
+import mask from "./masks/luka.json";
 import "./App.scss";
 
 const inputResolution = {
@@ -24,6 +26,7 @@ const videoConstraints = {
 function App() {
   const [isStarted, setIsStarted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [points, setPoints] = useState([]);
 
   const storageSetupItem = "kwastjeSetup";
@@ -49,7 +52,6 @@ function App() {
       } else {
         nextSetup[id] = ["number", "range"].includes(type) ? value / 1 : value;
       }
-      console.info(nextSetup, id, value);
       sessionStorage.setItem(storageSetupItem, JSON.stringify(nextSetup));
       return nextSetup;
     });
@@ -202,6 +204,14 @@ function App() {
                   {index}
                 </text>
               )}
+              {setup.hasMask &&
+                mask.map((area, areaIndex) => (
+                  <path
+                    key={`m-${areaIndex}`}
+                    fill={processColor(setup.color, setup.opacity)}
+                    d={`${renderPath(area, points)} Z`}
+                  />
+                ))}
             </>
           ))}
       </svg>
@@ -209,10 +219,12 @@ function App() {
         {...{
           setup,
           handleInputChange,
-          setSetup
+          setSetup,
+          setIsEditing
         }}
       />
-      {isLoaded ? <></> : <header>Loading...</header>}
+      {isLoaded ? null : <header>Loading...</header>}
+      {isEditing ? <FaceEditor {...{ inputResolution }} /> : null}
     </div>
   );
 }

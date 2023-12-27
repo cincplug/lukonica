@@ -1,10 +1,22 @@
+:root {
+  --color-white: #fafafa;
+  --color-half-black: #00000080;
+  --color-blue: #4ad;
+  --color-purple: #aa44dd;
+}
+
+button {
+  margin-right: 1rem;
+  height: 2rem;
+}
+
 .menu {
   position: absolute;
   top: 0;
   width: 12rem;
   height: 100vh;
   padding: 1rem;
-  background: white;
+  background: var(--color-white);
   margin: 0 0 0.5rem;
 }
 
@@ -35,8 +47,32 @@
   justify-content: center;
   align-items: center;
   button {
-    margin: 0 1rem;
     width: 5rem;
-    height: 2rem;
+  }
+}
+
+.face-editor {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: var(--color-white);
+  &__dot {
+    fill: var(--color-half-black);
+    stroke-width: 0.5rem;
+    stroke: transparent;
+    &:hover {
+      fill: var(--color-blue);
+      stroke: var(--color-blue);
+    }
+    &--first {
+      stroke: var(--color-half-black);
+    }
+  }
+  &__active-area {
+    fill: none;
+    stroke: var(--color-purple);
+    stroke-width: 1px;
   }
 }

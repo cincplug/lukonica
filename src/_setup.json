@@ -99,7 +99,7 @@
     "type": "checkbox"
   },
   {
-    "id": "hasNumbers",
+    "id": "hasMask",
     "description": "",
     "value": true,
     "type": "checkbox"

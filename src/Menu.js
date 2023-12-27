@@ -6,6 +6,7 @@ const Menu = (props) => {
   const {
     setup,
     handleInputChange,
+    setIsEditing,
   } = props;
 
   return (
@@ -36,6 +37,14 @@ const Menu = (props) => {
           }}
         >
           Reset
+        </button>
+        <button
+          className="control__input control__button control__button--clear"
+          onClick={() => {
+            setIsEditing(true);
+          }}
+        >
+          Face editor
         </button>
       </nav>
     </>
