@@ -50,9 +50,8 @@ export const processColor = (color, opacity) => {
 };
 
 export const renderPath = (area, facePoints = defaultFacePoints) =>
-  area.map(
-    (activeAreaPoint, activeAreaPointIndex) =>
-      `${activeAreaPointIndex === 0 ? "M" : "L"}${
-        facePoints[activeAreaPoint].x
-      }, ${facePoints[activeAreaPoint].y}`
-  );
+  area.map((activeAreaPoint, activeAreaPointIndex) => {
+    const point =
+      facePoints[activeAreaPoint] || {x:0, y:0};
+    return `${activeAreaPointIndex === 0 ? "M" : "L"}${point.x}, ${point.y}`;
+  });

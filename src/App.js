@@ -99,7 +99,7 @@ function App() {
                   key={`c-${index}`}
                   cx={point.x}
                   cy={point.y}
-                  r={Math.max(0, index + setup.radius) * setup.growth}
+                  r={Math.max(0, point.z + setup.radius) * setup.growth}
                   stroke="none"
                   fill={processColor(setup.color, setup.opacity)}
                 >
@@ -204,15 +204,30 @@ function App() {
                   {index}
                 </text>
               )}
-              {setup.hasMask &&
-                mask.map((area, areaIndex) => (
-                  <path
-                    key={`m-${areaIndex}`}
-                    fill={processColor(setup.color, setup.opacity)}
-                    d={`${renderPath(area, points)} Z`}
-                  />
-                ))}
             </>
+          ))}
+        {setup.hasMask &&
+          mask.map((area, areaIndex) => (
+            <path
+              className="mask-path"
+              key={`m-${areaIndex}`}
+              fill={processColor(setup.color, setup.opacity)}
+              d={`${renderPath(area, points)}`}
+              stroke="none"
+            >
+              {setup.hasTransition && (
+                <animate
+                  attributeName="d"
+                  values={`${renderPath(area, points)} Z;${renderPath(
+                    area,
+                    points
+                  )} Z`}
+                  keyTimes="0;1"
+                  dur={`${setup.transitionDuration}s`}
+                  repeatCount="indefinite"
+                />
+              )}
+            </path>
           ))}
       </svg>
       <Menu
