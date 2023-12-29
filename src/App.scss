@@ -56,12 +56,10 @@ button {
   top: 0;
   background: var(--color-white);
   &__dot {
-    fill: var(--color-half-black);
-    stroke-width: 0.5rem;
-    stroke: transparent;
+    fill: var(--color-blue);
+    stroke: none;
     &:hover {
-      fill: var(--color-blue);
-      stroke: var(--color-blue);
+      fill: var(--color-purple);
     }
     &--first {
       stroke: var(--color-half-black);
