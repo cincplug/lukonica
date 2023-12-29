@@ -51,7 +51,17 @@ export const processColor = (color, opacity) => {
 
 export const renderPath = (area, facePoints = defaultFacePoints) =>
   area.map((activeAreaPoint, activeAreaPointIndex) => {
-    const point =
-      facePoints[activeAreaPoint] || {x:0, y:0};
+    const point = facePoints[activeAreaPoint] || { x: 0, y: 0 };
     return `${activeAreaPointIndex === 0 ? "M" : "L"}${point.x}, ${point.y}`;
   });
+
+export const saveFile = (areas) => {
+  const data = JSON.stringify(areas);
+  const blob = new Blob([data], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = 'areas.json';
+  link.href = url;
+  link.click();
+  URL.revokeObjectURL(url);
+};

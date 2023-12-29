@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import defaultFacePoints from "./default-face-points.json";
-import { renderPath } from "./utils";
+import { renderPath, saveFile } from "./utils";
 import "./App.scss";
 
 function FaceEditor(props) {
-  const { inputResolution } = props;
+  const { inputResolution, setIsEditing } = props;
   const [areas, setAreas] = useState([]);
   const [activeArea, setActiveArea] = useState([]);
   const handleDotClick = (_event, pointIndex) => {
@@ -59,7 +59,10 @@ function FaceEditor(props) {
           />
         ))}
       </svg>
-      <button onClick={() => {}}>Both</button>
+      <nav id="mainNav" className={`menu menu--controls`}>
+        <button onClick={() => saveFile(areas)}>Save</button>
+        <button onClick={() => setIsEditing(false)}>Close</button>
+      </nav>
     </div>
   );
 }

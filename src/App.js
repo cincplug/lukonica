@@ -66,180 +66,184 @@ function App() {
     setIsLoaded(true);
   };
 
-  if (!isStarted) {
-    return <Splash {...{ setIsStarted, setSetup }} />;
-  }
-
   return (
     <div className="wrap">
-      <Webcam
-        width={inputResolution.width}
-        height={inputResolution.height}
-        style={{
-          visibility: setup.hasVideo ? "visible" : "hidden",
-          position: "absolute"
-        }}
-        videoConstraints={videoConstraints}
-        onLoadedData={handleVideoLoad}
-        mirrored={true}
-      />
-      {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}
-      {/* {points.slice(0,10).length && ( */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${inputResolution.width} ${inputResolution.height}`}
-        style={{ position: "absolute", mixBlendMode: setup.blendMode }}
-      >
-        {points
-          .slice(0, -setup.transitionArrangement - 1)
-          .map((point, index) => (
-            <>
-              {setup.hasCircles && (
-                <circle
-                  key={`c-${index}`}
-                  cx={point.x}
-                  cy={point.y}
-                  r={Math.max(0, point.z + setup.radius) * setup.growth}
+      {isStarted ? (
+        <>
+          <Webcam
+            width={inputResolution.width}
+            height={inputResolution.height}
+            style={{
+              visibility: setup.hasVideo ? "visible" : "hidden",
+              position: "absolute"
+            }}
+            videoConstraints={videoConstraints}
+            onLoadedData={handleVideoLoad}
+            mirrored={true}
+          />
+          {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}
+          {/* {points.slice(0,10).length && ( */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox={`0 0 ${inputResolution.width} ${inputResolution.height}`}
+            style={{ position: "absolute", mixBlendMode: setup.blendMode }}
+          >
+            {points
+              .slice(0, -setup.transitionArrangement - 1)
+              .map((point, index) => (
+                <>
+                  {setup.hasCircles && (
+                    <circle
+                      key={`c-${index}`}
+                      cx={point.x}
+                      cy={point.y}
+                      r={Math.max(0, point.z + setup.radius) * setup.growth}
+                      stroke="none"
+                      fill={processColor(setup.color, setup.opacity)}
+                    >
+                      {setup.hasTransition && (
+                        <>
+                          <animate
+                            attributeName="cx"
+                            values={`${points[index].x};${
+                              points[index + setup.transitionArrangement].x
+                            }`}
+                            keyTimes="0;1"
+                            dur={`${setup.transitionDuration}s`}
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="cy"
+                            values={`${points[index].y};${
+                              points[index + setup.transitionArrangement].y
+                            }`}
+                            keyTimes="0;1"
+                            dur={`${setup.transitionDuration}s`}
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="r"
+                            values={`${
+                              Math.max(0, point.z + setup.radius) * setup.growth
+                            };${
+                              Math.max(
+                                0,
+                                points[index + setup.transitionArrangement].z +
+                                  setup.radius
+                              ) * setup.growth
+                            }`}
+                            keyTimes="0;1"
+                            dur={`${setup.transitionDuration}s`}
+                            repeatCount="indefinite"
+                          />
+                        </>
+                      )}
+                    </circle>
+                  )}
+                  {setup.hasLines && (
+                    <line
+                      key={`l-${index}`}
+                      x1={point.x}
+                      x2={points[index + setup.transitionArrangement].x}
+                      y1={point.y}
+                      y2={points[index + setup.transitionArrangement].y}
+                      stroke={processColor(setup.color, setup.opacity)}
+                      strokeWidth={setup.radius + point.z * setup.growth}
+                    >
+                      {setup.hasTransition && (
+                        <>
+                          <animate
+                            attributeName="x1"
+                            values={`${points[index].x};${
+                              points[index + setup.transitionArrangement].x
+                            }`}
+                            keyTimes="0;1"
+                            dur={`${setup.transitionDuration}s`}
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="y1"
+                            values={`${points[index].y};${
+                              points[index + setup.transitionArrangement].y
+                            }`}
+                            keyTimes="0;1"
+                            dur={`${setup.transitionDuration}s`}
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="x2"
+                            values={`${
+                              points[index + setup.transitionArrangement].x
+                            };${points[index].x}`}
+                            keyTimes="0;1"
+                            dur={`${setup.transitionDuration}s`}
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="y2"
+                            values={`${
+                              points[index + setup.transitionArrangement].y
+                            };${points[index].y}`}
+                            keyTimes="0;1"
+                            dur={`${setup.transitionDuration}s`}
+                            repeatCount="indefinite"
+                          />
+                        </>
+                      )}
+                    </line>
+                  )}
+                  {setup.hasNumbers && (
+                    <text
+                      key={`t-${index}`}
+                      x={point.x}
+                      y={point.y}
+                      fill={processColor(setup.color, setup.opacity)}
+                    >
+                      {index}
+                    </text>
+                  )}
+                </>
+              ))}
+            {setup.hasMask &&
+              mask.map((area, areaIndex) => (
+                <path
+                  className="mask-path"
+                  key={`m-${areaIndex}`}
+                  fill={processColor(setup.color, setup.opacity)}
+                  d={`${renderPath(area, points)}`}
                   stroke="none"
-                  fill={processColor(setup.color, setup.opacity)}
                 >
                   {setup.hasTransition && (
-                    <>
-                      <animate
-                        attributeName="cx"
-                        values={`${points[index].x};${
-                          points[index + setup.transitionArrangement].x
-                        }`}
-                        keyTimes="0;1"
-                        dur={`${setup.transitionDuration}s`}
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="cy"
-                        values={`${points[index].y};${
-                          points[index + setup.transitionArrangement].y
-                        }`}
-                        keyTimes="0;1"
-                        dur={`${setup.transitionDuration}s`}
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="r"
-                        values={`${
-                          Math.max(0, point.z + setup.radius) * setup.growth
-                        };${
-                          Math.max(
-                            0,
-                            points[index + setup.transitionArrangement].z +
-                              setup.radius
-                          ) * setup.growth
-                        }`}
-                        keyTimes="0;1"
-                        dur={`${setup.transitionDuration}s`}
-                        repeatCount="indefinite"
-                      />
-                    </>
+                    <animate
+                      attributeName="d"
+                      values={`${renderPath(area, points)} Z;${renderPath(
+                        area,
+                        points
+                      )} Z`}
+                      keyTimes="0;1"
+                      dur={`${setup.transitionDuration}s`}
+                      repeatCount="indefinite"
+                    />
                   )}
-                </circle>
-              )}
-              {setup.hasLines && (
-                <line
-                  key={`l-${index}`}
-                  x1={point.x}
-                  x2={points[index + setup.transitionArrangement].x}
-                  y1={point.y}
-                  y2={points[index + setup.transitionArrangement].y}
-                  stroke={processColor(setup.color, setup.opacity)}
-                  strokeWidth={setup.radius + point.z * setup.growth}
-                >
-                  {setup.hasTransition && (
-                    <>
-                      <animate
-                        attributeName="x1"
-                        values={`${points[index].x};${
-                          points[index + setup.transitionArrangement].x
-                        }`}
-                        keyTimes="0;1"
-                        dur={`${setup.transitionDuration}s`}
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="y1"
-                        values={`${points[index].y};${
-                          points[index + setup.transitionArrangement].y
-                        }`}
-                        keyTimes="0;1"
-                        dur={`${setup.transitionDuration}s`}
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="x2"
-                        values={`${
-                          points[index + setup.transitionArrangement].x
-                        };${points[index].x}`}
-                        keyTimes="0;1"
-                        dur={`${setup.transitionDuration}s`}
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="y2"
-                        values={`${
-                          points[index + setup.transitionArrangement].y
-                        };${points[index].y}`}
-                        keyTimes="0;1"
-                        dur={`${setup.transitionDuration}s`}
-                        repeatCount="indefinite"
-                      />
-                    </>
-                  )}
-                </line>
-              )}
-              {setup.hasNumbers && (
-                <text
-                  key={`t-${index}`}
-                  x={point.x}
-                  y={point.y}
-                  fill={processColor(setup.color, setup.opacity)}
-                >
-                  {index}
-                </text>
-              )}
-            </>
-          ))}
-        {setup.hasMask &&
-          mask.map((area, areaIndex) => (
-            <path
-              className="mask-path"
-              key={`m-${areaIndex}`}
-              fill={processColor(setup.color, setup.opacity)}
-              d={`${renderPath(area, points)}`}
-              stroke="none"
-            >
-              {setup.hasTransition && (
-                <animate
-                  attributeName="d"
-                  values={`${renderPath(area, points)} Z;${renderPath(
-                    area,
-                    points
-                  )} Z`}
-                  keyTimes="0;1"
-                  dur={`${setup.transitionDuration}s`}
-                  repeatCount="indefinite"
-                />
-              )}
-            </path>
-          ))}
-      </svg>
-      <Menu
-        {...{
-          setup,
-          handleInputChange,
-          setSetup,
-          setIsEditing
-        }}
-      />
-      {isLoaded ? null : <header>Loading...</header>}
-      {isEditing ? <FaceEditor {...{ inputResolution }} /> : null}
+                </path>
+              ))}
+          </svg>
+          <Menu
+            {...{
+              setup,
+              handleInputChange,
+              setSetup
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <Splash {...{ setIsStarted, setSetup, setIsEditing }} />
+          {isEditing ? (
+            <FaceEditor {...{ inputResolution, setIsEditing }} />
+          ) : null}
+        </>
+      )}
     </div>
   );
 }

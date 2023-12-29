@@ -2,7 +2,7 @@ import React from "react";
 import "./App.scss";
 
 function Splash(props) {
-  const { setIsStarted, setSetup } = props;
+  const { setIsStarted, setSetup, setIsEditing } = props;
   return (
     <div className="splash">
       <button
@@ -33,7 +33,15 @@ function Splash(props) {
           });
         }}
       >
-        Both
+        Faces and hands
+      </button>
+      <button
+        className="control__input control__button control__button--clear"
+        onClick={() => {
+          setIsEditing(true);
+        }}
+      >
+        Face editor
       </button>
     </div>
   );
