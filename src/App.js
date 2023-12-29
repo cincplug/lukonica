@@ -36,12 +36,6 @@ function App() {
   defaultSetup.forEach((item) => {
     initialSetup[item.id] = storedSetup ? storedSetup[item.id] : item.value;
   });
-  if (storedSetup && storedSetup.tasje) {
-    initialSetup.tasje = new DOMParser().parseFromString(
-      storedSetup.tasje,
-      "text/html"
-    ).body.firstChild;
-  }
   const [setup, setSetup] = useState(initialSetup);
   const handleInputChange = (event) => {
     setSetup((prevSetup) => {
