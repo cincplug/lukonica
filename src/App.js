@@ -56,7 +56,7 @@ function App() {
     const video = videoNode.target;
     if (video.readyState !== 4) return;
     if (isLoaded) return;
-    runDetector(video, setPoints, showsFaces, showsHands);
+    runDetector({ video, setPoints, showsFaces, showsHands, mask });
     setIsLoaded(true);
   };
 
