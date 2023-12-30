@@ -5,11 +5,13 @@ import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
 import "@mediapipe/hands";
 import Webcam from "react-webcam";
-import { runDetector, processColor, renderPath } from "./utils";
+import { runDetector } from "./utils";
 import defaultSetup from "./_setup.json";
 import Menu from "./Menu";
 import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
+import Circles from "./Circles";
+import Paths from "./Paths";
 import mask from "./masks/luka.json";
 import "./App.scss";
 
@@ -66,7 +68,6 @@ function App() {
       )
     );
   }
-  const { radius, pattern } = setup;
 
   return (
     <div className="wrap">
@@ -83,77 +84,30 @@ function App() {
             onLoadedData={handleVideoLoad}
             mirrored={true}
           />
-          <svg
-            className="drawing"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox={`0 0 ${width} ${height}`}
-            style={{ mixBlendMode: setup.blendMode, width, height }}
-          >
-            {points.length > 0
-              ? flatMask.map(
-                  (flatMaskPoint, index) =>
-                    pattern === "circles" && (
-                      <circle
-                        key={`c-${index}`}
-                        cx={points[flatMaskPoint].x}
-                        cy={points[flatMaskPoint].y}
-                        r={
-                          Math.max(
-                            0,
-                            (points[flatMaskPoint].z ||
-                              index - flatMask.length + handsPointsCount) +
-                              setup.radius
-                          ) * setup.growth
-                        }
-                        stroke="none"
-                        fill={processColor(setup.color, setup.opacity)}
-                      >
-                        {setup.hasTransition && (
-                          <>
-                            <animate
-                              attributeName="cx"
-                              values={`${points[flatMaskPoint].x};${
-                                points[
-                                  flatMaskPoint + setup.transitionArrangement
-                                ].x
-                              }`}
-                              keyTimes="0;1"
-                              dur={`${setup.transitionDuration}s`}
-                              repeatCount="indefinite"
-                            />
-                            <animate
-                              attributeName="cy"
-                              values={`${points[flatMaskPoint].y};${
-                                points[
-                                  flatMaskPoint + setup.transitionArrangement
-                                ].y
-                              }`}
-                              keyTimes="0;1"
-                              dur={`${setup.transitionDuration}s`}
-                              repeatCount="indefinite"
-                            />
-                          </>
-                        )}
-                      </circle>
-                    )
-                )
-              : null}
-            {pattern === "paths" || pattern === "curved paths"
-              ? mask.map((area, areaIndex) => (
-                  <path
-                    className="mask-path"
-                    key={`m-${areaIndex}`}
-                    fill={processColor(setup.color, setup.opacity)}
-                    d={`${renderPath({
-                      area,
-                      points,
-                      radius: pattern === "curved paths" ? radius : 0
-                    })}`}
-                    stroke="none"
-                  ></path>
-                ))
-              : null}
-          </svg>
+          {points && points.length > 0 && (
+            <svg
+              className="drawing"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox={`0 0 ${width} ${height}`}
+              style={{ mixBlendMode: setup.blendMode, width, height }}
+            >
+              {(() => {
+                switch (setup.pattern) {
+                  case "circles":
+                    return (
+                      <Circles
+                        {...{ points, flatMask, setup, handsPointsCount }}
+                      />
+                    );
+                  case "paths":
+                  case "curved paths":
+                    return <Paths {...{ points, mask, setup }} />;
+                  default:
+                    return null;
+                }
+              })()}
+            </svg>
+          )}
           <Menu
             {...{
               setup,
