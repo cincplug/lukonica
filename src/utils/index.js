@@ -50,12 +50,20 @@ export const processColor = (color, opacity) => {
     .padStart(2, "0")}`;
 };
 
-export const renderPath = (area, facePoints = defaultFacePoints) =>
-  area.map((activeAreaPoint, activeAreaPointIndex) => {
-    const point = facePoints[activeAreaPoint];
-    if (!point) return null;
-    return `${activeAreaPointIndex === 0 ? "M" : "L"}${point.x}, ${point.y}`;
-  });
+export const renderPath = ({ area, points = defaultFacePoints, radius }) =>
+  area
+    .map((activeAreaPoint, activeAreaPointIndex) => {
+      const point = points[activeAreaPoint];
+      if (!point) return null;
+      return `${
+        activeAreaPointIndex === 0
+          ? "M"
+          : radius > 0
+          ? `Q${point.x + radius},${point.y + radius} `
+          : "L"
+      } ${point.x},${point.y}`;
+    })
+    .join(" ");
 
 export const saveFile = (areas) => {
   const data = JSON.stringify(areas);

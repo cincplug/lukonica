@@ -41,7 +41,7 @@ function FaceEditor(props) {
         {activeArea.length > 0 ? (
           <path
             className="face-editor__active-area"
-            d={`${renderPath(activeArea)} L${mouseX},${mouseY}`}
+            d={`${renderPath({activeArea})} L${mouseX},${mouseY}`}
           />
         ) : null}
         {defaultFacePoints.map((point, pointIndex) => {
@@ -63,7 +63,7 @@ function FaceEditor(props) {
           <path
             key={`a-${areaIndex}`}
             className="face-editor__area"
-            d={`${renderPath(area)} Z`}
+            d={`${renderPath({area})} Z`}
           />
         ))}
       </svg>

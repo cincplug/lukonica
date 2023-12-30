@@ -61,6 +61,7 @@ function App() {
 
   // const activePoints = points.filter((_point, pointIndex) => mask.flat().includes(pointIndex));
   const flatMask = mask.flat();
+  const { radius, pattern } = setup;
 
   return (
     <div className="wrap">
@@ -87,7 +88,7 @@ function App() {
             {points.length > 0
               ? flatMask.slice(0, -setup.transitionArrangement - 1).map(
                   (flatMaskPoint, index) =>
-                    setup.pattern === "circles" && (
+                    pattern === "circles" && (
                       <circle
                         key={`c-${index}`}
                         cx={points[flatMaskPoint].x}
@@ -129,29 +130,21 @@ function App() {
                     )
                 )
               : null}
-            {setup.pattern === "paths" &&
-              mask.map((area, areaIndex) => (
-                <path
-                  className="mask-path"
-                  key={`m-${areaIndex}`}
-                  fill={processColor(setup.color, setup.opacity)}
-                  d={`${renderPath(area, points)}`}
-                  stroke="none"
-                >
-                  {setup.hasTransition && (
-                    <animate
-                      attributeName="d"
-                      values={`${renderPath(area, points)} Z;${renderPath(
-                        area,
-                        points
-                      )} Z`}
-                      keyTimes="0;1"
-                      dur={`${setup.transitionDuration}s`}
-                      repeatCount="indefinite"
-                    />
-                  )}
-                </path>
-              ))}
+            {pattern === "paths" || pattern === "curved paths"
+              ? mask.map((area, areaIndex) => (
+                  <path
+                    className="mask-path"
+                    key={`m-${areaIndex}`}
+                    fill={processColor(setup.color, setup.opacity)}
+                    d={`${renderPath({
+                      area,
+                      points,
+                      radius: pattern === "curved paths" ? radius : 0
+                    })}`}
+                    stroke="none"
+                  ></path>
+                ))
+              : null}
           </svg>
           <Menu
             {...{
