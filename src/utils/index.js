@@ -2,14 +2,8 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import defaultFacePoints from "../default-face-points.json";
 
-export const runDetector = async ({
-  video,
-  setPoints,
-  showsFaces,
-  showsHands,
-  mask
-}) => {
-
+export const runDetector = async ({ video, setup, setPoints }) => {
+  const { showsFaces, showsHands } = setup;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
     runtime: "tfjs",
@@ -38,11 +32,6 @@ export const runDetector = async ({
     let points = [];
     if (showsFaces && faces && faces[0] && faces[0].keypoints) {
       points = points.concat(faces[0].keypoints);
-      if (mask) {
-        points = points.filter((_point, pointIndex) =>
-          mask.flat().includes(pointIndex)
-        );
-      }
     }
     if (showsHands && hands && hands[0] && hands[0].keypoints) {
       points = points.concat(hands[0].keypoints);
