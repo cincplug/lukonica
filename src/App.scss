@@ -2,6 +2,7 @@
   --color-white: #fafafa;
   --color-half-black: #00000080;
   --color-blue: #4ad;
+  --color-half-blue: #4ad8;
   --color-purple: #aa44dd;
 }
 
@@ -56,7 +57,7 @@ button {
   top: 0;
   background: var(--color-white);
   &__dot {
-    fill: var(--color-blue);
+    fill: var(--color-half-blue);
     stroke: none;
     &:hover {
       fill: var(--color-purple);
@@ -64,6 +65,9 @@ button {
     &--first {
       stroke: var(--color-half-black);
     }
+  }
+  &__area {
+    fill: var(--color-half-blue)
   }
   &__active-area {
     fill: none;

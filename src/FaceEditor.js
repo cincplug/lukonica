@@ -62,7 +62,7 @@ function FaceEditor(props) {
         {areas.map((area, areaIndex) => (
           <path
             key={`a-${areaIndex}`}
-            className="area"
+            className="face-editor__area"
             d={`${renderPath(area)} Z`}
           />
         ))}
