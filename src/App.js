@@ -22,6 +22,7 @@ const videoConstraints = {
   height: inputResolution.height,
   facingMode: "user"
 };
+const handsPointsCount = 21;
 
 function App() {
   const [isStarted, setIsStarted] = useState(false);
@@ -60,7 +61,12 @@ function App() {
   };
 
   // const activePoints = points.filter((_point, pointIndex) => mask.flat().includes(pointIndex));
-  const flatMask = mask.flat();
+  let flatMask = mask.flat().slice(0, -setup.transitionArrangement - 1);
+  if (setup.showsHands && points.length > 478) {
+    flatMask = flatMask.concat(
+      ...Array.from({ length: handsPointsCount }, (_, i) => i + points.length - handsPointsCount - 1)
+    );
+  }
   const { radius, pattern } = setup;
 
   return (
@@ -78,15 +84,13 @@ function App() {
             onLoadedData={handleVideoLoad}
             mirrored={true}
           />
-          {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}
-          {/* {points.slice(0,10).length && ( */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox={`0 0 ${inputResolution.width} ${inputResolution.height}`}
             style={{ position: "absolute", mixBlendMode: setup.blendMode }}
           >
             {points.length > 0
-              ? flatMask.slice(0, -setup.transitionArrangement - 1).map(
+              ? flatMask.map(
                   (flatMaskPoint, index) =>
                     pattern === "circles" && (
                       <circle
@@ -94,7 +98,7 @@ function App() {
                         cx={points[flatMaskPoint].x}
                         cy={points[flatMaskPoint].y}
                         r={
-                          Math.max(0, points[flatMaskPoint].z + setup.radius) *
+                          Math.max(0, (points[flatMaskPoint].z || setup.radius) + setup.radius) *
                           setup.growth
                         }
                         stroke="none"
