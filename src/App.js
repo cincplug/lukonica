@@ -64,7 +64,10 @@ function App() {
   let flatMask = mask.flat().slice(0, -setup.transitionArrangement - 1);
   if (setup.showsHands && points.length > 478) {
     flatMask = flatMask.concat(
-      ...Array.from({ length: handsPointsCount }, (_, i) => i + points.length - handsPointsCount - 1)
+      ...Array.from(
+        { length: handsPointsCount },
+        (_, i) => i + points.length - handsPointsCount - 1
+      )
     );
   }
   const { radius, pattern } = setup;
@@ -98,8 +101,11 @@ function App() {
                         cx={points[flatMaskPoint].x}
                         cy={points[flatMaskPoint].y}
                         r={
-                          Math.max(0, (points[flatMaskPoint].z || setup.radius) + setup.radius) *
-                          setup.growth
+                          Math.max(
+                            0,
+                            (points[flatMaskPoint].z || index - flatMask.length + handsPointsCount) +
+                              setup.radius
+                          ) * setup.growth
                         }
                         stroke="none"
                         fill={processColor(setup.color, setup.opacity)}

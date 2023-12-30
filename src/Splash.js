@@ -9,21 +9,11 @@ function Splash(props) {
         onClick={() => {
           setIsStarted(true);
           setSetup((prevSetup) => {
-            return { ...prevSetup, showsFaces: true };
+            return { ...prevSetup, showsFaces: true, showsHands: false };
           });
         }}
       >
-        Faces
-      </button>
-      <button
-        onClick={() => {
-          setIsStarted(true);
-          setSetup((prevSetup) => {
-            return { ...prevSetup, showsHands: true };
-          });
-        }}
-      >
-        Hands
+        Face only
       </button>
       <button
         onClick={() => {
@@ -33,7 +23,7 @@ function Splash(props) {
           });
         }}
       >
-        Faces and hands
+        Face and hand
       </button>
       <button
         className="control__input control__button control__button--clear"
@@ -41,7 +31,7 @@ function Splash(props) {
           setIsEditing(true);
         }}
       >
-        Face editor
+        Area editor
       </button>
     </div>
   );
