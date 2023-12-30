@@ -17,11 +17,7 @@ const inputResolution = {
   width: window.innerWidth,
   height: window.innerHeight
 };
-const videoConstraints = {
-  width: inputResolution.width,
-  height: inputResolution.height,
-  facingMode: "user"
-};
+const { width, height } = inputResolution;
 const handsPointsCount = 21;
 
 function App() {
@@ -83,14 +79,15 @@ function App() {
               visibility: setup.hasVideo ? "visible" : "hidden",
               position: "absolute"
             }}
-            videoConstraints={videoConstraints}
+            videoConstraints={inputResolution}
             onLoadedData={handleVideoLoad}
             mirrored={true}
           />
           <svg
+            className="drawing"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox={`0 0 ${inputResolution.width} ${inputResolution.height}`}
-            style={{ position: "absolute", mixBlendMode: setup.blendMode }}
+            viewBox={`0 0 ${width} ${height}`}
+            style={{ mixBlendMode: setup.blendMode, width, height }}
           >
             {points.length > 0
               ? flatMask.map(
@@ -103,7 +100,8 @@ function App() {
                         r={
                           Math.max(
                             0,
-                            (points[flatMaskPoint].z || index - flatMask.length + handsPointsCount) +
+                            (points[flatMaskPoint].z ||
+                              index - flatMask.length + handsPointsCount) +
                               setup.radius
                           ) * setup.growth
                         }
