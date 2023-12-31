@@ -3,6 +3,7 @@ import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import defaultFacePoints from "../default-face-points.json";
 
 export const runDetector = async ({ video, setup, setPoints }) => {
+  let frame = 0;
   const { showsFaces, showsHands } = setup;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
@@ -25,23 +26,26 @@ export const runDetector = async ({ video, setup, setPoints }) => {
   );
 
   const detect = async () => {
-    const estimationConfig = { flipHorizontal: true };
-    const faces = await facesDetector.estimateFaces(video, estimationConfig);
-    const hands = await handsDetector.estimateHands(video, estimationConfig);
+    if (frame % setup.latency === 0) {
+      const estimationConfig = { flipHorizontal: true };
+      const faces = await facesDetector.estimateFaces(video, estimationConfig);
+      const hands = await handsDetector.estimateHands(video, estimationConfig);
 
-    let points = [];
-    if (showsFaces && faces && faces[0] && faces[0].keypoints) {
-      faces.forEach((face) => {
-        points = points.concat(face.keypoints);
-      });
-    }
-    if (showsHands && hands && hands[0] && hands[0].keypoints) {
-      hands.forEach((hand) => {
-        points = points.concat(hand.keypoints);
-      });
-    }
+      let points = [];
+      if (showsFaces && faces && faces[0] && faces[0].keypoints) {
+        faces.forEach((face) => {
+          points = points.concat(face.keypoints);
+        });
+      }
+      if (showsHands && hands && hands[0] && hands[0].keypoints) {
+        hands.forEach((hand) => {
+          points = points.concat(hand.keypoints);
+        });
+      }
 
-    setPoints(points);
+      setPoints(points);
+    }
+    frame++;
     requestAnimationFrame(detect);
   };
 

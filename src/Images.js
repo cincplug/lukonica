@@ -1,5 +1,4 @@
 import React from "react";
-// import { processColor } from "./utils";
 import bubble from "./masks/bubble.png";
 
 const Images = ({ points, flatMask, setup, handsPointsCount }) => {
@@ -7,10 +6,9 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
     transitionArrangement,
     radius,
     growth,
-    // color,
-    // opacity,
     hasTransition,
-    transitionDuration
+    transitionDuration,
+    lowThreshold
   } = setup;
 
   return flatMask
@@ -21,9 +19,9 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
       const getSize = (point) => {
         return (
           Math.max(
-            0,
+            lowThreshold,
             (point || index - flatMask.length + handsPointsCount) + radius
-          ) * growth
+          ) * growth * lowThreshold
         );
       };
       const animationProps = {
