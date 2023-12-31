@@ -13,7 +13,7 @@ import FaceEditor from "./FaceEditor";
 import Circles from "./Circles";
 import Images from "./Images";
 import Paths from "./Paths";
-import mask from "./masks/luka3.json";
+import mask from "./masks/luka.json";
 import "./App.scss";
 
 const inputResolution = {

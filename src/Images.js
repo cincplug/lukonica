@@ -1,5 +1,5 @@
 import React from "react";
-import { processColor } from "./utils";
+// import { processColor } from "./utils";
 import bubble from "./masks/bubble.png";
 
 const Images = ({ points, flatMask, setup, handsPointsCount }) => {
@@ -7,8 +7,8 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
     transitionArrangement,
     radius,
     growth,
-    color,
-    opacity,
+    // color,
+    // opacity,
     hasTransition,
     transitionDuration
   } = setup;
@@ -38,7 +38,8 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
           x={pointFrom.x}
           y={pointFrom.y}
           width={getSize(pointFrom.z)}
-          href={bubble}
+          href={setup.image || bubble}
+          transform={`translate(${-getSize(pointFrom.z) / 2})`}
         >
           {hasTransition && (
             <>
