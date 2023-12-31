@@ -1,7 +1,8 @@
 import React from "react";
 import { processColor } from "./utils";
+import bubble from "./masks/bubble.png";
 
-const Circles = ({ points, flatMask, setup, handsPointsCount }) => {
+const Images = ({ points, flatMask, setup, handsPointsCount }) => {
   const {
     transitionArrangement,
     radius,
@@ -32,36 +33,35 @@ const Circles = ({ points, flatMask, setup, handsPointsCount }) => {
       };
 
       return (
-        <circle
+        <image
           key={`c-${index}`}
-          cx={pointFrom.x}
-          cy={pointFrom.y}
-          r={getSize(pointFrom.z)}
-          stroke="none"
-          fill={processColor(color, opacity)}
+          x={pointFrom.x}
+          y={pointFrom.y}
+          width={getSize(pointFrom.z)}
+          href={bubble}
         >
           {hasTransition && (
             <>
               <animate
-                attributeName="cx"
+                attributeName="x"
                 values={`${pointFrom.x};${pointTo.x}`}
                 {...animationProps}
               />
               <animate
-                attributeName="cy"
+                attributeName="y"
                 values={`${pointFrom.y};${pointTo.y}`}
                 {...animationProps}
               />
               <animate
-                attributeName="r"
+                attributeName="width"
                 values={`${getSize(pointFrom.z)};${getSize(pointTo.z)}`}
                 {...animationProps}
               />
             </>
           )}
-        </circle>
+        </image>
       );
     });
 };
 
-export default Circles;
+export default Images;

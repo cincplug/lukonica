@@ -11,8 +11,9 @@ import Menu from "./Menu";
 import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
 import Circles from "./Circles";
+import Images from "./Images";
 import Paths from "./Paths";
-import mask from "./masks/luka.json";
+import mask from "./masks/luka3.json";
 import "./App.scss";
 
 const inputResolution = {
@@ -60,11 +61,11 @@ function App() {
 
   // const activePoints = points.filter((_point, pointIndex) => mask.flat().includes(pointIndex));
   let flatMask = mask.flat().slice(0, -setup.transitionArrangement - 1);
-  if (setup.showsHands && points.length > 478) {
+  if (setup.showsHands && points && points.length > 0) {
     flatMask = flatMask.concat(
       ...Array.from(
         { length: handsPointsCount },
-        (_, i) => i + points.length - handsPointsCount - 1
+        (_, i) => i + points.length - handsPointsCount + 1
       )
     );
   }
@@ -96,6 +97,12 @@ function App() {
                   case "circles":
                     return (
                       <Circles
+                        {...{ points, flatMask, setup, handsPointsCount }}
+                      />
+                    );
+                  case "images":
+                    return (
+                      <Images
                         {...{ points, flatMask, setup, handsPointsCount }}
                       />
                     );
