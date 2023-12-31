@@ -21,7 +21,7 @@ const inputResolution = {
   height: window.innerHeight
 };
 const { width, height } = inputResolution;
-const handsPointsCount = 21;
+const handsPointsCount = 42;
 
 function App() {
   const [isStarted, setIsStarted] = useState(false);

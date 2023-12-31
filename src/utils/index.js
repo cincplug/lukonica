@@ -31,10 +31,14 @@ export const runDetector = async ({ video, setup, setPoints }) => {
 
     let points = [];
     if (showsFaces && faces && faces[0] && faces[0].keypoints) {
-      points = points.concat(faces[0].keypoints);
+      faces.forEach((face) => {
+        points = points.concat(face.keypoints);
+      });
     }
     if (showsHands && hands && hands[0] && hands[0].keypoints) {
-      points = points.concat(hands[0].keypoints);
+      hands.forEach((hand) => {
+        points = points.concat(hand.keypoints);
+      });
     }
 
     setPoints(points);
