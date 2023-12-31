@@ -98,14 +98,14 @@
     "id": "showsFaces",
     "description": "",
     "value": false,
-    "isHidden": false,
+    "isHidden": true,
     "type": "checkbox"
   },
   {
     "id": "showsHands",
     "description": "",
     "value": false,
-    "isHidden": false,
+    "isHidden": true,
     "type": "checkbox"
   }
 ]
