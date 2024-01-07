@@ -13,7 +13,8 @@ import FaceEditor from "./FaceEditor";
 import Circles from "./Circles";
 import Images from "./Images";
 import Paths from "./Paths";
-import mask from "./masks/luka.json";
+import Frank from "./Frank";
+import mask from "./masks/outer.json";
 import "./App.scss";
 
 const inputResolution = {
@@ -28,6 +29,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [points, setPoints] = useState([]);
+  const [chunks, setChunks] = useState([]);
+  const [activeChunk, setActiveChunk] = useState([]);
 
   const storageSetupItem = "kwastjeSetup";
   const storedSetupRaw = sessionStorage.getItem(storageSetupItem);
@@ -55,7 +58,14 @@ function App() {
     const video = videoNode.target;
     if (video.readyState !== 4) return;
     if (isLoaded) return;
-    runDetector({ video, setPoints, setup });
+    runDetector({
+      video,
+      setPoints,
+      setChunks,
+      activeChunk,
+      setActiveChunk,
+      setup
+    });
     setIsLoaded(true);
   };
 
@@ -109,6 +119,12 @@ function App() {
                   case "paths":
                   case "curved paths":
                     return <Paths {...{ points, mask, setup }} />;
+                  case "frank":
+                    return (
+                      <Frank
+                        {...{ points, chunks, activeChunk, mask, setup }}
+                      />
+                    );
                   default:
                     return null;
                 }

@@ -2,7 +2,27 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import defaultFacePoints from "../default-face-points.json";
 
-export const runDetector = async ({ video, setup, setPoints }) => {
+const findClosestFacePointIndex = ({facePoints, indexTip, threshold}) => {
+  return facePoints.reduce((closestFacePoint, currentFacePoint, currentIndex) => {
+      const dx = currentFacePoint.x - indexTip.x;
+      const dy = currentFacePoint.y - indexTip.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < closestFacePoint.minDistance && distance < threshold) {
+          return { minDistance: distance, index: currentIndex };
+      } else {
+          return closestFacePoint;
+      }
+  }, { minDistance: Infinity, index: null }).index;
+}
+
+export const runDetector = async ({
+  video,
+  setup,
+  setPoints,
+  setChunks,
+  setActiveChunk
+}) => {
   let frame = 0;
   const { showsFaces, showsHands } = setup;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
@@ -41,8 +61,27 @@ export const runDetector = async ({ video, setup, setPoints }) => {
         hands.forEach((hand) => {
           points = points.concat(hand.keypoints);
         });
+        const indexTip = hands[0]?.keypoints[8];
+        const threshold = 40;
+        const closestPoint = findClosestFacePointIndex({
+          facePoints: defaultFacePoints,
+          indexTip,
+          threshold
+        });
+        if (closestPoint !== null) {
+          setActiveChunk((prevActiveChunk) => {
+            if (prevActiveChunk.length > 0 && prevActiveChunk[0] === closestPoint) {
+              setChunks((prevChunks) => {
+                console.info([...prevChunks, prevActiveChunk]);
+                return [...prevChunks, prevActiveChunk];
+              });
+              return [];
+            } else {
+              return [...prevActiveChunk, closestPoint];
+            }
+          });
+        }
       }
-
       setPoints(points);
     }
     frame++;

@@ -1,7 +1,7 @@
 const Control = ({ item, index, setup, handleInputChange }) => {
   const { id, type, min, max, step, description, options } = item;
   const label = id.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
-  let value = setup[id] || null;
+  let value = setup[id] || "";
   const checked = value === true;
   return (
     <fieldset

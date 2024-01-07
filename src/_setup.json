@@ -110,7 +110,7 @@
     "description": "What will be drawn on points",
     "value": "paths",
     "type": "select",
-    "options": ["paths", "curved paths", "circles", "images"]
+    "options": ["paths", "curved paths", "circles", "images", "frank"]
   },
   {
     "id": "showsFaces",
