@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "@tensorflow/tfjs";
 // Register WebGL backend.
 import "@tensorflow/tfjs-backend-webgl";
@@ -14,12 +14,13 @@ import Circles from "./Circles";
 import Images from "./Images";
 import Paths from "./Paths";
 import Frank from "./Frank";
-import mask from "./masks/outer.json";
+import mask from "./masks/luka.json";
+import defaultFacePoints from "./default-face-points.json";
 import "./App.scss";
 
 const inputResolution = {
-  width: window.innerWidth,
-  height: window.innerHeight
+  width: window.outerWidth,
+  height: window.outerHeight
 };
 const { width, height } = inputResolution;
 const handsPointsCount = 42;
@@ -31,6 +32,7 @@ function App() {
   const [points, setPoints] = useState([]);
   const [chunks, setChunks] = useState([]);
   const [activeChunk, setActiveChunk] = useState([]);
+  const [cursor, setCursor] = useState({ x: 0, y: 0, isActive: false });
 
   const storageSetupItem = "kwastjeSetup";
   const storedSetupRaw = sessionStorage.getItem(storageSetupItem);
@@ -60,11 +62,11 @@ function App() {
     if (isLoaded) return;
     runDetector({
       video,
+      setup,
       setPoints,
       setChunks,
-      activeChunk,
       setActiveChunk,
-      setup
+      setCursor
     });
     setIsLoaded(true);
   };
@@ -80,6 +82,20 @@ function App() {
     );
   }
 
+  useEffect(() => {
+    if (!cursor.isActive && activeChunk.length > 0) {
+      setCursor((prevCursor) => {
+        setActiveChunk((prevActiveChunk) => {
+          setChunks((prevChunks) => {
+            return [...prevChunks, prevActiveChunk];
+          });
+          return [];
+        });
+        return { ...prevCursor, isActive: false };
+      });
+    }
+  }, [cursor.isActive, activeChunk.length]);
+
   return (
     <div className="wrap">
       {isStarted ? (
@@ -94,6 +110,7 @@ function App() {
             videoConstraints={inputResolution}
             onLoadedData={handleVideoLoad}
             mirrored={true}
+            imageSmoothing={false}
           />
           {points && points.length > 0 && (
             <svg
@@ -129,6 +146,21 @@ function App() {
                     return null;
                 }
               })()}
+              <circle
+                r={cursor.isActive ? 5 : 10}
+                cx={cursor.x}
+                cy={cursor.y}
+              ></circle>
+              {/* {defaultFacePoints.map(
+                (defaultFacePoint, defaultFacePointIndex) => (
+                  <circle
+                    r={3}
+                    cx={defaultFacePoint.x}
+                    cy={defaultFacePoint.y}
+                    key={defaultFacePointIndex}
+                  ></circle>
+                )
+              )} */}
             </svg>
           )}
           <Menu
@@ -147,6 +179,7 @@ function App() {
           ) : null}
         </>
       )}
+      {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}
     </div>
   );
 }

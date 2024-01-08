@@ -2,33 +2,40 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import defaultFacePoints from "../default-face-points.json";
 
-const findClosestFacePointIndex = ({facePoints, indexTip, threshold}) => {
-  return facePoints.reduce((closestFacePoint, currentFacePoint, currentIndex) => {
-      const dx = currentFacePoint.x - indexTip.x;
-      const dy = currentFacePoint.y - indexTip.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
+const findClosestFacePointIndex = ({ facePoints, indexTip, threshold }) => {
+  return facePoints.reduce(
+    (closestFacePoint, currentFacePoint, currentIndex) => {
+      const distance = getDistance(currentFacePoint, indexTip);
       if (distance < closestFacePoint.minDistance && distance < threshold) {
-          return { minDistance: distance, index: currentIndex };
+        return { minDistance: distance, index: currentIndex };
       } else {
-          return closestFacePoint;
+        return closestFacePoint;
       }
-  }, { minDistance: Infinity, index: null }).index;
-}
+    },
+    { minDistance: Infinity, index: null }
+  ).index;
+};
+
+const getDistance = (point1, point2) => {
+  const dx = point1.x - point2.x;
+  const dy = point1.y - point2.y;
+  return Math.sqrt(dx * dx + dy * dy);
+};
 
 export const runDetector = async ({
   video,
   setup,
   setPoints,
   setChunks,
-  setActiveChunk
+  setActiveChunk,
+  setCursor
 }) => {
   let frame = 0;
   const { showsFaces, showsHands } = setup;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
     runtime: "tfjs",
-    refineLandmarks: true
+    refineLandmarks: false
   };
   const facesDetector = await faceLandmarksDetection.createDetector(
     facesModel,
@@ -38,7 +45,7 @@ export const runDetector = async ({
   const handsModel = handPoseDetection.SupportedModels.MediaPipeHands;
   const handsDetectorConfig = {
     runtime: "tfjs",
-    modelType: "full"
+    modelType: "lite"
   };
   const handsDetector = await handPoseDetection.createDetector(
     handsModel,
@@ -47,7 +54,7 @@ export const runDetector = async ({
 
   const detect = async () => {
     if (frame % setup.latency === 0) {
-      const estimationConfig = { flipHorizontal: true };
+      const estimationConfig = { flipHorizontal: true, staticImageMode: false };
       const faces = await facesDetector.estimateFaces(video, estimationConfig);
       const hands = await handsDetector.estimateHands(video, estimationConfig);
 
@@ -58,21 +65,32 @@ export const runDetector = async ({
         });
       }
       if (showsHands && hands && hands[0] && hands[0].keypoints) {
-        hands.forEach((hand) => {
-          points = points.concat(hand.keypoints);
-        });
+        if (setup.pattern !== "frank") {
+          hands.forEach((hand) => {
+            points = points.concat(hand.keypoints);
+          });
+        }
+        const thumbTip = hands[0]?.keypoints[4];
         const indexTip = hands[0]?.keypoints[8];
-        const threshold = 40;
+        const thumbIndexDistance = getDistance(thumbTip, indexTip);
+        const threshold = 50;
+        setCursor({
+          x: (thumbTip.x + indexTip.x) / 2,
+          y: (thumbTip.y + indexTip.y) / 2,
+          isActive: thumbIndexDistance < threshold
+        });
         const closestPoint = findClosestFacePointIndex({
-          facePoints: defaultFacePoints,
+          facePoints: points,
           indexTip,
           threshold
         });
-        if (closestPoint !== null) {
+        if (closestPoint !== null && thumbIndexDistance < threshold) {
           setActiveChunk((prevActiveChunk) => {
-            if (prevActiveChunk.length > 0 && prevActiveChunk[0] === closestPoint) {
+            if (
+              prevActiveChunk.length > 0 &&
+              prevActiveChunk[0] === closestPoint
+            ) {
               setChunks((prevChunks) => {
-                console.info([...prevChunks, prevActiveChunk]);
                 return [...prevChunks, prevActiveChunk];
               });
               return [];
