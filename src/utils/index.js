@@ -117,15 +117,26 @@ export const processColor = (color, opacity) => {
 export const renderPath = ({ area, points, radius }) =>
   area
     .map((activeAreaPoint, activeAreaPointIndex) => {
-      const point = points[activeAreaPoint];
-      if (!point) return null;
-      return `${
-        activeAreaPointIndex === 0
-          ? "M"
-          : radius > 0
-          ? `Q${point.x + radius},${point.y + radius} `
-          : "L"
-      } ${point.x},${point.y}`;
+      const thisPoint = points[activeAreaPoint];
+      if (!thisPoint) return null;
+      const lastPoint = points[area[activeAreaPointIndex - 1]];
+      if (radius > 0 && lastPoint) {
+        const deltaX = thisPoint.x - lastPoint.x;
+        const deltaY = thisPoint.y - lastPoint.y;
+        const controlPointX =
+          lastPoint.x +
+          deltaX / 2 +
+          (radius * deltaY) / Math.hypot(deltaX, deltaY);
+        const controlPointY =
+          lastPoint.y +
+          deltaY / 2 -
+          (radius * deltaX) / Math.hypot(deltaX, deltaY);
+        return `Q${controlPointX},${controlPointY} ${thisPoint.x},${thisPoint.y}`;
+      } else {
+        return `${activeAreaPointIndex === 0 ? "M" : "L"} ${thisPoint.x},${
+          thisPoint.y
+        }`;
+      }
     })
     .join(" ");
 
