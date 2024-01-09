@@ -12,7 +12,6 @@ import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
 import Images from "./Images";
 import Paths from "./Paths";
-import Frank from "./Frank";
 import mask from "./masks/luka.json";
 import "./App.scss";
 
@@ -127,10 +126,8 @@ function App() {
                     );
                   case "paths":
                   case "curved paths":
-                    return <Paths {...{ points, mask, setup }} />;
-                  case "frank":
                     return (
-                      <Frank
+                      <Paths
                         {...{ points, chunks, activeChunk, mask, setup }}
                       />
                     );

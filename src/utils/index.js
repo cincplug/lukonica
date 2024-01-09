@@ -64,7 +64,7 @@ export const runDetector = async ({
         });
       }
       if (showsHands && hands && hands[0] && hands[0].keypoints) {
-        if (setup.pattern !== "frank") {
+        if (!["paths", "curved paths"].includes(setup.pattern)) {
           hands.forEach((hand) => {
             points = points.concat(hand.keypoints);
           });
