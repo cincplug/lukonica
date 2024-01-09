@@ -41,7 +41,7 @@ function FaceEditor(props) {
         {activeArea.length > 0 ? (
           <path
             className="face-editor__active-area"
-            d={`${renderPath({ area: activeArea })} L${mouseX},${mouseY}`}
+            d={`${renderPath({ area: activeArea, points: defaultFacePoints })} L${mouseX},${mouseY}`}
           />
         ) : null}
         {defaultFacePoints.map((point, pointIndex) => {

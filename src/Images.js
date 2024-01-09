@@ -16,12 +16,17 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
     .map((flatMaskPoint, index) => {
       const pointFrom = points[flatMaskPoint];
       const pointTo = points[flatMaskPoint + transitionArrangement];
+      if (!pointFrom) {
+        return null;
+      }
       const getSize = (point) => {
         return (
           Math.max(
             lowThreshold,
             (point || index - flatMask.length + handsPointsCount) + radius
-          ) * growth * lowThreshold
+          ) *
+          growth *
+          lowThreshold
         );
       };
       const animationProps = {

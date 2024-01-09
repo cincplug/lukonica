@@ -9,14 +9,13 @@ const Frank = ({ points, mask, setup, chunks, activeChunk }) => {
         <path
           className="mask-path"
           key={`m-${areaIndex}`}
-          stroke={processColor(setup.color, setup.opacity)}
-          strokeWidth={3}
+          fill={processColor(setup.color, setup.opacity)}
           d={`${renderPath({
             area: area.slice(setup.transitionArrangement),
             points,
             radius: pattern === "curved paths" ? radius : 0
           })} Z`}
-          fill="none"
+          stroke="none"
         >
           {setup.hasTransition && (
             <animate

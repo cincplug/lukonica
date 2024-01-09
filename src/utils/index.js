@@ -1,6 +1,5 @@
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
-import defaultFacePoints from "../default-face-points.json";
 
 const findClosestFacePointIndex = ({ facePoints, indexTip, threshold }) => {
   return facePoints.reduce(
@@ -115,7 +114,7 @@ export const processColor = (color, opacity) => {
     .padStart(2, "0")}`;
 };
 
-export const renderPath = ({ area, points = defaultFacePoints, radius }) =>
+export const renderPath = ({ area, points, radius }) =>
   area
     .map((activeAreaPoint, activeAreaPointIndex) => {
       const point = points[activeAreaPoint];

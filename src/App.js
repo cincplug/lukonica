@@ -10,7 +10,6 @@ import defaultSetup from "./_setup.json";
 import Menu from "./Menu";
 import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
-import Circles from "./Circles";
 import Images from "./Images";
 import Paths from "./Paths";
 import Frank from "./Frank";
@@ -18,8 +17,8 @@ import mask from "./masks/luka.json";
 import "./App.scss";
 
 const inputResolution = {
-  width: window.outerWidth,
-  height: window.outerHeight
+  width: window.innerWidth,
+  height: window.innerHeight
 };
 const { width, height } = inputResolution;
 const handsPointsCount = 42;
@@ -120,12 +119,6 @@ function App() {
             >
               {(() => {
                 switch (setup.pattern) {
-                  case "circles":
-                    return (
-                      <Circles
-                        {...{ points, flatMask, setup, handsPointsCount }}
-                      />
-                    );
                   case "images":
                     return (
                       <Images
