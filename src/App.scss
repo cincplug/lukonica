@@ -92,3 +92,19 @@ button {
 .drawing {
   position: relative;
 }
+
+.mask-path {
+  &--default {
+    stroke: none;
+  }
+  &--chunk {
+    fill: none;
+    stroke-width: 2px;
+    stroke: #ffdd00;
+    &--active {
+      stroke-width: 3px;
+      stroke: #ffddff;
+    }
+  }
+
+}

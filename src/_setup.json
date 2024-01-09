@@ -75,7 +75,7 @@
   {
     "id": "latency",
     "description": "On how many frames it refreshes",
-    "value": 3,
+    "value": 2,
     "type": "range",
     "min": 1,
     "max": 20,

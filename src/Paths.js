@@ -7,7 +7,7 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
     <>
       {mask.map((area, areaIndex) => (
         <path
-          className="mask-path"
+          className="mask-path mask-path--default"
           key={`m-${areaIndex}`}
           fill={processColor(setup.color, setup.opacity)}
           d={`${renderPath({
@@ -15,7 +15,6 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
             points,
             radius: pattern === "curved paths" ? radius : 0
           })} Z`}
-          stroke="none"
         >
           {setup.hasTransition && (
             <animate
@@ -40,28 +39,22 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
         chunks.map((chunk, chunkIndex) => (
           <path
             key={`ch-${chunkIndex}`}
-            className="mask-path"
-            stroke="#ffff00"
-            strokeWidth={3}
+            className="mask-path mask-path--chunk"
             d={`${renderPath({
               area: chunk,
               points,
               radius: pattern === "curved paths" ? radius : 0
             })} Z`}
-            fill="none"
           ></path>
         ))}
       {activeChunk && (
         <path
-          className="mask-path"
-          stroke="#ff00ff"
-          strokeWidth={3}
+          className="mask-path mask-path--chunk mask-path--chunk--active"
           d={`${renderPath({
             area: activeChunk,
             points,
             radius: pattern === "curved paths" ? radius : 0
           })}`}
-          fill="none"
         ></path>
       )}
     </>
