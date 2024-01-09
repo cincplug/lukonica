@@ -2,7 +2,7 @@ import React from "react";
 import { processColor, renderPath } from "./utils";
 
 const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
-  const { pattern, radius } = setup;
+  const { pattern, radius, transitionArrangement } = setup;
   return (
     <>
       {mask.map((area, areaIndex) => (
@@ -11,7 +11,7 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
           key={`m-${areaIndex}`}
           fill={processColor(setup.color, setup.opacity)}
           d={`${renderPath({
-            area: area.slice(setup.transitionArrangement),
+            area: area.slice(0, -transitionArrangement - 1),
             points,
             radius: pattern === "curved paths" ? radius : 0
           })} Z`}
@@ -21,11 +21,11 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
             <animate
               attributeName="d"
               values={`${renderPath({
-                area: area.slice(setup.transitionArrangement),
+                area: area.slice(0, -transitionArrangement - 1),
                 points,
                 radius: pattern === "curved paths" ? radius : 0
               })} Z;${renderPath({
-                area: area.slice(0, -setup.transitionArrangement),
+                area: area.slice(1, -transitionArrangement),
                 points,
                 radius: pattern === "curved paths" ? radius : 0
               })} Z`}
