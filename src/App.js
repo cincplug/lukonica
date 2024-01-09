@@ -15,7 +15,6 @@ import Images from "./Images";
 import Paths from "./Paths";
 import Frank from "./Frank";
 import mask from "./masks/luka.json";
-import defaultFacePoints from "./default-face-points.json";
 import "./App.scss";
 
 const inputResolution = {
