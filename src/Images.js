@@ -11,11 +11,19 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
     lowThreshold
   } = setup;
 
+  const defaultFacePointCount = 468;
+
   return flatMask
     .slice(0, -transitionArrangement - 1)
     .map((flatMaskPoint, index) => {
       const pointFrom = points[flatMaskPoint];
-      const pointTo = points[flatMaskPoint + transitionArrangement];
+      const pointTo =
+        points[
+          Math.min(
+            flatMaskPoint + transitionArrangement,
+            defaultFacePointCount - 1
+          )
+        ];
       if (!pointFrom) {
         return null;
       }
