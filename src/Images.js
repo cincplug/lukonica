@@ -1,13 +1,15 @@
 import React from "react";
 import bubble from "./masks/bubble.png";
+import { getDistance } from "./utils";
 
-const Images = ({ points, flatMask, setup, handsPointsCount }) => {
+const Images = ({ points, flatMask, setup, handsPointsCount, cursor }) => {
   const {
     transitionArrangement,
     radius,
     growth,
     transitionDuration,
-    lowThreshold
+    lowThreshold,
+    unfoldThreshold
   } = setup;
 
   const defaultFacePointCount = 468;
@@ -23,7 +25,10 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
             defaultFacePointCount - 1
           )
         ];
-      if (!pointFrom) {
+      if (
+        !pointFrom ||
+        getDistance(cursor, pointFrom) < unfoldThreshold
+      ) {
         return null;
       }
       const getSize = (point) => {

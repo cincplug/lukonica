@@ -121,7 +121,7 @@ function App() {
                   case "images":
                     return (
                       <Images
-                        {...{ points, flatMask, setup, handsPointsCount }}
+                        {...{ points, flatMask, setup, handsPointsCount, cursor }}
                       />
                     );
                   case "paths":

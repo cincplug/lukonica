@@ -125,5 +125,14 @@
     "description": "",
     "value": "",
     "type": "url"
+  },
+  {
+    "id": "unfoldThreshold",
+    "description": "Threshold for finger to delete images",
+    "value": 50,
+    "type": "range",
+    "min": 0,
+    "max": 200,
+    "step": 1
   }
 ]
