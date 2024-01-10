@@ -101,7 +101,7 @@ function App() {
             width={inputResolution.width}
             height={inputResolution.height}
             style={{
-              visibility: setup.hasVideo ? "visible" : "hidden",
+              visibility: setup.showsVideo ? "visible" : "hidden",
               position: "absolute"
             }}
             videoConstraints={inputResolution}
