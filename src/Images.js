@@ -6,7 +6,6 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
     transitionArrangement,
     radius,
     growth,
-    hasTransition,
     transitionDuration,
     lowThreshold
   } = setup;
@@ -52,7 +51,7 @@ const Images = ({ points, flatMask, setup, handsPointsCount }) => {
           href={setup.image || bubble}
           transform={`translate(${-getSize(pointFrom.z) / 2})`}
         >
-          {hasTransition && (
+          {transitionArrangement && (
             <>
               <animate
                 attributeName="x"

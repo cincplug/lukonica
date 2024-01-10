@@ -17,7 +17,7 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
             radius
           })} Z`}
         >
-          {setup.hasTransition && (
+          {transitionArrangement && (
             <animate
               attributeName="d"
               values={`${renderPath({

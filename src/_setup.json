@@ -67,12 +67,6 @@
     "type": "checkbox"
   },
   {
-    "id": "hasTransition",
-    "description": "Animate or not",
-    "value": true,
-    "type": "checkbox"
-  },
-  {
     "id": "latency",
     "description": "On how many frames it refreshes",
     "value": 2,
