@@ -2,7 +2,8 @@ import React from "react";
 import { processColor, renderPath } from "./utils";
 
 const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
-  const { pattern, radius, transitionArrangement } = setup;
+  const { pattern, transitionArrangement } = setup;
+  const radius = pattern === "curved paths" ? setup.radius : 0;
   return (
     <>
       {mask.map((area, areaIndex) => (
@@ -13,7 +14,7 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
           d={`${renderPath({
             area: area.slice(0, -transitionArrangement - 1),
             points,
-            radius: pattern === "curved paths" ? radius : 0
+            radius
           })} Z`}
         >
           {setup.hasTransition && (
@@ -22,11 +23,11 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
               values={`${renderPath({
                 area: area.slice(0, -transitionArrangement - 1),
                 points,
-                radius: pattern === "curved paths" ? radius : 0
+                radius
               })} Z;${renderPath({
                 area: area.slice(1, -transitionArrangement),
                 points,
-                radius: pattern === "curved paths" ? radius : 0
+                radius
               })} Z`}
               keyTimes="0;1"
               dur={`${setup.transitionDuration}s`}
@@ -43,7 +44,7 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
             d={`${renderPath({
               area: chunk,
               points,
-              radius: pattern === "curved paths" ? radius : 0
+              radius
             })} Z`}
           ></path>
         ))}
@@ -53,7 +54,7 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
           d={`${renderPath({
             area: activeChunk,
             points,
-            radius: pattern === "curved paths" ? radius : 0
+            radius
           })}`}
         ></path>
       )}

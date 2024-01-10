@@ -72,7 +72,7 @@ export const runDetector = async ({
         const thumbTip = hands[0]?.keypoints[4];
         const indexTip = hands[0]?.keypoints[8];
         const thumbIndexDistance = getDistance(thumbTip, indexTip);
-        const threshold = 50;
+        const threshold = 40;
         setCursor({
           x: (thumbTip.x + indexTip.x) / 2,
           y: (thumbTip.y + indexTip.y) / 2,
