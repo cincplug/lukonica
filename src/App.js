@@ -12,7 +12,7 @@ import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
 import Images from "./Images";
 import Paths from "./Paths";
-import mask from "./masks/luka.json";
+import mask from "./masks/luka3.json";
 import "./App.scss";
 
 const inputResolution = {
