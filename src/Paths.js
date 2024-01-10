@@ -12,7 +12,7 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
           key={`m-${areaIndex}`}
           fill={processColor(setup.color, setup.opacity)}
           d={`${renderPath({
-            area: area.slice(0, -transitionArrangement - 1),
+            area: area.slice(0, area.length - transitionArrangement),
             points,
             radius
           })} Z`}
@@ -21,11 +21,11 @@ const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
             <animate
               attributeName="d"
               values={`${renderPath({
-                area: area.slice(0, -transitionArrangement - 1),
+                area: area.slice(0, area.length - transitionArrangement),
                 points,
                 radius
               })} Z;${renderPath({
-                area: area.slice(1, -transitionArrangement),
+                area: area.slice(-area.length + transitionArrangement),
                 points,
                 radius
               })} Z`}
