@@ -16,8 +16,8 @@ import mask from "./masks/luka3.json";
 import "./App.scss";
 
 const inputResolution = {
-  width: window.innerWidth,
-  height: window.innerHeight
+  width: window.outerWidth,
+  height: window.outerHeight
 };
 const { width, height } = inputResolution;
 const handsPointsCount = 42;

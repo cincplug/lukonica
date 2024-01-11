@@ -53,7 +53,7 @@ const Images = ({ points, flatMask, setup, handsPointsCount, cursor }) => {
           x={pointFrom.x}
           y={pointFrom.y}
           width={getSize(pointFrom.z)}
-          href={setup.image || bubble}
+          href={setup.imageUrl || bubble}
           transform={`translate(${-getSize(pointFrom.z) / 2})`}
         >
           {transitionArrangement && (

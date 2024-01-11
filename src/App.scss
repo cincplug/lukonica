@@ -1,6 +1,7 @@
 :root {
-  --color-white: #fafafa;
-  --color-half-black: #00000080;
+  --color-white: #fff;
+  --color-white-dimmed: #fffe;
+  --color-half-black: #0008;
   --color-blue: #4ad;
   --color-half-blue: #4ad8;
   --color-purple: #aa44dd;
@@ -18,24 +19,28 @@ button {
 .menu {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 12rem;
+  right: 0;
+  width: 10rem;
   height: 100vh;
   padding: 1rem;
-  background: var(--color-white);
+  background: var(--color-white-dimmed);
   margin: 0 0 0.5rem;
 }
 
 .control {
   border: none;
   padding: 0;
-  margin: 0 0 1rem;
+  margin: 0 0 0.8rem;
   display: flex;
   flex-direction: column-reverse;
   width: 100%;
+  &__input[type="checkbox"] {
+    margin: 0 0.2rem 0 0;
+  }
   &__label {
     display: flex;
     justify-content: space-between;
+    font-size: 0.8rem;
   }
   &--checkbox {
     flex-direction: row;
