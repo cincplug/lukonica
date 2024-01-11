@@ -5,15 +5,15 @@ import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
 import "@mediapipe/hands";
 import Webcam from "react-webcam";
-import { runDetector } from "./utils";
-import defaultSetup from "./_setup.json";
+import { runDetector } from "../utils";
+import defaultSetup from "../_setup.json";
 import Menu from "./Menu";
 import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
-import Images from "./Images";
-import Paths from "./Paths";
-import mask from "./masks/luka3.json";
-import "./App.scss";
+import Images from "./patterns/Images";
+import Paths from "./patterns/Paths";
+import mask from "../masks/luka3.json";
+import "../styles.scss";
 
 const inputResolution = {
   width: window.outerWidth,

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import defaultFacePoints from "./default-face-points.json";
-import { renderPath, saveFile } from "./utils";
-import "./App.scss";
+import defaultFacePoints from "../default-face-points.json";
+import { renderPath, saveFile } from "../utils";
 
 function FaceEditor(props) {
   const { inputResolution, setIsEditing } = props;

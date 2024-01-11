@@ -1,5 +1,5 @@
 import React from "react";
-import { processColor, renderPath } from "./utils";
+import { processColor, renderPath } from "../../utils";
 
 const Paths = ({ points, mask, setup, chunks, activeChunk }) => {
   const { pattern, transitionArrangement } = setup;

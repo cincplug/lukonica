@@ -1,6 +1,6 @@
 import React from "react";
-import bubble from "./masks/bubble.png";
-import { getDistance } from "./utils";
+import bubble from "../../assets/bubble.png";
+import { getDistance } from "../../utils";
 
 const Images = ({ points, flatMask, setup, handsPointsCount, cursor }) => {
   const {

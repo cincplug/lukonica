@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.scss";
 
 function Splash(props) {
   const { setIsStarted, setSetup, setIsEditing } = props;

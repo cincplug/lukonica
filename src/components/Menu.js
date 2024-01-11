@@ -1,4 +1,4 @@
-import defaultSetup from "./_setup.json";
+import defaultSetup from "../_setup.json";
 import ControlGroup from "./ControlGroup";
 // import { download } from "./utils";
 
