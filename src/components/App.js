@@ -31,7 +31,7 @@ function App() {
   const [activeChunk, setActiveChunk] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isActive: false });
 
-  const storageSetupItem = "kwastjeSetup";
+  const storageSetupItem = "lukonicaSetup";
   const storedSetupRaw = sessionStorage.getItem(storageSetupItem);
   const storedSetup = storedSetupRaw ? JSON.parse(storedSetupRaw) : null;
   const initialSetup = {};
