@@ -30,7 +30,7 @@ export const runDetector = async ({
   setCursor
 }) => {
   let frame = 0;
-  const { showsFaces, showsHands } = setup;
+  const { showsFaces, showsHands, gripThreshold } = setup;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
     runtime: "tfjs",
@@ -72,7 +72,7 @@ export const runDetector = async ({
         const thumbTip = hands[0]?.keypoints[4];
         const indexTip = hands[0]?.keypoints[8];
         const thumbIndexDistance = getDistance(thumbTip, indexTip);
-        const threshold = 40;
+        const threshold = gripThreshold;
         setCursor({
           x: (thumbTip.x + indexTip.x) / 2,
           y: (thumbTip.y + indexTip.y) / 2,

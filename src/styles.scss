@@ -4,7 +4,8 @@
   --color-half-black: #0008;
   --color-blue: #4ad;
   --color-half-blue: #4ad8;
-  --color-purple: #aa44dd;
+  --color-purple: #dd22ff;
+  --color-yellow: #ffdd00;
 }
 
 body {
@@ -77,7 +78,7 @@ button {
     }
   }
   &__area {
-    fill: var(--color-half-blue)
+    fill: var(--color-half-blue);
   }
   &__active-area {
     fill: none;
@@ -105,11 +106,20 @@ button {
   &--chunk {
     fill: none;
     stroke-width: 2px;
-    stroke: #ffdd00;
+    stroke: var(--color-yellow);
     &--active {
-      stroke-width: 3px;
-      stroke: #ffddff;
+      stroke-width: 4px;
+      stroke: var(--color-purple);
     }
   }
+}
 
+.cursor {
+  fill: var(--color-blue);
+  stroke: var(--color-blue);
+  stroke-width: 0.5rem;
+  transition: stroke-width 0.1s ease-in;
+  &--active {
+    stroke-width: 0;
+  }
 }

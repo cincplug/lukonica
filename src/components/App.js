@@ -121,7 +121,13 @@ function App() {
                   case "images":
                     return (
                       <Images
-                        {...{ points, flatMask, setup, handsPointsCount, cursor }}
+                        {...{
+                          points,
+                          flatMask,
+                          setup,
+                          handsPointsCount,
+                          cursor
+                        }}
                       />
                     );
                   case "paths":
@@ -136,7 +142,10 @@ function App() {
                 }
               })()}
               <circle
-                r={cursor.isActive ? 5 : 10}
+                className={`cursor cursor--${
+                  cursor.isActive ? "active" : "inactive"
+                }`}
+                r={5}
                 cx={cursor.x}
                 cy={cursor.y}
               ></circle>
