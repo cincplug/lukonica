@@ -2,10 +2,11 @@
   --color-white: #fff;
   --color-white-dimmed: #fffe;
   --color-half-black: #0008;
-  --color-blue: #4ad;
-  --color-half-blue: #4ad8;
-  --color-purple: #dd22ff;
-  --color-yellow: #ffdd00;
+  --color-blue: #2df;
+  --color-half-blue: #2df8;
+  --color-purple: #909;
+  --color-yellow: #fd2;
+  --color-half-yellow: #fd28;
 }
 
 body {
@@ -104,12 +105,12 @@ button {
     stroke: none;
   }
   &--chunk {
-    fill: none;
-    stroke-width: 2px;
-    stroke: var(--color-yellow);
+    fill: var(--color-half-yellow);
+    stroke: none;
     &--active {
-      stroke-width: 4px;
-      stroke: var(--color-purple);
+      fill: none;
+      stroke-width: 3px;
+      stroke: var(--color-yellow);
     }
   }
 }
