@@ -30,7 +30,7 @@ export const runDetector = async ({
   setCursor
 }) => {
   let frame = 0;
-  const { showsFaces, showsHands, gripThreshold } = setup;
+  const { showsFaces, showsHands, gripThreshold, latency, pattern } = setup;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
     runtime: "tfjs",
@@ -52,7 +52,7 @@ export const runDetector = async ({
   );
 
   const detect = async () => {
-    if (frame % setup.latency === 0) {
+    if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
       const faces = await facesDetector.estimateFaces(video, estimationConfig);
       const hands = await handsDetector.estimateHands(video, estimationConfig);
@@ -64,7 +64,7 @@ export const runDetector = async ({
         });
       }
       if (showsHands && hands && hands[0] && hands[0].keypoints) {
-        if (!["paths", "curved paths"].includes(setup.pattern)) {
+        if (!["paths", "curved paths"].includes(pattern)) {
           hands.forEach((hand) => {
             points = points.concat(hand.keypoints);
           });

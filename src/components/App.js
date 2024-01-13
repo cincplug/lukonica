@@ -49,6 +49,9 @@ function App() {
         nextSetup[id] = ["number", "range"].includes(type) ? value / 1 : value;
       }
       sessionStorage.setItem(storageSetupItem, JSON.stringify(nextSetup));
+      if(["latency", "pattern", "gripThreshold"].includes(id)) {
+        window.location.reload();
+      }
       return nextSetup;
     });
   };
