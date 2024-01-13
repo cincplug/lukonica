@@ -36,12 +36,9 @@ const Images = ({
         return null;
       }
       const getSize = (point) => {
-        return (
-          Math.max(
-            lowThreshold,
-            point || index
-          ) +
-          radius * growth 
+        return Math.max(
+          lowThreshold,
+          point || ((index + radius) / (index % transitionArrangement)) * growth
         );
       };
       const animationProps = {
