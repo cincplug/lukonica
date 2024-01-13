@@ -16,7 +16,7 @@ const Images = ({
     growth,
     transitionDuration,
     lowThreshold,
-    unfoldThreshold,
+    unfoldThreshold
   } = setup;
 
   const defaultFacePointCount = 468;
@@ -39,10 +39,9 @@ const Images = ({
         return (
           Math.max(
             lowThreshold,
-            (point || index - flatMask.length + handsPointsCount) + radius
-          ) *
-          growth *
-          lowThreshold
+            point || index
+          ) +
+          radius * growth 
         );
       };
       const animationProps = {
