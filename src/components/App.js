@@ -16,8 +16,8 @@ import mask from "../masks/luka.json";
 import "../styles.scss";
 
 const inputResolution = {
-  width: window.outerWidth,
-  height: window.outerHeight
+  width: window.innerWidth,
+  height: window.innerHeight
 };
 const { width, height } = inputResolution;
 const handsPointsCount = 42;
@@ -69,7 +69,9 @@ function App() {
   };
 
   // const activePoints = points.filter((_point, pointIndex) => mask.flat().includes(pointIndex));
-  let flatMask = mask.flat().slice(0, -setup.transitionArrangement - 1);
+  let flatMask = mask.flat();
+  const flatMaskLength = flatMask.length;
+  flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
   if (setup.showsHands && points && points.length > 0) {
     flatMask = flatMask.concat(
       ...Array.from(
@@ -126,7 +128,8 @@ function App() {
                           flatMask,
                           setup,
                           handsPointsCount,
-                          cursor
+                          cursor,
+                          flatMaskLength
                         }}
                       />
                     );
@@ -145,20 +148,10 @@ function App() {
                 className={`cursor cursor--${
                   cursor.isActive ? "active" : "inactive"
                 }`}
-                r={5}
+                r={6}
                 cx={cursor.x}
                 cy={cursor.y}
               ></circle>
-              {/* {defaultFacePoints.map(
-                (defaultFacePoint, defaultFacePointIndex) => (
-                  <circle
-                    r={3}
-                    cx={defaultFacePoint.x}
-                    cy={defaultFacePoint.y}
-                    key={defaultFacePointIndex}
-                  ></circle>
-                )
-              )} */}
             </svg>
           )}
           <Menu

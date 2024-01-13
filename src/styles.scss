@@ -3,7 +3,7 @@
   --color-white-dimmed: #fffe;
   --color-half-black: #0008;
   --color-blue: #2df;
-  --color-half-blue: #2df8;
+  --color-dark-blue: #08a;
   --color-purple: #909;
   --color-yellow: #fd2;
   --color-half-yellow: #fd28;
@@ -69,7 +69,7 @@ button {
   top: 0;
   background: var(--color-white);
   &__dot {
-    fill: var(--color-half-blue);
+    fill: var(--color-blue);
     stroke: none;
     &:hover {
       fill: var(--color-purple);
@@ -79,7 +79,8 @@ button {
     }
   }
   &__area {
-    fill: var(--color-half-blue);
+    fill: var(--color-half-yellow);
+    stroke: var(--color-blue)
   }
   &__active-area {
     fill: none;
@@ -117,9 +118,9 @@ button {
 
 .cursor {
   fill: var(--color-blue);
-  stroke: var(--color-blue);
-  stroke-width: 0.5rem;
-  transition: stroke-width 0.1s ease-in;
+  stroke: var(--color-dark-blue);
+  stroke-width: 0.8rem;
+  transition: stroke-width 0.1s ease-out;
   &--active {
     stroke-width: 0;
   }

@@ -2,14 +2,21 @@ import React from "react";
 import bubble from "../../assets/bubble.png";
 import { getDistance } from "../../utils";
 
-const Images = ({ points, flatMask, setup, handsPointsCount, cursor }) => {
+const Images = ({
+  points,
+  flatMask,
+  setup,
+  handsPointsCount,
+  cursor,
+  flatMaskLength
+}) => {
   const {
     transitionArrangement,
     radius,
     growth,
     transitionDuration,
     lowThreshold,
-    unfoldThreshold
+    unfoldThreshold,
   } = setup;
 
   const defaultFacePointCount = 468;
@@ -25,10 +32,7 @@ const Images = ({ points, flatMask, setup, handsPointsCount, cursor }) => {
             defaultFacePointCount - 1
           )
         ];
-      if (
-        !pointFrom ||
-        getDistance(cursor, pointFrom) < unfoldThreshold
-      ) {
+      if (!pointFrom || getDistance(cursor, pointFrom) < unfoldThreshold) {
         return null;
       }
       const getSize = (point) => {
@@ -58,16 +62,20 @@ const Images = ({ points, flatMask, setup, handsPointsCount, cursor }) => {
         >
           {transitionArrangement && (
             <>
-              <animate
-                attributeName="x"
-                values={`${pointFrom.x};${pointTo.x}`}
-                {...animationProps}
-              />
-              <animate
-                attributeName="y"
-                values={`${pointFrom.y};${pointTo.y}`}
-                {...animationProps}
-              />
+              {index < flatMaskLength && (
+                <>
+                  <animate
+                    attributeName="x"
+                    values={`${pointFrom.x};${pointTo.x}`}
+                    {...animationProps}
+                  />
+                  <animate
+                    attributeName="y"
+                    values={`${pointFrom.y};${pointTo.y}`}
+                    {...animationProps}
+                  />
+                </>
+              )}
               <animate
                 attributeName="width"
                 values={`${getSize(pointFrom.z)};${getSize(pointTo.z)}`}
