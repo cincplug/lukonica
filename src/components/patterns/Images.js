@@ -2,14 +2,7 @@ import React from "react";
 import bubble from "../../assets/bubble.png";
 import { getDistance } from "../../utils";
 
-const Images = ({
-  points,
-  flatMask,
-  setup,
-  handsPointsCount,
-  cursor,
-  flatMaskLength
-}) => {
+const Images = ({ points, flatMask, setup, cursor, flatMaskLength }) => {
   const {
     transitionArrangement,
     radius,
@@ -36,9 +29,12 @@ const Images = ({
         return null;
       }
       const getSize = (point) => {
-        return Math.max(
-          lowThreshold,
-          point || ((index + radius) / (index % transitionArrangement)) * growth
+        return (
+          Math.max(
+            lowThreshold,
+            point || (index + radius) / (index % (transitionArrangement + 1))
+          ) +
+          radius * growth
         );
       };
       const animationProps = {
