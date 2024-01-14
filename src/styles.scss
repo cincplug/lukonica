@@ -30,12 +30,26 @@ button {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-gap: 0.6rem;
+  @media (max-width: 512px) {
+    width: auto;
+    height: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    bottom: 0;
+    top: auto;
+    grid-gap: 0.4rem;
+    .control {
+      grid-column: span 1;
+    }
+    button {
+      grid-column: span 1;
+    }
+  }
 }
 
 .control {
   display: flex;
   flex-direction: column-reverse;
-  justify-content: flex-end;
+  justify-content: flex-start;
   grid-column: 1 / span 4;
   border: none;
   padding: 0;
@@ -48,7 +62,7 @@ button {
   // }
   &--checkbox {
     flex-direction: row;
-    align-self: flex-start;
+    align-self: center;
     grid-column: 3 / span 2;
   }
   &--color {
@@ -89,6 +103,9 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
+  button {
+    width: 9rem;
+  }
 }
 
 .face-editor {
