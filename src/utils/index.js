@@ -23,14 +23,13 @@ export const getDistance = (point1, point2) => {
 
 export const runDetector = async ({
   video,
-  setup,
+  setupRef,
   setPoints,
   setChunks,
   setActiveChunk,
   setCursor
 }) => {
   let frame = 0;
-  const { showsFaces, showsHands, gripThreshold, latency, pattern } = setup;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
     runtime: "tfjs",
@@ -52,6 +51,7 @@ export const runDetector = async ({
   );
 
   const detect = async () => {
+    const { showsFaces, showsHands, gripThreshold, latency, pattern } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
       const faces = await facesDetector.estimateFaces(video, estimationConfig);

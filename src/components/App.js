@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "@tensorflow/tfjs";
-// Register WebGL backend.
 import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
 import "@mediapipe/hands";
@@ -39,6 +38,11 @@ function App() {
     initialSetup[item.id] = storedSetup ? storedSetup[item.id] : item.value;
   });
   const [setup, setSetup] = useState(initialSetup);
+  const setupRef = useRef(setup);
+  useEffect(() => {
+    setupRef.current = setup;
+  }, [setup]);
+
   const handleInputChange = (event) => {
     setSetup((prevSetup) => {
       const { id, value, type } = event.target;
@@ -49,9 +53,6 @@ function App() {
         nextSetup[id] = ["number", "range"].includes(type) ? value / 1 : value;
       }
       sessionStorage.setItem(storageSetupItem, JSON.stringify(nextSetup));
-      if(["latency", "pattern", "gripThreshold"].includes(id)) {
-        window.location.reload();
-      }
       return nextSetup;
     });
   };
@@ -61,8 +62,8 @@ function App() {
     if (video.readyState !== 4) return;
     if (isLoaded) return;
     runDetector({
+      setupRef,
       video,
-      setup,
       setPoints,
       setChunks,
       setActiveChunk,
