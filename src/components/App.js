@@ -141,21 +141,13 @@ function App() {
                   case "curved paths":
                     return (
                       <Paths
-                        {...{ points, chunks, activeChunk, mask, setup }}
+                        {...{ points, chunks, activeChunk, mask, setup, cursor }}
                       />
                     );
                   default:
                     return null;
                 }
               })()}
-              <circle
-                className={`cursor cursor--${
-                  cursor.isActive ? "active" : "inactive"
-                }`}
-                r={6}
-                cx={cursor.x}
-                cy={cursor.y}
-              ></circle>
             </svg>
           )}
           <Menu
