@@ -4,7 +4,7 @@ import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
 import "@mediapipe/hands";
 import Webcam from "react-webcam";
-import { runDetector } from "../utils";
+import { runDetector } from "../utils/runDetector";
 import defaultSetup from "../_setup.json";
 import Menu from "./Menu";
 import Splash from "./Splash";
