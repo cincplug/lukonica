@@ -15,7 +15,7 @@ body {
 
 button {
   margin: 0 1rem 0 0;
-  padding: 0.5rem 2rem;
+  padding: 0.3rem 2rem;
 }
 
 .menu {
@@ -26,32 +26,59 @@ button {
   height: 100vh;
   padding: 0.5rem 1rem;
   background: var(--color-white-dimmed);
-  margin: 0 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: 0.6rem;
 }
 
 .control {
-  border: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column-reverse;
-  width: 100%;
-  &__input[type="checkbox"] {
-    margin: 0 0.2rem 0 0;
-  }
-  &__label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-  }
+  justify-content: flex-end;
+  grid-column: 1 / span 4;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  // &--range {
+  //   grid-column: 1 / span 4;
+  //   // @include mobile-landscape {
+  //   //   grid-column: span 2;
+  //   // }
+  // }
   &--checkbox {
     flex-direction: row;
+    align-self: flex-start;
+    grid-column: 3 / span 2;
   }
-  &__select {
-    padding: 0.2rem;
+  &--color {
+    grid-column: span 2;
+    position: relative;
+    width: 1rem;
+  }
+  &__button {
+    grid-column: span 4;
+    width: 100%;
+  }
+}
+label {
+  user-select: none;
+  text-transform: capitalize;
+  &--name {
+    margin-top: 0.4rem;
+  }
+  .menu--collapsed & {
+    display: none;
+  }
+  [type="range"] + & {
+    display: flex;
+    justify-content: space-between;
+  }
+  [type="checkbox"] + & {
+    margin: 0;
+  }
+  [type="color"] + & {
+    display: none;
   }
 }
 
@@ -83,7 +110,7 @@ button {
   }
   &__area {
     fill: var(--color-half-yellow);
-    stroke: var(--color-blue)
+    stroke: var(--color-blue);
   }
   &__active-area {
     fill: none;

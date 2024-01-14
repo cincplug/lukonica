@@ -80,6 +80,7 @@
   },
   {
     "id": "showsVideo",
+    "title": "video",
     "description": "Show / hide source video",
     "value": true,
     "type": "checkbox"
