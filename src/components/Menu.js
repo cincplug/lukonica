@@ -1,11 +1,12 @@
 import defaultSetup from "../_setup.json";
 import ControlGroup from "./ControlGroup";
-// import { download } from "./utils";
+import { saveSvg, saveJson } from "../utils";
 
 const Menu = (props) => {
   const {
     setup,
     handleInputChange,
+    mask,
   } = props;
 
   return (
@@ -20,14 +21,22 @@ const Menu = (props) => {
             (control) => !control.isHidden && !control.isRight
           )}
         />
-        {/* <button
+        <button
           className="control__input control__button control__button--save"
           onClick={() => {
-            download();
+            saveSvg();
           }}
         >
-          Save
-        </button> */}
+          Save SVG
+        </button>
+        <button
+          className="control__input control__button control__button--save"
+          onClick={() => {
+            saveJson(mask);
+          }}
+        >
+          Save mask
+        </button>
         <button
           className="control__input control__button control__button--clear"
           onClick={() => {

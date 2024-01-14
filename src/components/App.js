@@ -141,7 +141,14 @@ function App() {
                   case "curved paths":
                     return (
                       <Paths
-                        {...{ points, chunks, activeChunk, mask, setup, cursor }}
+                        {...{
+                          points,
+                          chunks,
+                          activeChunk,
+                          mask,
+                          setup,
+                          cursor
+                        }}
                       />
                     );
                   default:
@@ -154,7 +161,8 @@ function App() {
             {...{
               setup,
               handleInputChange,
-              setSetup
+              setSetup,
+              mask: mask.concat(chunks)
             }}
           />
         </>

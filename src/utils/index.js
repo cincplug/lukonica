@@ -50,7 +50,7 @@ export const renderPath = ({ area, points, radius }) =>
     })
     .join(" ");
 
-export const saveFile = (areas) => {
+export const saveJson = (areas) => {
   const data = JSON.stringify(areas);
   const blob = new Blob([data], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -59,4 +59,14 @@ export const saveFile = (areas) => {
   link.href = url;
   link.click();
   URL.revokeObjectURL(url);
+};
+
+export const saveSvg = () => {
+  const link = document.createElement("a");
+  link.download = "download.svg";
+  const svg = document.querySelector(".drawing");
+  const base64doc = btoa(unescape(encodeURIComponent(svg.outerHTML)));
+  const e = new MouseEvent("click");
+  link.href = "data:image/svg+xml;base64," + base64doc;
+  link.dispatchEvent(e);
 };

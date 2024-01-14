@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import defaultFacePoints from "../default-face-points.json";
-import { renderPath, saveFile } from "../utils";
+import { renderPath, saveJson } from "../utils";
 
 function FaceEditor(props) {
   const { inputResolution, setIsEditing } = props;
@@ -70,7 +70,7 @@ function FaceEditor(props) {
         ))}
       </svg>
       <nav id="mainNav" className={`menu menu--controls`}>
-        <button onClick={() => saveFile(areas)}>Save</button>
+        <button onClick={() => saveJson(areas)}>Save</button>
         <button onClick={() => setIsEditing(false)}>Close</button>
       </nav>
     </div>
