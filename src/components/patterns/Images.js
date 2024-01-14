@@ -9,7 +9,7 @@ const Images = ({ points, flatMask, setup, cursor, flatMaskLength }) => {
     growth,
     transitionDuration,
     lowThreshold,
-    unfoldThreshold
+    gripThreshold
   } = setup;
 
   const defaultFacePointCount = 468;
@@ -25,7 +25,7 @@ const Images = ({ points, flatMask, setup, cursor, flatMaskLength }) => {
             defaultFacePointCount - 1
           )
         ];
-      if (!pointFrom || getDistance(cursor, pointFrom) < unfoldThreshold) {
+      if (!pointFrom || getDistance(cursor, pointFrom) < gripThreshold) {
         return null;
       }
       const getSize = (point) => {
