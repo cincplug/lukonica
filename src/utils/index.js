@@ -52,13 +52,15 @@ export const renderPath = ({ area, points, radius }) =>
 
 export const saveJson = (areas) => {
   const data = JSON.stringify(areas);
-  const blob = new Blob([data], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.download = "areas.json";
-  link.href = url;
-  link.click();
-  URL.revokeObjectURL(url);
+  fetch('/api/save', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ data }),
+}).then(response => response.json())
+.then(data => console.log(data))
+.catch((error) => console.error('Error:', error));
 };
 
 export const saveSvg = () => {
