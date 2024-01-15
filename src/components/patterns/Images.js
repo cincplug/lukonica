@@ -26,7 +26,8 @@ const Images = ({ points, flatMask, setup, cursor, flatMaskLength }) => {
         return (
           Math.max(
             lowThreshold,
-            (index + radius) / (((index % (handFactor + 1)) * handFactor) || handFactor)
+            (index + radius) /
+              ((index % (handFactor + 1)) * handFactor || handFactor)
           ) +
           radius * growth
         );
