@@ -12,27 +12,21 @@ const Images = ({ points, flatMask, setup, cursor, flatMaskLength }) => {
     gripThreshold
   } = setup;
 
-  const defaultFacePointCount = 468;
-
   return flatMask
     .slice(0, -transitionArrangement - 1)
     .map((flatMaskPoint, index) => {
       const pointFrom = points[flatMaskPoint];
       const pointTo =
-        points[
-          Math.min(
-            flatMaskPoint + transitionArrangement,
-            defaultFacePointCount - 1
-          )
-        ];
+        points[Math.max(flatMaskPoint - transitionArrangement, 0)];
       if (!pointFrom || getDistance(cursor, pointFrom) < gripThreshold) {
         return null;
       }
       const getSize = (point) => {
+        const handFactor = transitionArrangement + 2;
         return (
           Math.max(
             lowThreshold,
-            point || (index + radius) / (index % (transitionArrangement + 1))
+            point || (index + radius) / (index % (handFactor + 1)) / handFactor
           ) +
           radius * growth
         );
@@ -54,20 +48,18 @@ const Images = ({ points, flatMask, setup, cursor, flatMaskLength }) => {
         >
           {transitionArrangement && (
             <>
-              {index < flatMaskLength && (
-                <>
-                  <animate
-                    attributeName="x"
-                    values={`${pointFrom.x};${pointTo.x}`}
-                    {...animationProps}
-                  />
-                  <animate
-                    attributeName="y"
-                    values={`${pointFrom.y};${pointTo.y}`}
-                    {...animationProps}
-                  />
-                </>
-              )}
+              <>
+                <animate
+                  attributeName="x"
+                  values={`${pointFrom.x};${pointTo.x}`}
+                  {...animationProps}
+                />
+                <animate
+                  attributeName="y"
+                  values={`${pointFrom.y};${pointTo.y}`}
+                  {...animationProps}
+                />
+              </>
               <animate
                 attributeName="width"
                 values={`${getSize(pointFrom.z)};${getSize(pointTo.z)}`}
