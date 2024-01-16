@@ -48,7 +48,7 @@ const Menu = (props) => {
         </fieldset>
       </nav>
       <nav id="mainNav" className={`menu menu--patterns`}>
-        <PatternGroup {...isLoaded} />
+        <PatternGroup {...{ isLoaded }} />
       </nav>
     </>
   );

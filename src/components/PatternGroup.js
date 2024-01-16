@@ -12,12 +12,18 @@ const PatternGroup = (props) => {
   useEffect(() => {
     fetch("/api/fetch")
       .then((response) => response.json())
-      .then((jsons) => setData(jsons))
+      .then((jsons) => {
+        const data = jsons.map((json) => JSON.parse(json.data));
+        if (data) {
+          setData(data);
+        }
+      })
       .catch((error) => console.error("Error:", error));
-  }, [data]);
+  }, []);
 
   return (
-    data && isLoaded &&
+    data &&
+    isLoaded &&
     data.map((pattern, index) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
