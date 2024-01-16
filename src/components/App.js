@@ -162,7 +162,8 @@ function App() {
               setup,
               handleInputChange,
               setSetup,
-              mask: mask.concat(chunks)
+              mask: mask.concat(chunks),
+              isLoaded,
             }}
           />
         </>

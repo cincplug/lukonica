@@ -6,17 +6,18 @@ import defaultFacePoints from "../default-face-points.json";
 import { renderPath } from "../utils";
 
 const PatternGroup = (props) => {
+  const { isLoaded } = props;
   const [data, setData] = useState(null);
 
-    useEffect(() => {
-      fetch("/api/fetch")
-        .then((response) => response.json())
-        .then((jsons) => setData(jsons))
-        .catch((error) => console.error("Error:", error));
-    }, []);
+  useEffect(() => {
+    fetch("/api/fetch")
+      .then((response) => response.json())
+      .then((jsons) => setData(jsons))
+      .catch((error) => console.error("Error:", error));
+  }, [data]);
 
   return (
-    data &&
+    data && isLoaded &&
     data.map((pattern, index) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
