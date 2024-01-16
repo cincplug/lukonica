@@ -35,6 +35,11 @@ button {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-gap: 0.6rem;
   grid-auto-rows: auto;
+  &--patterns {
+    right: auto;
+    left: 0;
+    grid-template-rows: max-content;
+  }
   @media (max-width: 512px) {
     width: auto;
     height: auto;
@@ -200,4 +205,8 @@ label {
   &--active {
     stroke-width: 0;
   }
+}
+
+.pattern {
+  grid-column: span 6;
 }

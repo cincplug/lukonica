@@ -1,5 +1,6 @@
 import defaultSetup from "../_setup.json";
 import ControlGroup from "./ControlGroup";
+import PatternGroup from "./PatternGroup";
 import { saveSvg, saveJson } from "../utils";
 
 const Menu = (props) => {
@@ -45,6 +46,9 @@ const Menu = (props) => {
             Reset
           </button>
         </fieldset>
+      </nav>
+      <nav id="mainNav" className={`menu menu--patterns`}>
+        <PatternGroup />
       </nav>
     </>
   );
