@@ -4,7 +4,7 @@ import PatternGroup from "./PatternGroup";
 import { saveSvg, saveJson } from "../utils";
 
 const Menu = (props) => {
-  const { setup, handleInputChange, mask, isLoaded } = props;
+  const { setup, handleInputChange, mask, isLoaded, setMask } = props;
 
   return (
     <>
@@ -17,7 +17,7 @@ const Menu = (props) => {
         />
         <fieldset className="control">
           <button
-            className="control__input control__button control__button--save"
+            className="menu__button control__input control__button control__button--save"
             onClick={() => {
               saveSvg();
             }}
@@ -27,7 +27,7 @@ const Menu = (props) => {
         </fieldset>
         <fieldset className="control">
           <button
-            className="control__input control__button control__button--save"
+            className="menu__button control__input control__button control__button--save"
             onClick={() => {
               saveJson(mask);
             }}
@@ -37,7 +37,7 @@ const Menu = (props) => {
         </fieldset>
         <fieldset className="control">
           <button
-            className="control__input control__button control__button--clear"
+            className="menu__button control__input control__button control__button--clear"
             onClick={() => {
               sessionStorage.clear();
               window.location.reload();
@@ -47,9 +47,7 @@ const Menu = (props) => {
           </button>
         </fieldset>
       </nav>
-      <nav id="mainNav" className={`menu menu--patterns`}>
-        <PatternGroup {...{ isLoaded }} />
-      </nav>
+      <PatternGroup {...{ isLoaded, setMask }} />
     </>
   );
 };

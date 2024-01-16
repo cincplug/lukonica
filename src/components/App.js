@@ -11,7 +11,6 @@ import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
 import Images from "./patterns/Images";
 import Paths from "./patterns/Paths";
-import mask from "../masks/luka.json";
 import "../styles.scss";
 
 const inputResolution = {
@@ -28,6 +27,7 @@ function App() {
   const [points, setPoints] = useState([]);
   const [chunks, setChunks] = useState([]);
   const [activeChunk, setActiveChunk] = useState([]);
+  const [mask, setMask] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isActive: false });
 
   const storageSetupItem = "lukonicaSetup";
@@ -72,10 +72,11 @@ function App() {
     setIsLoaded(true);
   };
 
-  // const activePoints = points.filter((_point, pointIndex) => mask.flat().includes(pointIndex));
   let flatMask = mask.flat();
   const flatMaskLength = flatMask.length;
-  flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
+  if (flatMaskLength > 0) {
+    flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
+  }
   if (setup.showsHands && points && points.length > 0) {
     flatMask = flatMask.concat(
       ...Array.from(
@@ -162,8 +163,9 @@ function App() {
               setup,
               handleInputChange,
               setSetup,
+              setMask,
               mask: mask.concat(chunks),
-              isLoaded,
+              isLoaded
             }}
           />
         </>
