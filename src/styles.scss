@@ -28,7 +28,7 @@ button {
   right: 0;
   width: 10rem;
   height: 100vh;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   background: var(--color-white-dimmed);
   margin: 0;
   display: grid;
@@ -65,7 +65,7 @@ button {
 .control {
   display: flex;
   flex-direction: column-reverse;
-  justify-content: flex-start;
+  justify-content: center;
   grid-column: 1 / span 12;
   border: none;
   padding: 0;
