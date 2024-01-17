@@ -13,6 +13,7 @@
   --color-yellow: #ec2;
   --color-yellow-semi: #fd28;
 
+  --bg: var(--color-black-light);
   --bg-input: linear-gradient(var(--color-skin-light), var(--color-skin));
   --bg-input-active: var(--color-skin-light);
 
@@ -38,6 +39,7 @@ button {
   color: var(--color-black);
   border: none;
   border-radius: 2rem;
+  font-weight: bold;
   &:hover {
     background: var(--bg-input-active);
   }
@@ -126,7 +128,7 @@ select {
         grid-column: span 6;
       }
     }
-    &__button {
+    &--button {
       grid-column: span 4;
       padding: 0.5rem 0;
     }
@@ -163,9 +165,8 @@ select {
     position: relative;
     width: 1rem;
   }
-  &__button {
+  &--button {
     grid-column: span 12;
-    width: 100%;
   }
   &--select {
     grid-column: span 6;
@@ -226,24 +227,24 @@ label {
   height: 100vh;
   left: 0;
   top: 0;
-  background: var(--color-white);
+  background: var(--bg);
   &__dot {
-    fill: var(--color-blue-light);
+    fill: var(--color-yellow-semi);
     stroke: none;
     &:hover {
-      fill: var(--color-purple);
+      fill: var(--color-skin-light);
     }
     &--first {
-      stroke: var(--color-black);
+      stroke: var(--color-yellow);
     }
   }
   &__area {
     fill: var(--color-yellow-semi);
-    stroke: var(--color-blue-light);
+    stroke: var(--color-yellow);
   }
   &__active-area {
     fill: none;
-    stroke: var(--color-purple);
+    stroke: var(--color-blue-light);
     stroke-width: 1px;
   }
 }

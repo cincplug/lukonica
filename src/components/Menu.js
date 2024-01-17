@@ -15,7 +15,7 @@ const Menu = (props) => {
             (control) => !control.isHidden && !control.isRight
           )}
         />
-        <fieldset className="control">
+        <fieldset className="control control--button">
           <button
             className="menu__button control__input control__button control__button--save"
             onClick={() => {
@@ -25,7 +25,7 @@ const Menu = (props) => {
             Save SVG
           </button>
         </fieldset>
-        <fieldset className="control">
+        <fieldset className="control control--button">
           <button
             className="menu__button control__input control__button control__button--save"
             onClick={() => {
@@ -35,7 +35,7 @@ const Menu = (props) => {
             Save mask
           </button>
         </fieldset>
-        <fieldset className="control">
+        <fieldset className="control control--button">
           <button
             className="menu__button control__input control__button control__button--clear"
             onClick={() => {
