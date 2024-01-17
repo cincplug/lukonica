@@ -20,7 +20,7 @@
   {
     "id": "radius",
     "description": "Initial radius",
-    "value": 20,
+    "value": 5,
     "type": "range",
     "min": 0.5,
     "max": 500,
