@@ -4,9 +4,8 @@ import masks from "../masks/masks.json";
 import { renderPath } from "../utils";
 
 const PatternGroup = (props) => {
-  const { setMask } = props;
+  const { setMask, setup, handleInputChange } = props;
   const [data, setData] = useState(masks);
-  const [activeMaskIndex, setActiveMaskIndex] = useState(0);
 
   useEffect(() => {
     fetch("/api/fetch")
@@ -21,8 +20,14 @@ const PatternGroup = (props) => {
   }, []);
 
   const handlePatternClick = (_event, pattern, index) => {
+    handleInputChange({
+      target: {
+        id: "activeMaskIndex",
+        value: index,
+        type: "range"
+      }
+    });
     setMask(pattern);
-    setActiveMaskIndex(index);
   };
 
   return (
@@ -31,7 +36,7 @@ const PatternGroup = (props) => {
         {data.map((pattern, index) => (
           <button
             className={`menu__pattern__button menu__pattern__button--${
-              activeMaskIndex === index ? "active" : "inactive"
+              setup.activeMaskIndex === index ? "active" : "inactive"
             }`}
             onClick={(event) => handlePatternClick(event, pattern, index)}
             key={`p-${index}`}

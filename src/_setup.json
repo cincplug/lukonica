@@ -135,5 +135,15 @@
     "description": "",
     "value": "",
     "type": "url"
+  },
+  {
+    "id": "activeMaskIndex",
+    "description": "Index of the active mask",
+    "value": 0,
+    "isHidden": true,
+    "type": "range",
+    "min": 0,
+    "max": 255,
+    "step": 1
   }
 ]

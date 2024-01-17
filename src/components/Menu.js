@@ -5,7 +5,6 @@ import { saveSvg, saveJson } from "../utils";
 
 const Menu = (props) => {
   const { setup, handleInputChange, mask, setMask } = props;
-
   return (
     <>
       <nav id="mainNav" className={`menu menu--controls`}>
@@ -47,7 +46,7 @@ const Menu = (props) => {
           </button>
         </fieldset>
       </nav>
-      <PatternGroup {...{ setMask }} />
+      <PatternGroup {...{ setMask, setup, handleInputChange }} />
     </>
   );
 };
