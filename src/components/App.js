@@ -162,7 +162,6 @@ function App() {
               setSetup,
               setMask,
               mask: mask.concat(chunks),
-              isLoaded
             }}
           />
         </>

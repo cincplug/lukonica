@@ -4,7 +4,7 @@ import PatternGroup from "./PatternGroup";
 import { saveSvg, saveJson } from "../utils";
 
 const Menu = (props) => {
-  const { setup, handleInputChange, mask, isLoaded, setMask } = props;
+  const { setup, handleInputChange, mask, setMask } = props;
 
   return (
     <>
@@ -47,7 +47,7 @@ const Menu = (props) => {
           </button>
         </fieldset>
       </nav>
-      <PatternGroup {...{ isLoaded, setMask }} />
+      <PatternGroup {...{ setMask }} />
     </>
   );
 };

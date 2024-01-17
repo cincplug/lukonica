@@ -4,8 +4,8 @@ import masks from "../masks/masks.json";
 import { renderPath } from "../utils";
 
 const PatternGroup = (props) => {
-  const { isLoaded, setMask } = props;
-  const [data, setData] = useState(null);
+  const { setMask } = props;
+  const [data, setData] = useState(masks);
 
   useEffect(() => {
     fetch("/api/fetch")
@@ -13,7 +13,7 @@ const PatternGroup = (props) => {
       .then((jsons) => {
         const data = jsons.map((json) => JSON.parse(json.data));
         if (data) {
-          setData(masks.concat(data));
+          setData((prevData) => prevData.concat(data));
         }
       })
       .catch((error) => console.error("Error:", error));
@@ -24,8 +24,7 @@ const PatternGroup = (props) => {
   };
 
   return (
-    data &&
-    isLoaded && (
+    data && (
       <nav id="mainNav" className={`menu menu--patterns`}>
         {data.map((pattern, index) => (
           <button
