@@ -1,21 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap");
+
 :root {
   --color-white: #fff;
-  --color-white-dimmed: #f8f8f8;
-  --color-black: #222;
-  --color-half-black: #000b;
-  --color-blue: #2df;
-  --color-dark-blue: #08a;
-  --color-purple: #909;
+  --color-black: #000;
+  --color-black-light: #272727;
+  --color-grey: #747474;
+  --color-silver: #ccc;
+  --color-blue-light: #2df;
+  --color-blue: #08a;
+  --color-skin: #c68c7f;
+  --color-skin-light: #f7c496;
   --color-yellow: #ec2;
-  --color-half-yellow: #fd28;
+  --color-yellow-semi: #fd28;
 
-  --color-input: var(--color-yellow);
+  --bg-input: linear-gradient(var(--color-skin-light), var(--color-skin));
+  --bg-input-active: var(--color-skin-light);
 
   --gap: 0.6rem;
+  --gap-half: calc(var(--gap) / 2);
+  --gap-double: calc(var(--gap) * 2);
+  --font: "Figtree" sans-serif;
 }
 
 * {
   box-sizing: border-box;
+  font-family: var(--font);
 }
 
 body {
@@ -25,19 +34,48 @@ body {
 button {
   margin: 0;
   padding: var(--gap) 0;
-  background-color: var(--color-input);
+  background: var(--bg-input);
+  color: var(--color-black);
   border: none;
   border-radius: 2rem;
-  path {
-    fill: var(--color-half-black);
-  }
   &:hover {
-    background-color: var(--color-dark-blue);
-    color: white;
-    path {
-      fill: var(--color-white);
+    background: var(--bg-input-active);
+  }
+}
+
+input {
+  border-radius: var(--gap-half);
+  background: var(--color-black-light);
+  border: 1px solid var(--color-skin);
+  padding: var(--gap-half);
+  &[type="range"] {
+    appearance: none;
+    height: var(--gap-half);
+    margin-top: var(--gap-half);
+    background: var(--color-skin);
+    padding: 0;
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      height: var(--gap-double);
+      width: var(--gap-double);
+      border: 1px solid var(--color-black-light);
+      border-radius: var(--gap-half);
+      background: var(--color-skin-light);
     }
   }
+  &[type="color"] {
+    appearance: none;
+    border-radius: var(--gap-half);
+    padding: 0;
+  }
+}
+
+select {
+  padding: var(--gap-half);
+  border-radius: var(--gap-half);
+  background: var(--bg-input);
+  border: none;
 }
 
 .menu {
@@ -47,7 +85,8 @@ button {
   width: 12rem;
   height: 100vh;
   padding: var(--gap);
-  background: var(--color-white-dimmed);
+  background: var(--color-black-light);
+  color: var(--color-silver);
   margin: 0;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -62,10 +101,10 @@ button {
     &__button {
       grid-column: span 4;
       border-radius: 0.2rem;
-      background: var(--color-white);
+      background: var(--bg-input);
       padding: 0;
       &--active {
-        background-color: var(--color-yellow);
+        background: var(--bg-input-active);
       }
     }
   }
@@ -142,7 +181,7 @@ button {
 }
 label {
   user-select: none;
-  text-transform: capitalize;
+  margin-bottom: var(--gap-half);
   &--name {
     margin-top: 0.4rem;
   }
@@ -168,6 +207,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(var(--color-black-light), var(--color-black));
   button {
     width: 9rem;
     margin-right: 1rem;
@@ -188,18 +228,18 @@ label {
   top: 0;
   background: var(--color-white);
   &__dot {
-    fill: var(--color-blue);
+    fill: var(--color-blue-light);
     stroke: none;
     &:hover {
       fill: var(--color-purple);
     }
     &--first {
-      stroke: var(--color-half-black);
+      stroke: var(--color-black);
     }
   }
   &__area {
-    fill: var(--color-half-yellow);
-    stroke: var(--color-blue);
+    fill: var(--color-yellow-semi);
+    stroke: var(--color-blue-light);
   }
   &__active-area {
     fill: none;
@@ -225,7 +265,7 @@ label {
     stroke: none;
   }
   &--chunk {
-    fill: var(--color-half-yellow);
+    fill: var(--color-yellow-semi);
     stroke: none;
     &--active {
       fill: none;
@@ -236,8 +276,8 @@ label {
 }
 
 .cursor {
-  fill: var(--color-blue);
-  stroke: var(--color-dark-blue);
+  fill: var(--color-blue-light);
+  stroke: var(--color-blue);
   stroke-width: 0.8rem;
   transition: stroke-width 0.1s ease-out;
   &--active {
