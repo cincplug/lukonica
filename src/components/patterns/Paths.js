@@ -2,7 +2,7 @@ import React from "react";
 import { processColor, renderPath } from "../../utils";
 
 const Paths = ({ points, mask, setup, chunks, activeChunk, cursor }) => {
-  const { pattern, transitionArrangement, radius } = setup;
+  const { transitionArrangement, radius } = setup;
   return (
     <>
       {mask.map((area, areaIndex) => (

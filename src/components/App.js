@@ -132,9 +132,7 @@ function App() {
                           points,
                           flatMask,
                           setup,
-                          handsPointsCount,
-                          cursor,
-                          flatMaskLength
+                          cursor
                         }}
                       />
                     );
@@ -143,10 +141,10 @@ function App() {
                       <Paths
                         {...{
                           points,
-                          chunks,
-                          activeChunk,
                           mask,
                           setup,
+                          chunks,
+                          activeChunk,
                           cursor
                         }}
                       />
