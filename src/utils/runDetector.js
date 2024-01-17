@@ -40,12 +40,12 @@ export const runDetector = async ({
       const hands = await handsDetector.estimateHands(video, estimationConfig);
 
       let points = [];
-      if (showsFaces && faces && faces[0] && faces[0].keypoints) {
+      if (showsFaces && faces?.[0]?.keypoints) {
         faces.forEach((face) => {
           points = points.concat(face.keypoints);
         });
       }
-      if (showsHands && hands && hands[0] && hands[0].keypoints) {
+      if (showsHands && hands?.[0]?.keypoints) {
         if (!["paths"].includes(pattern)) {
           hands.forEach((hand) => {
             points = points.concat(hand.keypoints);
