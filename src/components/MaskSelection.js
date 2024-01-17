@@ -5,7 +5,8 @@ import { renderPath } from "../utils";
 
 const MaskSelection = (props) => {
   const { setActiveMask, setup, handleInputChange } = props;
-  const [masks, setMasks] = useState(defaultMasks);
+  const { activeMaskIndex } = setup;
+  const [masks, setMasks] = useState(null);
 
   useEffect(() => {
     fetch("/api/fetch")
@@ -14,12 +15,18 @@ const MaskSelection = (props) => {
         const parsedResponse = responseJson.map((json) =>
           JSON.parse(json.data)
         );
-        if (parsedResponse) {
-          setMasks((prevData) => prevData.concat(parsedResponse));
-        }
+        setMasks(
+          parsedResponse ? defaultMasks.concat(parsedResponse) : defaultMasks
+        );
       })
       .catch((error) => console.error("Error:", error));
   }, []);
+
+  useEffect(() => {
+    if (masks) {
+      setActiveMask(masks[activeMaskIndex]);
+    }
+  }, [masks, setActiveMask, activeMaskIndex]);
 
   const handlePatternClick = (_event, mask, index) => {
     handleInputChange({
@@ -38,7 +45,7 @@ const MaskSelection = (props) => {
         {masks.map((mask, index) => (
           <button
             className={`menu__pattern__button menu__pattern__button--${
-              setup.activeMaskIndex === index ? "active" : "inactive"
+              activeMaskIndex === index ? "active" : "inactive"
             }`}
             onClick={(event) => handlePatternClick(event, mask, index)}
             key={`p-${index}`}
