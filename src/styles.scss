@@ -1,15 +1,15 @@
 :root {
   --color-white: #fff;
-  --color-white-dimmed: #fffd;
+  --color-white-dimmed: #f8f8f8;
   --color-black: #222;
   --color-half-black: #000b;
   --color-blue: #2df;
   --color-dark-blue: #08a;
   --color-purple: #909;
-  --color-yellow: #fd2;
+  --color-yellow: #ec2;
   --color-half-yellow: #fd28;
 
-  --color-input: var(--color-half-black);
+  --color-input: var(--color-yellow);
 }
 
 body {
@@ -22,13 +22,12 @@ button {
   background-color: var(--color-input);
   border: none;
   border-radius: 2rem;
-  color: var(--color-white);
-  transition: background-color 0.1s ease-in;
   path {
     fill: var(--color-half-black);
   }
   &:hover {
     background-color: var(--color-dark-blue);
+    color: white;
     path {
       fill: var(--color-white);
     }
@@ -57,7 +56,10 @@ button {
     &__button {
       grid-column: span 6;
       border-radius: 0.2rem;
-      background: var(--color-white)
+      background: var(--color-white);
+      &--active {
+        background-color: var(--color-yellow);
+      }
     }
   }
   @media (max-width: 512px) {

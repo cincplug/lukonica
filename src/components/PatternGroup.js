@@ -6,6 +6,7 @@ import { renderPath } from "../utils";
 const PatternGroup = (props) => {
   const { setMask } = props;
   const [data, setData] = useState(masks);
+  const [activeMaskIndex, setActiveMaskIndex] = useState(0);
 
   useEffect(() => {
     fetch("/api/fetch")
@@ -19,8 +20,9 @@ const PatternGroup = (props) => {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  const handlePatternClick = (_event, pattern) => {
+  const handlePatternClick = (_event, pattern, index) => {
     setMask(pattern);
+    setActiveMaskIndex(index);
   };
 
   return (
@@ -28,8 +30,10 @@ const PatternGroup = (props) => {
       <nav id="mainNav" className={`menu menu--patterns`}>
         {data.map((pattern, index) => (
           <button
-            className="menu__pattern__button"
-            onClick={(event) => handlePatternClick(event, pattern)}
+            className={`menu__pattern__button menu__pattern__button--${
+              activeMaskIndex === index ? "active" : "inactive"
+            }`}
+            onClick={(event) => handlePatternClick(event, pattern, index)}
             key={`p-${index}`}
           >
             <svg
