@@ -10,6 +10,12 @@
   --color-half-yellow: #fd28;
 
   --color-input: var(--color-yellow);
+
+  --gap: 0.6rem;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -18,7 +24,7 @@ body {
 
 button {
   margin: 0;
-  padding: 0.5rem 1rem;
+  padding: var(--gap) 0;
   background-color: var(--color-input);
   border: none;
   border-radius: 2rem;
@@ -38,14 +44,14 @@ button {
   position: absolute;
   top: 0;
   right: 0;
-  width: 10rem;
+  width: 12rem;
   height: 100vh;
-  padding: 0 1rem;
+  padding: var(--gap);
   background: var(--color-white-dimmed);
   margin: 0;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-gap: 0.6rem;
+  grid-gap: var(--gap);
   grid-auto-rows: auto;
   &--patterns {
     right: auto;
@@ -54,9 +60,10 @@ button {
   }
   &__pattern {
     &__button {
-      grid-column: span 6;
+      grid-column: span 4;
       border-radius: 0.2rem;
       background: var(--color-white);
+      padding: 0;
       &--active {
         background-color: var(--color-yellow);
       }
@@ -67,8 +74,6 @@ button {
     height: auto;
     bottom: 0;
     top: auto;
-    grid-gap: 0.4rem;
-    padding: 0.4rem;
     .control {
       grid-column: span 6;
       &--color,
