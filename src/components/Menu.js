@@ -1,6 +1,6 @@
 import defaultSetup from "../_setup.json";
 import ControlGroup from "./ControlGroup";
-import PatternGroup from "./PatternGroup";
+import MaskSelection from "./MaskSelection";
 import { saveSvg, saveJson } from "../utils";
 
 const Menu = (props) => {
@@ -46,7 +46,7 @@ const Menu = (props) => {
           </button>
         </fieldset>
       </nav>
-      <PatternGroup {...{ setActiveMask, setup, handleInputChange }} />
+      <MaskSelection {...{ setActiveMask, setup, handleInputChange }} />
     </>
   );
 };

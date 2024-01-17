@@ -3,7 +3,7 @@ import defaultFacePoints from "../data/defaultFacePoints.json";
 import defaultMasks from "../data/defaultMasks.json";
 import { renderPath } from "../utils";
 
-const PatternGroup = (props) => {
+const MaskSelection = (props) => {
   const { setActiveMask, setup, handleInputChange } = props;
   const [masks, setMasks] = useState(defaultMasks);
 
@@ -21,7 +21,7 @@ const PatternGroup = (props) => {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  const handlePatternClick = (_event, pattern, index) => {
+  const handlePatternClick = (_event, mask, index) => {
     handleInputChange({
       target: {
         id: "activeMaskIndex",
@@ -29,18 +29,18 @@ const PatternGroup = (props) => {
         type: "range"
       }
     });
-    setActiveMask(pattern);
+    setActiveMask(mask);
   };
 
   return (
     masks && (
       <nav id="mainNav" className={`menu menu--patterns`}>
-        {masks.map((pattern, index) => (
+        {masks.map((mask, index) => (
           <button
             className={`menu__pattern__button menu__pattern__button--${
               setup.activeMaskIndex === index ? "active" : "inactive"
             }`}
-            onClick={(event) => handlePatternClick(event, pattern, index)}
+            onClick={(event) => handlePatternClick(event, mask, index)}
             key={`p-${index}`}
           >
             <svg
@@ -48,7 +48,7 @@ const PatternGroup = (props) => {
               viewBox={`200 0 800 700`}
               className="menu__pattern__svg"
             >
-              {pattern.map((path, pathIndex) => (
+              {mask.map((path, pathIndex) => (
                 <path
                   key={`pth-${pathIndex}`}
                   className="menu__pattern__path"
@@ -67,4 +67,4 @@ const PatternGroup = (props) => {
   );
 };
 
-export default PatternGroup;
+export default MaskSelection;
