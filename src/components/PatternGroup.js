@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-import defaultFacePoints from "../default-face-points.json";
-import masks from "../masks/masks.json";
+import defaultFacePoints from "../data/defaultFacePoints.json";
+import defaultMasks from "../data/defaultMasks.json";
 import { renderPath } from "../utils";
 
 const PatternGroup = (props) => {
-  const { setMask, setup, handleInputChange } = props;
-  const [data, setData] = useState(masks);
+  const { setActiveMask, setup, handleInputChange } = props;
+  const [masks, setMasks] = useState(defaultMasks);
 
   useEffect(() => {
     fetch("/api/fetch")
       .then((response) => response.json())
-      .then((jsons) => {
-        const data = jsons.map((json) => JSON.parse(json.data));
-        if (data) {
-          setData((prevData) => prevData.concat(data));
+      .then((responseJson) => {
+        const parsedResponse = responseJson.map((json) =>
+          JSON.parse(json.data)
+        );
+        if (parsedResponse) {
+          setMasks((prevData) => prevData.concat(parsedResponse));
         }
       })
       .catch((error) => console.error("Error:", error));
@@ -27,13 +29,13 @@ const PatternGroup = (props) => {
         type: "range"
       }
     });
-    setMask(pattern);
+    setActiveMask(pattern);
   };
 
   return (
-    data && (
+    masks && (
       <nav id="mainNav" className={`menu menu--patterns`}>
-        {data.map((pattern, index) => (
+        {masks.map((pattern, index) => (
           <button
             className={`menu__pattern__button menu__pattern__button--${
               setup.activeMaskIndex === index ? "active" : "inactive"

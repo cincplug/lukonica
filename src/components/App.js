@@ -27,7 +27,7 @@ function App() {
   const [points, setPoints] = useState([]);
   const [chunks, setChunks] = useState([]);
   const [activeChunk, setActiveChunk] = useState([]);
-  const [mask, setMask] = useState([]);
+  const [activeMask, setActiveMask] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isActive: false });
 
   const storageSetupItem = "lukonicaSetup";
@@ -72,7 +72,7 @@ function App() {
     setIsLoaded(true);
   };
 
-  let flatMask = mask.flat();
+  let flatMask = activeMask.flat();
   const flatMaskLength = flatMask.length;
   if (flatMaskLength > 0) {
     flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
@@ -141,7 +141,7 @@ function App() {
                       <Paths
                         {...{
                           points,
-                          mask,
+                          activeMask,
                           setup,
                           chunks,
                           activeChunk,
@@ -160,8 +160,8 @@ function App() {
               setup,
               handleInputChange,
               setSetup,
-              setMask,
-              mask: mask.concat(chunks),
+              setActiveMask,
+              activeMask: activeMask.concat(chunks),
             }}
           />
         </>

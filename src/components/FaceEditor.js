@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import defaultFacePoints from "../default-face-points.json";
+import defaultFacePoints from "../data/defaultFacePoints.json";
 import { renderPath, saveJson } from "../utils";
 
 function FaceEditor(props) {

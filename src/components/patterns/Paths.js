@@ -1,11 +1,11 @@
 import React from "react";
 import { processColor, renderPath } from "../../utils";
 
-const Paths = ({ points, mask, setup, chunks, activeChunk, cursor }) => {
+const Paths = ({ points, activeMask, setup, chunks, activeChunk, cursor }) => {
   const { transitionArrangement, radius } = setup;
   return (
     <>
-      {mask.map((area, areaIndex) => (
+      {activeMask.map((area, areaIndex) => (
         <path
           className="mask-path mask-path--default"
           key={`m-${areaIndex}`}
