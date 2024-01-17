@@ -2,8 +2,7 @@ import React from "react";
 import { processColor, renderPath } from "../../utils";
 
 const Paths = ({ points, mask, setup, chunks, activeChunk, cursor }) => {
-  const { pattern, transitionArrangement } = setup;
-  const radius = pattern === "curved paths" ? setup.radius : 0;
+  const { pattern, transitionArrangement, radius } = setup;
   return (
     <>
       {mask.map((area, areaIndex) => (

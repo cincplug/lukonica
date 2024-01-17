@@ -139,7 +139,6 @@ function App() {
                       />
                     );
                   case "paths":
-                  case "curved paths":
                     return (
                       <Paths
                         {...{

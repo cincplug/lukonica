@@ -33,14 +33,15 @@ export const renderPath = ({ area, points, radius }) =>
       if (radius > 0 && lastPoint) {
         const deltaX = thisPoint.x - lastPoint.x;
         const deltaY = thisPoint.y - lastPoint.y;
+        const h = Math.hypot(deltaX, deltaY) + radius;
         const controlPointX =
           lastPoint.x +
           deltaX / 2 +
-          (radius * deltaY) / Math.hypot(deltaX, deltaY);
+          (radius * deltaY) / h;
         const controlPointY =
           lastPoint.y +
           deltaY / 2 -
-          (radius * deltaX) / Math.hypot(deltaX, deltaY);
+          (radius * deltaX) / h;
         return `Q${controlPointX},${controlPointY} ${thisPoint.x},${thisPoint.y}`;
       } else {
         return `${activeAreaPointIndex === 0 ? "M" : "L"} ${thisPoint.x},${
