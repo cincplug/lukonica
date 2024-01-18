@@ -20,7 +20,7 @@
   {
     "id": "radius",
     "description": "Initial radius",
-    "value": 5,
+    "value": 10,
     "type": "range",
     "min": 0.5,
     "max": 500,
@@ -57,7 +57,7 @@
   {
     "id": "gripThreshold",
     "description": "How tight you need to squeeze your thumb and index finger to draw",
-    "value": 70,
+    "value": 40,
     "type": "range",
     "min": 20,
     "max": 100,
@@ -114,7 +114,7 @@
     "description": "What will be drawn on points",
     "value": "paths",
     "type": "select",
-    "options": ["paths", "images"]
+    "options": ["numbers", "paths", "images"]
   },
   {
     "id": "showsFaces",

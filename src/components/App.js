@@ -11,6 +11,7 @@ import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
 import Images from "./patterns/Images";
 import Paths from "./patterns/Paths";
+import Numbers from "./patterns/Numbers";
 import "../styles.scss";
 
 const inputResolution = {
@@ -145,6 +146,16 @@ function App() {
                           setup,
                           chunks,
                           activeChunk,
+                          cursor
+                        }}
+                      />
+                    );
+                  case "numbers":
+                    return (
+                      <Numbers
+                        {...{
+                          points,
+                          setup,
                           cursor
                         }}
                       />

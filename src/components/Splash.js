@@ -22,7 +22,7 @@ function Splash(props) {
           });
         }}
       >
-        Face and hand
+        Face and hands
       </button>
       <button
         className="control__input control__button control__button--clear"
