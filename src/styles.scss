@@ -20,7 +20,7 @@
   --gap: 0.6rem;
   --gap-half: calc(var(--gap) / 2);
   --gap-double: calc(var(--gap) * 2);
-  --font: "Figtree" sans-serif;
+  --font: "Figtree", sans-serif;
 }
 
 * {
@@ -30,6 +30,9 @@
 
 body {
   overflow: hidden;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button {
