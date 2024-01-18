@@ -1,12 +1,12 @@
 export const findClosestFacePointIndex = ({
   facePoints,
   indexTip,
-  threshold
+  gripThreshold
 }) => {
   return facePoints.reduce(
     (closestFacePoint, currentFacePoint, currentIndex) => {
       const distance = getDistance(currentFacePoint, indexTip);
-      if (distance < closestFacePoint.minDistance && distance < threshold) {
+      if (distance < closestFacePoint.minDistance && distance < gripThreshold) {
         return { minDistance: distance, index: currentIndex };
       } else {
         return closestFacePoint;

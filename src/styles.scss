@@ -3,7 +3,7 @@
 :root {
   --color-white: #fff;
   --color-black: #000;
-  --color-black-light: #272727;
+  --color-black-light: #222;
   --color-grey: #747474;
   --color-silver: #ccc;
   --color-blue-light: #2df;
@@ -17,9 +17,15 @@
   --bg-input: var(--color-skin);
   --bg-input-active: var(--color-skin-light);
 
+  --gradient-dark: linear-gradient(
+    var(--color-black-light),
+    var(--color-black)
+  );
+
   --gap: 0.6rem;
   --gap-half: calc(var(--gap) / 2);
   --gap-double: calc(var(--gap) * 2);
+
   --font: "Figtree", sans-serif;
 }
 
@@ -91,7 +97,7 @@ select {
   width: 12rem;
   height: 100vh;
   padding: var(--gap);
-  background: var(--color-black-light);
+  background: var(--gradient-dark);
   color: var(--color-silver);
   margin: 0;
   display: grid;
@@ -212,7 +218,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(var(--color-black-light), var(--color-black));
+  background: var(--gradient-dark);
   button {
     width: 9rem;
     margin-right: 1rem;

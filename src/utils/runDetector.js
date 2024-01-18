@@ -54,18 +54,17 @@ export const runDetector = async ({
         const thumbTip = hands[0]?.keypoints[4];
         const indexTip = hands[0]?.keypoints[8];
         const thumbIndexDistance = getDistance(thumbTip, indexTip);
-        const threshold = gripThreshold;
         setCursor({
           x: (thumbTip.x + indexTip.x) / 2,
           y: (thumbTip.y + indexTip.y) / 2,
-          isActive: thumbIndexDistance < threshold
+          isActive: thumbIndexDistance < gripThreshold
         });
         const closestPoint = findClosestFacePointIndex({
           facePoints: points,
           indexTip,
-          threshold
+          gripThreshold
         });
-        if (closestPoint !== null && thumbIndexDistance < threshold) {
+        if (closestPoint !== null && thumbIndexDistance < gripThreshold) {
           setActiveChunk((prevActiveChunk) => {
             if (
               prevActiveChunk.length > 0 &&
