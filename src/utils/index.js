@@ -1,4 +1,8 @@
-export const findClosestFacePointIndex = ({ facePoints, indexTip, threshold }) => {
+export const findClosestFacePointIndex = ({
+  facePoints,
+  indexTip,
+  threshold
+}) => {
   return facePoints.reduce(
     (closestFacePoint, currentFacePoint, currentIndex) => {
       const distance = getDistance(currentFacePoint, indexTip);
@@ -24,7 +28,7 @@ export const processColor = (color, opacity) => {
     .padStart(2, "0")}`;
 };
 
-export const renderPath = ({ area, points, radius }) =>
+export const renderPath = ({ area, points, radius, isOpen }) =>
   area
     .map((activeAreaPoint, activeAreaPointIndex) => {
       const thisPoint = points[activeAreaPoint];
@@ -34,14 +38,8 @@ export const renderPath = ({ area, points, radius }) =>
         const deltaX = thisPoint.x - lastPoint.x;
         const deltaY = thisPoint.y - lastPoint.y;
         const h = Math.hypot(deltaX, deltaY) + radius;
-        const controlPointX =
-          lastPoint.x +
-          deltaX / 2 +
-          (radius * deltaY) / h;
-        const controlPointY =
-          lastPoint.y +
-          deltaY / 2 -
-          (radius * deltaX) / h;
+        const controlPointX = lastPoint.x + deltaX / 2 + (radius * deltaY) / h;
+        const controlPointY = lastPoint.y + deltaY / 2 - (radius * deltaX) / h;
         return `Q${controlPointX},${controlPointY} ${thisPoint.x},${thisPoint.y}`;
       } else {
         return `${activeAreaPointIndex === 0 ? "M" : "L"} ${thisPoint.x},${
@@ -53,15 +51,16 @@ export const renderPath = ({ area, points, radius }) =>
 
 export const saveJson = (areas) => {
   const data = JSON.stringify(areas);
-  fetch('/api/save', {
-    method: 'POST',
+  fetch("/api/save", {
+    method: "POST",
     headers: {
-        'Content-Type': 'application/json',
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify({ data }),
-}).then(response => response.json())
-.then(data => console.log(data))
-.catch((error) => console.error('Error:', error));
+    body: JSON.stringify({ data })
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error("Error:", error));
 };
 
 export const saveSvg = () => {

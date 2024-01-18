@@ -161,7 +161,7 @@ function App() {
               handleInputChange,
               setSetup,
               setActiveMask,
-              activeMask: activeMask.concat(chunks),
+              activeMask: activeMask.concat(chunks)
             }}
           />
         </>
