@@ -155,6 +155,7 @@ function App() {
                       <Numbers
                         {...{
                           points,
+                          flatMask,
                           setup,
                           cursor
                         }}
