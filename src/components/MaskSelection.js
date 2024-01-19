@@ -6,7 +6,7 @@ import { renderPath } from "../utils";
 const MaskSelection = (props) => {
   const { setActiveMask, setup, handleInputChange } = props;
   const { activeMaskIndex } = setup;
-  const [masks, setMasks] = useState(null);
+  const [masks, setMasks] = useState(defaultMasks);
 
   useEffect(() => {
     fetch("/api/fetch")
@@ -23,9 +23,7 @@ const MaskSelection = (props) => {
   }, []);
 
   useEffect(() => {
-    if (masks) {
-      setActiveMask(masks[activeMaskIndex]);
-    }
+    setActiveMask((masks || defaultMasks)[activeMaskIndex]);
   }, [masks, setActiveMask, activeMaskIndex]);
 
   const handlePatternClick = (_event, mask, index) => {
@@ -40,7 +38,7 @@ const MaskSelection = (props) => {
   };
 
   return (
-    masks && (
+    (masks || defaultMasks) && (
       <nav id="mainNav" className={`menu menu--patterns`}>
         {masks.map((mask, index) => (
           <button
