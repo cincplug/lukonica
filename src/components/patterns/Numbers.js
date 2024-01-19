@@ -9,7 +9,7 @@ const Numbers = ({ points, setup, cursor }) => {
           <text
             key={`c-${pointIndex}`}
             fill={processColor(setup.color, setup.opacity)}
-            x={point.x}
+            x={point.x - setup.radius}
             y={point.y}
             className={`number-pattern`}
           >

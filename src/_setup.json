@@ -75,7 +75,7 @@
   {
     "id": "color",
     "description": "Color of particles",
-    "value": "#34f564",
+    "value": "#000000",
     "type": "color"
   },
   {
@@ -112,7 +112,7 @@
   {
     "id": "pattern",
     "description": "What will be drawn on points",
-    "value": "paths",
+    "value": "numbers",
     "type": "select",
     "options": ["numbers", "paths", "images"]
   },
