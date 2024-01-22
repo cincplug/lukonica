@@ -40,15 +40,19 @@ export const runDetector = async ({
       const hands = await handsDetector.estimateHands(video, estimationConfig);
 
       let points = [];
-      if (showsFaces && faces?.[0]?.keypoints) {
+      if (showsFaces && faces?.length) {
         faces.forEach((face) => {
-          points = points.concat(face.keypoints);
+          if (face.keypoints) {
+            points = points.concat(face.keypoints);
+          }
         });
       }
-      if (showsHands && hands?.[0]?.keypoints) {
+      if (showsHands && hands?.length) {
         if (!["paths"].includes(pattern)) {
           hands.forEach((hand) => {
-            points = points.concat(hand.keypoints);
+            if (hand.keypoints) {
+              points = points.concat(hand.keypoints);
+            }
           });
         }
         const thumbTip = hands[0]?.keypoints[4];
@@ -85,7 +89,9 @@ export const runDetector = async ({
           });
         }
       }
-      setPoints(points);
+      if (points.length) {
+        setPoints(points);
+      }
     }
     frame++;
     requestAnimationFrame(detect);
