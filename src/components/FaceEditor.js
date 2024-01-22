@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import defaultFacePoints from "../data/defaultFacePoints.json";
+import DEFAULT_FACE_POINTS from "../data/defaultFacePoints.json";
 import { renderPath, saveJson } from "../utils";
 
 function FaceEditor(props) {
@@ -42,11 +42,11 @@ function FaceEditor(props) {
             className="face-editor__active-area"
             d={`${renderPath({
               area: activeArea,
-              points: defaultFacePoints
+              points: DEFAULT_FACE_POINTS
             })} L${mouseX},${mouseY}`}
           />
         ) : null}
-        {defaultFacePoints.map((point, pointIndex) => {
+        {DEFAULT_FACE_POINTS.map((point, pointIndex) => {
           return (
             <circle
               key={`c-${pointIndex}`}
@@ -65,7 +65,7 @@ function FaceEditor(props) {
           <path
             key={`a-${areaIndex}`}
             className="face-editor__area"
-            d={`${renderPath({ area, points: defaultFacePoints })} Z`}
+            d={`${renderPath({ area, points: DEFAULT_FACE_POINTS })} Z`}
           />
         ))}
       </svg>

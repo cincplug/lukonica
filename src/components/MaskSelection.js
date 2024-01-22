@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import defaultFacePoints from "../data/defaultFacePoints.json";
-import defaultMasks from "../data/defaultMasks.json";
+import DEFAULT_FACE_POINTS from "../data/defaultFacePoints.json";
+import DEFAULT_MASKS from "../data/defaultMasks.json";
 import { renderPath } from "../utils";
 
 const MaskSelection = (props) => {
   const { setActiveMask, setup, handleInputChange } = props;
   const { activeMaskIndex } = setup;
-  const [masks, setMasks] = useState(defaultMasks);
+  const [masks, setMasks] = useState(DEFAULT_MASKS);
 
   useEffect(() => {
     fetch("/api/fetch")
@@ -16,14 +16,14 @@ const MaskSelection = (props) => {
           JSON.parse(json.data)
         );
         setMasks(
-          parsedResponse ? defaultMasks.concat(parsedResponse) : defaultMasks
+          parsedResponse ? DEFAULT_MASKS.concat(parsedResponse) : DEFAULT_MASKS
         );
       })
       .catch((error) => console.error("Error:", error));
   }, []);
 
   useEffect(() => {
-    setActiveMask((masks || defaultMasks)[activeMaskIndex]);
+    setActiveMask((masks || DEFAULT_MASKS)[activeMaskIndex]);
   }, [masks, setActiveMask, activeMaskIndex]);
 
   const handlePatternClick = (_event, mask, index) => {
@@ -38,7 +38,7 @@ const MaskSelection = (props) => {
   };
 
   return (
-    (masks || defaultMasks) && (
+    (masks || DEFAULT_MASKS) && (
       <nav id="mainNav" className={`menu menu--patterns`}>
         {masks.map((mask, index) => (
           <button
@@ -59,7 +59,7 @@ const MaskSelection = (props) => {
                   className="menu__pattern__path"
                   d={`${renderPath({
                     area: path,
-                    points: defaultFacePoints,
+                    points: DEFAULT_FACE_POINTS,
                     radius: 0
                   })}`}
                 ></path>

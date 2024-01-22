@@ -5,7 +5,7 @@ import "@mediapipe/face_mesh";
 import "@mediapipe/hands";
 import Webcam from "react-webcam";
 import { runDetector } from "../utils/runDetector";
-import defaultSetup from "../_setup.json";
+import DEFAULT_SETUP from "../_setup.json";
 import Menu from "./Menu";
 import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
@@ -19,7 +19,7 @@ const inputResolution = {
   height: window.innerHeight
 };
 const { width, height } = inputResolution;
-const pointsPerHandCount = 21;
+const DEFAULT_HAND_POINTS_COUNT = 21;
 
 function App() {
   const [isStarted, setIsStarted] = useState(false);
@@ -36,7 +36,7 @@ function App() {
   const storedSetupRaw = sessionStorage.getItem(storageSetupItem);
   const storedSetup = storedSetupRaw ? JSON.parse(storedSetupRaw) : null;
   const initialSetup = {};
-  defaultSetup.forEach((item) => {
+  DEFAULT_SETUP.forEach((item) => {
     initialSetup[item.id] = storedSetup ? storedSetup[item.id] : item.value;
   });
   const [setup, setSetup] = useState(initialSetup);
@@ -83,8 +83,8 @@ function App() {
   if (setup.showsHands && points && points.length > 0 && handsCount > 0) {
     flatMask = flatMask.concat(
       ...Array.from(
-        { length: handsCount * pointsPerHandCount },
-        (_, i) => i + points.length - handsCount * pointsPerHandCount
+        { length: handsCount * DEFAULT_HAND_POINTS_COUNT },
+        (_, i) => i + points.length - handsCount * DEFAULT_HAND_POINTS_COUNT
       )
     );
   }

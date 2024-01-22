@@ -1,4 +1,4 @@
-import defaultSetup from "../_setup.json";
+import DEFAULT_SETUP from "../_setup.json";
 import ControlGroup from "./ControlGroup";
 import MaskSelection from "./MaskSelection";
 import { saveSvg, saveJson } from "../utils";
@@ -10,7 +10,7 @@ const Menu = (props) => {
       <nav id="mainNav" className={`menu menu--controls`}>
         <ControlGroup
           {...{ setup, handleInputChange }}
-          controls={defaultSetup.filter(
+          controls={DEFAULT_SETUP.filter(
             (control) => !control.isHidden && !control.isRight
           )}
         />
