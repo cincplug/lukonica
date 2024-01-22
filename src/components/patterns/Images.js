@@ -13,11 +13,9 @@ const Images = ({ points, flatMask, setup, cursor }) => {
   } = setup;
 
   return flatMask
-    .slice(0, -transitionArrangement - 1)
     .map((flatMaskPoint, index) => {
       const pointFrom = points[flatMaskPoint];
-      const pointTo =
-        points[Math.max(flatMaskPoint - transitionArrangement, 0)];
+      const pointTo = points[(flatMaskPoint + transitionArrangement) % points.length];
       if (!pointFrom || getDistance(cursor, pointFrom) < gripThreshold) {
         return null;
       }

@@ -81,10 +81,11 @@ function App() {
     flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
   }
   if (setup.showsHands && points && points.length > 0 && handsCount > 0) {
+    const handsPointsTotal = handsCount * DEFAULT_HAND_POINTS_COUNT;
     flatMask = flatMask.concat(
       ...Array.from(
-        { length: handsCount * DEFAULT_HAND_POINTS_COUNT },
-        (_, i) => i + points.length - handsCount * DEFAULT_HAND_POINTS_COUNT
+        { length: handsPointsTotal },
+        (_, i) => i + points.length - handsPointsTotal
       )
     );
   }
