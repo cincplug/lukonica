@@ -12,63 +12,59 @@ const Images = ({ points, flatMask, setup, cursor }) => {
     gripThreshold
   } = setup;
 
-  return flatMask
-    .map((flatMaskPoint, index) => {
-      const pointFrom = points[flatMaskPoint];
-      const pointTo = points[(flatMaskPoint + transitionArrangement) % points.length];
-      if (!pointFrom || getDistance(cursor, pointFrom) < gripThreshold) {
-        return null;
-      }
-      const getSize = (point) => {
-        const handFactor = transitionArrangement + 2;
-        return (
-          Math.max(
-            lowThreshold,
-            (index + radius) /
-              ((index % (handFactor + 1)) * handFactor || radius / handFactor)
-          ) +
-          radius * growth
-        );
-      };
-      const animationProps = {
-        keyTimes: "0;1",
-        dur: `${transitionDuration}s`,
-        repeatCount: "indefinite"
-      };
+  return flatMask.map((flatMaskPoint, index) => {
+    const pointFrom = points[flatMaskPoint];
+    const pointTo =
+      points[(flatMaskPoint + transitionArrangement) % points.length];
+    if (!pointFrom || getDistance(cursor, pointFrom) < gripThreshold) {
+      return null;
+    }
+    const size =
+      Math.max(
+        lowThreshold,
+        (index + radius) /
+          ((index % (lowThreshold + 1)) * lowThreshold || radius / lowThreshold)
+      ) +
+      radius * growth;
+    const animationProps = {
+      keyTimes: "0;1",
+      dur: `${transitionDuration}s`,
+      repeatCount: "indefinite"
+    };
 
-      return (
-        <image
-          key={`c-${index}`}
-          x={pointFrom.x}
-          y={pointFrom.y}
-          width={getSize(pointFrom.z)}
-          href={setup.imageUrl || bubble}
-          transform={`translate(${-getSize(pointFrom.z) / 2})`}
-        >
-          {transitionArrangement && (
+    return (
+      <image
+        key={`c-${index}`}
+        x={pointFrom.x}
+        y={pointFrom.y}
+        width={size}
+        href={setup.imageUrl || bubble}
+        transform={`translate(${-size / 2})`}
+      >
+        {transitionArrangement && (
+          <>
             <>
-              <>
-                <animate
-                  attributeName="x"
-                  values={`${pointFrom.x};${pointTo.x}`}
-                  {...animationProps}
-                />
-                <animate
-                  attributeName="y"
-                  values={`${pointFrom.y};${pointTo.y}`}
-                  {...animationProps}
-                />
-              </>
               <animate
-                attributeName="width"
-                values={`${getSize(pointFrom.z)};${getSize(pointTo.z)}`}
+                attributeName="x"
+                values={`${pointFrom.x};${pointTo.x}`}
+                {...animationProps}
+              />
+              <animate
+                attributeName="y"
+                values={`${pointFrom.y};${pointTo.y}`}
                 {...animationProps}
               />
             </>
-          )}
-        </image>
-      );
-    });
+            <animate
+              attributeName="width"
+              values={`${size};${size}`}
+              {...animationProps}
+            />
+          </>
+        )}
+      </image>
+    );
+  });
 };
 
 export default Images;
