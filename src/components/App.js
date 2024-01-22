@@ -19,7 +19,7 @@ const inputResolution = {
   height: window.innerHeight
 };
 const { width, height } = inputResolution;
-const handsPointsCount = 42;
+const pointsPerHandCount = 21;
 
 function App() {
   const [isStarted, setIsStarted] = useState(false);
@@ -30,6 +30,7 @@ function App() {
   const [activeChunk, setActiveChunk] = useState([]);
   const [activeMask, setActiveMask] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isActive: false });
+  const [handsCount, setHandsCount] = useState(0);
 
   const storageSetupItem = "lukonicaSetup";
   const storedSetupRaw = sessionStorage.getItem(storageSetupItem);
@@ -68,7 +69,8 @@ function App() {
       setPoints,
       setChunks,
       setActiveChunk,
-      setCursor
+      setCursor,
+      setHandsCount
     });
     setIsLoaded(true);
   };
@@ -78,11 +80,11 @@ function App() {
   if (flatMaskLength > 0) {
     flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
   }
-  if (setup.showsHands && points && points.length > 0) {
+  if (setup.showsHands && points && points.length > 0 && handsCount > 0) {
     flatMask = flatMask.concat(
       ...Array.from(
-        { length: handsPointsCount },
-        (_, i) => i + points.length - handsPointsCount + 1
+        { length: handsCount * pointsPerHandCount },
+        (_, i) => i + points.length - handsCount * pointsPerHandCount
       )
     );
   }

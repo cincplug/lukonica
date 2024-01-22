@@ -8,7 +8,8 @@ export const runDetector = async ({
   setPoints,
   setChunks,
   setActiveChunk,
-  setCursor
+  setCursor,
+  setHandsCount,
 }) => {
   let frame = 0;
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
@@ -89,6 +90,7 @@ export const runDetector = async ({
           });
         }
       }
+      setHandsCount(hands.length);
       if (points.length) {
         setPoints(points);
       }
