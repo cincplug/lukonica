@@ -25,8 +25,8 @@ const Paths = ({ points, activeMask, setup, chunks, activeChunk, cursor }) => {
                 radius
               })} Z;${renderPath({
                 area: [
-                  ...area.slice(-transitionArrangement),
-                  ...area.slice(0, area.length - transitionArrangement)
+                  ...area.slice(transitionArrangement),
+                  ...area.slice(0, transitionArrangement)
                 ],
                 points,
                 radius
