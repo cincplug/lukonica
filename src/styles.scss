@@ -26,6 +26,8 @@
   --gap-half: calc(var(--gap) / 2);
   --gap-double: calc(var(--gap) * 2);
 
+  --menu-width: 12rem;
+
   --font: "Figtree", sans-serif;
 }
 
@@ -100,11 +102,20 @@ select {
   border: none;
 }
 
+pre {
+  width: 500px;
+  position: absolute;
+  left: var(--menu-width);
+  top: 0;
+  z-index: 1;
+  background: #fff8;
+}
+
 .menu {
   position: absolute;
   top: 0;
   right: 0;
-  width: 12rem;
+  width: var(--menu-width);
   height: 100vh;
   padding: var(--gap);
   background: var(--gradient-dark);

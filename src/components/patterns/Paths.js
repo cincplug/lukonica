@@ -1,64 +1,106 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { processColor, renderPath } from "../../utils";
 
-const Paths = ({ points, activeMask, setup, chunks, activeChunk, cursor }) => {
-  const { transitionArrangement, radius } = setup;
+const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
+  const {
+    radius,
+    transitionDuration,
+    usesCssAnimation,
+    usesSvgAnimation,
+    transitionArrangement
+  } = setup;
+
+  useEffect(() => {
+    if (usesCssAnimation && pathRef && pathRef.current) {
+      if (area && points && radius) {
+        const newPath = renderPath({ area, points, radius });
+        pathRef.current.setAttribute("d", newPath);
+      }
+    }
+  }, [area, pathRef, points, radius, usesCssAnimation]);
+
   return (
-    <>
-      {activeMask.map((area, areaIndex) => (
-        <path
-          className="mask-path mask-path--default"
-          key={`m-${areaIndex}`}
-          fill={processColor(setup.color, setup.opacity)}
-          d={`${renderPath({
+    <path
+      ref={pathRef}
+      className={className}
+      fill={processColor(setup.color, setup.opacity)}
+      d={
+        area && points && radius
+          ? `${renderPath({ area, points, radius })} Z`
+          : ""
+      }
+      style={
+        usesCssAnimation
+          ? { transition: `d ${transitionDuration}s linear` }
+          : null
+      }
+      {...commonProps}
+    >
+      {transitionArrangement && usesSvgAnimation && (
+        <animate
+          attributeName="d"
+          values={`${renderPath({
             area,
             points,
             radius
+          })} Z;${renderPath({
+            area: [
+              ...area.slice(transitionArrangement),
+              ...area.slice(0, transitionArrangement)
+            ],
+            points,
+            radius
           })} Z`}
-        >
-          {transitionArrangement && (
-            <animate
-              attributeName="d"
-              values={`${renderPath({
-                area,
-                points,
-                radius
-              })} Z;${renderPath({
-                area: [
-                  ...area.slice(transitionArrangement),
-                  ...area.slice(0, transitionArrangement)
-                ],
-                points,
-                radius
-              })} Z`}
-              keyTimes="0;1"
-              dur={`${setup.transitionDuration}s`}
-              repeatCount="indefinite"
-            />
-          )}
-        </path>
+          keyTimes="0;1"
+          dur={`${setup.transitionDuration}s`}
+          repeatCount="indefinite"
+        />
+      )}
+    </path>
+  );
+};
+
+const Paths = ({ points, activeMask, setup, chunks, activeChunk, cursor }) => {
+  const { transitionArrangement } = setup;
+  const maskRefs = useRef(activeMask.map(() => React.createRef()));
+  const chunkRefs = useRef(chunks.map(() => React.createRef()));
+  const activeChunkRef = useRef(null);
+  const commonProps = {
+    setup,
+    points
+  };
+
+  return (
+    <>
+      {activeMask.map((area, areaIndex) => (
+        <Path
+          key={`m-${areaIndex}`}
+          area={[
+            ...area.slice(transitionArrangement),
+            ...area.slice(0, transitionArrangement)
+          ]}
+          className="mask-path mask-path--default"
+          pathRef={maskRefs.current[areaIndex]}
+          {...commonProps}
+        />
       ))}
       {chunks &&
         chunks.map((chunk, chunkIndex) => (
-          <path
+          <Path
             key={`ch-${chunkIndex}`}
+            area={chunk}
             className="mask-path mask-path--chunk"
-            d={`${renderPath({
-              area: chunk,
-              points,
-              radius
-            })} Z`}
-          ></path>
+            pathRef={chunkRefs.current[chunkIndex]}
+            {...commonProps}
+          />
         ))}
       {activeChunk && (
-        <path
+        <Path
+          area={activeChunk}
           className="mask-path mask-path--chunk mask-path--chunk--active"
-          d={`${renderPath({
-            area: activeChunk,
-            points,
-            radius
-          })}`}
-        ></path>
+          pathRef={activeChunkRef}
+          {...commonProps}
+        />
       )}
       <circle
         className={`cursor cursor--${cursor.isActive ? "active" : "inactive"}`}
