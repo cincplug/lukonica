@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { processColor, renderPath } from "../../utils";
 
+const PATH_SPEED_MODIFIER = 10;
 const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
   const {
     radius,
@@ -31,7 +32,11 @@ const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
       }
       style={
         usesCssAnimation
-          ? { transition: `d ${transitionDuration / 10}s linear` }
+          ? {
+              transition: `d ${
+                transitionDuration / PATH_SPEED_MODIFIER
+              }s linear`
+            }
           : null
       }
       {...commonProps}
