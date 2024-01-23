@@ -31,7 +31,7 @@ const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
       }
       style={
         usesCssAnimation
-          ? { transition: `d ${transitionDuration}s linear` }
+          ? { transition: `d ${transitionDuration / 10}s linear` }
           : null
       }
       {...commonProps}
