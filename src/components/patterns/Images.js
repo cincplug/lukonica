@@ -24,7 +24,10 @@ const Images = ({ points, flatMask, setup, cursor }) => {
     }
     const getSize = (point = index) => {
       return (
-        Math.max(lowThreshold, (point + radius) / (index % (lowThreshold + 1))) +
+        Math.max(
+          lowThreshold,
+          (point + radius) / ((index % lowThreshold) + 1)
+        ) +
         radius * growth
       );
     };
