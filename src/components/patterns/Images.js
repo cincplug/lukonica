@@ -9,7 +9,9 @@ const Images = ({ points, flatMask, setup, cursor }) => {
     growth,
     transitionDuration,
     lowThreshold,
-    gripThreshold
+    gripThreshold,
+    usesSvgAnimation,
+    usesCssAnimation
   } = setup;
 
   return flatMask.map((flatMaskPoint, index) => {
@@ -26,7 +28,7 @@ const Images = ({ points, flatMask, setup, cursor }) => {
       return (
         Math.max(
           lowThreshold,
-          (point + radius) / ((index % lowThreshold) + 1)
+          (point + radius) / ((index % lowThreshold) + lowThreshold)
         ) +
         radius * growth
       );
@@ -36,6 +38,14 @@ const Images = ({ points, flatMask, setup, cursor }) => {
       dur: `${transitionDuration}s`,
       repeatCount: "indefinite"
     };
+    const style = usesCssAnimation
+      ? {
+          animation: `move-to ${transitionDuration}s infinite`,
+          transform: `translate(${pointFrom.x}px, ${pointFrom.y}px)`,
+          "--dx": `${pointTo.x - pointFrom.x}px`,
+          "--dy": `${pointTo.y - pointFrom.y}px`
+        }
+      : null;
 
     return (
       <image
@@ -44,9 +54,9 @@ const Images = ({ points, flatMask, setup, cursor }) => {
         y={pointFrom.y}
         width={getSize(pointFrom.z)}
         href={setup.imageUrl || bubble}
-        transform={`translate(${-getSize(pointFrom.z) / 2})`}
+        style={style}
       >
-        {transitionArrangement && (
+        {transitionArrangement && usesSvgAnimation && (
           <>
             <animate
               attributeName="x"

@@ -86,6 +86,20 @@
     "type": "checkbox"
   },
   {
+    "id": "usesSvgAnimation",
+    "title": "anim SVG",
+    "description": "Achieve animation with SVG <animate> element",
+    "value": true,
+    "type": "checkbox"
+  },
+  {
+    "id": "usesCssAnimation",
+    "title": "anim CSS",
+    "description": "Achieve animation with CSS animation property",
+    "value": true,
+    "type": "checkbox"
+  },
+  {
     "id": "blendMode",
     "description": "Blending mode with the background",
     "value": "normal",
