@@ -89,7 +89,7 @@
     "id": "usesSvgAnimation",
     "title": "anim SVG",
     "description": "Achieve animation with SVG <animate> element",
-    "value": true,
+    "value": false,
     "type": "checkbox"
   },
   {
