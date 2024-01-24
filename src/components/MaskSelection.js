@@ -23,7 +23,9 @@ const MaskSelection = (props) => {
   }, []);
 
   useEffect(() => {
-    setActiveMask((masks || DEFAULT_MASKS)[activeMaskIndex]);
+    setActiveMask(
+      (masks || DEFAULT_MASKS)[activeMaskIndex] || DEFAULT_MASKS[0]
+    );
   }, [masks, setActiveMask, activeMaskIndex]);
 
   const handlePatternClick = (_event, mask, index) => {

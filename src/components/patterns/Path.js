@@ -35,7 +35,7 @@ const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
           ? {
               transition: `d ${
                 transitionDuration / PATH_SPEED_MODIFIER
-              }s linear`
+              }s ease-out`
             }
           : null
       }
