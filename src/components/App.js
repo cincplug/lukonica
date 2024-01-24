@@ -7,7 +7,6 @@ import Webcam from "react-webcam";
 import { runDetector } from "../utils/runDetector";
 import DEFAULT_SETUP from "../_setup.json";
 import Menu from "./Menu";
-import Splash from "./Splash";
 import FaceEditor from "./FaceEditor";
 import Images from "./patterns/Images";
 import Paths from "./patterns/Paths";
@@ -40,6 +39,7 @@ function App() {
     initialSetup[item.id] = storedSetup ? storedSetup[item.id] : item.value;
   });
   const [setup, setSetup] = useState(initialSetup);
+
   const setupRef = useRef(setup);
   useEffect(() => {
     setupRef.current = setup;
@@ -59,20 +59,47 @@ function App() {
     });
   };
 
+  const [stopDetector, setStopDetector] = useState(null);
+  const webcamRef = useRef(null);
+
+  const [shouldRunDetector, setShouldRunDetector] = useState(false);
+
   const handleVideoLoad = (videoNode) => {
     const video = videoNode.target;
     if (video.readyState !== 4) return;
     if (isLoaded) return;
-    runDetector({
-      setupRef,
-      video,
-      setPoints,
-      setChunks,
-      setActiveChunk,
-      setCursor,
-      setHandsCount
-    });
+    if (shouldRunDetector) {
+      runDetector({
+        setupRef,
+        video,
+        setPoints,
+        setChunks,
+        setActiveChunk,
+        setCursor,
+        setHandsCount
+      }).then((stop) => {
+        setStopDetector(() => stop);
+      });
+    }
     setIsLoaded(true);
+  };
+
+  const handlePlayButtonClick = (event) => {
+    setIsStarted((prevIsStarted) => {
+      setSetup((prevSetup) => {
+        if (stopDetector && prevIsStarted) {
+          stopDetector();
+          setIsLoaded(false);
+        }
+        setShouldRunDetector(!prevIsStarted);
+        return {
+          ...prevSetup,
+          showsFaces: true,
+          showsHands: true
+        };
+      });
+      return !prevIsStarted;
+    });
   };
 
   let flatMask = activeMask.flat();
@@ -109,6 +136,7 @@ function App() {
       {isStarted ? (
         <>
           <Webcam
+            ref={webcamRef}
             width={inputResolution.width}
             height={inputResolution.height}
             style={{
@@ -170,24 +198,35 @@ function App() {
               })()}
             </svg>
           )}
-          <Menu
-            {...{
-              setup,
-              handleInputChange,
-              setSetup,
-              setActiveMask,
-              activeMask: activeMask.concat(chunks)
-            }}
-          />
         </>
       ) : (
         <>
-          <Splash {...{ setIsStarted, setSetup, setIsEditing }} />
-          {isEditing ? (
-            <FaceEditor {...{ inputResolution, setIsEditing }} />
-          ) : null}
+          <button
+            className="video-button"
+            onClick={() => {
+              setIsEditing(true);
+            }}
+          >
+            Edit areas
+          </button>
         </>
       )}
+      <button
+        className={`video-button video-button--${isStarted ? "pause" : "play"}`}
+        onClick={handlePlayButtonClick}
+      >
+        {isStarted ? "Stop video" : "Start video"}
+      </button>
+      {isEditing ? <FaceEditor {...{ inputResolution, setIsEditing }} /> : null}
+      <Menu
+        {...{
+          setup,
+          handleInputChange,
+          setSetup,
+          setActiveMask,
+          activeMask: activeMask.concat(chunks)
+        }}
+      />
       {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}
     </div>
   );

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap");
 
 :root {
   --color-white: #fff;
@@ -22,7 +22,7 @@
     var(--color-black)
   );
 
-  --gap: 0.6rem;
+  --gap: 0.7rem;
   --gap-half: calc(var(--gap) / 2);
   --gap-double: calc(var(--gap) * 2);
 
@@ -55,12 +55,13 @@ body {
 
 button {
   margin: 0;
-  padding: var(--gap) 0;
+  padding: var(--gap) var(--gap-double);
   background: var(--bg-input);
   color: var(--color-black);
   border: none;
   border-radius: 2rem;
   font-weight: bold;
+  font-size: 0.9rem;
   &:hover {
     background: var(--bg-input-active);
   }
@@ -124,7 +125,7 @@ pre {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-gap: var(--gap);
-  grid-auto-rows: auto;
+  grid-auto-rows: max-content;
   &--patterns {
     right: auto;
     left: 0;
@@ -212,6 +213,7 @@ pre {
     }
   }
 }
+
 label {
   user-select: none;
   margin-bottom: var(--gap-half);
@@ -233,26 +235,6 @@ label {
   }
 }
 
-.splash {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--gradient-dark);
-  button {
-    width: 9rem;
-    margin-right: 1rem;
-  }
-  @media (max-width: 512px) {
-    flex-direction: column;
-    button {
-      margin: 1rem;
-    }
-  }
-}
-
 .face-editor {
   position: absolute;
   width: 100vw;
@@ -260,6 +242,7 @@ label {
   left: 0;
   top: 0;
   background: var(--bg);
+  z-index: 1;
   &__dot {
     fill: var(--color-yellow-semi);
     stroke: none;
@@ -320,4 +303,22 @@ label {
 
 .number-pattern {
   font-weight: bold;
+}
+
+.video-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-blue);
+  color: var(--color-white);
+  bottom: var(--gap-double);
+  width: 9rem;
+  margin: 0 var(--gap);
+  &--pause {
+    position: fixed;
+    z-index: 1;
+  }
+  &:hover {
+    color: var(--color-black);
+  }
 }

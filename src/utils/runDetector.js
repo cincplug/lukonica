@@ -9,9 +9,11 @@ export const runDetector = async ({
   setChunks,
   setActiveChunk,
   setCursor,
-  setHandsCount,
+  setHandsCount
 }) => {
   let frame = 0;
+  let shouldContinue = true; 
+
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
     runtime: "tfjs",
@@ -96,8 +98,14 @@ export const runDetector = async ({
       }
     }
     frame++;
-    requestAnimationFrame(detect);
+    if (shouldContinue) {
+      requestAnimationFrame(detect);
+    }
   };
 
   detect();
+
+  return () => {
+    shouldContinue = false;
+  };
 };
