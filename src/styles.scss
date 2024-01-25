@@ -195,6 +195,7 @@ pre {
     height: auto;
     bottom: 0;
     top: auto;
+    background: var(--color-black);
     .control {
       grid-column: span 6;
       &--color,
@@ -207,6 +208,9 @@ pre {
       &--imageUrl {
         grid-column: span 6;
       }
+      &--button {
+        grid-column: span 3;
+      }
     }
     &--button {
       grid-column: span 4;
@@ -215,10 +219,13 @@ pre {
     &--masks {
       top: 0;
       bottom: auto;
+      display: flex;
+      overflow-x: auto;
       width: 100%;
-    }
-    &__button {
-      grid-column: span 2;
+      button {
+        flex: 0 0 calc(100% / 8);
+
+      }
     }
   }
 }

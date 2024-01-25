@@ -59,6 +59,7 @@
     "description": "How tight you need to squeeze your thumb and index finger to draw",
     "value": 40,
     "type": "range",
+    "isHidden": true,
     "min": 20,
     "max": 100,
     "step": 1
