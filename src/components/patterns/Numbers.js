@@ -12,7 +12,7 @@ const Numbers = ({ points, setup, flatMask }) => {
           fill={processColor(setup.color, setup.opacity)}
           x={point.x - setup.radius}
           y={point.y}
-          className={`number-pattern`}
+          className={`number-mask`}
         >
           {pointIndex}
         </text>

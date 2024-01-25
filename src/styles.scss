@@ -130,20 +130,18 @@ pre {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-gap: var(--gap);
   grid-auto-rows: max-content;
-  &--patterns {
+  &--masks {
     right: auto;
     left: 0;
     grid-auto-rows: max-content;
   }
-  &__pattern {
-    &__button {
-      grid-column: span 4;
-      border-radius: var(--radius);
-      background: var(--bg-input);
-      padding: 0;
-      &--active {
-        background: var(--bg-input-active);
-      }
+  &__button {
+    grid-column: span 4;
+    border-radius: var(--radius);
+    background: var(--bg-input);
+    padding: 0;
+    &--active {
+      background: var(--bg-input-active);
     }
   }
   @media (max-width: 512px) {
@@ -168,13 +166,13 @@ pre {
       grid-column: span 4;
       padding: 0.5rem 0;
     }
-    &--patterns {
+    &--masks {
       top: 0;
       bottom: auto;
       width: 100%;
       height: 6.4rem;
     }
-    &__pattern {
+    &__mask {
       &__button {
         grid-column: span 2;
       }

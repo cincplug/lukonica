@@ -28,7 +28,7 @@ const MaskSelection = (props) => {
     );
   }, [masks, setActiveMask, activeMaskIndex]);
 
-  const handlePatternClick = (_event, mask, index) => {
+  const handleMaskButtonClick = (_event, mask, index) => {
     handleInputChange({
       target: {
         id: "activeMaskIndex",
@@ -41,24 +41,22 @@ const MaskSelection = (props) => {
 
   return (
     (masks || DEFAULT_MASKS) && (
-      <nav id="mainNav" className={`menu menu--patterns`}>
+      <nav id="mainNav" className={`menu menu--masks`}>
         {masks.map((mask, index) => (
           <button
-            className={`menu__pattern__button menu__pattern__button--${
+            className={`menu__button menu__button--${
               activeMaskIndex === index ? "active" : "inactive"
             }`}
-            onClick={(event) => handlePatternClick(event, mask, index)}
+            onClick={(event) => handleMaskButtonClick(event, mask, index)}
             key={`p-${index}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox={`200 0 800 700`}
-              className="menu__pattern__svg"
             >
               {mask.map((path, pathIndex) => (
                 <path
                   key={`pth-${pathIndex}`}
-                  className="menu__pattern__path"
                   d={`${renderPath({
                     area: path,
                     points: DEFAULT_FACE_POINTS,
