@@ -65,9 +65,6 @@ button {
   border-radius: 2rem;
   font-weight: bold;
   font-size: 0.9rem;
-  &:hover {
-    background: var(--bg-input-active);
-  }
 }
 
 input {
@@ -105,6 +102,12 @@ select {
   background: var(--bg-input);
   height: var(--input-height);
   border: none;
+}
+
+input, select, button {
+  &:hover, &:active {
+    box-shadow: 0 0 0 1px var(--color-skin-light);
+  }
 }
 
 pre {
@@ -316,16 +319,11 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--color-blue);
-  color: var(--color-white);
   bottom: var(--gap-double);
   width: 9rem;
   margin: 0 var(--gap);
   &--pause {
     position: fixed;
     z-index: 1;
-  }
-  &:hover {
-    color: var(--color-black);
   }
 }
