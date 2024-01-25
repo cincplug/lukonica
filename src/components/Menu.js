@@ -16,7 +16,7 @@ const Menu = (props) => {
         />
         <fieldset className="control control--button">
           <button
-            className="menu__button control__input control__button control__button--save"
+            className="menu__pattern__button"
             onClick={() => {
               saveSvg();
             }}
@@ -26,7 +26,7 @@ const Menu = (props) => {
         </fieldset>
         <fieldset className="control control--button">
           <button
-            className="menu__button control__input control__button control__button--save"
+            className="menu__pattern__button"
             onClick={() => {
               saveJson(activeMask);
             }}
@@ -36,7 +36,7 @@ const Menu = (props) => {
         </fieldset>
         <fieldset className="control control--button">
           <button
-            className="menu__button control__input control__button control__button--clear"
+            className="menu__pattern__button"
             onClick={() => {
               sessionStorage.clear();
               window.location.reload();
