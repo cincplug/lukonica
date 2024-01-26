@@ -6,8 +6,8 @@
   --color-black-light: #222;
   --color-grey: #747474;
   --color-silver: #ccc;
-  --color-blue-light: #2df;
-  --color-blue: #08a;
+  --color-blue-light: #0bd;
+  --color-blue: #068;
   --color-skin: #c68c7f;
   --color-skin-light: #f7c496;
   --color-yellow: #ec2;
@@ -68,12 +68,13 @@ button {
   &.splash-button {
     width: 9rem;
     margin: 0 var(--gap);
+    font-size: 1rem;
   }
   &.video-button {
-    background: var(--color-blue);
+    background: var(--color-blue-light);
     color: var(--color-white);
     &:hover {
-      background: var(--color-blue-light);
+      background: var(--color-blue);
     }
     &.pause-button {
       position: fixed;
