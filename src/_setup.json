@@ -74,10 +74,11 @@
     "step": 1
   },
   {
-    "id": "color",
-    "description": "Color of particles",
-    "value": "#000000",
-    "type": "color"
+    "id": "hasControlPoints",
+    "description": "",
+    "title":"thumb",
+    "value": false,
+    "type": "checkbox"
   },
   {
     "id": "showsVideo",
@@ -162,10 +163,9 @@
     "step": 1
   },
   {
-    "id": "hasControlPoints",
-    "description": "",
-    "title":"thumb",
-    "value": false,
-    "type": "checkbox"
+    "id": "color",
+    "description": "Color of particles",
+    "value": "#000000",
+    "type": "color"
   }
 ]
