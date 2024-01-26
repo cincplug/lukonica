@@ -371,13 +371,13 @@ label {
   fill: var(--color-blue-light);
   stroke: var(--color-blue);
   stroke-width: 0.8rem;
-  transition: stroke-width 0.1s ease-out;
+  transition: all 0.1s ease-out;
   &--active {
     stroke-width: 0;
   }
 }
 
-.number-pattern {
+.number-mask {
   font-weight: bold;
 }
 

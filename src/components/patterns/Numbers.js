@@ -8,7 +8,7 @@ const Numbers = ({ points, setup, flatMask }) => {
       if (!point) return null;
       return (
         <text
-          key={`c-${pointIndex}`}
+          key={`n-${pointIndex}`}
           fill={processColor(setup.color, setup.opacity)}
           x={point.x - setup.radius}
           y={point.y}

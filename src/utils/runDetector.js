@@ -12,7 +12,7 @@ export const runDetector = async ({
   setHandsCount
 }) => {
   let frame = 0;
-  let shouldContinue = true; 
+  let shouldContinue = true;
 
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
@@ -65,9 +65,18 @@ export const runDetector = async ({
           const threshold = prevCursor.isActive
             ? gripThreshold * 2
             : gripThreshold;
+          const thumbTipX = thumbTip.x;
+          const thumbTipY = thumbTip.y;
+          const indexTipX = indexTip.x;
+          const indexTipY = indexTip.y;
+
           return {
-            x: (thumbTip.x + indexTip.x) / 2,
-            y: (thumbTip.y + indexTip.y) / 2,
+            x: (thumbTipX + indexTipX) / 2,
+            y: (thumbTipY + indexTipY) / 2,
+            thumbTipX,
+            thumbTipY,
+            indexTipX,
+            indexTipY,
             isActive: thumbIndexDistance < threshold
           };
         });

@@ -160,5 +160,12 @@
     "min": 0,
     "max": 255,
     "step": 1
+  },
+  {
+    "id": "hasControlPoints",
+    "description": "",
+    "title":"thumb",
+    "value": false,
+    "type": "checkbox"
   }
 ]
