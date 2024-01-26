@@ -65,6 +65,22 @@ button {
   border-radius: 2rem;
   font-weight: bold;
   font-size: 0.9rem;
+  &.splash-button {
+    width: 9rem;
+    margin: 0 var(--gap);
+  }
+  &.video-button {
+    background: var(--color-blue);
+    color: var(--color-white);
+    &:hover {
+      background: var(--color-blue-light);
+    }
+    &.pause-button {
+      position: fixed;
+      bottom: var(--gap-double);
+      z-index: 1;
+    }
+  }
 }
 
 input {
@@ -184,12 +200,12 @@ pre {
   &--stretched {
     grid-auto-rows: auto;
   }
-  &__button {
+  button {
     grid-column: span 4;
     border-radius: var(--radius);
     background: var(--bg-input);
     padding: 0;
-    &--active {
+    &.active {
       background: var(--bg-input-active);
     }
   }
@@ -364,15 +380,3 @@ label {
   font-weight: bold;
 }
 
-.video-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: var(--gap-double);
-  width: 9rem;
-  margin: 0 var(--gap);
-  &--pause {
-    position: fixed;
-    z-index: 1;
-  }
-}

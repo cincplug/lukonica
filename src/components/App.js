@@ -202,7 +202,7 @@ function App() {
       ) : (
         <>
           <button
-            className="video-button"
+            className="splash-button"
             onClick={() => {
               setIsEditing(true);
             }}
@@ -212,7 +212,7 @@ function App() {
         </>
       )}
       <button
-        className={`video-button video-button--${isStarted ? "pause" : "play"}`}
+        className={`splash-button video-button ${isStarted ? "pause-button" : "play-button"}`}
         onClick={handlePlayButtonClick}
       >
         {isStarted ? "Stop video" : "Start video"}
