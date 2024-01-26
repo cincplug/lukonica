@@ -41,7 +41,7 @@ const MaskSelection = (props) => {
 
   return (
     (masks || DEFAULT_MASKS) && (
-      <nav id="mainNav" className={`menu menu--masks`}>
+      <nav className={`menu menu--masks`}>
         {masks.map((mask, index) => (
           <button
             className={`menu__button menu__button--${

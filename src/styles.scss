@@ -181,6 +181,9 @@ pre {
     left: 0;
     grid-auto-rows: max-content;
   }
+  &--stretched {
+    grid-auto-rows: auto;
+  }
   &__button {
     grid-column: span 4;
     border-radius: var(--radius);
@@ -224,7 +227,6 @@ pre {
       width: 100%;
       button {
         flex: 0 0 calc(100% / 8);
-
       }
     }
   }

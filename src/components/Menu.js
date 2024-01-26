@@ -7,7 +7,7 @@ const Menu = (props) => {
   const { setup, handleInputChange, activeMask, setActiveMask } = props;
   return (
     <>
-      <nav id="mainNav" className={`menu menu--controls`}>
+      <nav className={`menu menu--controls menu--stretched`}>
         <ControlGroup
           {...{ setup, handleInputChange }}
           controls={DEFAULT_SETUP.filter(

@@ -69,12 +69,16 @@ function FaceEditor(props) {
           />
         ))}
       </svg>
-      <nav id="mainNav" className="menu menu--controls">
+      <nav className="menu menu--controls">
         <fieldset className="control control--button">
-          <button onClick={() => saveJson(areas)}>Save</button>
+          <button className="menu__button" onClick={() => saveJson(areas)}>
+            Save
+          </button>
         </fieldset>
         <fieldset className="control control--button">
-          <button onClick={() => setIsEditing(false)}>Close</button>
+          <button className="menu__button" onClick={() => setIsEditing(false)}>
+            Close
+          </button>
         </fieldset>
       </nav>
     </div>
