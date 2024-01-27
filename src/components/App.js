@@ -87,7 +87,11 @@ function App() {
     setIsStarted((prevIsStarted) => {
       setSetup((prevSetup) => {
         if (stopDetector && prevIsStarted) {
-          stopDetector();
+          try {
+            stopDetector();
+          } catch (error) {
+            console.error('An error occurred:', error);
+          }
           setIsLoaded(false);
         }
         setShouldRunDetector(!prevIsStarted);
@@ -100,6 +104,7 @@ function App() {
       return !prevIsStarted;
     });
   };
+  
 
   let flatMask = activeMask.flat();
   const flatMaskLength = flatMask.length;

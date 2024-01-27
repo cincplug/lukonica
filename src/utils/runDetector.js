@@ -14,6 +14,7 @@ export const runDetector = async ({
 }) => {
   let frame = 0;
   let shouldContinue = true;
+  let animationFrameId;
 
   const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const facesDetectorConfig = {
@@ -40,8 +41,14 @@ export const runDetector = async ({
       setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
-      const faces = await facesDetector.estimateFaces(video, estimationConfig);
-      const hands = await handsDetector.estimateHands(video, estimationConfig);
+      let faces, hands;
+      try {
+        faces = await facesDetector.estimateFaces(video, estimationConfig);
+        hands = await handsDetector.estimateHands(video, estimationConfig);
+      } catch (error) {
+        console.error('Error estimating faces or hands', error);
+        return;
+      }
 
       let points = [];
       if (showsFaces && faces?.length) {
@@ -116,7 +123,7 @@ export const runDetector = async ({
     }
     frame++;
     if (shouldContinue) {
-      requestAnimationFrame(detect);
+      animationFrameId = requestAnimationFrame(detect);
     }
   };
 
@@ -124,5 +131,6 @@ export const runDetector = async ({
 
   return () => {
     shouldContinue = false;
+    cancelAnimationFrame(animationFrameId);
   };
 };
