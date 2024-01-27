@@ -3,14 +3,12 @@ import "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
 import "@mediapipe/hands";
-import Webcam from "react-webcam";
-import { runDetector } from "../utils/runDetector";
 import DEFAULT_SETUP from "../_setup.json";
+import { runDetector } from "../utils/runDetector";
+import Webcam from "react-webcam";
+import Drawing from "./Drawing";
 import Menu from "./Menu";
 import FaceEditor from "./FaceEditor";
-import Images from "./patterns/Images";
-import Paths from "./patterns/Paths";
-import Numbers from "./patterns/Numbers";
 import "../styles.scss";
 
 const inputResolution = {
@@ -60,9 +58,8 @@ function App() {
     });
   };
 
-  const [stopDetector, setStopDetector] = useState(null);
   const webcamRef = useRef(null);
-
+  const [stopDetector, setStopDetector] = useState(null);
   const [shouldRunDetector, setShouldRunDetector] = useState(false);
 
   const handleVideoLoad = (videoNode) => {
@@ -139,8 +136,8 @@ function App() {
         <>
           <Webcam
             ref={webcamRef}
-            width={inputResolution.width}
-            height={inputResolution.height}
+            width={width}
+            height={height}
             style={{
               visibility: setup.showsVideo ? "visible" : "hidden",
               position: "absolute"
@@ -151,64 +148,19 @@ function App() {
             imageSmoothing={false}
           />
           {points && points.length > 0 && (
-            <svg
-              className="drawing"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox={`0 0 ${width} ${height}`}
-              style={{ mixBlendMode: setup.blendMode, width, height }}
-            >
-              {(() => {
-                switch (setup.pattern) {
-                  case "images":
-                    return (
-                      <Images
-                        {...{
-                          points,
-                          flatMask,
-                          setup,
-                          cursor
-                        }}
-                      />
-                    );
-                  case "paths":
-                    return (
-                      <Paths
-                        {...{
-                          points,
-                          activeMask,
-                          setup,
-                          chunks,
-                          activeChunk,
-                          cursor
-                        }}
-                      />
-                    );
-                  case "numbers":
-                    return (
-                      <Numbers
-                        {...{
-                          points,
-                          flatMask,
-                          setup,
-                          cursor
-                        }}
-                      />
-                    );
-                  default:
-                    return null;
-                }
-              })()}
-              {scribble && (
-                <path
-                fill="none"
-                  stroke={setup.color}
-                  strokeWidth={setup.radius}
-                  d={scribble.map((point, index) => {
-                    return `${index === 0 ? "M" : "L"} ${point.x},${point.y}`;
-                  })}
-                ></path>
-              )}
-            </svg>
+            <Drawing
+              {...{
+                inputResolution,
+                setup,
+                points,
+                flatMask,
+                cursor,
+                chunks,
+                activeChunk,
+                activeMask,
+                scribble
+              }}
+            />
           )}
         </>
       ) : (
