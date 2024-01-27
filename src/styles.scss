@@ -231,6 +231,9 @@ pre {
       &--button {
         grid-column: span 3;
       }
+      &--opacity {
+        grid-column: span 3;
+      }
     }
     &--button {
       grid-column: span 4;
@@ -268,6 +271,10 @@ pre {
     grid-column: span 6;
     position: relative;
     width: 1rem;
+  }
+  &--opacity {
+    grid-column: span 6;
+    min-width: 0;
   }
   &--button {
     grid-column: span 6;
@@ -307,7 +314,7 @@ label {
     margin: 0;
   }
   [type="color"] + & {
-    display: none;
+    margin: 0.4rem 0 0.2rem;
   }
 }
 

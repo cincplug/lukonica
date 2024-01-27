@@ -65,6 +65,12 @@
     "step": 1
   },
   {
+    "id": "color",
+    "description": "Color of particles",
+    "value": "#000000",
+    "type": "color"
+  },
+  {
     "id": "opacity",
     "description": "Initial opacity",
     "value": 128,
@@ -161,11 +167,5 @@
     "min": 0,
     "max": 255,
     "step": 1
-  },
-  {
-    "id": "color",
-    "description": "Color of particles",
-    "value": "#000000",
-    "type": "color"
   }
 ]
