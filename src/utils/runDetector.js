@@ -9,7 +9,8 @@ export const runDetector = async ({
   setChunks,
   setActiveChunk,
   setCursor,
-  setHandsCount
+  setHandsCount,
+  setScribble
 }) => {
   let frame = 0;
   let shouldContinue = true;
@@ -69,10 +70,17 @@ export const runDetector = async ({
           const thumbTipY = thumbTip.y;
           const indexTipX = indexTip.x;
           const indexTipY = indexTip.y;
+          const x = (thumbTipX + indexTipX) / 2;
+          const y = (thumbTipY + indexTipY) / 2;
 
+          if (thumbIndexDistance < gripThreshold) {
+            setScribble((prevScribble) => {
+              return [...prevScribble, { x, y }];
+            });
+          }
           return {
-            x: (thumbTipX + indexTipX) / 2,
-            y: (thumbTipY + indexTipY) / 2,
+            x,
+            y,
             thumbTipX,
             thumbTipY,
             indexTipX,

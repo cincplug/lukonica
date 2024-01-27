@@ -28,7 +28,7 @@ export const processColor = (color, opacity) => {
     .padStart(2, "0")}`;
 };
 
-export const renderPath = ({ area, points, radius, isOpen }) =>
+export const renderPath = ({ area, points, radius }) =>
   area
     .map((activeAreaPoint, activeAreaPointIndex) => {
       const thisPoint = points[activeAreaPoint];

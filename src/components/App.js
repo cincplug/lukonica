@@ -28,6 +28,7 @@ function App() {
   const [chunks, setChunks] = useState([]);
   const [activeChunk, setActiveChunk] = useState([]);
   const [activeMask, setActiveMask] = useState([]);
+  const [scribble, setScribble] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isActive: false });
   const [handsCount, setHandsCount] = useState(0);
 
@@ -76,7 +77,8 @@ function App() {
         setChunks,
         setActiveChunk,
         setCursor,
-        setHandsCount
+        setHandsCount,
+        setScribble
       }).then((stop) => {
         setStopDetector(() => stop);
       });
@@ -196,6 +198,16 @@ function App() {
                     return null;
                 }
               })()}
+              {scribble && (
+                <path
+                fill="none"
+                  stroke={setup.color}
+                  strokeWidth={setup.radius}
+                  d={scribble.map((point, index) => {
+                    return `${index === 0 ? "M" : "L"} ${point.x},${point.y}`;
+                  })}
+                ></path>
+              )}
             </svg>
           )}
         </>
@@ -212,7 +224,9 @@ function App() {
         </>
       )}
       <button
-        className={`splash-button video-button ${isStarted ? "pause-button" : "play-button"}`}
+        className={`splash-button video-button ${
+          isStarted ? "pause-button" : "play-button"
+        }`}
         onClick={handlePlayButtonClick}
       >
         {isStarted ? "Stop video" : "Start video"}
