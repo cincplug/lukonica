@@ -11,7 +11,10 @@ const Menu = (props) => {
         <ControlGroup
           {...{ setup, handleInputChange }}
           controls={DEFAULT_SETUP.filter(
-            (control) => !control.isHidden && !control.isRight
+            (control) =>
+              !control.isHidden &&
+              (!control.parentPattern ||
+                control.parentPattern === setup.pattern)
           )}
         />
         <fieldset className="control control--button">

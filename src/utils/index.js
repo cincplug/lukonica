@@ -23,7 +23,7 @@ export const getDistance = (point1, point2) => {
 };
 
 export const processColor = (color, opacity) => {
-  return `${color}${Math.min(255, Math.max(16, opacity))
+  return `${color}${Math.min(255, Math.max(0, Math.round(opacity)))
     .toString(16)
     .padStart(2, "0")}`;
 };

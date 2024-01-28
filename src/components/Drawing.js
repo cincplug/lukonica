@@ -2,6 +2,8 @@ import React from "react";
 import Images from "./patterns/Images";
 import Paths from "./patterns/Paths";
 import Numbers from "./patterns/Numbers";
+import pathStrokes from "./patterns/path-strokes";
+import { processColor } from "../utils";
 
 const Drawing = ({
   inputResolution,
@@ -15,6 +17,7 @@ const Drawing = ({
   scribble
 }) => {
   const { width, height } = inputResolution;
+  const { radius, growth, pattern, pathStroke } = setup;
   return (
     <svg
       className="drawing"
@@ -23,7 +26,7 @@ const Drawing = ({
       style={{ mixBlendMode: setup.blendMode, width, height }}
     >
       {(() => {
-        switch (setup.pattern) {
+        switch (pattern) {
           case "images":
             return (
               <Images
@@ -66,10 +69,32 @@ const Drawing = ({
       {scribble && (
         <path
           fill="none"
-          stroke={setup.color}
-          strokeWidth={setup.radius}
-          d={scribble.map((point, index) => {
-            return `${index === 0 ? "M" : "L"} ${point.x},${point.y}`;
+          stroke={processColor(setup.color, setup.opacity)}
+          strokeWidth={radius * growth}
+          d={scribble.map((thisPoint, thisPointIndex) => {
+            const lastPoint = scribble[scribble.length - 1];
+            if (!thisPoint || !lastPoint) return null;
+            if (radius > 0 && lastPoint && thisPointIndex > 0) {
+              const deltaX = thisPoint.x - lastPoint.x;
+              const deltaY = thisPoint.y - lastPoint.y;
+              const h = Math.hypot(deltaX, deltaY) + radius;
+              const controlPoint = {
+                x: lastPoint.x + deltaX / 2 + deltaY / h,
+                y: lastPoint.y + deltaY / 2 - (radius * deltaX) / h
+              };
+              return pathStrokes({
+                pathStroke,
+                thisPoint,
+                controlPoint,
+                radius,
+                growth
+              });
+            } else {
+              return `${thisPointIndex === 0 ? "M" : "L"} ${thisPoint.x},${
+                thisPoint.y
+              }`;
+            }
+            // return `${index === 0 ? "M" : "L"} ${point.x},${point.y}`;
           })}
         ></path>
       )}

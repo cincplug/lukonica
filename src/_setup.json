@@ -80,29 +80,24 @@
     "step": 1
   },
   {
-    "id": "hasControlPoints",
-    "description": "",
-    "title":"thumb",
-    "value": false,
-    "type": "checkbox"
-  },
-  {
-    "id": "showsVideo",
-    "title": "video",
-    "description": "Show / hide source video",
-    "value": true,
-    "type": "checkbox"
+    "id": "videoOpacity",
+    "description": "Opacity of source video",
+    "value": 255,
+    "type": "range",
+    "min": 0,
+    "max": 255,
+    "step": 1
   },
   {
     "id": "usesSvgAnimation",
-    "title": "anim SVG",
+    "title": "animate with SVG",
     "description": "Achieve animation with SVG <animate> element",
     "value": false,
     "type": "checkbox"
   },
   {
     "id": "usesCssAnimation",
-    "title": "anim CSS",
+    "title": "animate with CSS",
     "description": "Achieve animation with CSS animation property",
     "value": true,
     "type": "checkbox"
@@ -154,9 +149,26 @@
   },
   {
     "id": "imageUrl",
-    "description": "",
+    "description": "URL of the particle image",
     "value": "",
+    "parentPattern": "images",
     "type": "url"
+  },
+  {
+    "id": "hasControlPoints",
+    "description": "Shows or hides thumb and forefinger tip",
+    "title":"thumb points",
+    "parentPattern": "paths",
+    "value": false,
+    "type": "checkbox"
+  },
+  {
+    "id": "pathStroke",
+    "description": "Sub-pattern of paths",
+    "value": "arcs",
+    "type": "select",
+    "parentPattern": "paths",
+    "options": ["arcs", "quadratics"]
   },
   {
     "id": "activeMaskIndex",

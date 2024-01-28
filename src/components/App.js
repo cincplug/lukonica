@@ -144,7 +144,7 @@ function App() {
             width={width}
             height={height}
             style={{
-              visibility: setup.showsVideo ? "visible" : "hidden",
+              opacity: setup.videoOpacity / 255,
               position: "absolute"
             }}
             videoConstraints={inputResolution}
