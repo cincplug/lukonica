@@ -135,7 +135,11 @@ function App() {
   }, [cursor.isActive, activeChunk.length]);
 
   return (
-    <div className="wrap">
+    <div
+      className={`wrap wrap--${
+        isStarted && isLoaded ? "started" : "not-started"
+      }`}
+    >
       {isStarted ? (
         <>
           <Webcam

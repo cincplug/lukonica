@@ -51,7 +51,6 @@
 body {
   overflow: hidden;
   margin: 0;
-  background: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -355,6 +354,9 @@ label {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  &--not-started {
+    background: var(--color-black-light);
+  }
 }
 
 .drawing {
