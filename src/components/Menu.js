@@ -4,7 +4,23 @@ import MaskSelection from "./MaskSelection";
 import { saveSvg, saveJson } from "../utils";
 
 const Menu = (props) => {
-  const { setup, handleInputChange, activeMask, setActiveMask } = props;
+  const {
+    setup,
+    handleInputChange,
+    activeMask,
+    setActiveMask,
+    setScribble,
+    setPoints,
+    setChunks,
+    setActiveChunk
+  } = props;
+
+  const handleClearButtonClick = () => {
+    setScribble([]);
+    setPoints([]);
+    setChunks([]);
+    setActiveChunk([]);
+  };
   return (
     <>
       <nav className={`menu menu--controls menu--stretched`}>
@@ -35,6 +51,14 @@ const Menu = (props) => {
             }}
           >
             Save mask
+          </button>
+        </fieldset>
+        <fieldset className="control control--button">
+          <button
+            className=""
+            onClick={handleClearButtonClick}
+          >
+            Clear
           </button>
         </fieldset>
         <fieldset className="control control--button">

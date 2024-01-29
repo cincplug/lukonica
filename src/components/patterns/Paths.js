@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import Path from "./Path";
 
-const Paths = ({ points, activeMask, setup, chunks, activeChunk, cursor }) => {
-  const { transitionArrangement, hasControlPoints } = setup;
+const Paths = ({ points, activeMask, setup, chunks, activeChunk }) => {
+  const { transitionArrangement } = setup;
   const maskRefs = useRef(activeMask.map(() => React.createRef()));
   const chunkRefs = useRef(chunks.map(() => React.createRef()));
   const activeChunkRef = useRef(null);
@@ -43,32 +43,6 @@ const Paths = ({ points, activeMask, setup, chunks, activeChunk, cursor }) => {
           {...commonProps}
         />
       )}
-      {hasControlPoints && (
-        <>
-          <circle
-            className={`cursor cursor--${
-              cursor.isActive ? "active" : "inactive"
-            }`}
-            r={2}
-            cx={cursor.thumbTipX}
-            cy={cursor.thumbTipY}
-          ></circle>
-          <circle
-            className={`cursor cursor--${
-              cursor.isActive ? "active" : "inactive"
-            }`}
-            r={2}
-            cx={cursor.indexTipX}
-            cy={cursor.indexTipY}
-          ></circle>
-        </>
-      )}
-      <circle
-        className={`cursor cursor--${cursor.isActive ? "active" : "inactive"}`}
-        r={6}
-        cx={cursor.x}
-        cy={cursor.y}
-      ></circle>
     </>
   );
 };

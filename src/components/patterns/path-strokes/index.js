@@ -1,6 +1,7 @@
 const pathStrokes = (props) => {
   const { pathStroke, thisPoint, controlPoint, radius, growth } = props;
   const strokeDefinitions = {
+    lines: `L${thisPoint.x},${thisPoint.y} `,
     arcs: `A${radius * growth},${radius * growth} 1 0 1 ${thisPoint.x},${
       thisPoint.y
     }`,

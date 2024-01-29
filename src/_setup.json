@@ -134,10 +134,32 @@
     "options": ["numbers", "paths", "images"]
   },
   {
-    "id": "showsFaces",
-    "description": "",
+    "id": "imageUrl",
+    "description": "URL of the particle image",
+    "value": "",
+    "parentPattern": "images",
+    "type": "url"
+  },
+  {
+    "id": "hasCursor",
+    "description": "Shows or hides cursor",
+    "title":"cursor point",
+    "value": true,
+    "type": "checkbox"
+  },
+  {
+    "id": "hasCursorFingertips",
+    "description": "Shows or hides thumb and forefinger tip",
+    "title":"cursor fingertips",
     "value": false,
-    "isHidden": true,
+    "type": "checkbox"
+  },
+  {
+    "id": "showsFaces",
+    "title": "process faces",
+    "description": "Turns face recognition on / off",
+    "value": false,
+    "isHidden": false,
     "type": "checkbox"
   },
   {
@@ -148,27 +170,12 @@
     "type": "checkbox"
   },
   {
-    "id": "imageUrl",
-    "description": "URL of the particle image",
-    "value": "",
-    "parentPattern": "images",
-    "type": "url"
-  },
-  {
-    "id": "hasControlPoints",
-    "description": "Shows or hides thumb and forefinger tip",
-    "title":"thumb points",
-    "parentPattern": "paths",
-    "value": false,
-    "type": "checkbox"
-  },
-  {
     "id": "pathStroke",
     "description": "Sub-pattern of paths",
-    "value": "arcs",
+    "value": "lines",
     "type": "select",
     "parentPattern": "paths",
-    "options": ["arcs", "quadratics"]
+    "options": ["lines", "arcs", "quadratics"]
   },
   {
     "id": "activeMaskIndex",

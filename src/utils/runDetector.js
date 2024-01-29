@@ -80,7 +80,7 @@ export const runDetector = async ({
           const x = (thumbTipX + indexTipX) / 2;
           const y = (thumbTipY + indexTipY) / 2;
 
-          if (thumbIndexDistance < gripThreshold) {
+          if (thumbIndexDistance < gripThreshold && !showsFaces) {
             setScribble((prevScribble) => {
               return [...prevScribble, { x, y }];
             });

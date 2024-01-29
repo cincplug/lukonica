@@ -17,7 +17,15 @@ const Drawing = ({
   scribble
 }) => {
   const { width, height } = inputResolution;
-  const { radius, growth, pattern, pathStroke } = setup;
+  const {
+    radius,
+    growth,
+    pattern,
+    pathStroke,
+    hasCursor,
+    hasCursorFingertips,
+    showsFaces
+  } = setup;
   return (
     <svg
       className="drawing"
@@ -46,8 +54,7 @@ const Drawing = ({
                   activeMask,
                   setup,
                   chunks,
-                  activeChunk,
-                  cursor
+                  activeChunk
                 }}
               />
             );
@@ -66,7 +73,7 @@ const Drawing = ({
             return null;
         }
       })()}
-      {scribble && (
+      {scribble?.length > 0 && !showsFaces && (
         <path
           fill="none"
           stroke={processColor(setup.color, setup.opacity)}
@@ -97,6 +104,36 @@ const Drawing = ({
             // return `${index === 0 ? "M" : "L"} ${point.x},${point.y}`;
           })}
         ></path>
+      )}
+      {hasCursorFingertips && (
+        <>
+          <circle
+            className={`cursor cursor--${
+              cursor.isActive ? "active" : "inactive"
+            }`}
+            r={2}
+            cx={cursor.thumbTipX}
+            cy={cursor.thumbTipY}
+          ></circle>
+          <circle
+            className={`cursor cursor--${
+              cursor.isActive ? "active" : "inactive"
+            }`}
+            r={2}
+            cx={cursor.indexTipX}
+            cy={cursor.indexTipY}
+          ></circle>
+        </>
+      )}
+      {hasCursor && (
+        <circle
+          className={`cursor cursor--${
+            cursor.isActive ? "active" : "inactive"
+          }`}
+          r={6}
+          cx={cursor.x}
+          cy={cursor.y}
+        ></circle>
       )}
     </svg>
   );

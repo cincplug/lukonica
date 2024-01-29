@@ -90,21 +90,20 @@ function App() {
           try {
             stopDetector();
           } catch (error) {
-            console.error('An error occurred:', error);
+            console.error("An error occurred:", error);
           }
           setIsLoaded(false);
         }
         setShouldRunDetector(!prevIsStarted);
         return {
           ...prevSetup,
-          showsFaces: true,
+          showsFaces: prevSetup.showsFaces,
           showsHands: true
         };
       });
       return !prevIsStarted;
     });
   };
-  
 
   let flatMask = activeMask.flat();
   const flatMaskLength = flatMask.length;
@@ -152,21 +151,19 @@ function App() {
             mirrored={true}
             imageSmoothing={false}
           />
-          {points && points.length > 0 && (
-            <Drawing
-              {...{
-                inputResolution,
-                setup,
-                points,
-                flatMask,
-                cursor,
-                chunks,
-                activeChunk,
-                activeMask,
-                scribble
-              }}
-            />
-          )}
+          <Drawing
+            {...{
+              inputResolution,
+              setup,
+              points,
+              flatMask,
+              cursor,
+              chunks,
+              activeChunk,
+              activeMask,
+              scribble
+            }}
+          />
         </>
       ) : (
         <>
@@ -195,6 +192,10 @@ function App() {
           handleInputChange,
           setSetup,
           setActiveMask,
+          setPoints,
+          setChunks,
+          setActiveChunk,
+          setScribble,
           activeMask: activeMask.concat(chunks)
         }}
       />

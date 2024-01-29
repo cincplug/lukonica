@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap");
 
 :root {
-  --color-white: #fff;
+  --color-white: #e8e8e8;
   --color-black: #000;
   --color-black-light: #222;
   --color-grey: #747474;
@@ -51,7 +51,7 @@
 body {
   overflow: hidden;
   margin: 0;
-  background: var(--color-black-light);
+  background: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
