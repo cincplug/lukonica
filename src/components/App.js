@@ -27,7 +27,7 @@ function App() {
   const [activeChunk, setActiveChunk] = useState([]);
   const [activeMask, setActiveMask] = useState([]);
   const [scribble, setScribble] = useState([]);
-  const [cursor, setCursor] = useState({ x: 0, y: 0, isActive: false });
+  const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
   const [handsCount, setHandsCount] = useState(0);
 
   const storageSetupItem = "lukonicaSetup";
@@ -121,7 +121,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!cursor.isActive && activeChunk.length > 0) {
+    if (!cursor.isPinched && activeChunk.length > 0) {
       setCursor((prevCursor) => {
         setActiveChunk((prevActiveChunk) => {
           setChunks((prevChunks) => {
@@ -129,10 +129,10 @@ function App() {
           });
           return [];
         });
-        return { ...prevCursor, isActive: false };
+        return { ...prevCursor, isPinched: false };
       });
     }
-  }, [cursor.isActive, activeChunk.length]);
+  }, [cursor.isPinched, activeChunk.length]);
 
   return (
     <div

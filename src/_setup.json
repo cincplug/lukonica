@@ -55,7 +55,7 @@
     "step": 1
   },
   {
-    "id": "gripThreshold",
+    "id": "pinchThreshold",
     "description": "How tight you need to squeeze your thumb and index finger to draw",
     "value": 40,
     "type": "range",

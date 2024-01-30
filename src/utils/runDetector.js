@@ -37,7 +37,7 @@ export const runDetector = async ({
   );
 
   const detect = async () => {
-    const { showsFaces, showsHands, gripThreshold, latency, pattern } =
+    const { showsFaces, showsHands, pinchThreshold, latency, pattern } =
       setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
@@ -46,7 +46,7 @@ export const runDetector = async ({
         faces = await facesDetector.estimateFaces(video, estimationConfig);
         hands = await handsDetector.estimateHands(video, estimationConfig);
       } catch (error) {
-        console.error('Error estimating faces or hands', error);
+        console.error("Error estimating faces or hands", error);
         return;
       }
 
@@ -69,22 +69,22 @@ export const runDetector = async ({
         const thumbTip = hands[0]?.keypoints[4];
         const indexTip = hands[0]?.keypoints[8];
         const thumbIndexDistance = getDistance(thumbTip, indexTip);
+        const isPinched = thumbIndexDistance < pinchThreshold;
         setCursor((prevCursor) => {
-          const threshold = prevCursor.isActive
-            ? gripThreshold * 2
-            : gripThreshold;
           const thumbTipX = thumbTip.x;
           const thumbTipY = thumbTip.y;
           const indexTipX = indexTip.x;
           const indexTipY = indexTip.y;
           const x = (thumbTipX + indexTipX) / 2;
           const y = (thumbTipY + indexTipY) / 2;
-
-          if (thumbIndexDistance < gripThreshold && !showsFaces) {
+          if (!showsFaces && isPinched) {
             setScribble((prevScribble) => {
               return [...prevScribble, { x, y }];
             });
           }
+          const threshold = prevCursor.isPinched
+          ? pinchThreshold * 2
+          : pinchThreshold;
           return {
             x,
             y,
@@ -92,15 +92,15 @@ export const runDetector = async ({
             thumbTipY,
             indexTipX,
             indexTipY,
-            isActive: thumbIndexDistance < threshold
+            isPinched: thumbIndexDistance < threshold 
           };
         });
         const closestPoint = findClosestFacePointIndex({
           facePoints: points,
           indexTip,
-          gripThreshold
+          pinchThreshold
         });
-        if (closestPoint !== null && thumbIndexDistance < gripThreshold) {
+        if (showsFaces && closestPoint && isPinched) {
           setActiveChunk((prevActiveChunk) => {
             if (
               prevActiveChunk.length > 0 &&

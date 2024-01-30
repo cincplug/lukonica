@@ -109,7 +109,7 @@ const Drawing = ({
         <>
           <circle
             className={`cursor cursor--${
-              cursor.isActive ? "active" : "inactive"
+              cursor.isPinched ? "active" : "inactive"
             }`}
             r={2}
             cx={cursor.thumbTipX}
@@ -117,7 +117,7 @@ const Drawing = ({
           ></circle>
           <circle
             className={`cursor cursor--${
-              cursor.isActive ? "active" : "inactive"
+              cursor.isPinched ? "active" : "inactive"
             }`}
             r={2}
             cx={cursor.indexTipX}
@@ -128,7 +128,7 @@ const Drawing = ({
       {hasCursor && (
         <circle
           className={`cursor cursor--${
-            cursor.isActive ? "active" : "inactive"
+            cursor.isPinched ? "active" : "inactive"
           }`}
           r={6}
           cx={cursor.x}

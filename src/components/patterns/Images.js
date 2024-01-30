@@ -9,7 +9,7 @@ const Images = ({ points, flatMask, setup, cursor }) => {
     growth,
     transitionDuration,
     lowThreshold,
-    gripThreshold,
+    pinchThreshold,
     usesSvgAnimation,
     usesCssAnimation
   } = setup;
@@ -21,7 +21,7 @@ const Images = ({ points, flatMask, setup, cursor }) => {
         (flatMaskPoint - transitionArrangement + points.length) % points.length
       ];
 
-    if (!pointFrom || getDistance(cursor, pointFrom) < gripThreshold) {
+    if (!pointFrom || getDistance(cursor, pointFrom) < pinchThreshold) {
       return null;
     }
     const getSize = (point = index) => {
