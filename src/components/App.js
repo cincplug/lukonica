@@ -23,8 +23,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [points, setPoints] = useState([]);
-  const [chunks, setChunks] = useState([]);
-  const [activeChunk, setActiveChunk] = useState([]);
+  const [customFaceAreas, setCustomFaceAreas] = useState([]);
+  const [activeCustomFaceArea, setActiveCustomFaceArea] = useState([]);
   const [activeMask, setActiveMask] = useState([]);
   const [scribble, setScribble] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
@@ -71,8 +71,8 @@ function App() {
         setupRef,
         video,
         setPoints,
-        setChunks,
-        setActiveChunk,
+        setCustomFaceAreas,
+        setActiveCustomFaceArea,
         setCursor,
         setHandsCount,
         setScribble
@@ -121,18 +121,18 @@ function App() {
   }
 
   useEffect(() => {
-    if (!cursor.isPinched && activeChunk.length > 0) {
+    if (!cursor.isPinched && activeCustomFaceArea.length > 0) {
       setCursor((prevCursor) => {
-        setActiveChunk((prevActiveChunk) => {
-          setChunks((prevChunks) => {
-            return [...prevChunks, prevActiveChunk];
+        setActiveCustomFaceArea((prevActiveCustomFaceArea) => {
+          setCustomFaceAreas((prevCustomFaceAreas) => {
+            return [...prevCustomFaceAreas, prevActiveCustomFaceArea];
           });
           return [];
         });
         return { ...prevCursor, isPinched: false };
       });
     }
-  }, [cursor.isPinched, activeChunk.length]);
+  }, [cursor.isPinched, activeCustomFaceArea.length]);
 
   return (
     <div
@@ -162,8 +162,8 @@ function App() {
               points,
               flatMask,
               cursor,
-              chunks,
-              activeChunk,
+              customFaceAreas,
+              activeCustomFaceArea,
               activeMask,
               scribble
             }}
@@ -177,7 +177,7 @@ function App() {
               setIsEditing(true);
             }}
           >
-            Edit areas
+            Create mask
           </button>
         </>
       )}
@@ -197,10 +197,10 @@ function App() {
           setSetup,
           setActiveMask,
           setPoints,
-          setChunks,
-          setActiveChunk,
+          setCustomFaceAreas,
+          setActiveCustomFaceArea,
           setScribble,
-          activeMask: activeMask.concat(chunks)
+          activeMask: activeMask.concat(customFaceAreas)
         }}
       />
       {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}

@@ -6,8 +6,8 @@ export const runDetector = async ({
   video,
   setupRef,
   setPoints,
-  setChunks,
-  setActiveChunk,
+  setCustomFaceAreas,
+  setActiveCustomFaceArea,
   setCursor,
   setHandsCount,
   setScribble
@@ -101,17 +101,17 @@ export const runDetector = async ({
           pinchThreshold
         });
         if (showsFaces && closestPoint && isPinched) {
-          setActiveChunk((prevActiveChunk) => {
+          setActiveCustomFaceArea((prevActiveCustomFaceArea) => {
             if (
-              prevActiveChunk.length > 0 &&
-              prevActiveChunk[0] === closestPoint
+              prevActiveCustomFaceArea.length > 0 &&
+              prevActiveCustomFaceArea[0] === closestPoint
             ) {
-              setChunks((prevChunks) => {
-                return [...prevChunks, prevActiveChunk];
+              setCustomFaceAreas((prevCustomFaceAreas) => {
+                return [...prevCustomFaceAreas, prevActiveCustomFaceArea];
               });
               return [];
             } else {
-              return [...prevActiveChunk, closestPoint];
+              return [...prevActiveCustomFaceArea, closestPoint];
             }
           });
         }

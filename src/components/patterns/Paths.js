@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import Path from "./Path";
 
-const Paths = ({ points, activeMask, setup, chunks, activeChunk }) => {
+const Paths = ({ points, activeMask, setup, customFaceAreas, activeCustomFaceArea }) => {
   const { transitionArrangement } = setup;
   const maskRefs = useRef(activeMask.map(() => React.createRef()));
-  const chunkRefs = useRef(chunks.map(() => React.createRef()));
-  const activeChunkRef = useRef(null);
+  const customFaceAreaRefs = useRef(customFaceAreas.map(() => React.createRef()));
+  const activeCustomFaceAreaRef = useRef(null);
   const commonProps = {
     setup,
     points
@@ -25,21 +25,21 @@ const Paths = ({ points, activeMask, setup, chunks, activeChunk }) => {
           {...commonProps}
         />
       ))}
-      {chunks &&
-        chunks.map((chunk, chunkIndex) => (
+      {customFaceAreas &&
+        customFaceAreas.map((customFaceArea, customFaceAreaIndex) => (
           <Path
-            key={`ch-${chunkIndex}`}
-            area={chunk}
-            className="mask-path mask-path--chunk"
-            pathRef={chunkRefs.current[chunkIndex]}
+            key={`ch-${customFaceAreaIndex}`}
+            area={customFaceArea}
+            className="mask-path mask-path--customFaceArea"
+            pathRef={customFaceAreaRefs.current[customFaceAreaIndex]}
             {...commonProps}
           />
         ))}
-      {activeChunk && (
+      {activeCustomFaceArea && (
         <Path
-          area={activeChunk}
-          className="mask-path mask-path--chunk mask-path--chunk--active"
-          pathRef={activeChunkRef}
+          area={activeCustomFaceArea}
+          className="mask-path mask-path--customFaceArea mask-path--customFaceArea--active"
+          pathRef={activeCustomFaceAreaRef}
           {...commonProps}
         />
       )}

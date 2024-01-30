@@ -4,24 +4,24 @@ import { renderPath, saveJson } from "../utils";
 
 function FaceEditor(props) {
   const { inputResolution, setIsEditing } = props;
-  const [areas, setAreas] = useState([]);
-  const [activeArea, setActiveArea] = useState([]);
+  const [faceAreas, setFaceAreas] = useState([]);
+  const [activeFaceArea, setActiveFaceArea] = useState([]);
   const [mouseX, setMouseX] = useState(inputResolution.width / 2);
   const [mouseY, setMouseY] = useState(inputResolution.height / 2);
 
   const handleDotClick = (_event, pointIndex) => {
-    if (activeArea.length === 0) {
-      setActiveArea([pointIndex]);
+    if (activeFaceArea.length === 0) {
+      setActiveFaceArea([pointIndex]);
     } else {
-      if (activeArea[0] === pointIndex) {
-        setAreas((prevAreas) => {
-          console.info([...prevAreas, activeArea]);
-          return [...prevAreas, activeArea];
+      if (activeFaceArea[0] === pointIndex) {
+        setFaceAreas((prevFaceAreas) => {
+          console.info([...prevFaceAreas, activeFaceArea]);
+          return [...prevFaceAreas, activeFaceArea];
         });
-        setActiveArea([]);
+        setActiveFaceArea([]);
       } else {
-        setActiveArea((prevActiveArea) => {
-          return [...prevActiveArea, pointIndex];
+        setActiveFaceArea((prevActiveFaceArea) => {
+          return [...prevActiveFaceArea, pointIndex];
         });
       }
     }
@@ -37,11 +37,11 @@ function FaceEditor(props) {
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${inputResolution.width} ${inputResolution.height}`}
       >
-        {activeArea.length > 0 ? (
+        {activeFaceArea.length > 0 ? (
           <path
             className="face-editor__active-area"
             d={`${renderPath({
-              area: activeArea,
+              area: activeFaceArea,
               points: DEFAULT_FACE_POINTS
             })} L${mouseX},${mouseY}`}
           />
@@ -54,14 +54,14 @@ function FaceEditor(props) {
               cy={point.y}
               r={4}
               className={`face-editor__dot ${
-                activeArea[0] === pointIndex ? "face-editor__dot--first" : ""
+                activeFaceArea[0] === pointIndex ? "face-editor__dot--first" : ""
               }`}
               onClick={(event) => handleDotClick(event, pointIndex)}
             />
           );
         })}
 
-        {areas.map((area, areaIndex) => (
+        {faceAreas.map((area, areaIndex) => (
           <path
             key={`a-${areaIndex}`}
             className="face-editor__area"
@@ -71,7 +71,7 @@ function FaceEditor(props) {
       </svg>
       <nav className="menu menu--controls">
         <fieldset className="control control--button">
-          <button className="" onClick={() => saveJson(areas)}>
+          <button className="" onClick={() => saveJson(faceAreas)}>
             Save
           </button>
         </fieldset>
