@@ -11,8 +11,8 @@ const Drawing = ({
   points,
   flatMask,
   cursor,
-  customFaceAreas,
-  activeCustomFaceArea,
+  customMask,
+  customMaskNewArea,
   activeMask,
   scribble
 }) => {
@@ -53,8 +53,8 @@ const Drawing = ({
                   points,
                   activeMask,
                   setup,
-                  customFaceAreas,
-                  activeCustomFaceArea
+                  customMask,
+                  customMaskNewArea
                 }}
               />
             );

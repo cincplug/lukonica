@@ -23,8 +23,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [points, setPoints] = useState([]);
-  const [customFaceAreas, setCustomFaceAreas] = useState([]);
-  const [activeCustomFaceArea, setActiveCustomFaceArea] = useState([]);
+  const [customMask, setCustomMask] = useState([]);
+  const [customMaskNewArea, setCustomMaskNewArea] = useState([]);
   const [activeMask, setActiveMask] = useState([]);
   const [scribble, setScribble] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
@@ -71,8 +71,8 @@ function App() {
         setupRef,
         video,
         setPoints,
-        setCustomFaceAreas,
-        setActiveCustomFaceArea,
+        setCustomMask,
+        setCustomMaskNewArea,
         setCursor,
         setHandsCount,
         setScribble
@@ -121,18 +121,18 @@ function App() {
   }
 
   useEffect(() => {
-    if (!cursor.isPinched && activeCustomFaceArea.length > 0) {
+    if (!cursor.isPinched && customMaskNewArea.length > 0) {
       setCursor((prevCursor) => {
-        setActiveCustomFaceArea((prevActiveCustomFaceArea) => {
-          setCustomFaceAreas((prevCustomFaceAreas) => {
-            return [...prevCustomFaceAreas, prevActiveCustomFaceArea];
+        setCustomMaskNewArea((prevCustomMaskNewArea) => {
+          setCustomMask((prevCustomMask) => {
+            return [...prevCustomMask, prevCustomMaskNewArea];
           });
           return [];
         });
         return { ...prevCursor, isPinched: false };
       });
     }
-  }, [cursor.isPinched, activeCustomFaceArea.length]);
+  }, [cursor.isPinched, customMaskNewArea.length]);
 
   return (
     <div
@@ -162,8 +162,8 @@ function App() {
               points,
               flatMask,
               cursor,
-              customFaceAreas,
-              activeCustomFaceArea,
+              customMask,
+              customMaskNewArea,
               activeMask,
               scribble
             }}
@@ -197,10 +197,10 @@ function App() {
           setSetup,
           setActiveMask,
           setPoints,
-          setCustomFaceAreas,
-          setActiveCustomFaceArea,
+          setCustomMask,
+          setCustomMaskNewArea,
           setScribble,
-          activeMask: activeMask.concat(customFaceAreas)
+          activeMask: activeMask.concat(customMask)
         }}
       />
       {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}

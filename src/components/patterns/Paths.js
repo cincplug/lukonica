@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import Path from "./Path";
 
-const Paths = ({ points, activeMask, setup, customFaceAreas, activeCustomFaceArea }) => {
+const Paths = ({ points, activeMask, setup, customMask, customMaskNewArea }) => {
   const { transitionArrangement } = setup;
   const maskRefs = useRef(activeMask.map(() => React.createRef()));
-  const customFaceAreaRefs = useRef(customFaceAreas.map(() => React.createRef()));
-  const activeCustomFaceAreaRef = useRef(null);
+  const customFaceAreaRefs = useRef(customMask.map(() => React.createRef()));
+  const customMaskNewAreaRef = useRef(null);
   const commonProps = {
     setup,
     points
@@ -25,8 +25,8 @@ const Paths = ({ points, activeMask, setup, customFaceAreas, activeCustomFaceAre
           {...commonProps}
         />
       ))}
-      {customFaceAreas &&
-        customFaceAreas.map((customFaceArea, customFaceAreaIndex) => (
+      {customMask &&
+        customMask.map((customFaceArea, customFaceAreaIndex) => (
           <Path
             key={`ch-${customFaceAreaIndex}`}
             area={customFaceArea}
@@ -35,11 +35,11 @@ const Paths = ({ points, activeMask, setup, customFaceAreas, activeCustomFaceAre
             {...commonProps}
           />
         ))}
-      {activeCustomFaceArea && (
+      {customMaskNewArea && (
         <Path
-          area={activeCustomFaceArea}
+          area={customMaskNewArea}
           className="mask-path mask-path--customFaceArea mask-path--customFaceArea--active"
-          pathRef={activeCustomFaceAreaRef}
+          pathRef={customMaskNewAreaRef}
           {...commonProps}
         />
       )}

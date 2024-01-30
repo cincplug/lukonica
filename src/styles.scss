@@ -319,7 +319,7 @@ label {
   }
 }
 
-.face-editor {
+.mask-editor {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -341,7 +341,7 @@ label {
     fill: var(--color-yellow-semi);
     stroke: var(--color-yellow);
   }
-  &__active-area {
+  &__new-area {
     fill: none;
     stroke: var(--color-blue-light);
     stroke-width: 1px;

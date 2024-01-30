@@ -11,15 +11,15 @@ const Menu = (props) => {
     setActiveMask,
     setScribble,
     setPoints,
-    setCustomFaceAreas,
-    setActiveCustomFaceArea
+    setCustomMask,
+    setCustomMaskNewArea
   } = props;
 
   const handleClearButtonClick = () => {
     setScribble([]);
     setPoints([]);
-    setCustomFaceAreas([]);
-    setActiveCustomFaceArea([]);
+    setCustomMask([]);
+    setCustomMaskNewArea([]);
   };
   return (
     <>

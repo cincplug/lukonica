@@ -6,8 +6,8 @@ export const runDetector = async ({
   video,
   setupRef,
   setPoints,
-  setCustomFaceAreas,
-  setActiveCustomFaceArea,
+  setCustomMask,
+  setCustomMaskNewArea,
   setCursor,
   setHandsCount,
   setScribble
@@ -101,17 +101,17 @@ export const runDetector = async ({
           pinchThreshold
         });
         if (showsFaces && closestPoint && isPinched) {
-          setActiveCustomFaceArea((prevActiveCustomFaceArea) => {
+          setCustomMaskNewArea((prevCustomMaskNewArea) => {
             if (
-              prevActiveCustomFaceArea.length > 0 &&
-              prevActiveCustomFaceArea[0] === closestPoint
+              prevCustomMaskNewArea.length > 0 &&
+              prevCustomMaskNewArea[0] === closestPoint
             ) {
-              setCustomFaceAreas((prevCustomFaceAreas) => {
-                return [...prevCustomFaceAreas, prevActiveCustomFaceArea];
+              setCustomMask((prevCustomMask) => {
+                return [...prevCustomMask, prevCustomMaskNewArea];
               });
               return [];
             } else {
-              return [...prevActiveCustomFaceArea, closestPoint];
+              return [...prevCustomMaskNewArea, closestPoint];
             }
           });
         }

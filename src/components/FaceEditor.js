@@ -4,24 +4,24 @@ import { renderPath, saveJson } from "../utils";
 
 function FaceEditor(props) {
   const { inputResolution, setIsEditing } = props;
-  const [faceAreas, setFaceAreas] = useState([]);
-  const [activeFaceArea, setActiveFaceArea] = useState([]);
+  const [customMask, setCustomMask] = useState([]);
+  const [customMaskNewArea, setCustomMaskNewArea] = useState([]);
   const [mouseX, setMouseX] = useState(inputResolution.width / 2);
   const [mouseY, setMouseY] = useState(inputResolution.height / 2);
 
   const handleDotClick = (_event, pointIndex) => {
-    if (activeFaceArea.length === 0) {
-      setActiveFaceArea([pointIndex]);
+    if (customMaskNewArea.length === 0) {
+      setCustomMaskNewArea([pointIndex]);
     } else {
-      if (activeFaceArea[0] === pointIndex) {
-        setFaceAreas((prevFaceAreas) => {
-          console.info([...prevFaceAreas, activeFaceArea]);
-          return [...prevFaceAreas, activeFaceArea];
+      if (customMaskNewArea[0] === pointIndex) {
+        setCustomMask((prevCustomMask) => {
+          console.info([...prevCustomMask, customMaskNewArea]);
+          return [...prevCustomMask, customMaskNewArea];
         });
-        setActiveFaceArea([]);
+        setCustomMaskNewArea([]);
       } else {
-        setActiveFaceArea((prevActiveFaceArea) => {
-          return [...prevActiveFaceArea, pointIndex];
+        setCustomMaskNewArea((prevCustomMaskNewArea) => {
+          return [...prevCustomMaskNewArea, pointIndex];
         });
       }
     }
@@ -32,16 +32,16 @@ function FaceEditor(props) {
   };
 
   return (
-    <div className="face-editor" onMouseMove={handleMouseMove}>
+    <div className="mask-editor" onMouseMove={handleMouseMove}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${inputResolution.width} ${inputResolution.height}`}
       >
-        {activeFaceArea.length > 0 ? (
+        {customMaskNewArea.length > 0 ? (
           <path
-            className="face-editor__active-area"
+            className="mask-editor__new-area"
             d={`${renderPath({
-              area: activeFaceArea,
+              area: customMaskNewArea,
               points: DEFAULT_FACE_POINTS
             })} L${mouseX},${mouseY}`}
           />
@@ -53,25 +53,25 @@ function FaceEditor(props) {
               cx={point.x}
               cy={point.y}
               r={4}
-              className={`face-editor__dot ${
-                activeFaceArea[0] === pointIndex ? "face-editor__dot--first" : ""
+              className={`mask-editor__dot ${
+                customMaskNewArea[0] === pointIndex ? "mask-editor__dot--first" : ""
               }`}
               onClick={(event) => handleDotClick(event, pointIndex)}
             />
           );
         })}
 
-        {faceAreas.map((area, areaIndex) => (
+        {customMask.map((area, areaIndex) => (
           <path
             key={`a-${areaIndex}`}
-            className="face-editor__area"
+            className="mask-editor__area"
             d={`${renderPath({ area, points: DEFAULT_FACE_POINTS })} Z`}
           />
         ))}
       </svg>
       <nav className="menu menu--controls">
         <fieldset className="control control--button">
-          <button className="" onClick={() => saveJson(faceAreas)}>
+          <button className="" onClick={() => saveJson(customMask)}>
             Save
           </button>
         </fieldset>
