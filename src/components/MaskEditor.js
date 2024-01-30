@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DEFAULT_FACE_POINTS from "../data/defaultFacePoints.json";
 import { renderPath, saveJson } from "../utils";
 
-function FaceEditor(props) {
+function MaskEditor(props) {
   const { inputResolution, setIsEditing } = props;
   const [customMask, setCustomMask] = useState([]);
   const [customMaskNewArea, setCustomMaskNewArea] = useState([]);
@@ -85,4 +85,4 @@ function FaceEditor(props) {
   );
 }
 
-export default FaceEditor;
+export default MaskEditor;

@@ -8,7 +8,7 @@ import { runDetector } from "../utils/runDetector";
 import Webcam from "react-webcam";
 import Drawing from "./Drawing";
 import Menu from "./Menu";
-import FaceEditor from "./FaceEditor";
+import MaskEditor from "./MaskEditor";
 import "../styles.scss";
 
 const inputResolution = {
@@ -189,7 +189,7 @@ function App() {
       >
         {isStarted ? "Stop video" : "Start video"}
       </button>
-      {isEditing ? <FaceEditor {...{ inputResolution, setIsEditing }} /> : null}
+      {isEditing ? <MaskEditor {...{ inputResolution, setIsEditing }} /> : null}
       <Menu
         {...{
           setup,
