@@ -9,6 +9,7 @@ import Webcam from "react-webcam";
 import Drawing from "./Drawing";
 import Menu from "./Menu";
 import MaskEditor from "./MaskEditor";
+import Splash from "./Splash";
 import "../styles.scss";
 
 const inputResolution = {
@@ -18,7 +19,7 @@ const inputResolution = {
 const { width, height } = inputResolution;
 const DEFAULT_HAND_POINTS_COUNT = 21;
 
-function App() {
+const App = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -152,7 +153,7 @@ function App() {
         isStarted && isLoaded ? "started" : "not-started"
       }`}
     >
-      {isStarted ? (
+      {isStarted && (
         <>
           <Webcam
             ref={webcamRef}
@@ -181,28 +182,14 @@ function App() {
               scribbleNewArea
             }}
           />
-        </>
-      ) : (
-        <>
           <button
-            className="splash-button"
-            onClick={() => {
-              setIsEditing(true);
-            }}
+            className="splash-button video-button pause-button"
+            onClick={handlePlayButtonClick}
           >
-            Create mask
+            Stop video
           </button>
         </>
       )}
-      <button
-        className={`splash-button video-button ${
-          isStarted ? "pause-button" : "play-button"
-        }`}
-        onClick={handlePlayButtonClick}
-      >
-        {isStarted ? "Stop video" : "Start video"}
-      </button>
-      {isEditing ? <MaskEditor {...{ inputResolution, setIsEditing }} /> : null}
       <Menu
         {...{
           setup,
@@ -217,9 +204,11 @@ function App() {
           activeMask: activeMask.concat(customMask)
         }}
       />
+      {isEditing ? <MaskEditor {...{ inputResolution, setIsEditing }} /> : null}
+      {!isStarted && <Splash {...{ setIsEditing, handlePlayButtonClick }} />}
       {/* <pre>{JSON.stringify(scribbleNewArea, null, 4)}</pre> */}
     </div>
   );
-}
+};
 
 export default App;
