@@ -6,7 +6,7 @@ const pathStrokes = (props) => {
       thisPoint.y
     }`,
     quadratics: `Q${controlPoint.x},${controlPoint.y} ${thisPoint.x},${thisPoint.y}`,
-    hairs: `L${controlPoint.x},${controlPoint.y} A${radius * growth},${
+    watermelons: `L${controlPoint.x},${controlPoint.y} A${radius * growth},${
       radius * growth
     } 1 0 1 ${thisPoint.x},${thisPoint.y}`
   };
