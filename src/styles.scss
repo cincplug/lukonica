@@ -172,12 +172,16 @@ input[type="checkbox"] {
 }
 
 pre {
-  width: 500px;
+  width: 17rem;
+  height: 100vh;
+  overflow: auto;
   position: absolute;
   left: var(--menu-width);
+  margin: 0;
   top: 0;
   z-index: 1;
   background: #fff8;
+  
 }
 
 .menu {
