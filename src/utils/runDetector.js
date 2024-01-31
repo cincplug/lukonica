@@ -10,7 +10,8 @@ export const runDetector = async ({
   setCustomMaskNewArea,
   setCursor,
   setHandsCount,
-  setScribble
+  setScribble,
+  setScribbleNewArea
 }) => {
   let frame = 0;
   let shouldContinue = true;
@@ -37,7 +38,7 @@ export const runDetector = async ({
   );
 
   const detect = async () => {
-    const { showsFaces, showsHands, pinchThreshold, latency, pattern } =
+    const { showsFaces, showsHands, pinchThreshold, lowThreshold, latency, pattern } =
       setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
@@ -70,21 +71,16 @@ export const runDetector = async ({
         const indexTip = hands[0]?.keypoints[8];
         const thumbIndexDistance = getDistance(thumbTip, indexTip);
         const isPinched = thumbIndexDistance < pinchThreshold;
+        const thumbTipX = thumbTip.x;
+        const thumbTipY = thumbTip.y;
+        const indexTipX = indexTip.x;
+        const indexTipY = indexTip.y;
+        const x = (thumbTipX + indexTipX) / 2;
+        const y = (thumbTipY + indexTipY) / 2;
         setCursor((prevCursor) => {
-          const thumbTipX = thumbTip.x;
-          const thumbTipY = thumbTip.y;
-          const indexTipX = indexTip.x;
-          const indexTipY = indexTip.y;
-          const x = (thumbTipX + indexTipX) / 2;
-          const y = (thumbTipY + indexTipY) / 2;
-          if (!showsFaces && isPinched) {
-            setScribble((prevScribble) => {
-              return [...prevScribble, { x, y }];
-            });
-          }
           const threshold = prevCursor.isPinched
-          ? pinchThreshold * 2
-          : pinchThreshold;
+            ? pinchThreshold * 2
+            : pinchThreshold;
           return {
             x,
             y,
@@ -92,7 +88,7 @@ export const runDetector = async ({
             thumbTipY,
             indexTipX,
             indexTipY,
-            isPinched: thumbIndexDistance < threshold 
+            isPinched: thumbIndexDistance < threshold
           };
         });
         const closestPoint = findClosestFacePointIndex({
@@ -100,6 +96,23 @@ export const runDetector = async ({
           indexTip,
           pinchThreshold
         });
+        if (!showsFaces && isPinched) {
+          setScribbleNewArea((prevScribbleNewArea) => {
+            if (
+              prevScribbleNewArea.length === 0 ||
+              getDistance(
+                {
+                  x: prevScribbleNewArea[prevScribbleNewArea.length - 1].x,
+                  y: prevScribbleNewArea[prevScribbleNewArea.length - 1].y
+                },
+                { x, y }
+              ) > lowThreshold
+            ) {
+              return [...prevScribbleNewArea, { x, y }];
+            }
+            return prevScribbleNewArea;
+          });
+        }
         if (showsFaces && closestPoint && isPinched) {
           setCustomMaskNewArea((prevCustomMaskNewArea) => {
             if (

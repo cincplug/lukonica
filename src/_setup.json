@@ -38,9 +38,9 @@
   {
     "id": "lowThreshold",
     "description": "Minimal radius",
-    "value": 3,
+    "value": 5,
     "type": "range",
-    "isHidden": true,
+    "isHidden": false,
     "min": 0,
     "max": 20,
     "step": 1
@@ -59,7 +59,7 @@
     "description": "How tight you need to squeeze your thumb and index finger to draw",
     "value": 40,
     "type": "range",
-    "isHidden": true,
+    "isHidden": false,
     "min": 20,
     "max": 100,
     "step": 1
@@ -90,14 +90,14 @@
   },
   {
     "id": "usesSvgAnimation",
-    "title": "animate with SVG",
+    "title": "use SVG animation",
     "description": "Achieve animation with SVG <animate> element",
     "value": false,
     "type": "checkbox"
   },
   {
     "id": "usesCssAnimation",
-    "title": "animate with CSS",
+    "title": "use CSS animation",
     "description": "Achieve animation with CSS animation property",
     "value": true,
     "type": "checkbox"

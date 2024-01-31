@@ -30,7 +30,7 @@ const Paths = ({ points, activeMask, setup, customMask, customMaskNewArea }) => 
           <Path
             key={`ch-${customFaceAreaIndex}`}
             area={customFaceArea}
-            className="mask-path mask-path--customFaceArea"
+            className="mask-path mask-path--custom-face-area"
             pathRef={customFaceAreaRefs.current[customFaceAreaIndex]}
             {...commonProps}
           />
@@ -38,7 +38,7 @@ const Paths = ({ points, activeMask, setup, customMask, customMaskNewArea }) => 
       {customMaskNewArea && (
         <Path
           area={customMaskNewArea}
-          className="mask-path mask-path--customFaceArea mask-path--customFaceArea--active"
+          className="mask-path mask-path--custom-face-area mask-path--custom-face-area--active"
           pathRef={customMaskNewAreaRef}
           {...commonProps}
         />

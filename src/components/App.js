@@ -27,6 +27,7 @@ function App() {
   const [customMaskNewArea, setCustomMaskNewArea] = useState([]);
   const [activeMask, setActiveMask] = useState([]);
   const [scribble, setScribble] = useState([]);
+  const [scribbleNewArea, setScribbleNewArea] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
   const [handsCount, setHandsCount] = useState(0);
 
@@ -75,7 +76,8 @@ function App() {
         setCustomMaskNewArea,
         setCursor,
         setHandsCount,
-        setScribble
+        setScribble,
+        setScribbleNewArea
       }).then((stop) => {
         setStopDetector(() => stop);
       });
@@ -121,18 +123,28 @@ function App() {
   }
 
   useEffect(() => {
-    if (!cursor.isPinched && customMaskNewArea.length > 0) {
-      setCursor((prevCursor) => {
+    if (
+      !cursor.isPinched &&
+      (customMaskNewArea.length > 0 || scribbleNewArea.length > 0)
+    ) {
+      if (customMaskNewArea.length > 0) {
         setCustomMaskNewArea((prevCustomMaskNewArea) => {
           setCustomMask((prevCustomMask) => {
             return [...prevCustomMask, prevCustomMaskNewArea];
           });
           return [];
         });
-        return { ...prevCursor, isPinched: false };
-      });
+      }
+      if (scribbleNewArea.length > 0) {
+        setScribbleNewArea((prevScribbleNewArea) => {
+          setScribble((prevScribble) => {
+            return [...prevScribble, prevScribbleNewArea];
+          });
+          return [];
+        });
+      }
     }
-  }, [cursor.isPinched, customMaskNewArea.length]);
+  }, [cursor.isPinched, customMaskNewArea.length, scribbleNewArea.length]);
 
   return (
     <div
@@ -165,7 +177,8 @@ function App() {
               customMask,
               customMaskNewArea,
               activeMask,
-              scribble
+              scribble,
+              scribbleNewArea
             }}
           />
         </>
@@ -200,10 +213,11 @@ function App() {
           setCustomMask,
           setCustomMaskNewArea,
           setScribble,
+          setScribbleNewArea,
           activeMask: activeMask.concat(customMask)
         }}
       />
-      {/* <pre>{JSON.stringify(points, null, 4)}</pre> */}
+      {/* <pre>{JSON.stringify(scribbleNewArea, null, 4)}</pre> */}
     </div>
   );
 }

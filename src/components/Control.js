@@ -33,7 +33,7 @@ const Control = ({ item, index, setup, handleInputChange }) => {
         />
       )}
       <label className="control__label" htmlFor={id}>
-        <span>{label}</span>
+        <span className="control__label__text">{label}</span>
         {type === "range" && <span>{value}</span>}
       </label>
     </fieldset>

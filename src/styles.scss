@@ -26,7 +26,7 @@
   --gap-half: calc(var(--gap) / 2);
   --gap-double: calc(var(--gap) * 2);
 
-  --menu-width: 12rem;
+  --menu-width: 15rem;
   --input-height: 1.8rem;
 
   --radius: 0.2rem;
@@ -181,7 +181,6 @@ pre {
   top: 0;
   z-index: 1;
   background: #fff8;
-  
 }
 
 .menu {
@@ -207,7 +206,7 @@ pre {
     grid-auto-rows: auto;
   }
   button {
-    grid-column: span 4;
+    grid-column: span 3;
     border-radius: var(--radius);
     background: var(--bg-input);
     padding: 0;
@@ -236,7 +235,7 @@ pre {
       &--button {
         grid-column: span 3;
       }
-      &--opacity {
+      &--range {
         grid-column: span 3;
       }
     }
@@ -264,7 +263,7 @@ pre {
   grid-column: 1 / span 12;
   border: none;
   padding: 0;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   &--checkbox {
     flex-direction: row;
     align-self: center;
@@ -277,7 +276,7 @@ pre {
     position: relative;
     width: 1rem;
   }
-  &--opacity {
+  &--range {
     grid-column: span 6;
     min-width: 0;
   }
@@ -305,12 +304,7 @@ pre {
 label {
   user-select: none;
   margin-bottom: var(--gap-half);
-  &--name {
-    margin-top: 0.4rem;
-  }
-  .menu--collapsed & {
-    display: none;
-  }
+  margin-right: var(--gap-half); 
   [type="range"] + & {
     display: flex;
     justify-content: space-between;
@@ -371,7 +365,7 @@ label {
   &--default {
     stroke: none;
   }
-  &--customFaceArea {
+  &--custom-face-area {
     fill: var(--color-yellow-semi);
     stroke: none;
     &--active {
@@ -395,4 +389,3 @@ label {
 .number-mask {
   font-weight: bold;
 }
-
