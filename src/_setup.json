@@ -179,7 +179,7 @@
     "value": "lines",
     "type": "select",
     "parentPattern": "paths",
-    "options": ["lines", "arcs", "quadratics"]
+    "options": ["lines", "arcs", "quadratics", "hairs"]
   },
   {
     "id": "activeMaskIndex",
