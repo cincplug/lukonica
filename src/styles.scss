@@ -308,6 +308,7 @@ label {
   [type="range"] + & {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
   }
   [type="checkbox"] + & {
     margin: 0;

@@ -1,7 +1,8 @@
 [
   {
     "id": "transitionDuration",
-    "description": "Duration of transition",
+    "title": "duration",
+    "description": "Duration of transitions",
     "value": 2,
     "type": "range",
     "min": 0.1,
@@ -10,6 +11,7 @@
   },
   {
     "id": "transitionArrangement",
+    "title": "arrangement",
     "description": "Arrangement of elements in transition",
     "value": 2,
     "type": "range",
@@ -56,6 +58,7 @@
   },
   {
     "id": "pinchThreshold",
+    "title": "pinch",
     "description": "How tight you need to squeeze your thumb and index finger to draw",
     "value": 40,
     "type": "range",
@@ -72,7 +75,8 @@
   },
   {
     "id": "opacity",
-    "description": "Initial opacity",
+    "title": "shape opacity",
+    "description": "Initial opacity of shapes",
     "value": 128,
     "type": "range",
     "min": 0,
@@ -150,7 +154,7 @@
   {
     "id": "hasCursorFingertips",
     "description": "Shows or hides thumb and forefinger tip",
-    "title":"cursor fingertips",
+    "title":"fingertips",
     "value": false,
     "type": "checkbox"
   },
