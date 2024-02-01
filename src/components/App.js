@@ -190,6 +190,7 @@ const App = () => {
           </button>
         </>
       )}
+      {!isStarted && <Splash {...{ setIsEditing, handlePlayButtonClick }} />}
       <Menu
         {...{
           setup,
@@ -204,8 +205,9 @@ const App = () => {
           activeMask: activeMask.concat(customMask)
         }}
       />
-      {isEditing ? <MaskEditor {...{ inputResolution, setIsEditing }} /> : null}
-      {!isStarted && <Splash {...{ setIsEditing, handlePlayButtonClick }} />}
+      {isEditing ? (
+        <MaskEditor {...{ inputResolution, setIsEditing, activeMask }} />
+      ) : null}
       {/* <pre>{JSON.stringify(scribbleNewArea, null, 4)}</pre> */}
     </div>
   );
