@@ -1,0 +1,25 @@
+{
+  "makeUp": {
+    "transitionDuration": 2,
+    "transitionArrangement": 2,
+    "radius": 0.5,
+    "growth": 0.2,
+    "lowThreshold": 5,
+    "latency": 2,
+    "pinchThreshold": 40,
+    "color": "#ae0368",
+    "opacity": 128,
+    "videoOpacity": 255,
+    "usesSvgAnimation": false,
+    "usesCssAnimation": true,
+    "blendMode": "normal",
+    "pattern": "paths",
+    "imageUrl": "",
+    "hasCursor": true,
+    "hasCursorFingertips": false,
+    "showsFaces": true,
+    "showsHands": true,
+    "pathStroke": "lines",
+    "activeMaskIndex": 6
+  }
+}

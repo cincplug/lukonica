@@ -64,7 +64,7 @@ button {
   border: none;
   border-radius: 2rem;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   &.splash-button {
     width: 9rem;
     margin: 0 var(--gap);
@@ -184,6 +184,15 @@ pre {
   background: #fff8;
 }
 
+h3 {
+  position: relative;
+  text-align: center;
+  grid-column: span 12;
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin: 0;
+}
+
 .menu {
   position: absolute;
   top: 0;
@@ -263,7 +272,7 @@ pre {
   grid-column: 1 / span 12;
   border: none;
   padding: 0;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   &--checkbox {
     flex-direction: row;
     align-self: center;

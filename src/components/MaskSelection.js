@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import DEFAULT_FACE_POINTS from "../data/defaultFacePoints.json";
 import DEFAULT_MASKS from "../data/defaultMasks.json";
+import scenarios from "../data/scenarios.json";
 import { renderPath } from "../utils";
 
 const MaskSelection = (props) => {
-  const { setActiveMask, setup, handleInputChange } = props;
+  const { setActiveMask, setup, setSetup, handleInputChange } = props;
   const { activeMaskIndex } = setup;
   const [masks, setMasks] = useState(DEFAULT_MASKS);
 
@@ -42,6 +43,7 @@ const MaskSelection = (props) => {
   return (
     (masks || DEFAULT_MASKS) && (
       <nav className={`menu menu--masks`}>
+        <h3>Masks</h3>
         {masks.map((mask, index) => (
           <button
             className={`${activeMaskIndex === index ? "active" : "inactive"}`}
@@ -61,6 +63,22 @@ const MaskSelection = (props) => {
               ))}
             </svg>
           </button>
+        ))}
+        <h3>Scenarios</h3>
+        {Object.keys(scenarios).map((scenario, sindex) => (
+          <fieldset className="control control--button">
+            <button
+              onClick={() =>
+                setSetup((prevSetup) => {
+                  const newScenario = scenarios[scenario];
+                  return { ...prevSetup, ...newScenario };
+                })
+              }
+              key={`scn-${sindex}`}
+            >
+              {scenario}
+            </button>
+          </fieldset>
         ))}
       </nav>
     )

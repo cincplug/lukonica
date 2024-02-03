@@ -6,13 +6,14 @@ import { saveSvg, saveJson } from "../utils";
 const Menu = (props) => {
   const {
     setup,
+    setSetup,
     handleInputChange,
     activeMask,
     setActiveMask,
     setScribble,
     setPoints,
     setCustomMask,
-    setCustomMaskNewArea
+    setCustomMaskNewArea,
   } = props;
 
   const handleClearButtonClick = () => {
@@ -35,7 +36,6 @@ const Menu = (props) => {
         />
         <fieldset className="control control--button">
           <button
-            className=""
             onClick={() => {
               saveSvg();
             }}
@@ -45,7 +45,6 @@ const Menu = (props) => {
         </fieldset>
         <fieldset className="control control--button">
           <button
-            className=""
             onClick={() => {
               saveJson(activeMask);
             }}
@@ -55,7 +54,6 @@ const Menu = (props) => {
         </fieldset>
         <fieldset className="control control--button">
           <button
-            className=""
             onClick={handleClearButtonClick}
           >
             Clear
@@ -63,7 +61,6 @@ const Menu = (props) => {
         </fieldset>
         <fieldset className="control control--button">
           <button
-            className=""
             onClick={() => {
               sessionStorage.clear();
               window.location.reload();
@@ -73,7 +70,7 @@ const Menu = (props) => {
           </button>
         </fieldset>
       </nav>
-      <MaskSelection {...{ setActiveMask, setup, handleInputChange }} />
+      <MaskSelection {...{ setActiveMask, setup, setSetup, handleInputChange }} />
     </>
   );
 };
