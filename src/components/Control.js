@@ -4,7 +4,7 @@ const Control = ({ item, index, setup, handleInputChange }) => {
   let value = setup[id];
   const checked = value === true;
   return (
-    <fieldset
+    <div
       className={`control control--${type} control--${id}`}
       key={`${id}-${index}`}
       title={description}
@@ -33,10 +33,10 @@ const Control = ({ item, index, setup, handleInputChange }) => {
         />
       )}
       <label className="control__label" htmlFor={id}>
-        <span className="control__label__text">{label}</span>
-        {type === "range" && <span>{value}</span>}
+        <span className="text">{label}</span>
+        {type === "range" && <span className="value">{value}</span>}
       </label>
-    </fieldset>
+    </div>
   );
 };
 

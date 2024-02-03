@@ -34,7 +34,7 @@ const Menu = (props) => {
                 control.parentPattern === setup.pattern)
           )}
         />
-        <fieldset className="control control--button">
+        <div className="control control--button">
           <button
             onClick={() => {
               saveSvg();
@@ -42,8 +42,8 @@ const Menu = (props) => {
           >
             Save SVG
           </button>
-        </fieldset>
-        <fieldset className="control control--button">
+        </div>
+        <div className="control control--button">
           <button
             onClick={() => {
               saveJson(activeMask);
@@ -51,15 +51,15 @@ const Menu = (props) => {
           >
             Save mask
           </button>
-        </fieldset>
-        <fieldset className="control control--button">
+        </div>
+        <div className="control control--button">
           <button
             onClick={handleClearButtonClick}
           >
             Clear
           </button>
-        </fieldset>
-        <fieldset className="control control--button">
+        </div>
+        <div className="control control--button">
           <button
             onClick={() => {
               sessionStorage.clear();
@@ -68,7 +68,7 @@ const Menu = (props) => {
           >
             Reset
           </button>
-        </fieldset>
+        </div>
       </nav>
       <MaskSelection {...{ setActiveMask, setup, setSetup, handleInputChange }} />
     </>

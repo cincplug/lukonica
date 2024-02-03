@@ -43,43 +43,47 @@ const MaskSelection = (props) => {
   return (
     (masks || DEFAULT_MASKS) && (
       <nav className={`menu menu--masks`}>
-        <h3>Masks</h3>
-        {masks.map((mask, index) => (
-          <button
-            className={`${activeMaskIndex === index ? "active" : "inactive"}`}
-            onClick={(event) => handleMaskButtonClick(event, mask, index)}
-            key={`p-${index}`}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox={`200 0 800 700`}>
-              {mask.map((path, pathIndex) => (
-                <path
-                  key={`pth-${pathIndex}`}
-                  d={`${renderPath({
-                    area: path,
-                    points: DEFAULT_FACE_POINTS,
-                    radius: 0
-                  })}`}
-                ></path>
-              ))}
-            </svg>
-          </button>
-        ))}
-        <h3>Scenarios</h3>
-        {Object.keys(scenarios).map((scenario, sindex) => (
-          <fieldset className="control control--button">
+        <fieldset>
+          <legend>masks</legend>
+          {masks.map((mask, index) => (
             <button
-              onClick={() =>
-                setSetup((prevSetup) => {
-                  const newScenario = scenarios[scenario];
-                  return { ...prevSetup, ...newScenario };
-                })
-              }
-              key={`scn-${sindex}`}
+              className={`${activeMaskIndex === index ? "active" : "inactive"}`}
+              onClick={(event) => handleMaskButtonClick(event, mask, index)}
+              key={`p-${index}`}
             >
-              {scenario}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox={`200 0 800 700`}>
+                {mask.map((path, pathIndex) => (
+                  <path
+                    key={`pth-${pathIndex}`}
+                    d={`${renderPath({
+                      area: path,
+                      points: DEFAULT_FACE_POINTS,
+                      radius: 0
+                    })}`}
+                  ></path>
+                ))}
+              </svg>
             </button>
-          </fieldset>
-        ))}
+          ))}
+        </fieldset>
+        <fieldset>
+          <legend>scenarios</legend>
+          {Object.keys(scenarios).map((scenario, sindex) => (
+            <div className="control control--button">
+              <button
+                onClick={() =>
+                  setSetup((prevSetup) => {
+                    const newScenario = scenarios[scenario];
+                    return { ...prevSetup, ...newScenario };
+                  })
+                }
+                key={`scn-${sindex}`}
+              >
+                {scenario}
+              </button>
+            </div>
+          ))}
+        </fieldset>
       </nav>
     )
   );

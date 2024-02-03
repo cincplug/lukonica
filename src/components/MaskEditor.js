@@ -96,16 +96,16 @@ function MaskEditor(props) {
         })}
       </svg>
       <nav className="menu menu--controls">
-        <fieldset className="control control--button">
+        <div className="control control--button">
           <button className="" onClick={() => saveJson(mask)}>
             Save
           </button>
-        </fieldset>
-        <fieldset className="control control--button">
+        </div>
+        <div className="control control--button">
           <button className="" onClick={() => setIsEditing(false)}>
             Close
           </button>
-        </fieldset>
+        </div>
       </nav>
     </div>
   );

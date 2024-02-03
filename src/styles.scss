@@ -32,7 +32,10 @@
 
   --radius: 0.2rem;
 
-  --font: "Figtree", sans-serif;
+  --font-family: "Figtree", sans-serif;
+  --font-size-s: 0.5rem;
+  --font-size-m: 0.75rem;
+  --font-size-l: 1rem;
 }
 
 @keyframes move-to {
@@ -46,7 +49,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: var(--font);
+  font-family: var(--font-family);
 }
 
 body {
@@ -64,11 +67,11 @@ button {
   border: none;
   border-radius: 2rem;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: var(--font-size-m);
   &.splash-button {
     width: 9rem;
     margin: 0 var(--gap);
-    font-size: 1rem;
+    font-size: var(--font-size-l);
   }
   &.video-button {
     background: var(--color-blue-light);
@@ -165,8 +168,8 @@ input[type="checkbox"] {
       background: var(--color-skin-light);
       content: "✔️";
       color: var(--color-black);
-      font-size: 0.5rem;
-      line-height: 0.8rem;
+      font-size: var(--font-size-s);
+      line-height: var(--font-size-m);
       text-align: center;
     }
   }
@@ -184,13 +187,13 @@ pre {
   background: #fff8;
 }
 
-h3 {
-  position: relative;
-  text-align: center;
+fieldset {
+  display: contents;
+}
+
+legend {
   grid-column: span 12;
-  font-size: 0.9rem;
-  font-weight: normal;
-  margin: 0;
+  font-size: var(--font-size-m);
 }
 
 .menu {
@@ -272,7 +275,7 @@ h3 {
   grid-column: 1 / span 12;
   border: none;
   padding: 0;
-  font-size: 0.8rem;
+  font-size: var(--font-size-m);
   &--checkbox {
     flex-direction: row;
     align-self: center;
@@ -294,7 +297,7 @@ h3 {
     button {
       height: var(--input-height);
       font-weight: normal;
-      font-size: 0.8rem;
+      font-size: var(--font-size-m);
     }
   }
   &--select {
@@ -311,7 +314,6 @@ h3 {
 }
 
 label {
-  user-select: none;
   margin-bottom: var(--gap-half);
   margin-right: var(--gap-half);
   [type="range"] + & {
@@ -324,6 +326,9 @@ label {
   }
   [type="color"] + & {
     margin: 0.4rem 0 0.2rem;
+  }
+  .value {
+    color: var(--color-skin-light);
   }
 }
 
