@@ -2,6 +2,7 @@ import React from "react";
 import Images from "./patterns/Images";
 import Paths from "./patterns/Paths";
 import Numbers from "./patterns/Numbers";
+import Cursor from "./Cursor";
 import pathStrokes from "./patterns/path-strokes";
 import { processColor } from "../utils";
 
@@ -109,36 +110,11 @@ const Drawing = ({
             ></path>
           )
         )}
-      {hasCursorFingertips && (
-        <>
-          <circle
-            className={`cursor cursor--${
-              cursor.isPinched ? "active" : "inactive"
-            }`}
-            r={2}
-            cx={cursor.thumbTipX}
-            cy={cursor.thumbTipY}
-          ></circle>
-          <circle
-            className={`cursor cursor--${
-              cursor.isPinched ? "active" : "inactive"
-            }`}
-            r={2}
-            cx={cursor.indexTipX}
-            cy={cursor.indexTipY}
-          ></circle>
-        </>
-      )}
-      {hasCursor && (
-        <circle
-          className={`cursor cursor--${
-            cursor.isPinched ? "active" : "inactive"
-          }`}
-          r={6}
-          cx={cursor.x}
-          cy={cursor.y}
-        ></circle>
-      )}
+      <Cursor
+        cursor={cursor}
+        hasCursor={hasCursor}
+        hasCursorFingertips={hasCursorFingertips}
+      />
     </svg>
   );
 };
