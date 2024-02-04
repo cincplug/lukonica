@@ -9,7 +9,7 @@ const MaskSelection = (props) => {
   const { activeMaskIndex } = setup;
   const [masks, setMasks] = useState(DEFAULT_MASKS);
 
-  useEffect(() => {
+  const fetchMoreMasks = () => {
     fetch("/api/fetch")
       .then((response) => response.json())
       .then((responseJson) => {
@@ -21,7 +21,7 @@ const MaskSelection = (props) => {
         );
       })
       .catch((error) => console.error("Error:", error));
-  }, []);
+  };
 
   useEffect(() => {
     setActiveMask(
@@ -65,6 +65,9 @@ const MaskSelection = (props) => {
               </svg>
             </button>
           ))}
+          <button onClick={fetchMoreMasks} key={`p-more`}>
+            more masks
+          </button>
         </fieldset>
         <fieldset>
           <legend>scenarios</legend>
