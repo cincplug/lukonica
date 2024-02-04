@@ -42,12 +42,12 @@ const MaskSelection = (props) => {
 
   return (
     (masks || DEFAULT_MASKS) && (
-      <nav className={`menu menu--masks`}>
-        <fieldset>
-          <legend>masks</legend>
+      <nav className={`menu menu--secondary`}>
+        <fieldset className="menu--masks">
+          <legend>Masks</legend>
           {masks.map((mask, index) => (
             <button
-              className={`${activeMaskIndex === index ? "active" : "inactive"}`}
+              className={`menu--masks__button ${activeMaskIndex === index ? "active" : "inactive"}`}
               onClick={(event) => handleMaskButtonClick(event, mask, index)}
               key={`p-${index}`}
             >
@@ -66,25 +66,24 @@ const MaskSelection = (props) => {
             </button>
           ))}
           <button onClick={fetchMoreMasks} key={`p-more`}>
-            more masks
+            More
           </button>
         </fieldset>
-        <fieldset>
-          <legend>scenarios</legend>
-          {Object.keys(scenarios).map((scenario, sindex) => (
-            <div className="control control--button">
-              <button
-                onClick={() =>
-                  setSetup((prevSetup) => {
-                    const newScenario = scenarios[scenario];
-                    return { ...prevSetup, ...newScenario };
-                  })
-                }
-                key={`scn-${sindex}`}
-              >
-                {scenario}
-              </button>
-            </div>
+        <fieldset className="menu--scenarios">
+          <legend>Scenarios</legend>
+          {Object.keys(scenarios).map((scenario, index) => (
+            <button
+              className="control control--button"
+              key={`scn-${index}`}
+              onClick={() =>
+                setSetup((prevSetup) => {
+                  const newScenario = scenarios[scenario];
+                  return { ...prevSetup, ...newScenario };
+                })
+              }
+            >
+              {scenario}
+            </button>
           ))}
         </fieldset>
       </nav>

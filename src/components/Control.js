@@ -1,6 +1,5 @@
 const Control = ({ item, index, setup, handleInputChange }) => {
   const { id, type, min, max, step, title, description, options } = item;
-  const label = (title || id).replace(/([a-z])([A-Z])/g, "$1 $2").toLowerCase();
   let value = setup[id];
   const checked = value === true;
   return (
@@ -33,7 +32,7 @@ const Control = ({ item, index, setup, handleInputChange }) => {
         />
       )}
       <label className="control__label" htmlFor={id}>
-        <span className="text">{label}</span>
+        <span className="text">{title}</span>
         {type === "range" && <span className="value">{value}</span>}
       </label>
     </div>

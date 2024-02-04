@@ -13,7 +13,7 @@ const Menu = (props) => {
     setScribble,
     setPoints,
     setCustomMask,
-    setCustomMaskNewArea,
+    setCustomMaskNewArea
   } = props;
 
   const handleClearButtonClick = () => {
@@ -34,43 +34,41 @@ const Menu = (props) => {
                 control.parentPattern === setup.pattern)
           )}
         />
-        <div className="control control--button">
-          <button
-            onClick={() => {
-              saveSvg();
-            }}
-          >
-            Save SVG
-          </button>
-        </div>
-        <div className="control control--button">
-          <button
-            onClick={() => {
-              saveJson(activeMask);
-            }}
-          >
-            Save mask
-          </button>
-        </div>
-        <div className="control control--button">
-          <button
-            onClick={handleClearButtonClick}
-          >
-            Clear
-          </button>
-        </div>
-        <div className="control control--button">
-          <button
-            onClick={() => {
-              sessionStorage.clear();
-              window.location.reload();
-            }}
-          >
-            Reset
-          </button>
-        </div>
+        <button
+          className="control control--button"
+          onClick={() => {
+            saveSvg();
+          }}
+        >
+          Save SVG
+        </button>
+        <button
+          className="control control--button"
+          onClick={() => {
+            saveJson(activeMask);
+          }}
+        >
+          Save mask
+        </button>
+        <button
+          className="control control--button"
+          onClick={handleClearButtonClick}
+        >
+          Clear
+        </button>
+        <button
+          className="control control--button"
+          onClick={() => {
+            sessionStorage.clear();
+            window.location.reload();
+          }}
+        >
+          Reset
+        </button>
       </nav>
-      <MaskSelection {...{ setActiveMask, setup, setSetup, handleInputChange }} />
+      <MaskSelection
+        {...{ setActiveMask, setup, setSetup, handleInputChange }}
+      />
     </>
   );
 };

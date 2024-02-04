@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@500;700&display=swap");
 
 :root {
   --color-white: #e8e8e8;
@@ -23,18 +23,18 @@
     var(--color-black)
   );
 
-  --gap: 0.75rem;
+  --gap: 0.8rem;
   --gap-half: calc(var(--gap) / 2);
   --gap-double: calc(var(--gap) * 2);
 
-  --menu-width: 15rem;
+  --menu-width: 16rem;
   --input-height: 1.8rem;
 
   --radius: 0.2rem;
 
   --font-family: "Figtree", sans-serif;
   --font-size-s: 0.5rem;
-  --font-size-m: 0.75rem;
+  --font-size-m: 0.8rem;
   --font-size-l: 1rem;
 }
 
@@ -61,17 +61,17 @@ body {
 
 button {
   margin: 0;
-  padding: var(--gap) var(--gap-double);
   background: var(--bg-input);
   color: var(--color-black);
   border: none;
   border-radius: 2rem;
-  font-weight: bold;
   font-size: var(--font-size-m);
   &.splash-button {
     width: 9rem;
     margin: 0 var(--gap);
+    padding: var(--gap) var(--gap-double);
     font-size: var(--font-size-l);
+    font-weight: bold;
   }
   &.video-button {
     background: var(--color-blue-light);
@@ -122,6 +122,7 @@ select {
   background: var(--bg-input);
   height: var(--input-height);
   border: none;
+  text-transform: capitalize;
 }
 
 input[type="range"],
@@ -146,10 +147,10 @@ input[type="checkbox"] {
 
   & + label {
     display: flex;
+    align-items: center;
 
     &:before {
       flex-shrink: 0;
-      margin: 0.2rem;
       margin-right: 0.3rem;
       content: "";
       width: var(--gap);
@@ -210,18 +211,24 @@ legend {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-gap: var(--gap);
   grid-auto-rows: max-content;
-  &--masks {
+  &--secondary {
     right: auto;
     left: 0;
     grid-auto-rows: max-content;
+    @media (max-width: 512px) {
+      display: block;
+    }
+  }
+  &--masks {
+    button {
+      grid-column: span 3;
+      padding: 0;
+    }
   }
   &--stretched {
     grid-auto-rows: auto;
   }
   button {
-    grid-column: span 3;
-    border-radius: var(--radius);
-    padding: 0;
     &.active {
       background: var(--bg-input-active);
     }
@@ -255,13 +262,19 @@ legend {
       grid-column: span 4;
       padding: 0.5rem 0;
     }
-    &--masks {
+    &--secondary {
       top: 0;
       bottom: auto;
       display: flex;
       overflow-x: auto;
       width: 100%;
-      button {
+      &__button {
+        grid-column: span 3;
+        border-radius: var(--radius);
+        padding: 0;
+        &.active {
+          background: var(--bg-input-active);
+        }
         flex: 0 0 calc(100% / 8);
       }
     }
@@ -272,7 +285,7 @@ legend {
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
-  grid-column: 1 / span 12;
+  grid-column: span 6;
   border: none;
   padding: 0;
   font-size: var(--font-size-m);
@@ -280,27 +293,16 @@ legend {
     flex-direction: row;
     align-self: center;
     justify-content: flex-start;
-    grid-column: span 6;
     margin: 0;
   }
   &--color {
-    grid-column: span 6;
     position: relative;
     width: 1rem;
   }
   &--range {
-    grid-column: span 6;
     min-width: 0;
   }
-  &--button {
-    grid-column: span 6;
-    button {
-      height: var(--input-height);
-      font-size: var(--font-size-m);
-    }
-  }
   &--select {
-    grid-column: span 6;
     select {
       width: 100%;
     }
@@ -310,11 +312,14 @@ legend {
       max-width: 100%;
     }
   }
+  &--button {
+    height: 2rem;
+    align-items: center;
+  }
 }
 
 label {
   margin-bottom: var(--gap-half);
-  margin-right: var(--gap-half);
   [type="range"] + & {
     display: flex;
     justify-content: space-between;

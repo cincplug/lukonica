@@ -96,16 +96,18 @@ function MaskEditor(props) {
         })}
       </svg>
       <nav className="menu menu--controls">
-        <div className="control control--button">
-          <button className="" onClick={() => saveJson(mask)}>
-            Save
-          </button>
-        </div>
-        <div className="control control--button">
-          <button className="" onClick={() => setIsEditing(false)}>
-            Close
-          </button>
-        </div>
+        <button
+          className="control control--button"
+          onClick={() => saveJson(mask)}
+        >
+          Save
+        </button>
+        <button
+          className="control control--button"
+          onClick={() => setIsEditing(false)}
+        >
+          Close
+        </button>
       </nav>
     </div>
   );
