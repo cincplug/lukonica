@@ -58,6 +58,13 @@
   font-family: var(--font-family);
 }
 
+html {
+  font-size: 16px;
+  @include until {
+    font-size: 14px;
+  }
+}
+
 body {
   overflow: hidden;
   margin: 0;
@@ -128,6 +135,7 @@ select {
   background: var(--bg-input);
   height: var(--input-height);
   border: none;
+  font-size: var(--font-size-m);
   text-transform: capitalize;
 }
 
@@ -260,7 +268,7 @@ legend {
 
       &--imageUrl,
       &--button {
-        grid-column: span 6;
+        grid-column: span 3;
       }
     }
 
@@ -273,17 +281,34 @@ legend {
       top: 0;
       bottom: auto;
       display: flex;
-      overflow-x: auto;
+      flex-direction: column;
       width: 100%;
 
       button {
-        grid-column: span 3;
         border-radius: var(--radius);
         padding: 0;
+        margin-right: var(--gap);
+        flex: 0 0 calc(100% / 8);
         &.active {
           background: var(--bg-input-active);
         }
-        flex: 0 0 calc(100% / 8);
+      }
+      fieldset {
+        overflow-x: auto;
+        display: flex;
+        border: none;
+        padding: var(--gap-half) 0;
+      }
+      legend {
+        padding: 0;
+      }
+    }
+
+    &--scenarios {
+      button {
+        padding-left: var(--gap);
+        padding-right: var(--gap);
+        flex: none;
       }
     }
   }

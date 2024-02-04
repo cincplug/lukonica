@@ -8,7 +8,7 @@ const Images = ({ points, flatMask, setup, cursor }) => {
     radius,
     growth,
     transitionDuration,
-    lowThreshold,
+    minimum,
     pinchThreshold,
     usesSvgAnimation,
     usesCssAnimation
@@ -27,8 +27,8 @@ const Images = ({ points, flatMask, setup, cursor }) => {
     const getSize = (point = index) => {
       return (
         Math.max(
-          lowThreshold,
-          (point + radius) / ((index % lowThreshold) + lowThreshold)
+          minimum,
+          (point + radius) / ((index % minimum) + minimum)
         ) +
         radius * growth
       );

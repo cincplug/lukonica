@@ -4,7 +4,7 @@
     "transitionArrangement": 2,
     "radius": 0.5,
     "growth": 0.2,
-    "lowThreshold": 5,
+    "minimum": 5,
     "latency": 2,
     "pinchThreshold": 40,
     "color": "#ae0368",

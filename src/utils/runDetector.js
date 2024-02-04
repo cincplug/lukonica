@@ -38,7 +38,7 @@ export const runDetector = async ({
   );
 
   const detect = async () => {
-    const { showsFaces, showsHands, pinchThreshold, lowThreshold, latency, pattern } =
+    const { showsFaces, showsHands, pinchThreshold, minimum, latency, pattern } =
       setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
@@ -106,7 +106,7 @@ export const runDetector = async ({
                   y: prevScribbleNewArea[prevScribbleNewArea.length - 1].y
                 },
                 { x, y }
-              ) > lowThreshold
+              ) > minimum
             ) {
               return [...prevScribbleNewArea, { x, y }];
             }

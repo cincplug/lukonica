@@ -40,9 +40,9 @@
     "step": 0.01
   },
   {
-    "id": "lowThreshold",
-    "title": "Minimal radius",
-    "description": "Minimal radius",
+    "id": "minimum",
+    "title": "Minimum",
+    "description": "Minimum",
     "value": 5,
     "type": "range",
     "isHidden": false,

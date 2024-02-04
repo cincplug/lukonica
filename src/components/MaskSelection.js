@@ -51,7 +51,7 @@ const MaskSelection = (props) => {
               onClick={(event) => handleMaskButtonClick(event, mask, index)}
               key={`p-${index}`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox={`200 0 800 700`}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox={`180 0 800 680`}>
                 {mask.map((path, pathIndex) => (
                   <path
                     key={`pth-${pathIndex}`}
