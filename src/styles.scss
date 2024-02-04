@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@500;700&display=swap");
 
+@mixin until($breakpoint: 512px) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
 :root {
   --color-white: #e8e8e8;
   --color-black: #000;
@@ -211,63 +217,65 @@ legend {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-gap: var(--gap);
   grid-auto-rows: max-content;
+
   &--secondary {
     right: auto;
     left: 0;
     grid-auto-rows: max-content;
-    @media (max-width: 512px) {
-      display: block;
-    }
   }
+
   &--masks {
     button {
       grid-column: span 3;
       padding: 0;
     }
   }
+
   &--stretched {
     grid-auto-rows: auto;
   }
+
   button {
     &.active {
       background: var(--bg-input-active);
     }
   }
-  @media (max-width: 512px) {
+
+  @include until {
     width: auto;
     height: auto;
     bottom: 0;
     top: auto;
     background: var(--color-black);
+
     .control {
       grid-column: span 6;
+
       &--color,
-      &--checkbox {
-        grid-column: span 3;
-      }
-      &--select {
-        grid-column: span 3;
-      }
-      &--imageUrl {
-        grid-column: span 6;
-      }
-      &--button {
-        grid-column: span 3;
-      }
+      &--checkbox,
+      &--select,
       &--range {
         grid-column: span 3;
       }
+
+      &--imageUrl,
+      &--button {
+        grid-column: span 6;
+      }
     }
+
     &--button {
       grid-column: span 4;
       padding: 0.5rem 0;
     }
+
     &--secondary {
       top: 0;
       bottom: auto;
       display: flex;
       overflow-x: auto;
       width: 100%;
+
       &__button {
         grid-column: span 3;
         border-radius: var(--radius);
@@ -280,6 +288,7 @@ legend {
     }
   }
 }
+
 
 .control {
   display: flex;
