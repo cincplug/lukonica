@@ -21,7 +21,7 @@
   --color-black-light-semi: #222a;
   --color-grey: #747474;
   --color-silver: #ccc;
-  --color-blue-light: #0bd;
+  --color-blue-light: #0ce;
   --color-blue: #068;
   --color-skin: #c68c7f;
   --color-skin-light: #f7c496;
@@ -96,7 +96,6 @@ button {
   }
   &.video-button {
     background: var(--color-blue-light);
-    color: var(--color-white);
     &:hover {
       background: var(--color-blue);
     }
@@ -421,6 +420,11 @@ label {
   bottom: 0;
   left: 0;
   background: var(--color-black-light-semi);
+  flex-direction: column;
+  justify-content: space-evenly;
+  img {
+    max-width: 12rem;
+  }
 }
 
 .drawing {
