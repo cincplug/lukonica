@@ -5,33 +5,29 @@ const Cursor = ({ cursor, hasCursor, hasCursorFingertips }) => {
     <>
       {hasCursorFingertips && (
         <>
-          <circle
-            className={`cursor cursor--${
-              cursor.isPinched ? "active" : "inactive"
-            }`}
-            r={2}
-            cx={cursor.thumbTipX}
-            cy={cursor.thumbTipY}
-          ></circle>
-          <circle
-            className={`cursor cursor--${
-              cursor.isPinched ? "active" : "inactive"
-            }`}
-            r={2}
-            cx={cursor.indexTipX}
-            cy={cursor.indexTipY}
-          ></circle>
+          <div
+            className={`cursor cursor--fingertip`}
+            style={{
+              left: cursor.thumbTipX,
+              top: cursor.thumbTipY,
+            }}
+          ></div>
+          <div
+            className={`cursor cursor--fingertip`}
+            style={{
+              left: cursor.indexTipX,
+              top: cursor.indexTipY,
+            }}
+          ></div>
         </>
       )}
       {hasCursor && (
-        <circle
+        <div
           className={`cursor cursor--${
             cursor.isPinched ? "active" : "inactive"
           }`}
-          r={6}
-          cx={cursor.x}
-          cy={cursor.y}
-        ></circle>
+          style={{ left: cursor.x, top: cursor.y }}
+        ></div>
       )}
     </>
   );

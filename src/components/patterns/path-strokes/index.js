@@ -1,14 +1,14 @@
 const pathStrokes = (props) => {
   const { pathStroke, thisPoint, controlPoint, radius, growth } = props;
   const strokeDefinitions = {
-    lines: `L${thisPoint.x},${thisPoint.y} `,
-    arcs: `A${radius * growth},${radius * growth} 0 0 1 ${thisPoint.x},${
+    lines: `L${thisPoint.x} ${thisPoint.y} `,
+    arcs: `A${radius * growth} ${radius * growth} 0 0 1 ${thisPoint.x} ${
       thisPoint.y
     }`,
-    quadratics: `Q${controlPoint.x},${controlPoint.y} ${thisPoint.x},${thisPoint.y}`,
-    watermelons: `L${controlPoint.x},${controlPoint.y} A${radius * growth},${
+    quadratics: `Q${controlPoint.x} ${controlPoint.y} ${thisPoint.x} ${thisPoint.y}`,
+    watermelons: `L${controlPoint.x} ${controlPoint.y} A${radius * growth} ${
       radius * growth
-    } 1 0 1 ${thisPoint.x},${thisPoint.y}`
+    } 1 0 1 ${thisPoint.x} ${thisPoint.y}`
   };
   return strokeDefinitions[pathStroke];
 };

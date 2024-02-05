@@ -7,6 +7,7 @@ const Scribble = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
     <>
       {[...scribble, scribbleNewArea].map((scribbleArea, scribbleAreaIndex) => (
         <path
+          className="scribble"
           fill="none"
           stroke={processColor(setup.color, setup.opacity)}
           strokeWidth={radius * growth}

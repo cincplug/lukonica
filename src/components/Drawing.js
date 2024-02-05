@@ -27,63 +27,69 @@ const Drawing = ({
     showsFaces
   } = setup;
   return (
-    <svg
-      className="drawing"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 ${width} ${height}`}
-      style={{ mixBlendMode: setup.blendMode, width, height }}
-    >
-      {(() => {
-        switch (pattern) {
-          case "images":
-            return (
-              <Images
-                {...{
-                  points,
-                  flatMask,
-                  setup,
-                  cursor
-                }}
-              />
-            );
-          case "paths":
-            return (
-              <Paths
-                {...{
-                  points,
-                  activeMask,
-                  setup,
-                  customMask,
-                  customMaskNewArea
-                }}
-              />
-            );
-          case "numbers":
-            return (
-              <Numbers
-                {...{
-                  points,
-                  flatMask,
-                  setup,
-                  cursor
-                }}
-              />
-            );
-          default:
-            return null;
-        }
-      })()}
-      {!showsFaces && (
-        <Scribble
-          scribble={scribble}
-          scribbleNewArea={scribbleNewArea}
-          setup={setup}
-          radius={radius}
-          growth={growth}
-        />
-      )}
-      <Cursor cursor={cursor} hasCursor={hasCursor} hasCursorFingertips={hasCursorFingertips} />
-    </svg>
+    <>
+      <svg
+        className="drawing"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox={`0 0 ${width} ${height}`}
+        style={{ mixBlendMode: setup.blendMode, width, height }}
+      >
+        {(() => {
+          switch (pattern) {
+            case "images":
+              return (
+                <Images
+                  {...{
+                    points,
+                    flatMask,
+                    setup,
+                    cursor
+                  }}
+                />
+              );
+            case "paths":
+              return (
+                <Paths
+                  {...{
+                    points,
+                    activeMask,
+                    setup,
+                    customMask,
+                    customMaskNewArea
+                  }}
+                />
+              );
+            case "numbers":
+              return (
+                <Numbers
+                  {...{
+                    points,
+                    flatMask,
+                    setup,
+                    cursor
+                  }}
+                />
+              );
+            default:
+              return null;
+          }
+        })()}
+        {!showsFaces && (
+          <Scribble
+            scribble={scribble}
+            scribbleNewArea={scribbleNewArea}
+            setup={setup}
+            radius={radius}
+            growth={growth}
+          />
+        )}
+      </svg>
+      <Cursor
+        cursor={cursor}
+        hasCursor={hasCursor}
+        hasCursorFingertips={hasCursorFingertips}
+      />
+    </>
   );
 };
 
