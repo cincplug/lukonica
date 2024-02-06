@@ -28,6 +28,11 @@ const Scribble = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
           key={`scr-${scribbleAreaIndex}`}
           d={scribbleArea.map((thisPoint, thisPointIndex) => {
             const lastPoint = scribbleArea[scribbleArea.length - 1];
+            const prevPoint = scribbleArea[Math.max(0, thisPointIndex - 1)];
+            const nextPoint =
+              scribbleArea[
+                Math.min(thisPointIndex + 1, scribbleArea.length - 1)
+              ];
             if (!thisPoint || !lastPoint) return null;
             if (radius > 0 && lastPoint && thisPointIndex > 0) {
               const deltaX = thisPoint.x - lastPoint.x;
@@ -40,6 +45,8 @@ const Scribble = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
               return pathStrokes({
                 pathStroke: pathStroke,
                 thisPoint,
+                prevPoint,
+                nextPoint,
                 controlPoint,
                 radius,
                 growth

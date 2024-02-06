@@ -160,7 +160,7 @@
     "value": "lines",
     "type": "select",
     "parentPattern": "paths",
-    "options": ["lines", "arcs", "quadratics", "watermelons"]
+    "options": ["lines", "arcs", "quadratics", "beziers", "bezinerves", "watermelons"]
   },
   {
     "id": "showsFaces",
