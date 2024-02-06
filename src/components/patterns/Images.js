@@ -41,7 +41,6 @@ const Images = ({ points, flatMask, setup, cursor }) => {
     const style = usesCssAnimation
       ? {
           animation: `move-to ${transitionDuration}s infinite`,
-          transform: `translate(${pointFrom.x}px, ${pointFrom.y}px)`,
           "--dx": `${pointTo.x - pointFrom.x}px`,
           "--dy": `${pointTo.y - pointFrom.y}px`
         }

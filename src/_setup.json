@@ -143,7 +143,7 @@
     "description": "What will be drawn on points",
     "value": "numbers",
     "type": "select",
-    "options": ["numbers", "paths", "images"]
+    "options": ["numbers", "paths", "images", "sentences"]
   },
   {
     "id": "imageUrl",
@@ -201,6 +201,26 @@
     "type": "range",
     "min": 0,
     "max": 255,
+    "step": 1
+  },
+  {
+    "id": "text",
+    "title": "Text",
+    "description": "Text for sentences pattern",
+    "value": "The fixed point that the element rotates around is also known as the transform origin.",
+    "parentPattern": "sentences",
+    "type": "text"
+  },
+  {
+    "id": "textLimit",
+    "title": "Text limit",
+    "description": "Text limit length for sentences pattern",
+    "value": 100,
+    "parentPattern": "sentences",
+    "isHidden": true,
+    "type": "range",
+    "min": 1,
+    "max": 200,
     "step": 1
   }
 ]
