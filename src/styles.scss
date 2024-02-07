@@ -216,7 +216,7 @@ legend {
 }
 
 .menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: var(--menu-width);
@@ -403,11 +403,11 @@ label {
 }
 
 .wrap {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  margin: auto;
   &--not-started {
     background: var(--color-black-light);
   }

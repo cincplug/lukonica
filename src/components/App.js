@@ -12,11 +12,10 @@ import MaskEditor from "./MaskEditor";
 import Splash from "./Splash";
 import "../styles.scss";
 
-const inputResolution = {
+const screenResolution = {
   width: window.innerWidth,
   height: window.innerHeight
 };
-const { width, height } = inputResolution;
 const DEFAULT_HAND_POINTS_COUNT = 21;
 
 const App = () => {
@@ -63,12 +62,16 @@ const App = () => {
   const webcamRef = useRef(null);
   const [stopDetector, setStopDetector] = useState(null);
   const [shouldRunDetector, setShouldRunDetector] = useState(false);
+  const [inputResolution, setInputResolution] = useState(screenResolution);
+  const { width, height } = inputResolution;
 
   const handleVideoLoad = (videoNode) => {
     const video = videoNode.target;
     if (video.readyState !== 4) return;
     if (isLoaded) return;
     if (shouldRunDetector) {
+      const { videoWidth, videoHeight } = video;
+      setInputResolution({ width: videoWidth, height: videoHeight });
       runDetector({
         setupRef,
         video,
@@ -152,10 +155,12 @@ const App = () => {
       className={`wrap wrap--${
         isStarted && isLoaded ? "started" : "not-started"
       }`}
+      style={{ width, height }}
     >
       {isStarted && (
         <>
           <Webcam
+            audio={false}
             ref={webcamRef}
             width={width}
             height={height}
@@ -164,24 +169,27 @@ const App = () => {
               position: "absolute"
             }}
             videoConstraints={inputResolution}
+            forceScreenshotSourceSize={true}
             onLoadedData={handleVideoLoad}
             mirrored={true}
             imageSmoothing={false}
           />
-          <Drawing
-            {...{
-              inputResolution,
-              setup,
-              points,
-              flatMask,
-              cursor,
-              customMask,
-              customMaskNewArea,
-              activeMask,
-              scribble,
-              scribbleNewArea
-            }}
-          />
+          {isLoaded && (
+            <Drawing
+              {...{
+                inputResolution,
+                setup,
+                points,
+                flatMask,
+                cursor,
+                customMask,
+                customMaskNewArea,
+                activeMask,
+                scribble,
+                scribbleNewArea
+              }}
+            />
+          )}
           <button
             className="splash-button video-button pause-button"
             onClick={handlePlayButtonClick}
