@@ -21,5 +21,30 @@
     "showsHands": true,
     "pathStroke": "lines",
     "activeMaskIndex": 6
+  },
+  "Letter kite": {
+    "transitionDuration": 1,
+    "transitionArrangement": 1,
+    "radius": 27,
+    "growth": 0.5,
+    "minimum": 5,
+    "latency": 2,
+    "pinchThreshold": 40,
+    "color": "#000000",
+    "opacity": 192,
+    "videoOpacity": 48,
+    "usesSvgAnimation": false,
+    "usesCssAnimation": true,
+    "blendMode": "normal",
+    "pattern": "sentences",
+    "imageUrl": "",
+    "pathStroke": "lines",
+    "showsFaces": false,
+    "showsHands": true,
+    "hasCursor": true,
+    "hasCursorFingertips": false,
+    "activeMaskIndex": 0,
+    "text": "The fixed point that the element rotates around is also known as the transform origin.",
+    "textLimit": 100
   }
 }

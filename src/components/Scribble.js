@@ -27,8 +27,8 @@ const Scribble = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
           strokeWidth={radius * growth}
           key={`scr-${scribbleAreaIndex}`}
           d={scribbleArea.map((thisPoint, thisPointIndex) => {
-            const lastPoint = scribbleArea[scribbleArea.length - 1];
-            const prevPoint = scribbleArea[Math.max(0, thisPointIndex - 1)];
+            const lastPoint = scribbleArea[scribbleArea.length - 1] || thisPoint;
+            const prevPoint = scribbleArea[Math.max(0, thisPointIndex - 1)] || thisPoint;
             const nextPoint =
               scribbleArea[
                 Math.min(thisPointIndex + 1, scribbleArea.length - 1)
