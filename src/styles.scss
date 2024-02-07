@@ -349,6 +349,9 @@ legend {
       max-width: 100%;
     }
   }
+  &--text {
+    grid-column: span 12;
+  }
   &--button {
     height: 2rem;
     align-items: center;

@@ -208,7 +208,6 @@
     "title": "Text",
     "description": "Text for sentences pattern",
     "value": "The fixed point that the element rotates around is also known as the transform origin.",
-    "parentPattern": "sentences",
     "type": "text"
   },
   {
