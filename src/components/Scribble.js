@@ -3,6 +3,7 @@ import pathStrokes from "./patterns/path-strokes";
 import { processColor } from "../utils";
 import Sentence from "./Sentence";
 import Kite from "./Kite";
+import Train from "./Train";
 
 const Scribble = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
   const { pattern, color, opacity, pathStroke } = setup;
@@ -21,6 +22,17 @@ const Scribble = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
   if (pattern === "kite") {
     return (
       <Kite
+        scribble={scribble}
+        scribbleNewArea={scribbleNewArea}
+        setup={setup}
+        radius={radius}
+        growth={growth}
+      />
+    );
+  }
+  if (pattern === "train") {
+    return (
+      <Train
         scribble={scribble}
         scribbleNewArea={scribbleNewArea}
         setup={setup}
