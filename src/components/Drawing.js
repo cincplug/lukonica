@@ -34,47 +34,48 @@ const Drawing = ({
         viewBox={`0 0 ${width} ${height}`}
         style={{ mixBlendMode: setup.blendMode, width, height }}
       >
-        {(() => {
-          switch (pattern) {
-            case "images":
-              return (
-                <Images
-                  {...{
-                    points,
-                    flatMask,
-                    setup,
-                    cursor
-                  }}
-                />
-              );
-            case "paths":
-              return (
-                <Paths
-                  {...{
-                    points,
-                    activeMask,
-                    setup,
-                    customMask,
-                    customMaskNewArea
-                  }}
-                />
-              );
-            case "numbers":
-              return (
-                <Numbers
-                  {...{
-                    points,
-                    flatMask,
-                    setup,
-                    cursor
-                  }}
-                />
-              );
-            default:
-              return null;
-          }
-        })()}
-        {!showsFaces && (
+        {showsFaces ? (
+          (() => {
+            switch (pattern) {
+              case "images":
+                return (
+                  <Images
+                    {...{
+                      points,
+                      flatMask,
+                      setup,
+                      cursor
+                    }}
+                  />
+                );
+              case "paths":
+                return (
+                  <Paths
+                    {...{
+                      points,
+                      activeMask,
+                      setup,
+                      customMask,
+                      customMaskNewArea
+                    }}
+                  />
+                );
+              case "numbers":
+                return (
+                  <Numbers
+                    {...{
+                      points,
+                      flatMask,
+                      setup,
+                      cursor
+                    }}
+                  />
+                );
+              default:
+                return null;
+            }
+          })()
+        ) : (
           <Scribble
             scribble={scribble}
             scribbleNewArea={scribbleNewArea}
