@@ -1,9 +1,9 @@
 import React from "react";
 import pathStrokes from "./patterns/path-strokes";
 import { processColor } from "../utils";
-import Sentence from "./Sentence";
-import Kite from "./Kite";
-import Train from "./Train";
+import Sentence from "./patterns/Sentence";
+import Kite from "./patterns/Kite";
+import Train from "./patterns/Train";
 
 const Scribble = ({ scribble, scribbleNewArea, setup }) => {
   const {

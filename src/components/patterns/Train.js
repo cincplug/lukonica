@@ -1,5 +1,5 @@
 import React from "react";
-import { processColor } from "../utils";
+import { processColor } from "../../utils";
 
 const Train = ({ scribble, scribbleNewArea, setup }) => {
   const {
