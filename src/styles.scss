@@ -463,8 +463,10 @@ label {
     background: var(--color-blue-light);
   }
   &--fingertip {
-    width: var(--gap-half);
-    height: var(--gap-half);
+    opacity: 0.7;
+    background: var(--color-yellow);
+    width: var(--gap);
+    height: var(--gap);
   }
 }
 

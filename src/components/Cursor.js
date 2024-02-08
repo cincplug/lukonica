@@ -1,32 +1,39 @@
 import React from "react";
 
-const Cursor = ({ cursor, hasCursor, hasCursorFingertips }) => {
+const Cursor = (props) => {
+  const { cursor, hasCursorFingertips } = props;
+  const { x, y, thumbTip, indexTip, middleTip, isPinched } = cursor;
   return (
     <>
-      {hasCursorFingertips && (
+      {hasCursorFingertips && thumbTip && (
         <>
           <div
             className={`cursor cursor--fingertip`}
             style={{
-              left: cursor.thumbTipX,
-              top: cursor.thumbTipY,
+              left: thumbTip?.x,
+              top: thumbTip?.y
             }}
           ></div>
           <div
             className={`cursor cursor--fingertip`}
             style={{
-              left: cursor.indexTipX,
-              top: cursor.indexTipY,
+              left: indexTip?.x,
+              top: indexTip?.y
+            }}
+          ></div>
+          <div
+            className={`cursor cursor--fingertip`}
+            style={{
+              left: middleTip?.x,
+              top: middleTip?.y
             }}
           ></div>
         </>
       )}
-      {hasCursor && (
+      {x && (
         <div
-          className={`cursor cursor--${
-            cursor.isPinched ? "active" : "inactive"
-          }`}
-          style={{ left: cursor.x, top: cursor.y }}
+          className={`cursor cursor--${isPinched ? "active" : "inactive"}`}
+          style={{ left: x, top: y }}
         ></div>
       )}
     </>

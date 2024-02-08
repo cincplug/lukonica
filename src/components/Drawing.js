@@ -85,11 +85,12 @@ const Drawing = ({
           />
         )}
       </svg>
-      <Cursor
-        cursor={cursor}
-        hasCursor={hasCursor}
-        hasCursorFingertips={hasCursorFingertips}
-      />
+      {hasCursor && (
+        <Cursor
+          cursor={cursor}
+          hasCursorFingertips={hasCursorFingertips}
+        />
+      )}
     </>
   );
 };

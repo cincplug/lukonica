@@ -69,14 +69,11 @@ export const runDetector = async ({
         }
         const thumbTip = hands[0]?.keypoints[4];
         const indexTip = hands[0]?.keypoints[8];
+        const middleTip = hands[0]?.keypoints[12];
         const thumbIndexDistance = getDistance(thumbTip, indexTip);
         const isPinched = thumbIndexDistance < pinchThreshold;
-        const thumbTipX = thumbTip.x;
-        const thumbTipY = thumbTip.y;
-        const indexTipX = indexTip.x;
-        const indexTipY = indexTip.y;
-        const x = (thumbTipX + indexTipX) / 2;
-        const y = (thumbTipY + indexTipY) / 2;
+        const x = (thumbTip.x + indexTip.x) / 2;
+        const y = (thumbTip.y + indexTip.y) / 2;
         setCursor((prevCursor) => {
           const threshold = prevCursor.isPinched
             ? pinchThreshold * 2
@@ -84,10 +81,9 @@ export const runDetector = async ({
           return {
             x,
             y,
-            thumbTipX,
-            thumbTipY,
-            indexTipX,
-            indexTipY,
+            thumbTip,
+            indexTip,
+            middleTip,
             isPinched: thumbIndexDistance < threshold
           };
         });
