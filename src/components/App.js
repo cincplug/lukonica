@@ -45,6 +45,27 @@ const App = () => {
     setupRef.current = setup;
   }, [setup]);
 
+  useEffect(() => {
+    const handleKeyUp = (event) => {
+      console.warn(event.key);
+      if (event.key === "Backspace") {
+        clearPaths();
+      }
+    };
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  const clearPaths = () => {
+    setScribble([]);
+    setScribbleNewArea([]);
+    setPoints([]);
+    setCustomMask([]);
+    setCustomMaskNewArea([]);
+  }
+
   const handleInputChange = (event) => {
     setSetup((prevSetup) => {
       const { id, value, type } = event.target;
@@ -206,10 +227,7 @@ const App = () => {
           setSetup,
           setActiveMask,
           setPoints,
-          setCustomMask,
-          setCustomMaskNewArea,
-          setScribble,
-          setScribbleNewArea,
+          clearPaths,
           activeMask: activeMask.concat(customMask)
         }}
       />

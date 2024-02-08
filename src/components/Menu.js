@@ -10,18 +10,9 @@ const Menu = (props) => {
     handleInputChange,
     activeMask,
     setActiveMask,
-    setScribble,
-    setPoints,
-    setCustomMask,
-    setCustomMaskNewArea
+    clearPaths
   } = props;
 
-  const handleClearButtonClick = () => {
-    setScribble([]);
-    setPoints([]);
-    setCustomMask([]);
-    setCustomMaskNewArea([]);
-  };
   return (
     <>
       <nav className={`menu menu--controls menu--stretched`}>
@@ -50,10 +41,7 @@ const Menu = (props) => {
         >
           Save mask
         </button>
-        <button
-          className="control control--button"
-          onClick={handleClearButtonClick}
-        >
+        <button className="control control--button" onClick={clearPaths}>
           Clear
         </button>
         <button

@@ -17,11 +17,13 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
     .flat()
     .slice(-Math.min(textLimit, textArray.length));
 
-  const pathData = area
-    .map((point, index) => {
-      return `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`;
-    })
-    .join(" ") + " z";
+  const pathData = area.length
+    ? area
+        .map((point, index) => {
+          return `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`;
+        })
+        .join(" ") + " Z"
+    : null;
 
   return (
     <svg>
