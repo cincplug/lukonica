@@ -38,8 +38,14 @@ export const runDetector = async ({
   );
 
   const detect = async () => {
-    const { showsFaces, showsHands, pinchThreshold, minimum, latency, pattern } =
-      setupRef.current;
+    const {
+      showsFaces,
+      showsHands,
+      pinchThreshold,
+      minimum,
+      latency,
+      pattern
+    } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
       let faces, hands;
@@ -67,11 +73,16 @@ export const runDetector = async ({
             }
           });
         }
+        const wrist = hands[0]?.keypoints[0];
         const thumbTip = hands[0]?.keypoints[4];
         const indexTip = hands[0]?.keypoints[8];
-        const middleTip = hands[0]?.keypoints[12];
+        const middleDip = hands[0]?.keypoints[11];
         const thumbIndexDistance = getDistance(thumbTip, indexTip);
         const isPinched = thumbIndexDistance < pinchThreshold;
+        const isWagging =
+          !isPinched &&
+          (wrist.y - indexTip.y) / (wrist.y - middleDip.y) > 2 &&
+          (wrist.y - indexTip.y) / (wrist.x - indexTip.x) > 2;
         const x = (thumbTip.x + indexTip.x) / 2;
         const y = (thumbTip.y + indexTip.y) / 2;
         setCursor((prevCursor) => {
@@ -81,9 +92,11 @@ export const runDetector = async ({
           return {
             x,
             y,
+            wrist,
             thumbTip,
             indexTip,
-            middleTip,
+            middleDip,
+            isWagging,
             isPinched: thumbIndexDistance < threshold
           };
         });

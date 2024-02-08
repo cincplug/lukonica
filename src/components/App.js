@@ -58,13 +58,20 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (cursor.isWagging) {
+      console.warn(cursor.isWagging);
+      clearPaths();
+    }
+  }, [cursor.isWagging]);
+
   const clearPaths = () => {
     setScribble([]);
     setScribbleNewArea([]);
     setPoints([]);
     setCustomMask([]);
     setCustomMaskNewArea([]);
-  }
+  };
 
   const handleInputChange = (event) => {
     setSetup((prevSetup) => {

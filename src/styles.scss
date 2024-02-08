@@ -27,6 +27,7 @@
   --color-skin-light: #f7c496;
   --color-yellow: #ec2;
   --color-yellow-semi: #fd28;
+  --color-red: #c22;
 
   --bg: var(--color-black-light);
   --bg-input: var(--color-skin);
@@ -461,6 +462,9 @@ label {
   &--active {
     transform: translate(-50%, -50%) scale(0.5);
     background: var(--color-blue-light);
+  }
+  &--wagging {
+    background: var(--color-red);
   }
   &--fingertip {
     opacity: 0.7;

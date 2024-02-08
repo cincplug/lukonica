@@ -2,7 +2,8 @@ import React from "react";
 
 const Cursor = (props) => {
   const { cursor, hasCursorFingertips } = props;
-  const { x, y, thumbTip, indexTip, middleTip, isPinched } = cursor;
+  const { x, y, wrist, thumbTip, indexTip, middleDip, isPinched, isWagging } =
+    cursor;
   return (
     <>
       {hasCursorFingertips && thumbTip && (
@@ -24,15 +25,24 @@ const Cursor = (props) => {
           <div
             className={`cursor cursor--fingertip`}
             style={{
-              left: middleTip?.x,
-              top: middleTip?.y
+              left: middleDip?.x,
+              top: middleDip?.y
+            }}
+          ></div>
+          <div
+            className={`cursor cursor--fingertip`}
+            style={{
+              left: wrist?.x,
+              top: wrist?.y
             }}
           ></div>
         </>
       )}
       {x && (
         <div
-          className={`cursor cursor--${isPinched ? "active" : "inactive"}`}
+          className={`cursor cursor--${
+            isPinched ? "active" : "inactive"
+          } cursor--${isWagging ? "wagging" : "not-wagging"}`}
           style={{ left: x, top: y }}
         ></div>
       )}
