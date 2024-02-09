@@ -60,7 +60,6 @@ const App = () => {
 
   useEffect(() => {
     if (cursor.isWagging) {
-      console.warn(cursor.isWagging);
       clearPaths();
     }
   }, [cursor.isWagging]);

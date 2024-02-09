@@ -18,7 +18,7 @@
   --color-white: #e8e8e8;
   --color-black: #000;
   --color-black-light: #222;
-  --color-black-light-semi: #222a;
+  --color-black-light-semi: #222c;
   --color-grey: #747474;
   --color-silver: #ccc;
   --color-blue-light: #0ce;
@@ -34,8 +34,8 @@
   --bg-input-active: var(--color-skin-light);
 
   --gradient-dark: linear-gradient(
-    var(--color-black-light),
-    var(--color-black)
+    var(--color-black),
+    var(--color-black-light-semi)
   );
 
   --gap: 0.8rem;
@@ -149,7 +149,8 @@ input[type="color"],
 select,
 button {
   &:hover,
-  &:active {
+  &:active,
+  &.highlight {
     background: var(--color-skin-light);
   }
 }

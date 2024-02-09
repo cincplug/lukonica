@@ -221,5 +221,13 @@
     "min": 1,
     "max": 200,
     "step": 1
+  },
+  {
+    "id": "usesButtonPinch",
+    "title": "Button pinch",
+    "description": "Simulate click / hover by pinch on buttons",
+    "isHidden": true,
+    "value": true,
+    "type": "checkbox"
   }
 ]

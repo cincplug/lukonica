@@ -44,7 +44,8 @@ export const runDetector = async ({
       pinchThreshold,
       minimum,
       latency,
-      pattern
+      pattern,
+      usesButtonPinch
     } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
@@ -89,6 +90,22 @@ export const runDetector = async ({
           const threshold = prevCursor.isPinched
             ? pinchThreshold * 2
             : pinchThreshold;
+          if (usesButtonPinch && thumbIndexDistance < pinchThreshold * 4) {
+            const element = document.elementFromPoint(x, y);
+            if (!element) {
+              return;
+            }
+            if (element.tagName === "BUTTON") {
+              clearHighlight();
+              element.classList.add("highlight");
+              if (isPinched) {
+                element.click();
+                element.classList.remove("highlight");
+              }
+            } else {
+              clearHighlight();
+            }
+          }
           return {
             x,
             y,
@@ -155,4 +172,11 @@ export const runDetector = async ({
     shouldContinue = false;
     cancelAnimationFrame(animationFrameId);
   };
+};
+
+const clearHighlight = () => {
+  const highlightedElement = document.querySelector(".highlight");
+  if (highlightedElement) {
+    highlightedElement.classList.remove("highlight");
+  }
 };
