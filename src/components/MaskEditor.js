@@ -10,6 +10,7 @@ function MaskEditor(props) {
   const [mouseY, setMouseY] = useState(inputResolution.height / 2);
 
   const handleDotClick = (_event, pointIndex) => {
+    console.info(pointIndex);
     const areaIndex = mask.findIndex((area) => area.includes(pointIndex));
     if (areaIndex !== -1) {
       if (maskNewArea[0] === pointIndex) {
