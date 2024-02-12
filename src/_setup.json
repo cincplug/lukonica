@@ -227,7 +227,7 @@
     "title": "Button pinch",
     "description": "Simulate click / hover by pinch on buttons",
     "isHidden": true,
-    "value": true,
+    "value": false,
     "type": "checkbox"
   }
 ]

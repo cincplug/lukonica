@@ -47,7 +47,6 @@ const App = () => {
 
   useEffect(() => {
     const handleKeyUp = (event) => {
-      console.warn(event.key);
       if (event.key === "Backspace") {
         clearPaths();
       }
@@ -117,6 +116,7 @@ const App = () => {
   };
 
   const handlePlayButtonClick = (event) => {
+    console.warn(points);
     setIsStarted((prevIsStarted) => {
       setSetup((prevSetup) => {
         if (stopDetector && prevIsStarted) {
