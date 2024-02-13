@@ -65,7 +65,7 @@ const MaskSelection = (props) => {
               </svg>
             </button>
           ))}
-          <button onClick={fetchMoreMasks} key={`p-more`}>
+          <button className="menu--masks__button" onClick={fetchMoreMasks} key={`p-more`}>
             More
           </button>
         </fieldset>
