@@ -65,6 +65,18 @@ export const runDetector = async ({
             points = points.concat(face.keypoints);
           }
         });
+        const foreheadTop = faces[0]?.keypoints[10];
+        const browRoot = faces[0]?.keypoints[8];
+        const noseRoot = faces[0]?.keypoints[168];
+        const surpriseThreshold = 0.2;
+        setCursor((prevCursor) => {
+          return {
+            ...prevCursor,
+            isSurprised:
+              (noseRoot.y - browRoot.y) / (noseRoot.y - foreheadTop.y) >
+              surpriseThreshold
+          };
+        });
       }
       if (showsHands && hands?.length) {
         if (!["paths"].includes(pattern)) {
