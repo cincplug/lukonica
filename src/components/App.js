@@ -81,7 +81,6 @@ const App = () => {
         nextSetup[id] = ["number", "range"].includes(type) ? value / 1 : value;
       }
       sessionStorage.setItem(storageSetupItem, JSON.stringify(nextSetup));
-      // console.info(nextSetup);
       return nextSetup;
     });
   };

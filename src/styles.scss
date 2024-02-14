@@ -251,6 +251,15 @@ legend {
       font-size: 1.8rem;
       padding: 0.2rem;
     }
+    &__emoji {
+      filter: grayscale(1);
+      mix-blend-mode: multiply;
+      button:hover &,
+      button.active & {
+        filter: none;
+        mix-blend-mode: normal;
+      }
+    }
   }
 
   &--stretched {
