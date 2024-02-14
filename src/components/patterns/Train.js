@@ -12,7 +12,7 @@ const Train = ({ scribble, scribbleNewArea, setup }) => {
   } = setup;
 
   const textArray = Array.from(text);
-  const fullArea = [...scribble, scribbleNewArea].flat();
+  const fullArea = [...scribble, scribbleNewArea].flat().reverse();
 
   const area = fullArea.slice(-Math.min(textLimit, textArray.length));
 
@@ -34,8 +34,8 @@ const Train = ({ scribble, scribbleNewArea, setup }) => {
           {transitionArrangement > 0 && (
             <animate
               attributeName="startOffset"
-              from={`0%`}
-              to={`${100 / transitionArrangement}%`}
+              to={`0%`}
+              from={`100%`}
               dur={transitionDuration * 10}
               repeatCount="indefinite"
             />
