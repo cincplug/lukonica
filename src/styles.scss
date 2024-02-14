@@ -245,6 +245,13 @@ legend {
     }
   }
 
+  &--scenarios {
+    &__button {
+      grid-column: span 3;
+      font-size: 2rem;
+    }
+  }
+
   &--stretched {
     grid-auto-rows: auto;
   }

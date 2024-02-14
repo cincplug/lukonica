@@ -100,7 +100,7 @@ const MaskSelection = (props) => {
           <legend>Scenarios</legend>
           {Object.keys(scenarios).map((scenario, index) => (
             <button
-              className={`control control--button ${
+              className={`menu--scenarios__button ${
                 index === setup.activeScenarioIndex ? "active" : "inactive"
               }`}
               key={`scn-${index}`}
