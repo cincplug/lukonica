@@ -104,7 +104,7 @@
     "transitionDuration": 1.7,
     "transitionArrangement": 1,
     "radius": 40,
-    "growth": 0.83,
+    "growth": 1.39,
     "minimum": 5,
     "latency": 2,
     "pinchThreshold": 40,
@@ -122,7 +122,7 @@
     "hasCursor": true,
     "hasCursorFingertips": false,
     "activeMaskIndex": 0,
-    "text": "◀▶~....._...._..._.._.__.___.____._____.",
+    "text": "◈ ---....._...._..._.._.__.___.____._____.",
     "textLimit": 100,
     "usesButtonPinch": false
   },

@@ -40,7 +40,7 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
             className={`number-mask`}
             fill={processColor(color, opacity)}
             key={`sent-${index}`}
-            fontSize={radius * growth + textArray.length - index}
+            fontSize={radius  + textArray.length - index** growth}
             style={style}
           >
             <textPath href="#text-path" startOffset={`${endOffset}%`}>
