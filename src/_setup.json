@@ -166,7 +166,7 @@
     "id": "showsFaces",
     "title": "Faces",
     "description": "Turns face recognition on / off",
-    "value": false,
+    "value": true,
     "isHidden": false,
     "type": "checkbox"
   },

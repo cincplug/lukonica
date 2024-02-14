@@ -20,7 +20,7 @@
     "showsFaces": true,
     "showsHands": true,
     "pathStroke": "lines",
-    "activeMaskIndex": 6
+    "activeMaskIndex": 7
   },
   "Letter kite": {
     "transitionDuration": 1,

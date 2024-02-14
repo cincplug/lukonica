@@ -138,8 +138,7 @@ const App = () => {
   };
 
   let flatMask = activeMask.flat();
-  const flatMaskLength = flatMask.length;
-  if (flatMaskLength > 0) {
+  if (flatMask.length && setup.transitionArrangement) {
     flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
   }
   if (setup.showsHands && points && points.length > 0 && handsCount > 0) {
