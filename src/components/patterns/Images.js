@@ -28,7 +28,7 @@ const Images = ({ points, flatMask, setup, cursor }) => {
       return (
         Math.max(
           minimum,
-          (point + radius) / ((index % minimum) + minimum)
+          (point + radius) / ((index % transitionArrangement) + minimum)
         ) +
         radius * growth
       );
