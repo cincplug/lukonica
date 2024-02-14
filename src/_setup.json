@@ -193,6 +193,14 @@
     "type": "checkbox"
   },
   {
+    "id": "isAutoClosed",
+    "title": "Auto-close",
+    "description": "Whether to automatically close the path",
+    "parentPattern": "paths",
+    "value": false,
+    "type": "checkbox"
+  },
+  {
     "id": "activeMaskIndex",
     "title": "Active mask index",
     "description": "Index of the active mask",
