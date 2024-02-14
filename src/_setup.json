@@ -204,6 +204,17 @@
     "step": 1
   },
   {
+    "id": "activeScenarioIndex",
+    "title": "Active scenario index",
+    "description": "Index of the active scenario",
+    "value": 0,
+    "isHidden": true,
+    "type": "range",
+    "min": 0,
+    "max": 255,
+    "step": 1
+  },
+  {
     "id": "text",
     "title": "Text",
     "description": "Text for sentences pattern",

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DEFAULT_FACE_POINTS from "../data/defaultFacePoints.json";
 import DEFAULT_MASKS from "../data/defaultMasks.json";
+import DEFAULT_SETUP from "../_setup.json";
 import scenarios from "../data/scenarios.json";
 import { renderPath } from "../utils";
 
@@ -39,6 +40,26 @@ const MaskSelection = (props) => {
     });
     setActiveMask(mask);
   };
+  const handleScenarioButtonClick = (_event, scenario, index) => {
+    handleInputChange({
+      target: {
+        id: "activeScenarioIndex",
+        value: index,
+        type: "range"
+      }
+    });
+    setSetup((prevSetup) => {
+      const newScenario = scenarios[scenario];
+      if (!newScenario) {
+        const initialSetup = {};
+        DEFAULT_SETUP.forEach((item) => {
+          initialSetup[item.id] = item.value;
+        });
+        return initialSetup;
+      }
+      return { ...prevSetup, ...newScenario };
+    });
+  };
 
   return (
     (masks || DEFAULT_MASKS) && (
@@ -47,7 +68,9 @@ const MaskSelection = (props) => {
           <legend>Masks</legend>
           {masks.map((mask, index) => (
             <button
-              className={`menu--masks__button ${activeMaskIndex === index ? "active" : "inactive"}`}
+              className={`menu--masks__button ${
+                activeMaskIndex === index ? "active" : "inactive"
+              }`}
               onClick={(event) => handleMaskButtonClick(event, mask, index)}
               key={`p-${index}`}
             >
@@ -65,7 +88,11 @@ const MaskSelection = (props) => {
               </svg>
             </button>
           ))}
-          <button className="menu--masks__button" onClick={fetchMoreMasks} key={`p-more`}>
+          <button
+            className="menu--masks__button"
+            onClick={fetchMoreMasks}
+            key={`p-more`}
+          >
             More
           </button>
         </fieldset>
@@ -73,13 +100,12 @@ const MaskSelection = (props) => {
           <legend>Scenarios</legend>
           {Object.keys(scenarios).map((scenario, index) => (
             <button
-              className="control control--button"
+              className={`control control--button ${
+                index === setup.activeScenarioIndex ? "active" : "inactive"
+              }`}
               key={`scn-${index}`}
-              onClick={() =>
-                setSetup((prevSetup) => {
-                  const newScenario = scenarios[scenario];
-                  return { ...prevSetup, ...newScenario };
-                })
+              onClick={(event) =>
+                handleScenarioButtonClick(event, scenario, index)
               }
             >
               {scenario}
