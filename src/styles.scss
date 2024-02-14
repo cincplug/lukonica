@@ -89,7 +89,6 @@ button {
   border-radius: 2rem;
   font-size: var(--font-size-m);
   &.splash-button {
-    width: 9rem;
     margin: 0 var(--gap);
     padding: var(--gap) var(--gap-double);
     font-size: var(--font-size-l);
@@ -430,7 +429,17 @@ label {
   justify-content: space-evenly;
   img {
     max-width: 9rem;
-    margin: 0 1rem;
+    margin: 1rem 1rem 0;
+  }
+  h1 {
+    margin: 0;
+    letter-spacing: 0.1rem;
+    font-size: 3.8rem;
+    text-shadow: 0 0.3rem 0.4rem #0006, 0 -0.1rem 0.1rem #fff8;
+    color: var(--color-black-light);
+  }
+  h2 {
+    margin: 0.5rem 0 0.7rem;
   }
 }
 

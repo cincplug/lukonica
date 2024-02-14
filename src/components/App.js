@@ -116,7 +116,6 @@ const App = () => {
   };
 
   const handlePlayButtonClick = (event) => {
-    console.warn(points);
     setIsStarted((prevIsStarted) => {
       setSetup((prevSetup) => {
         if (stopDetector && prevIsStarted) {
@@ -221,7 +220,7 @@ const App = () => {
             className="splash-button video-button pause-button"
             onClick={handlePlayButtonClick}
           >
-            Stop video
+            Stop camera
           </button>
         </>
       )}
