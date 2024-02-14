@@ -3,7 +3,6 @@ import pathStrokes from "./patterns/path-strokes";
 import { processColor } from "../utils";
 import Sentence from "./patterns/Sentence";
 import Kite from "./patterns/Kite";
-import Train from "./patterns/Train";
 
 const Scribble = ({ scribble, scribbleNewArea, setup }) => {
   const {
@@ -16,8 +15,11 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
     text,
     radius,
     growth,
-    minimum
+    minimum,
+    textLimit
   } = setup;
+
+  const textArray = Array.from(text);
 
   if (pattern === "sentences") {
     return (
@@ -41,84 +43,73 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
       />
     );
   }
-  if (pattern === "train") {
-    return (
-      <Train
-        scribble={scribble}
-        scribbleNewArea={scribbleNewArea}
-        setup={setup}
-        radius={radius}
-        growth={growth}
-      />
-    );
-  }
   return (
     <>
-      {[...scribble, scribbleNewArea].map((scribbleArea, scribbleAreaIndex) => (
-        <>
-          <path
-            id={`text-path-${scribbleAreaIndex}`}
-            className="scribble"
-            fill="none"
-            stroke={processColor(color, opacity)}
-            strokeWidth={radius * growth}
-            key={`scr-${scribbleAreaIndex}`}
-            d={scribbleArea.map((thisPoint, thisPointIndex) => {
-              const lastPoint =
-                scribbleArea[scribbleArea.length - 1] || thisPoint;
-              const prevPoint =
-                scribbleArea[Math.max(0, thisPointIndex - 1)] || thisPoint;
-              const nextPoint =
-                scribbleArea[
-                  Math.min(thisPointIndex + 1, scribbleArea.length - 1)
-                ];
-              if (!thisPoint || !lastPoint) return null;
-              if (radius > 0 && lastPoint && thisPointIndex > 0) {
-                const deltaX = thisPoint.x - lastPoint.x;
-                const deltaY = thisPoint.y - lastPoint.y;
-                const h = Math.hypot(deltaX, deltaY) + radius;
-                const controlPoint = {
-                  x: lastPoint.x + deltaX / 2 + deltaY / h,
-                  y: lastPoint.y + deltaY / 2 - (radius * deltaX) / h
-                };
-                return pathStrokes({
-                  pathStroke: pathStroke,
-                  thisPoint,
-                  prevPoint,
-                  nextPoint,
-                  controlPoint,
-                  radius,
-                  growth
-                });
-              } else {
-                return `${thisPointIndex === 0 ? "M" : "L"} ${thisPoint.x},${
-                  thisPoint.y
-                }`;
-              }
-            })}
-          ></path>
-          {text && (
-            <text
-              className={`number-mask`}
-              fill={processColor(color, opacity)}
-              fontSize={radius * minimum + scribbleAreaIndex}
-            >
-              <textPath href={`#text-path-${scribbleAreaIndex}`}>
-                {transitionArrangement > 0 && (
-                  <animate
-                    attributeName="startOffset"
-                    from={`${transitionArrangement}%`}
-                    to={`${100 - transitionArrangement}%`}
-                    dur={transitionDuration * 10}
-                    repeatCount="indefinite"
-                  />
-                )}
-                {text}
-              </textPath>
-            </text>
-          )}
-        </>
-      ))}
+      {[...scribble, scribbleNewArea].map((scribbleArea, scribbleAreaIndex) => {
+        const fullArea = scribbleArea.flat().reverse();
+        const area = fullArea.slice(-Math.min(textLimit, textArray.length));
+        const pathData = area
+          .map((point, index) => {
+            const lastPoint = area[area.length - 1] || point;
+            const prevPoint = area[Math.max(0, index - 1)] || point;
+            const nextPoint = area[Math.min(index + 1, area.length - 1)];
+            if (!point || !lastPoint) return null;
+            if (radius > 0 && lastPoint && index > 0) {
+              const deltaX = point.x - lastPoint.x;
+              const deltaY = point.y - lastPoint.y;
+              const h = Math.hypot(deltaX, deltaY) + radius;
+              const controlPoint = {
+                x: lastPoint.x + deltaX / 2 + deltaY / h,
+                y: lastPoint.y + deltaY / 2 - (radius * deltaX) / h
+              };
+              return pathStrokes({
+                pathStroke: pathStroke,
+                thisPoint: point,
+                prevPoint,
+                nextPoint,
+                controlPoint,
+                radius,
+                growth
+              });
+            } else {
+              return `${index === 0 ? "M" : "L"} ${point.x},${point.y}`;
+            }
+          })
+          .join(" ");
+        return (
+          <>
+            <path
+              id={`text-path-${scribbleAreaIndex}`}
+              className="scribble"
+              fill="none"
+              stroke={processColor(color, opacity)}
+              strokeWidth={radius * growth}
+              key={`scr-${scribbleAreaIndex}`}
+              d={pathData} // Use pathData from Train component
+            ></path>
+            {text && (
+              <text
+                className={`number-mask`}
+                fill={processColor(color, opacity)}
+                fontSize={radius * minimum + scribbleAreaIndex}
+              >
+                <textPath href={`#text-path-${scribbleAreaIndex}`}>
+                  {transitionArrangement > 0 && (
+                    <animate
+                      attributeName="startOffset"
+                      to={`${transitionArrangement}%`}
+                      from={`${100 - transitionArrangement}%`}
+                      dur={transitionDuration * 10}
+                      repeatCount="indefinite"
+                    />
+                  )}
+                  {text}
+                </textPath>
+              </text>
+            )}
+          </>
+        );
+      })}
     </>
   );
 };

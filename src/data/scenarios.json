@@ -129,7 +129,7 @@
   "🚂": {
     "transitionDuration": 1.6,
     "transitionArrangement": 1,
-    "radius": 86.5,
+    "radius": 12.5,
     "growth": 0.5,
     "minimum": 3,
     "latency": 2,
@@ -140,7 +140,7 @@
     "usesSvgAnimation": false,
     "usesCssAnimation": true,
     "blendMode": "normal",
-    "pattern": "train",
+    "pattern": "paths",
     "imageUrl": "",
     "pathStroke": "lines",
     "showsFaces": false,
@@ -148,7 +148,7 @@
     "hasCursor": true,
     "hasCursorFingertips": false,
     "activeMaskIndex": 0,
-    "text": "🚂 🚃 🚋 🚕 🚋 🚃 🚙 🚃 🚗 🚃🚃 🚋 🚕 🚋 🚃 🚙 🚃 🚗 🚃",
+    "text": "🚂🚃🚋🚋🚃🚃🚃🚃🚋🚋🚃🚃🚃",
     "textLimit": 100,
     "usesButtonPinch": false
   },
