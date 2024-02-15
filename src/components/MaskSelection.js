@@ -41,13 +41,6 @@ const MaskSelection = (props) => {
     setActiveMask(mask);
   };
   const handleScenarioButtonClick = (_event, scenario, index) => {
-    handleInputChange({
-      target: {
-        id: "activeScenarioIndex",
-        value: index,
-        type: "range"
-      }
-    });
     setSetup((prevSetup) => {
       const newScenario = scenarios[scenario];
       if (!newScenario) {
@@ -58,6 +51,13 @@ const MaskSelection = (props) => {
         return initialSetup;
       }
       return { ...prevSetup, ...newScenario };
+    });
+    handleInputChange({
+      target: {
+        id: "activeScenarioIndex",
+        value: index,
+        type: "range"
+      }
     });
   };
 
