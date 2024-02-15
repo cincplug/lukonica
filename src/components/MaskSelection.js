@@ -108,7 +108,7 @@ const MaskSelection = (props) => {
                 handleScenarioButtonClick(event, scenario, index)
               }
             >
-              <span className="menu--scenarios__emoji">{scenario}</span>
+              {scenario}
             </button>
           ))}
         </fieldset>
