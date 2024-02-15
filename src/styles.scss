@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@500;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@500&display=swap");
 
 @mixin until($breakpoint: 512px) {
   @media screen and (max-width: $breakpoint) {
@@ -221,7 +221,7 @@ legend {
 .menu {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   width: var(--menu-width);
   height: 100vh;
   padding: var(--gap);
@@ -234,12 +234,15 @@ legend {
   grid-auto-rows: max-content;
 
   &--secondary {
-    right: auto;
-    left: 0;
+    left: auto;
+    right: 0;
     grid-auto-rows: max-content;
   }
 
   &--masks {
+    legend {
+      margin-top: var(--gap);
+    }
     button {
       grid-column: span 3;
       padding: 0;
@@ -253,7 +256,8 @@ legend {
       font-size: 1.7rem;
       padding: 0.4rem;
       background: var(--color-skin);
-      box-shadow: 0 0.3rem 0.4rem #0002, 0 -0.1rem 0 0.05rem var(--color-skin-light);
+      box-shadow: 0 0.3rem 0.4rem #0002,
+        0 -0.1rem 0 0.05rem var(--color-skin-light);
       font-family: "Noto Emoji", sans-serif;
     }
   }
