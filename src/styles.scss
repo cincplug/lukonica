@@ -248,6 +248,11 @@ legend {
       padding: 0;
       min-height: 2rem;
     }
+    path {
+      stroke: var(--color-black-light);
+      stroke-width: 1rem;
+      fill: none;
+    }
   }
 
   &--scenarios {

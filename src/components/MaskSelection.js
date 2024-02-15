@@ -98,7 +98,7 @@ const MaskSelection = (props) => {
                       area: path,
                       points: DEFAULT_FACE_POINTS,
                       radius: 0
-                    })}`}
+                    })} Z`}
                   ></path>
                 ))}
               </svg>

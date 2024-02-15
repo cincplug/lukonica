@@ -26,7 +26,7 @@
     "text": "",
     "textLimit": 100,
     "usesButtonPinch": false
-},
+  },
   "😎": {
     "transitionDuration": 1.2,
     "transitionArrangement": 2,
@@ -48,7 +48,34 @@
     "showsHands": false,
     "hasCursor": true,
     "hasCursorFingertips": false,
-    "activeMaskIndex": 9,
+    "activeMaskIndex": 10,
+    "text": "",
+    "textLimit": 100,
+    "usesButtonPinch": false
+  },
+  "🤩": {
+    "transitionDuration": 1.2,
+    "transitionArrangement": 2,
+    "radius": 0.5,
+    "growth": 0.2,
+    "minimum": 5,
+    "latency": 2,
+    "pinchThreshold": 40,
+    "color": "#fbff1f",
+    "opacity": 173,
+    "videoOpacity": 255,
+    "usesSvgAnimation": false,
+    "usesCssAnimation": true,
+    "blendMode": "lighten",
+    "pattern": "paths",
+    "imageUrl": "",
+    "pathStroke": "beziers",
+    "showsFaces": true,
+    "showsHands": true,
+    "hasCursor": true,
+    "hasCursorFingertips": false,
+    "isAutoClosed": false,
+    "activeMaskIndex": 15,
     "text": "",
     "textLimit": 100,
     "usesButtonPinch": false
@@ -101,7 +128,7 @@
     "showsFaces": true,
     "showsHands": true,
     "pathStroke": "lines",
-    "activeMaskIndex": 7
+    "activeMaskIndex": 8
   },
   "🚁": {
     "transitionDuration": 0.2,
@@ -130,7 +157,7 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🌿":{
+  "🌿": {
     "transitionDuration": 3.4,
     "transitionArrangement": 5,
     "radius": 162.5,
@@ -156,7 +183,7 @@
     "text": "",
     "textLimit": 100,
     "usesButtonPinch": false
-},
+  },
   "🛁": {
     "transitionDuration": 3,
     "transitionArrangement": 6,
