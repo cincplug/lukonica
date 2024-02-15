@@ -7,7 +7,7 @@ import { renderPath } from "../utils";
 
 const MaskSelection = (props) => {
   const { setActiveMask, setup, setSetup, handleInputChange } = props;
-  const { activeMaskIndex } = setup;
+  const { activeMaskIndex, showsFaces } = setup;
   const [masks, setMasks] = useState(DEFAULT_MASKS);
 
   const fetchMoreMasks = () => {
@@ -62,24 +62,24 @@ const MaskSelection = (props) => {
   };
 
   return (
-    (masks || DEFAULT_MASKS) && (
-      <nav className={`menu menu--secondary`}>
-        <fieldset className="menu--scenarios">
-          <legend>Scenarios</legend>
-          {Object.keys(scenarios).map((scenario, index) => (
-            <button
-              className={`menu--scenarios__button ${
-                index === setup.activeScenarioIndex ? "active" : "inactive"
-              }`}
-              key={`scn-${index}`}
-              onClick={(event) =>
-                handleScenarioButtonClick(event, scenario, index)
-              }
-            >
-              {scenario}
-            </button>
-          ))}
-        </fieldset>
+    <nav className={`menu menu--secondary`}>
+      <fieldset className="menu--scenarios">
+        <legend>Scenarios</legend>
+        {Object.keys(scenarios).map((scenario, index) => (
+          <button
+            className={`menu--scenarios__button ${
+              index === setup.activeScenarioIndex ? "active" : "inactive"
+            }`}
+            key={`scn-${index}`}
+            onClick={(event) =>
+              handleScenarioButtonClick(event, scenario, index)
+            }
+          >
+            {scenario}
+          </button>
+        ))}
+      </fieldset>
+      {showsFaces && (masks || DEFAULT_MASKS) && (
         <fieldset className="menu--masks">
           <legend>Masks</legend>
           {masks.map((mask, index) => (
@@ -112,8 +112,8 @@ const MaskSelection = (props) => {
             More
           </button>
         </fieldset>
-      </nav>
-    )
+      )}
+    </nav>
   );
 };
 

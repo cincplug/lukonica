@@ -104,6 +104,8 @@ button {
       position: fixed;
       bottom: var(--gap-double);
       z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 }
@@ -239,25 +241,31 @@ legend {
     grid-auto-rows: max-content;
   }
 
+  button {
+    &.active {
+      background: var(--bg-input-active);
+    }
+  }
+
   &--masks {
     legend {
       margin-top: var(--gap);
-    }
-    button {
-      grid-column: span 3;
-      padding: 0;
-      min-height: 2rem;
     }
     path {
       stroke: var(--color-black-light);
       stroke-width: 1rem;
       fill: none;
     }
+    button {
+      grid-column: span 3;
+      padding: 0;
+      min-height: 2rem;
+    }
   }
 
   &--scenarios {
     &__button {
-      grid-column: span 3;
+      grid-column: span 4;
       font-size: 1.7rem;
       padding: 0.4rem;
       background: var(--color-skin);
@@ -269,12 +277,6 @@ legend {
 
   &--stretched {
     grid-auto-rows: auto;
-  }
-
-  button {
-    &.active {
-      background: var(--bg-input-active);
-    }
   }
 
   @include until {

@@ -13,7 +13,7 @@
     "id": "transitionArrangement",
     "title": "Arrangement",
     "description": "Arrangement of elements in transition",
-    "value": 2,
+    "value": 0,
     "type": "range",
     "min": 0,
     "max": 10,
