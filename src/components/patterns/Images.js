@@ -38,13 +38,15 @@ const Images = ({ points, flatMask, setup, cursor }) => {
       dur: `${transitionDuration}s`,
       repeatCount: "indefinite"
     };
-    const style = usesCssAnimation
+    const opacityStyle = { opacity: setup.opacity / 255 };
+    const animationStyle = usesCssAnimation
       ? {
           animation: `move-to ${transitionDuration}s infinite`,
           "--dx": `${pointTo.x - pointFrom.x}px`,
           "--dy": `${pointTo.y - pointFrom.y}px`
         }
       : null;
+    const style = { ...opacityStyle, ...animationStyle };
 
     return (
       <image
