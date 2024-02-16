@@ -24,8 +24,10 @@ const Drawing = ({
     pattern,
     hasCursor,
     hasCursorFingertips,
-    showsFaces
+    showsFaces,
+    activeScenarioIndex
   } = setup;
+  const { muzzle } = cursor;
   return (
     <>
       <svg
@@ -84,12 +86,16 @@ const Drawing = ({
             growth={growth}
           />
         )}
+        {muzzle && activeScenarioIndex === 7 && (
+          <path
+            className="laser"
+            strokeDasharray={[10, 15]}
+            d={`M${muzzle.x}, ${muzzle.y} V0`}
+          ></path>
+        )}
       </svg>
       {hasCursor && (
-        <Cursor
-          cursor={cursor}
-          hasCursorFingertips={hasCursorFingertips}
-        />
+        <Cursor cursor={cursor} hasCursorFingertips={hasCursorFingertips} />
       )}
     </>
   );

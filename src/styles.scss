@@ -63,6 +63,16 @@
   }
 }
 
+@keyframes laser {
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -1rem);
+    opacity: 0;
+  }
+}
+
 * {
   box-sizing: border-box;
   font-family: var(--font-family);
@@ -507,4 +517,10 @@ label {
 
 .number-mask {
   font-weight: bold;
+}
+
+.laser {
+  stroke-width: 0.2rem;
+  stroke: #ffbb00;
+  animation: laser 0.2s ease-out forwards;
 }
