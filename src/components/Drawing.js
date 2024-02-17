@@ -25,11 +25,20 @@ const Drawing = ({
     hasCursor,
     hasCursorFingertips,
     showsFaces,
-    activeScenarioIndex
+    activeScenarioIndex,
+    bg
   } = setup;
   const { muzzle } = cursor;
   return (
     <>
+      <svg
+        className="drawing bg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox={`0 0 ${width} ${height}`}
+        style={{ width, height }}
+      >
+        <rect width={width} height={height} fill={bg}></rect>
+      </svg>
       <svg
         className="drawing"
         xmlns="http://www.w3.org/2000/svg"

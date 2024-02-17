@@ -166,6 +166,7 @@
     "latency": 2,
     "pinchThreshold": 40,
     "color": "#27ec97",
+    "bg": "#000000",
     "opacity": 255,
     "videoOpacity": 37,
     "usesSvgAnimation": false,

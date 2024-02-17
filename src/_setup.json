@@ -72,8 +72,15 @@
     "step": 1
   },
   {
+    "id": "bg",
+    "title": "Bg",
+    "description": "Background color",
+    "value": "#ffffff",
+    "type": "color"
+  },
+  {
     "id": "color",
-    "title": "Color",
+    "title": "Fg",
     "description": "Color of particles",
     "value": "#000000",
     "type": "color"

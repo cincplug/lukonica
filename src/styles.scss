@@ -301,7 +301,9 @@ legend {
     .control {
       grid-column: span 6;
 
-      &--color,
+      &--color {
+        grid-column: span 1;
+      }
       &--checkbox,
       &--select,
       &--range {
@@ -367,6 +369,7 @@ legend {
   &--color {
     position: relative;
     width: 1rem;
+    grid-column: span 3;
   }
   &--range {
     min-width: 0;
@@ -523,4 +526,11 @@ label {
   stroke-width: 0.2rem;
   stroke: #ffbb00;
   animation: laser 0.2s ease-out forwards;
+}
+
+.bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
 }
