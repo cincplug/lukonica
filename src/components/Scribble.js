@@ -16,7 +16,8 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
     radius,
     growth,
     minimum,
-    textLimit
+    textLimit,
+    imageUrl
   } = setup;
 
   const textArray = Array.from(text);
@@ -85,7 +86,7 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
               fill="none"
               stroke={processColor(color, opacity)}
               strokeWidth={radius * growth}
-              d={pathData} // Use pathData from Train component
+              d={pathData}
             ></path>
             {text && (
               <text
@@ -106,6 +107,13 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
                   {text}
                 </textPath>
               </text>
+            )}
+            {imageUrl && scribbleArea.length && (
+              <image width={radius * minimum} x={0} y={0} href={imageUrl}>
+                <animateMotion dur={transitionDuration * 10} repeatCount="indefinite" rotate="auto">
+                  <mpath href={`#text-path-${scribbleAreaIndex}`} />
+                </animateMotion>
+              </image>
             )}
           </React.Fragment>
         );

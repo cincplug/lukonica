@@ -150,7 +150,6 @@
     "title": "Image URL",
     "description": "URL of the particle image",
     "value": "",
-    "parentPattern": "images",
     "type": "url"
   },
   {

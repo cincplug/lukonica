@@ -408,7 +408,6 @@
     "usesCssAnimation": true,
     "blendMode": "normal",
     "pattern": "paths",
-    "imageUrl": "",
     "pathStroke": "lines",
     "showsFaces": false,
     "showsHands": true,
