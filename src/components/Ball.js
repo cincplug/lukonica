@@ -15,7 +15,7 @@ const speed = 10;
 
 const checkCollision = (ball, pathElement) => {
   let pathLength = pathElement.getTotalLength();
-  let precision = 10;
+  let precision = 2;
   for (let i = 0; i < pathLength; i += precision) {
     let point = pathElement.getPointAtLength(i);
     let dx = point.x - ball.x;
