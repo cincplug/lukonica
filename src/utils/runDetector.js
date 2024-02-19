@@ -10,8 +10,9 @@ export const runDetector = async ({
   setCustomMaskNewArea,
   setCursor,
   setHandsCount,
-  setScribble,
-  setScribbleNewArea
+  // setScribble,
+  setScribbleNewArea,
+  // activeMask
 }) => {
   let frame = 0;
   let shouldContinue = true;
@@ -45,7 +46,7 @@ export const runDetector = async ({
       minimum,
       latency,
       pattern,
-      usesButtonPinch
+      usesButtonPinch,
     } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
@@ -75,7 +76,9 @@ export const runDetector = async ({
             ...prevCursor,
             muzzle:
               (noseRoot.y - eyebrowMid.y) / (noseRoot.y - foreheadTop.y) >
-              surpriseThreshold ? muzzle : null
+              surpriseThreshold
+                ? muzzle
+                : null
           };
         });
       }

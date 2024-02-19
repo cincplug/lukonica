@@ -110,7 +110,8 @@ const App = () => {
         setCursor,
         setHandsCount,
         setScribble,
-        setScribbleNewArea
+        setScribbleNewArea,
+        activeMask
       }).then((stop) => {
         setStopDetector(() => stop);
       });
@@ -214,7 +215,7 @@ const App = () => {
                 customMaskNewArea,
                 activeMask,
                 scribble,
-                scribbleNewArea
+                scribbleNewArea,
               }}
             />
           )}

@@ -6,7 +6,10 @@ export const findClosestFacePointIndex = ({
   return facePoints.reduce(
     (closestFacePoint, currentFacePoint, currentIndex) => {
       const distance = getDistance(currentFacePoint, indexTip);
-      if (distance < closestFacePoint.minDistance && distance < pinchThreshold) {
+      if (
+        distance < closestFacePoint.minDistance &&
+        distance < pinchThreshold
+      ) {
         return { minDistance: distance, index: currentIndex };
       } else {
         return closestFacePoint;

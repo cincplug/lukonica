@@ -4,19 +4,21 @@ import Paths from "./patterns/Paths";
 import Numbers from "./patterns/Numbers";
 import Cursor from "./Cursor";
 import Scribble from "./Scribble";
+import Ball from "./Ball";
 
-const Drawing = ({
-  inputResolution,
-  setup,
-  points,
-  flatMask,
-  cursor,
-  customMask,
-  customMaskNewArea,
-  activeMask,
-  scribble,
-  scribbleNewArea
-}) => {
+const Drawing = (props) => {
+  const {
+    inputResolution,
+    setup,
+    points,
+    flatMask,
+    cursor,
+    customMask,
+    customMaskNewArea,
+    activeMask,
+    scribble,
+    scribbleNewArea
+  } = props;
   const { width, height } = inputResolution;
   const {
     radius,
@@ -32,7 +34,7 @@ const Drawing = ({
   return (
     <>
       <svg
-        className="drawing bg"
+        className="bg"
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${width} ${height}`}
         style={{ width, height }}
@@ -102,6 +104,7 @@ const Drawing = ({
             d={`M${muzzle.x}, ${muzzle.y} V0`}
           ></path>
         )}
+        {points.length && activeScenarioIndex === 8 && <Ball setup={setup} />}
       </svg>
       {hasCursor && (
         <Cursor cursor={cursor} hasCursorFingertips={hasCursorFingertips} />
