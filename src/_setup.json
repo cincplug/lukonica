@@ -150,7 +150,7 @@
     "description": "What will be drawn on points",
     "value": "numbers",
     "type": "select",
-    "options": ["numbers", "paths", "images", "sentences", "kite"]
+    "options": ["numbers", "paths", "images", "sentences", "kite", "canvas"]
   },
   {
     "id": "imageUrl",

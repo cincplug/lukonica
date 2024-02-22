@@ -11,7 +11,7 @@ export const runDetector = async ({
   setCursor,
   setHandsCount,
   // setScribble,
-  setScribbleNewArea,
+  setScribbleNewArea
   // activeMask
 }) => {
   let frame = 0;
@@ -47,6 +47,9 @@ export const runDetector = async ({
       latency,
       pattern,
       usesButtonPinch,
+      color,
+      radius,
+      growth
     } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
@@ -150,6 +153,24 @@ export const runDetector = async ({
                 { x, y }
               ) > minimum
             ) {
+              if (pattern === "canvas") {
+                const canvas = document.getElementById("canvas");
+                const ctx = canvas.getContext("2d");
+                ctx.strokeStyle = color;
+                ctx.lineWidth = radius * growth;
+
+                if (prevScribbleNewArea.length > 0) {
+                  ctx.beginPath();
+                  prevScribbleNewArea.forEach((point, index) => {
+                    ctx.moveTo(point.x, point.y);
+                    if (index < prevScribbleNewArea.length - 1) {
+                      const nextPoint = prevScribbleNewArea[index + 1];
+                      ctx.lineTo(nextPoint.x, nextPoint.y);
+                    }
+                    ctx.stroke();
+                  });
+                }
+              }
               return [...prevScribbleNewArea, { x, y }];
             }
             return prevScribbleNewArea;

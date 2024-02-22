@@ -10,6 +10,7 @@ import Drawing from "./Drawing";
 import Menu from "./Menu";
 import MaskEditor from "./MaskEditor";
 import Splash from "./Splash";
+import Cursor from "./Cursor";
 import "../styles.scss";
 
 const screenResolution = {
@@ -60,8 +61,14 @@ const App = () => {
   useEffect(() => {
     if (cursor.isWagging) {
       clearPaths();
+      if (setup.pattern === "canvas") {
+        const { width, height } = screenResolution;
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, width, height);
+      }
     }
-  }, [cursor.isWagging]);
+  }, [cursor.isWagging, setup.pattern]);
 
   const clearPaths = () => {
     setScribble([]);
@@ -203,22 +210,28 @@ const App = () => {
             mirrored={true}
             imageSmoothing={false}
           />
-          {isLoaded && (
-            <Drawing
-              {...{
-                inputResolution,
-                setup,
-                points,
-                flatMask,
-                cursor,
-                customMask,
-                customMaskNewArea,
-                activeMask,
-                scribble,
-                scribbleNewArea,
-              }}
-            />
-          )}
+          {isLoaded &&
+            (setup.pattern === "canvas" ? (
+              <>
+                <canvas id="canvas" width={width} height={height}></canvas>
+                <Cursor cursor={cursor} hasCursorFingertips={false} />
+              </>
+            ) : (
+              <Drawing
+                {...{
+                  inputResolution,
+                  setup,
+                  points,
+                  flatMask,
+                  cursor,
+                  customMask,
+                  customMaskNewArea,
+                  activeMask,
+                  scribble,
+                  scribbleNewArea
+                }}
+              />
+            ))}
           <button
             className="splash-button video-button pause-button"
             onClick={handlePlayButtonClick}
