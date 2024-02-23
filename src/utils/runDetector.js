@@ -1,6 +1,9 @@
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
-import { findClosestFacePointIndex, getDistance } from "./index";
+import { findClosestFacePointIndex, getDistance, processColor } from "./index";
+import { op } from "@tensorflow/tfjs";
+
+const CANVAS_LINE_WIDTH_MODIFIER = 0.05;
 
 export const runDetector = async ({
   video,
@@ -46,6 +49,7 @@ export const runDetector = async ({
       pattern,
       usesButtonPinch,
       color,
+      opacity,
       radius,
       growth
     } = setupRef.current;
@@ -53,7 +57,9 @@ export const runDetector = async ({
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
       let faces, hands;
       try {
-        faces = await facesDetector.estimateFaces(video, estimationConfig);
+        faces = showsFaces
+          ? await facesDetector.estimateFaces(video, estimationConfig)
+          : null;
         hands = await handsDetector.estimateHands(video, estimationConfig);
       } catch (error) {
         console.error("Error estimating faces or hands", error);
@@ -154,8 +160,12 @@ export const runDetector = async ({
               if (pattern === "canvas") {
                 const canvas = document.getElementById("canvas");
                 const ctx = canvas.getContext("2d");
-                ctx.strokeStyle = color;
-                ctx.lineWidth = radius * growth;
+                ctx.strokeStyle = processColor(color, opacity);
+                ctx.lineWidth =
+                  radius *
+                  growth *
+                  thumbIndexDistance *
+                  CANVAS_LINE_WIDTH_MODIFIER;
 
                 if (prevScribbleNewArea.length > 0) {
                   ctx.beginPath();
