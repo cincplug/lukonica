@@ -10,9 +10,7 @@ export const runDetector = async ({
   setCustomMaskNewArea,
   setCursor,
   setHandsCount,
-  // setScribble,
   setScribbleNewArea
-  // activeMask
 }) => {
   let frame = 0;
   let shouldContinue = true;
@@ -169,6 +167,7 @@ export const runDetector = async ({
                     }
                     ctx.stroke();
                   });
+                  return [...prevScribbleNewArea.slice(-1), { x, y }];
                 }
               }
               return [...prevScribbleNewArea, { x, y }];
