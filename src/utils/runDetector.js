@@ -1,9 +1,6 @@
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import { findClosestFacePointIndex, getDistance, processColor } from "./index";
-import { op } from "@tensorflow/tfjs";
-
-const CANVAS_LINE_WIDTH_MODIFIER = 0.05;
 
 export const runDetector = async ({
   video,
@@ -39,6 +36,9 @@ export const runDetector = async ({
     handsDetectorConfig
   );
 
+  const canvasElement = document.getElementById("canvas") || null;
+  const ctx = canvasElement?.getContext("2d") || null;
+  
   const detect = async () => {
     const {
       showsFaces,
@@ -157,24 +157,19 @@ export const runDetector = async ({
                 { x, y }
               ) > minimum
             ) {
-              if (pattern === "canvas") {
-                const canvas = document.getElementById("canvas");
-                const ctx = canvas.getContext("2d");
+              if (pattern === "canvas" && canvasElement) {
                 ctx.strokeStyle = processColor(color, opacity);
-                ctx.lineWidth =
-                  radius *
-                  growth *
-                  thumbIndexDistance *
-                  CANVAS_LINE_WIDTH_MODIFIER;
-
+                ctx.lineWidth = (radius - thumbIndexDistance) * growth;
+                
                 if (prevScribbleNewArea.length > 0) {
                   ctx.beginPath();
                   prevScribbleNewArea.forEach((point, index) => {
                     ctx.moveTo(point.x, point.y);
-                    if (index < prevScribbleNewArea.length - 1) {
-                      const nextPoint = prevScribbleNewArea[index + 1];
-                      ctx.lineTo(nextPoint.x, nextPoint.y);
-                    }
+                    const nextPoint =
+                      index < prevScribbleNewArea.length - 1
+                        ? prevScribbleNewArea[index + 1]
+                        : point;
+                    ctx.lineTo(nextPoint.x, nextPoint.y);
                     ctx.stroke();
                   });
                   return [...prevScribbleNewArea.slice(-1), { x, y }];

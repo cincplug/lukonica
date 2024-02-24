@@ -213,7 +213,7 @@
     "textLimit": 100,
     "ballSpeed": 30,
     "usesButtonPinch": false
-},
+  },
   "🌿": {
     "transitionDuration": 3.4,
     "transitionArrangement": 5,
@@ -447,6 +447,35 @@
     "activeMaskIndex": 0,
     "text": "🚂🚃🚋🚋🚃🚃🚃🚃🚋🚋🚃🚃🚃",
     "textLimit": 100,
+    "usesButtonPinch": false
+  },
+  "🖌️": {
+    "transitionDuration": 3.2,
+    "transitionArrangement": 1,
+    "radius": 40,
+    "growth": 0.2,
+    "minimum": 2,
+    "latency": 2,
+    "pinchThreshold": 40,
+    "bg": "#ffffff",
+    "color": "#160594",
+    "opacity": 192,
+    "videoOpacity": 48,
+    "usesSvgAnimation": false,
+    "usesCssAnimation": true,
+    "blendMode": "normal",
+    "pattern": "canvas",
+    "imageUrl": "",
+    "pathStroke": "beziers",
+    "showsFaces": false,
+    "showsHands": true,
+    "hasCursor": true,
+    "hasCursorFingertips": false,
+    "isAutoClosed": false,
+    "activeMaskIndex": 0,
+    "text": "",
+    "textLimit": 100,
+    "ballSpeed": 0,
     "usesButtonPinch": false
   }
 }

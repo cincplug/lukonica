@@ -214,7 +214,7 @@ const App = () => {
             (setup.pattern === "canvas" ? (
               <>
                 <canvas id="canvas" width={width} height={height}></canvas>
-                <Cursor cursor={cursor} hasCursorFingertips={false} />
+                <Cursor cursor={cursor} hasCursorFingertips={setup.hasCursorFingertips} />
               </>
             ) : (
               <Drawing
