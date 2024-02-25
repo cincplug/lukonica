@@ -212,13 +212,13 @@ const App = () => {
           />
           {isLoaded &&
             (setup.pattern === "canvas" ? (
-              <>
+              <div className="wrap">
                 <canvas id="canvas" width={width} height={height}></canvas>
                 <Cursor
                   cursor={cursor}
                   hasCursorFingertips={setup.hasCursorFingertips}
                 />
-              </>
+              </div>
             ) : (
               <Drawing
                 {...{
