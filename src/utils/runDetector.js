@@ -1,4 +1,3 @@
-import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import {
   findClosestFacePointIndex,
@@ -21,15 +20,20 @@ export const runDetector = async ({
   let shouldContinue = true;
   let animationFrameId;
 
-  const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-  const facesDetectorConfig = {
-    runtime: "tfjs",
-    refineLandmarks: false
-  };
-  const facesDetector = await faceLandmarksDetection.createDetector(
-    facesModel,
-    facesDetectorConfig
-  );
+  let facesDetector = null;
+
+  if (setupRef.current.showsFaces) {
+    const faceLandmarksDetection = await import("@tensorflow-models/face-landmarks-detection");
+    const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+    const facesDetectorConfig = {
+      runtime: "tfjs",
+      refineLandmarks: false
+    };
+    facesDetector = await faceLandmarksDetection.createDetector(
+      facesModel,
+      facesDetectorConfig
+    );
+  }
 
   const handsModel = handPoseDetection.SupportedModels.MediaPipeHands;
   const handsDetectorConfig = {
@@ -60,11 +64,12 @@ export const runDetector = async ({
     } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
-      let faces, hands;
+      let faces = null;
+      let hands;
       try {
-        faces = showsFaces
-          ? await facesDetector.estimateFaces(video, estimationConfig)
-          : null;
+        if (showsFaces && facesDetector) {
+          faces = await facesDetector.estimateFaces(video, estimationConfig);
+        }
         hands = await handsDetector.estimateHands(video, estimationConfig);
       } catch (error) {
         console.error("Error estimating faces or hands", error);
@@ -94,6 +99,7 @@ export const runDetector = async ({
           };
         });
       }
+
       if (showsHands && hands?.length) {
         if (!["paths"].includes(pattern)) {
           hands.forEach((hand) => {
