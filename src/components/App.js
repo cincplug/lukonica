@@ -13,7 +13,7 @@ import Splash from "./Splash";
 import Cursor from "./Cursor";
 import "../styles.scss";
 
-const screenResolution = {
+const targetResolution = {
   width: window.innerWidth,
   height: window.innerHeight
 };
@@ -62,7 +62,7 @@ const App = () => {
     if (cursor.isWagging) {
       clearPaths();
       if (setup.pattern === "canvas") {
-        const { width, height } = screenResolution;
+        const { width, height } = targetResolution;
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, width, height);
@@ -98,7 +98,7 @@ const App = () => {
   const webcamRef = useRef(null);
   const [stopDetector, setStopDetector] = useState(null);
   const [shouldRunDetector, setShouldRunDetector] = useState(false);
-  const [inputResolution, setInputResolution] = useState(screenResolution);
+  const [inputResolution, setInputResolution] = useState(targetResolution);
   const { width, height } = inputResolution;
 
   const handleVideoLoad = (videoNode) => {
@@ -188,7 +188,7 @@ const App = () => {
 
   return (
     <div
-      className={`wrap wrap--${
+      className={`wrap wrap--main wrap--${
         isStarted && isLoaded ? "started" : "not-started"
       }`}
       style={{ width, height }}
