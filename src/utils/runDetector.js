@@ -23,7 +23,9 @@ export const runDetector = async ({
   let facesDetector = null;
 
   if (setupRef.current.showsFaces) {
-    const faceLandmarksDetection = await import("@tensorflow-models/face-landmarks-detection");
+    const faceLandmarksDetection = await import(
+      "@tensorflow-models/face-landmarks-detection"
+    );
     const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
     const facesDetectorConfig = {
       runtime: "tfjs",
@@ -138,23 +140,39 @@ export const runDetector = async ({
             isPinched: thumbIndexDistance < threshold
           };
         });
-        const closestPoint = findClosestFacePointIndex({
-          facePoints: points,
-          indexTip,
-          pinchThreshold
-        });
-        if (!showsFaces && isPinched) {
+
+        if (showsFaces && isPinched) {
+          const closestPoint = findClosestFacePointIndex({
+            facePoints: points,
+            indexTip,
+            pinchThreshold
+          });
+
+          if (closestPoint) {
+            setCustomMaskNewArea((prevCustomMaskNewArea) => {
+              const isNewArea =
+                prevCustomMaskNewArea.length === 0 ||
+                prevCustomMaskNewArea[0] !== closestPoint;
+              if (isNewArea) {
+                return [...prevCustomMaskNewArea, closestPoint];
+              } else {
+                setCustomMask((prevCustomMask) => [
+                  ...prevCustomMask,
+                  prevCustomMaskNewArea
+                ]);
+                return [];
+              }
+            });
+          }
+        } else if (!showsFaces && isPinched) {
           setScribbleNewArea((prevScribbleNewArea) => {
-            if (
+            const isNewArea =
               prevScribbleNewArea.length === 0 ||
-              getDistance(
-                {
-                  x: prevScribbleNewArea[prevScribbleNewArea.length - 1].x,
-                  y: prevScribbleNewArea[prevScribbleNewArea.length - 1].y
-                },
-                { x, y }
-              ) > minimum
-            ) {
+              getDistance(prevScribbleNewArea[prevScribbleNewArea.length - 1], {
+                x,
+                y
+              }) > minimum;
+            if (isNewArea) {
               if (pattern === "canvas" && canvasElement) {
                 ctx.strokeStyle = processColor(color, opacity);
                 ctx.lineWidth = (radius - thumbIndexDistance) * growth;
@@ -176,21 +194,6 @@ export const runDetector = async ({
               return [...prevScribbleNewArea, { x, y }];
             }
             return prevScribbleNewArea;
-          });
-        }
-        if (showsFaces && closestPoint && isPinched) {
-          setCustomMaskNewArea((prevCustomMaskNewArea) => {
-            if (
-              prevCustomMaskNewArea.length > 0 &&
-              prevCustomMaskNewArea[0] === closestPoint
-            ) {
-              setCustomMask((prevCustomMask) => {
-                return [...prevCustomMask, prevCustomMaskNewArea];
-              });
-              return [];
-            } else {
-              return [...prevCustomMaskNewArea, closestPoint];
-            }
           });
         }
       }
