@@ -19,6 +19,8 @@ export const runDetector = async ({
   let frame = 0;
   let shouldContinue = true;
   let animationFrameId;
+  let lastX = 0;
+  let lastY = 0;
 
   let facesDetector = null;
 
@@ -164,37 +166,40 @@ export const runDetector = async ({
               }
             });
           }
-        } else if (!showsFaces && isPinched) {
-          setScribbleNewArea((prevScribbleNewArea) => {
-            const isNewArea =
-              prevScribbleNewArea.length === 0 ||
-              getDistance(prevScribbleNewArea[prevScribbleNewArea.length - 1], {
-                x,
-                y
-              }) > minimum;
-            if (isNewArea) {
-              if (pattern === "canvas" && canvasElement) {
-                ctx.strokeStyle = processColor(color, opacity);
-                ctx.lineWidth = (radius - thumbIndexDistance) * growth;
-
-                if (prevScribbleNewArea.length > 0) {
-                  ctx.beginPath();
-                  prevScribbleNewArea.forEach((point, index) => {
-                    ctx.moveTo(point.x, point.y);
-                    const nextPoint =
-                      index < prevScribbleNewArea.length - 1
-                        ? prevScribbleNewArea[index + 1]
-                        : point;
-                    ctx.lineTo(nextPoint.x, nextPoint.y);
-                    ctx.stroke();
-                  });
-                  return [...prevScribbleNewArea.slice(-1), { x, y }];
-                }
-              }
-              return [...prevScribbleNewArea, { x, y }];
+        }
+        if (!showsFaces) {
+          if (pattern === "canvas" && canvasElement) {
+            if (isWagging) {
+              ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+              lastX = 0;
+              lastY = 0;
+            } else if (isPinched) {
+              ctx.strokeStyle = processColor(color, opacity);
+              ctx.lineWidth = (radius - thumbIndexDistance) * growth;
+              ctx.beginPath();
+              ctx.moveTo(lastX || x, lastY || y);
+              ctx.lineTo(x, y);
+              lastX = x;
+              lastY = y;
+              ctx.stroke();
             }
-            return prevScribbleNewArea;
-          });
+          } else if (isPinched) {
+            setScribbleNewArea((prevScribbleNewArea) => {
+              const isNewArea =
+                prevScribbleNewArea.length === 0 ||
+                getDistance(
+                  prevScribbleNewArea[prevScribbleNewArea.length - 1],
+                  {
+                    x,
+                    y
+                  }
+                ) > minimum;
+              if (isNewArea) {
+                return [...prevScribbleNewArea, { x, y }];
+              }
+              return prevScribbleNewArea;
+            });
+          }
         }
       }
       setHandsCount(hands.length);

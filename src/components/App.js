@@ -59,14 +59,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (cursor.isWagging) {
+    if (cursor.isWagging && setup.pattern !== "canvas") {
       clearPaths();
-      if (setup.pattern === "canvas") {
-        const { width, height } = targetResolution;
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        ctx.clearRect(0, 0, width, height);
-      }
     }
   }, [cursor.isWagging, setup.pattern]);
 
