@@ -85,6 +85,11 @@ const Ball = (props) => {
     rafRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
+  const boardStyleProps = {
+    strokeWidth: setup.minimum / 2,
+    stroke: setup.color,
+    fill: "none"
+  };
 
   return (
     ball.x && (
@@ -96,23 +101,35 @@ const Ball = (props) => {
           ry={setup.minimum * setup.radius}
           width={board.size}
           height={board.size}
-          strokeWidth={setup.minimum / 2}
-          stroke={setup.color}
-          fill="none"
+          {...boardStyleProps}
         />
         <circle
           className="mask-path"
           cx={board.left + board.size / 3}
           cy={height / 3}
-          r={setup.minimum * setup.radius * 4}
-          fill={setup.color}
+          r={setup.minimum * setup.radius * 3}
+          {...boardStyleProps}
         ></circle>
         <circle
           className="mask-path"
           cx={board.left + (board.size / 3) * 2}
           cy={height / 3}
-          r={setup.minimum * setup.radius * 2}
-          fill={setup.color}
+          r={setup.minimum * setup.radius * 4}
+          {...boardStyleProps}
+        ></circle>
+        <circle
+          className="mask-path"
+          cx={board.left + board.size / 3}
+          cy={(height / 3) * 2}
+          r={setup.minimum * setup.radius * 4}
+          {...boardStyleProps}
+        ></circle>
+        <circle
+          className="mask-path"
+          cx={board.left + (board.size / 3) * 2}
+          cy={(height / 3) * 2}
+          r={setup.minimum * setup.radius * 3}
+          {...boardStyleProps}
         ></circle>
         <circle
           className="ball"

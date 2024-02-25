@@ -196,7 +196,7 @@
     "bg": "#02270b",
     "color": "#27ec6c",
     "opacity": 255,
-    "videoOpacity": 13,
+    "videoOpacity": 22,
     "usesSvgAnimation": false,
     "usesCssAnimation": true,
     "blendMode": "normal",
