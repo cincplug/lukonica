@@ -76,3 +76,27 @@ export const saveSvg = () => {
   link.href = "data:image/svg+xml;base64," + base64doc;
   link.dispatchEvent(e);
 };
+
+export const checkElementPinch = ({x, y, isPinched}) => {
+  const element = document.elementFromPoint(x, y);
+  if (!element) {
+    return;
+  }
+  if (element.tagName === "BUTTON") {
+    clearHighlight();
+    element.classList.add("highlight");
+    if (isPinched) {
+      element.click();
+      element.classList.remove("highlight");
+    }
+  } else {
+    clearHighlight();
+  }
+}
+
+const clearHighlight = () => {
+  const highlightedElement = document.querySelector(".highlight");
+  if (highlightedElement) {
+    highlightedElement.classList.remove("highlight");
+  }
+};

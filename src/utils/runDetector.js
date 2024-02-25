@@ -1,6 +1,11 @@
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
-import { findClosestFacePointIndex, getDistance, processColor } from "./index";
+import {
+  findClosestFacePointIndex,
+  getDistance,
+  processColor,
+  checkElementPinch
+} from "./index";
 
 export const runDetector = async ({
   video,
@@ -38,7 +43,7 @@ export const runDetector = async ({
 
   const canvasElement = document.getElementById("canvas") || null;
   const ctx = canvasElement?.getContext("2d") || null;
-  
+
   const detect = async () => {
     const {
       showsFaces,
@@ -114,20 +119,7 @@ export const runDetector = async ({
             ? pinchThreshold * 2
             : pinchThreshold;
           if (usesButtonPinch && thumbIndexDistance < pinchThreshold * 4) {
-            const element = document.elementFromPoint(x, y);
-            if (!element) {
-              return;
-            }
-            if (element.tagName === "BUTTON") {
-              clearHighlight();
-              element.classList.add("highlight");
-              if (isPinched) {
-                element.click();
-                element.classList.remove("highlight");
-              }
-            } else {
-              clearHighlight();
-            }
+            checkElementPinch({ x, y, isPinched });
           }
           return {
             x,
@@ -160,7 +152,7 @@ export const runDetector = async ({
               if (pattern === "canvas" && canvasElement) {
                 ctx.strokeStyle = processColor(color, opacity);
                 ctx.lineWidth = (radius - thumbIndexDistance) * growth;
-                
+
                 if (prevScribbleNewArea.length > 0) {
                   ctx.beginPath();
                   prevScribbleNewArea.forEach((point, index) => {
@@ -213,11 +205,4 @@ export const runDetector = async ({
     shouldContinue = false;
     cancelAnimationFrame(animationFrameId);
   };
-};
-
-const clearHighlight = () => {
-  const highlightedElement = document.querySelector(".highlight");
-  if (highlightedElement) {
-    highlightedElement.classList.remove("highlight");
-  }
 };
