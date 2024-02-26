@@ -19,8 +19,7 @@ export const runDetector = async ({
   let frame = 0;
   let shouldContinue = true;
   let animationFrameId;
-  let lastX = 0;
-  let lastY = 0;
+  let lastX, lastY;
 
   let facesDetector = null;
 
@@ -168,20 +167,22 @@ export const runDetector = async ({
           }
         }
         if (!showsFaces) {
-          if (pattern === "canvas" && canvasElement) {
+          if (pattern === "canvas") {
             if (isWagging) {
               ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-              lastX = 0;
-              lastY = 0;
-            } else if (isPinched) {
+            }
+            if (isPinched) {
               ctx.strokeStyle = processColor(color, opacity);
               ctx.lineWidth = (radius - thumbIndexDistance) * growth;
               ctx.beginPath();
-              ctx.moveTo(lastX || x, lastY || y);
+              ctx.moveTo(lastX, lastY);
               ctx.lineTo(x, y);
+              ctx.stroke();
               lastX = x;
               lastY = y;
-              ctx.stroke();
+            } else {
+              lastX = undefined;
+              lastY = undefined;
             }
           } else if (isPinched) {
             setScribbleNewArea((prevScribbleNewArea) => {
