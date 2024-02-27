@@ -1,4 +1,4 @@
-export const processFaces = ({ faces, points, setCursor }) => {
+export const processFaces = ({ faces, setCursor }) => {
   let newPoints = [];
   faces.forEach((face) => {
     if (face.keypoints) {
@@ -20,5 +20,5 @@ export const processFaces = ({ faces, points, setCursor }) => {
           : null
     };
   });
-  return [...points, ...newPoints];
+  return newPoints;
 };

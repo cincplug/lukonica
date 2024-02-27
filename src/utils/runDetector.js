@@ -67,7 +67,6 @@ export const runDetector = async ({
       if (showsFaces && faces?.length) {
         const facePoints = processFaces({
           faces,
-          points: points,
           setCursor
         });
         points = [...points, ...facePoints]; // Combine old and new points
@@ -77,7 +76,7 @@ export const runDetector = async ({
         const handPoints = processHands({
           setupRef,
           hands,
-          points: points,
+          points,
           setCursor,
           setCustomMaskNewArea,
           setCustomMask,
