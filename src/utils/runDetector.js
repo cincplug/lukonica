@@ -172,12 +172,17 @@ export const runDetector = async ({
               ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
             }
             if (isPinched) {
+              let targetLineWidth =
+                (radius - thumbIndexDistance) * growth + minimum;
+
+              ctx.lineWidth += (targetLineWidth - ctx.lineWidth) / 2;
+
               ctx.strokeStyle = processColor(color, opacity);
-              ctx.lineWidth = (radius - thumbIndexDistance) * growth;
               ctx.beginPath();
               ctx.moveTo(lastX, lastY);
-              ctx.lineTo(x, y);
+              ctx.bezierCurveTo(lastX, lastY, x, y, x, y);
               ctx.stroke();
+
               lastX = x;
               lastY = y;
             } else {
