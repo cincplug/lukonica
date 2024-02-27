@@ -1,10 +1,6 @@
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
-import {
-  findClosestFacePointIndex,
-  getDistance,
-  processColor,
-  checkElementPinch
-} from "./index";
+import { processFaces } from "./faceUtils";
+import { processHands } from "./handUtils";
 
 export const runDetector = async ({
   video,
@@ -19,7 +15,6 @@ export const runDetector = async ({
   let frame = 0;
   let shouldContinue = true;
   let animationFrameId;
-  let lastX, lastY;
 
   let facesDetector = null;
 
@@ -52,19 +47,7 @@ export const runDetector = async ({
   const ctx = canvasElement?.getContext("2d") || null;
 
   const detect = async () => {
-    const {
-      showsFaces,
-      showsHands,
-      pinchThreshold,
-      minimum,
-      latency,
-      pattern,
-      usesButtonPinch,
-      color,
-      opacity,
-      radius,
-      growth
-    } = setupRef.current;
+    const { showsFaces, showsHands, latency } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
       let faces = null;
@@ -81,132 +64,20 @@ export const runDetector = async ({
 
       let points = [];
       if (showsFaces && faces?.length) {
-        faces.forEach((face) => {
-          if (face.keypoints) {
-            points = points.concat(face.keypoints);
-          }
-        });
-        const foreheadTop = faces[0]?.keypoints[10];
-        const eyebrowMid = faces[0]?.keypoints[8];
-        const noseRoot = faces[0]?.keypoints[168];
-        const muzzle = faces[0]?.keypoints[151];
-        const surpriseThreshold = 0.17;
-        setCursor((prevCursor) => {
-          return {
-            ...prevCursor,
-            muzzle:
-              (noseRoot.y - eyebrowMid.y) / (noseRoot.y - foreheadTop.y) >
-              surpriseThreshold
-                ? muzzle
-                : null
-          };
-        });
+        points = processFaces({ faces, points, setCursor });
       }
 
       if (showsHands && hands?.length) {
-        if (!["paths"].includes(pattern)) {
-          hands.forEach((hand) => {
-            if (hand.keypoints) {
-              points = points.concat(hand.keypoints);
-            }
-          });
-        }
-        const wrist = hands[0]?.keypoints[0];
-        const thumbTip = hands[0]?.keypoints[4];
-        const indexTip = hands[0]?.keypoints[8];
-        const middleDip = hands[0]?.keypoints[11];
-        const thumbIndexDistance = getDistance(thumbTip, indexTip);
-        const isPinched = thumbIndexDistance < pinchThreshold;
-        const isWagging =
-          !isPinched &&
-          (wrist.y - indexTip.y) / (wrist.y - middleDip.y) > 2 &&
-          (wrist.y - indexTip.y) / (wrist.x - indexTip.x) > 2;
-        const x = (thumbTip.x + indexTip.x) / 2;
-        const y = (thumbTip.y + indexTip.y) / 2;
-        setCursor((prevCursor) => {
-          const threshold = prevCursor.isPinched
-            ? pinchThreshold * 2
-            : pinchThreshold;
-          if (usesButtonPinch && thumbIndexDistance < pinchThreshold * 4) {
-            checkElementPinch({ x, y, isPinched });
-          }
-          return {
-            x,
-            y,
-            wrist,
-            thumbTip,
-            indexTip,
-            middleDip,
-            isWagging,
-            isPinched: thumbIndexDistance < threshold
-          };
+        points = processHands({
+          setupRef,
+          hands,
+          points,
+          setCursor,
+          setCustomMaskNewArea,
+          setCustomMask,
+          setScribbleNewArea,
+          ctx
         });
-
-        if (showsFaces && isPinched) {
-          const closestPoint = findClosestFacePointIndex({
-            facePoints: points,
-            indexTip,
-            pinchThreshold
-          });
-
-          if (closestPoint) {
-            setCustomMaskNewArea((prevCustomMaskNewArea) => {
-              const isNewArea =
-                prevCustomMaskNewArea.length === 0 ||
-                prevCustomMaskNewArea[0] !== closestPoint;
-              if (isNewArea) {
-                return [...prevCustomMaskNewArea, closestPoint];
-              } else {
-                setCustomMask((prevCustomMask) => [
-                  ...prevCustomMask,
-                  prevCustomMaskNewArea
-                ]);
-                return [];
-              }
-            });
-          }
-        }
-        if (!showsFaces) {
-          if (pattern === "canvas") {
-            if (isWagging) {
-              ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            }
-            if (isPinched) {
-              let targetLineWidth =
-                (radius - thumbIndexDistance) * growth + minimum;
-
-              ctx.lineWidth += (targetLineWidth - ctx.lineWidth) / 2;
-
-              ctx.strokeStyle = processColor(color, opacity);
-              ctx.beginPath();
-              ctx.moveTo(lastX, lastY);
-              ctx.bezierCurveTo(lastX, lastY, x, y, x, y);
-              ctx.stroke();
-
-              lastX = x;
-              lastY = y;
-            } else {
-              lastX = undefined;
-              lastY = undefined;
-            }
-          } else if (isPinched) {
-            setScribbleNewArea((prevScribbleNewArea) => {
-              const isNewArea =
-                prevScribbleNewArea.length === 0 ||
-                getDistance(
-                  prevScribbleNewArea[prevScribbleNewArea.length - 1],
-                  {
-                    x,
-                    y
-                  }
-                ) > minimum;
-              if (isNewArea) {
-                return [...prevScribbleNewArea, { x, y }];
-              }
-              return prevScribbleNewArea;
-            });
-          }
-        }
       }
       setHandsCount(hands.length);
       if (points.length) {
