@@ -1,7 +1,8 @@
 export const processFaces = ({ faces, points, setCursor }) => {
+  let newPoints = [];
   faces.forEach((face) => {
     if (face.keypoints) {
-      points = points.concat(face.keypoints);
+      newPoints = newPoints.concat(face.keypoints);
     }
   });
   const foreheadTop = faces[0]?.keypoints[10];
@@ -19,5 +20,5 @@ export const processFaces = ({ faces, points, setCursor }) => {
           : null
     };
   });
-  return points;
+  return [...points, ...newPoints];
 };

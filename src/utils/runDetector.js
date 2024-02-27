@@ -63,21 +63,28 @@ export const runDetector = async ({
       }
 
       let points = [];
+
       if (showsFaces && faces?.length) {
-        points = processFaces({ faces, points, setCursor });
+        const facePoints = processFaces({
+          faces,
+          points: points,
+          setCursor
+        });
+        points = [...points, ...facePoints]; // Combine old and new points
       }
 
       if (showsHands && hands?.length) {
-        points = processHands({
+        const handPoints = processHands({
           setupRef,
           hands,
-          points,
+          points: points,
           setCursor,
           setCustomMaskNewArea,
           setCustomMask,
           setScribbleNewArea,
           ctx
         });
+        points = [...points, ...handPoints]; // Combine old and new points
       }
       setHandsCount(hands.length);
       if (points.length) {

@@ -27,11 +27,12 @@ export const processHands = ({
     pinchThreshold,
     usesButtonPinch,
     showsFaces
-  } = setupRef;
+  } = setupRef.current;
+  let newPoints = [];
   if (!["paths"].includes(pattern)) {
     hands.forEach((hand) => {
       if (hand.keypoints) {
-        points = points.concat(hand.keypoints);
+        newPoints = newPoints.concat(hand.keypoints);
       }
     });
   }
@@ -127,5 +128,5 @@ export const processHands = ({
       });
     }
   }
-  return points;
+  return [...points, ...newPoints];
 };
