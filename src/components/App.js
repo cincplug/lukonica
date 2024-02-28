@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
@@ -242,17 +243,42 @@ const App = () => {
         </>
       )}
       {!isStarted && <Splash {...{ setIsEditing, handlePlayButtonClick }} />}
-      <Menu
-        {...{
-          setup,
-          handleInputChange,
-          setSetup,
-          setActiveMask,
-          setPoints,
-          clearPaths,
-          activeMask: activeMask.concat(customMask)
-        }}
-      />
+      <Router>
+        <Routes>
+          <Route
+            path="/scenario/:scenario"
+            element={
+              <Menu
+                {...{
+                  setup,
+                  handleInputChange,
+                  setSetup,
+                  setActiveMask,
+                  setPoints,
+                  clearPaths,
+                  activeMask: activeMask.concat(customMask)
+                }}
+              />
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <Menu
+                {...{
+                  setup,
+                  handleInputChange,
+                  setSetup,
+                  setActiveMask,
+                  setPoints,
+                  clearPaths,
+                  activeMask: activeMask.concat(customMask)
+                }}
+              />
+            }
+          />
+        </Routes>
+      </Router>
       {isEditing ? (
         <MaskEditor {...{ inputResolution, setIsEditing, activeMask }} />
       ) : null}

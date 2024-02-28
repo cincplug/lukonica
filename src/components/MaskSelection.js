@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import DEFAULT_FACE_POINTS from "../data/defaultFacePoints.json";
 import DEFAULT_MASKS from "../data/defaultMasks.json";
 import DEFAULT_SETUP from "../_setup.json";
@@ -40,7 +41,11 @@ const MaskSelection = (props) => {
     });
     setActiveMask(mask);
   };
-  const handleScenarioButtonClick = (_event, scenario, index) => {
+
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const handleScenarioButtonClick = useCallback((_event, scenario, index) => {
     setSetup((prevSetup) => {
       const newScenario = scenarios[scenario];
       if (!newScenario) {
@@ -59,7 +64,18 @@ const MaskSelection = (props) => {
         type: "range"
       }
     });
-  };
+
+    navigate(`/scenario/${scenario}`);
+  }, [setSetup, handleInputChange, navigate]);
+
+  useEffect(() => {
+    if (params.scenario) {
+      const scenarioIndex = Object.keys(scenarios).indexOf(params.scenario);
+      if (scenarioIndex !== -1 && scenarioIndex !== setup.activeScenarioIndex) {
+        handleScenarioButtonClick(null, params.scenario, scenarioIndex);
+      }
+    }
+  }, [params, setup.activeScenarioIndex, handleScenarioButtonClick]);
 
   return (
     <nav className={`menu menu--secondary`}>

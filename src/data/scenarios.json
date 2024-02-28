@@ -1,5 +1,5 @@
 {
-  "/": null,
+  "": null,
   "🧔‍♂️": {
     "transitionDuration": 1.6,
     "transitionArrangement": 1,
@@ -473,7 +473,7 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🖌️": {
+  "🖋️": {
     "transitionDuration": 3.2,
     "transitionArrangement": 1,
     "radius": 40,
