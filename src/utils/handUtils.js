@@ -92,14 +92,14 @@ export const processHands = ({
     }
   }
   if (!showsFaces) {
-    if (pattern === "canvas") {
+    if (pattern === "canvas" && ctx) {
       if (isWagging) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       }
       if (isPinched) {
         let targetLineWidth = (radius - thumbIndexDistance) * growth + minimum;
 
-        ctx.lineWidth += (targetLineWidth - ctx.lineWidth) / 2;
+        ctx.lineWidth = (targetLineWidth - ctx.lineWidth) / 2;
 
         ctx.strokeStyle = processColor(color, opacity);
         ctx.beginPath();

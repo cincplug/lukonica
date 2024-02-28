@@ -1,3 +1,4 @@
+import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import { processFaces } from "./faceUtils";
 import { processHands } from "./handUtils";
@@ -10,7 +11,8 @@ export const runDetector = async ({
   setCustomMaskNewArea,
   setCursor,
   setHandsCount,
-  setScribbleNewArea
+  setScribbleNewArea,
+  ctx
 }) => {
   let frame = 0;
   let shouldContinue = true;
@@ -19,9 +21,6 @@ export const runDetector = async ({
   let facesDetector = null;
 
   if (setupRef.current.showsFaces) {
-    const faceLandmarksDetection = await import(
-      "@tensorflow-models/face-landmarks-detection"
-    );
     const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
     const facesDetectorConfig = {
       runtime: "tfjs",
@@ -42,9 +41,6 @@ export const runDetector = async ({
     handsModel,
     handsDetectorConfig
   );
-
-  const canvasElement = document.getElementById("canvas") || null;
-  const ctx = canvasElement?.getContext("2d") || null;
 
   const detect = async () => {
     const { showsFaces, showsHands, latency } = setupRef.current;

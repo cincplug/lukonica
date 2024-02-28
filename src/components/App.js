@@ -90,6 +90,8 @@ const App = () => {
   };
 
   const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
+
   const [stopDetector, setStopDetector] = useState(null);
   const [shouldRunDetector, setShouldRunDetector] = useState(false);
   const [inputResolution, setInputResolution] = useState(targetResolution);
@@ -102,6 +104,7 @@ const App = () => {
     if (shouldRunDetector) {
       const { videoWidth, videoHeight } = video;
       setInputResolution({ width: videoWidth, height: videoHeight });
+      const ctx = canvasRef.current?.getContext("2d");
       runDetector({
         setupRef,
         video,
@@ -112,7 +115,8 @@ const App = () => {
         setHandsCount,
         setScribble,
         setScribbleNewArea,
-        activeMask
+        activeMask,
+        ctx: ctx || null
       }).then((stop) => {
         setStopDetector(() => stop);
       });
@@ -204,31 +208,31 @@ const App = () => {
             mirrored={true}
             imageSmoothing={false}
           />
-          {isLoaded &&
-            (setup.pattern === "canvas" ? (
-              <div className="wrap">
-                <canvas id="canvas" width={width} height={height}></canvas>
-                <Cursor
-                  cursor={cursor}
-                  hasCursorFingertips={setup.hasCursorFingertips}
-                />
-              </div>
-            ) : (
-              <Drawing
-                {...{
-                  inputResolution,
-                  setup,
-                  points,
-                  flatMask,
-                  cursor,
-                  customMask,
-                  customMaskNewArea,
-                  activeMask,
-                  scribble,
-                  scribbleNewArea
-                }}
+          {setup.pattern === "canvas" && (
+            <div className="wrap">
+              <canvas ref={canvasRef} width={width} height={height}></canvas>
+              <Cursor
+                cursor={cursor}
+                hasCursorFingertips={setup.hasCursorFingertips}
               />
-            ))}
+            </div>
+          )}
+          {isLoaded && (
+            <Drawing
+              {...{
+                inputResolution,
+                setup,
+                points,
+                flatMask,
+                cursor,
+                customMask,
+                customMaskNewArea,
+                activeMask,
+                scribble,
+                scribbleNewArea
+              }}
+            />
+          )}
           <button
             className="splash-button video-button pause-button"
             onClick={handlePlayButtonClick}
