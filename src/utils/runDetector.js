@@ -1,5 +1,3 @@
-import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
-import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import { processFaces } from "./faceUtils";
 import { processHands } from "./handUtils";
 
@@ -19,40 +17,47 @@ export const runDetector = async ({
   let animationFrameId;
 
   let facesDetector = null;
+  let handsDetector = null;
 
   if (setupRef.current.showsFaces) {
-    const facesModel = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+    const faceLandmarksDetectionModule = await import("@tensorflow-models/face-landmarks-detection");
+    const facesModel = faceLandmarksDetectionModule.SupportedModels.MediaPipeFaceMesh;
     const facesDetectorConfig = {
       runtime: "tfjs",
       refineLandmarks: false
     };
-    facesDetector = await faceLandmarksDetection.createDetector(
+    facesDetector = await faceLandmarksDetectionModule.createDetector(
       facesModel,
       facesDetectorConfig
     );
   }
 
-  const handsModel = handPoseDetection.SupportedModels.MediaPipeHands;
-  const handsDetectorConfig = {
-    runtime: "tfjs",
-    modelType: "lite"
-  };
-  const handsDetector = await handPoseDetection.createDetector(
-    handsModel,
-    handsDetectorConfig
-  );
+  if (setupRef.current.showsHands) {
+    const handPoseDetectionModule = await import("@tensorflow-models/hand-pose-detection");
+    const handsModel = handPoseDetectionModule.SupportedModels.MediaPipeHands;
+    const handsDetectorConfig = {
+      runtime: "tfjs",
+      modelType: "lite"
+    };
+    handsDetector = await handPoseDetectionModule.createDetector(
+      handsModel,
+      handsDetectorConfig
+    );
+  }
 
   const detect = async () => {
     const { showsFaces, showsHands, latency } = setupRef.current;
     if (frame % latency === 0) {
       const estimationConfig = { flipHorizontal: true, staticImageMode: false };
       let faces = null;
-      let hands;
+      let hands = null;
       try {
         if (showsFaces && facesDetector) {
           faces = await facesDetector.estimateFaces(video, estimationConfig);
         }
-        hands = await handsDetector.estimateHands(video, estimationConfig);
+        if (showsHands && handsDetector) {
+          hands = await handsDetector.estimateHands(video, estimationConfig);
+        }
       } catch (error) {
         console.error("Error estimating faces or hands", error);
         return;
@@ -65,7 +70,7 @@ export const runDetector = async ({
           faces,
           setCursor
         });
-        points = [...points, ...facePoints]; 
+        points = [...points, ...facePoints];
       }
 
       if (showsHands && hands?.length) {
@@ -79,9 +84,9 @@ export const runDetector = async ({
           setScribbleNewArea,
           ctx
         });
-        points = [...points, ...handPoints]; 
+        points = [...points, ...handPoints];
       }
-      setHandsCount(hands.length);
+      setHandsCount(hands ? hands.length : 0);
       if (points.length) {
         setPoints(points);
       }
