@@ -65,7 +65,7 @@ export const runDetector = async ({
           faces,
           setCursor
         });
-        points = [...points, ...facePoints]; // Combine old and new points
+        points = [...points, ...facePoints]; 
       }
 
       if (showsHands && hands?.length) {
@@ -79,7 +79,7 @@ export const runDetector = async ({
           setScribbleNewArea,
           ctx
         });
-        points = [...points, ...handPoints]; // Combine old and new points
+        points = [...points, ...handPoints]; 
       }
       setHandsCount(hands.length);
       if (points.length) {

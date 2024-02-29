@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
-import "@mediapipe/face_mesh";
-import "@mediapipe/hands";
 import DEFAULT_SETUP from "../_setup.json";
 import { runDetector } from "../utils/runDetector";
 import Webcam from "react-webcam";
