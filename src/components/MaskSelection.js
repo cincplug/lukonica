@@ -45,28 +45,33 @@ const MaskSelection = (props) => {
   const navigate = useNavigate();
   const params = useParams();
 
-  const handleScenarioButtonClick = useCallback((_event, scenario, index) => {
-    setSetup((prevSetup) => {
-      const newScenario = scenarios[scenario];
-      if (!newScenario) {
-        const initialSetup = {};
-        DEFAULT_SETUP.forEach((item) => {
-          initialSetup[item.id] = item.value;
-        });
-        return initialSetup;
-      }
-      return { ...prevSetup, ...newScenario };
-    });
-    handleInputChange({
-      target: {
-        id: "activeScenarioIndex",
-        value: index,
-        type: "range"
-      }
-    });
+  const handleScenarioButtonClick = useCallback(
+    (_event, scenarioKey, index) => {
+      setSetup((prevSetup) => {
+        const newScenario = scenarios[scenarioKey];
+        if (!newScenario) {
+          const initialSetup = {};
+          DEFAULT_SETUP.forEach((item) => {
+            initialSetup[item.id] = item.value;
+          });
+          return initialSetup;
+        }
+        return { ...prevSetup, ...newScenario };
+      });
+      handleInputChange({
+        target: {
+          id: "activeScenarioIndex",
+          value: index,
+          type: "range"
+        }
+      });
 
-    navigate(`/scenario/${scenario}`);
-  }, [setSetup, handleInputChange, navigate]);
+      if (scenarioKey !== "/") {
+        navigate(`/scenario/${scenarioKey}`);
+      }
+    },
+    [setSetup, handleInputChange, navigate]
+  );
 
   useEffect(() => {
     if (params.scenario) {
@@ -81,19 +86,22 @@ const MaskSelection = (props) => {
     <nav className={`menu menu--secondary`}>
       <fieldset className="menu--scenarios">
         <legend>Scenarios</legend>
-        {Object.keys(scenarios).map((scenario, index) => (
-          <button
-            className={`menu--scenarios__button ${
-              index === setup.activeScenarioIndex ? "active" : "inactive"
-            }`}
-            key={`scn-${index}`}
-            onClick={(event) =>
-              handleScenarioButtonClick(event, scenario, index)
-            }
-          >
-            {scenario}
-          </button>
-        ))}
+        {Object.keys(scenarios).map((scenarioKey, index) => {
+          const scenario = scenarios[scenarioKey];
+          return (
+            <button
+              className={`menu--scenarios__button ${
+                index === setup.activeScenarioIndex ? "active" : "inactive"
+              }`}
+              key={`scn-${index}`}
+              onClick={(event) =>
+                handleScenarioButtonClick(event, scenarioKey, index)
+              }
+            >
+              {scenario?.icon || scenarioKey}
+            </button>
+          );
+        })}
       </fieldset>
       {showsFaces && (masks || DEFAULT_MASKS) && (
         <fieldset className="menu--masks">

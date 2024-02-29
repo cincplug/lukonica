@@ -1,6 +1,7 @@
 {
   "": null,
-  "🧔‍♂️": {
+  "face-features": {
+    "icon": "🧔‍♂️",
     "transitionDuration": 1.6,
     "transitionArrangement": 1,
     "radius": 0.5,
@@ -28,7 +29,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "😎": {
+  "sunglasses": {
+    "icon": "😎",
     "transitionDuration": 1.2,
     "transitionArrangement": 2,
     "radius": 0.5,
@@ -55,7 +57,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🤩": {
+  "star-eyes": {
+    "icon": "🤩",
     "transitionDuration": 1.2,
     "transitionArrangement": 2,
     "radius": 0.5,
@@ -85,7 +88,8 @@
     "ballSpeed": 0,
     "usesButtonPinch": false
   },
-  "👁️": {
+  "eyelashes": {
+    "icon": "👁️",
     "transitionDuration": 2,
     "transitionArrangement": 2,
     "radius": 4.5,
@@ -113,7 +117,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "👄": {
+  "lipstick": {
+    "icon": "👄",
     "transitionDuration": 2,
     "transitionArrangement": 2,
     "radius": 0.5,
@@ -137,7 +142,8 @@
     "pathStroke": "lines",
     "activeMaskIndex": 8
   },
-  "🚁": {
+  "helicopter": {
+    "icon": "🚁",
     "transitionDuration": 0.2,
     "transitionArrangement": 3,
     "radius": 3,
@@ -167,7 +173,8 @@
     "ballSpeed": 0,
     "usesButtonPinch": false
   },
-  "🚀": {
+  "eyebrow-invaders": {
+    "icon": "🚀",
     "transitionDuration": 1,
     "transitionArrangement": 1,
     "radius": 0.5,
@@ -195,7 +202,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🎱": {
+  "eyebrow-pinball": {
+    "icon": "🎱",
     "transitionDuration": 1,
     "transitionArrangement": 1,
     "radius": 1.5,
@@ -224,7 +232,8 @@
     "ballSpeed": 30,
     "usesButtonPinch": false
   },
-  "🌿": {
+  "face-plant": {
+    "icon": "🌿",
     "transitionDuration": 3.4,
     "transitionArrangement": 5,
     "radius": 162.5,
@@ -252,7 +261,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🛁": {
+  "face-wash": {
+    "icon": "🛁",
     "transitionDuration": 3,
     "transitionArrangement": 6,
     "radius": 139,
@@ -279,7 +289,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🍺": {
+  "too-much-beer": {
+    "icon": "🍺",
     "transitionDuration": 3.2,
     "transitionArrangement": 6,
     "radius": 12,
@@ -305,7 +316,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "👌": {
+  "pinch-paint": {
+    "icon": "👌",
     "transitionDuration": 3.2,
     "transitionArrangement": 1,
     "radius": 40,
@@ -333,7 +345,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "☁️": {
+  "pinch-paint-cloud": {
+    "icon": "☁️",
     "transitionDuration": 3.2,
     "transitionArrangement": 1,
     "radius": 10.5,
@@ -360,7 +373,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🍉": {
+  "watermelon": {
+    "icon": "🍉",
     "transitionDuration": 3.2,
     "transitionArrangement": 3,
     "radius": 81.5,
@@ -390,7 +404,8 @@
     "ballSpeed": 30,
     "usesButtonPinch": false
   },
-  "⌨️": {
+  "typewriter": {
+    "icon": "⌨️",
     "transitionDuration": 1,
     "transitionArrangement": 1,
     "radius": 35.5,
@@ -417,7 +432,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🪁": {
+  "kite": {
+    "icon": "🪁",
     "transitionDuration": 1.7,
     "transitionArrangement": 1,
     "radius": 80,
@@ -447,7 +463,8 @@
     "ballSpeed": 0,
     "usesButtonPinch": false
   },
-  "🚂": {
+  "railway": {
+    "icon": "🚂",
     "transitionDuration": 1.6,
     "transitionArrangement": 1,
     "radius": 12.5,
@@ -473,7 +490,8 @@
     "textLimit": 100,
     "usesButtonPinch": false
   },
-  "🖋️": {
+  "pinch-paint-canvas": {
+    "icon": "🖋️",
     "transitionDuration": 3.2,
     "transitionArrangement": 1,
     "radius": 40,
