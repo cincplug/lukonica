@@ -65,10 +65,8 @@ const MaskSelection = (props) => {
           type: "range"
         }
       });
-
-      if (scenarioKey !== "/") {
-        navigate(`/scenario/${scenarioKey}`);
-      }
+      const newUrl = `/${scenarioKey.replace("/", "")}`;
+      navigate(newUrl);
     },
     [setSetup, handleInputChange, navigate]
   );

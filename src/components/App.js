@@ -246,7 +246,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route
-            path="/scenario/:scenario"
+            path="/:scenario"
             element={
               <Menu
                 {...{
