@@ -1,12 +1,13 @@
-import logo from "../assets/lukonica-logo.svg";
+import { ReactComponent as Logo } from "../assets/lukonica-logo.svg";
+
 const Splash = (props) => {
   const { setIsEditing, handlePlayButtonClick } = props;
   return (
     <div className="wrap splash">
       <h1>Lukonica</h1>
-      <button onClick={handlePlayButtonClick}>
-        <img src={logo} alt="logo" />
-        <h2>Start camera</h2>
+      <button className="splash-button" onClick={handlePlayButtonClick}>
+        <Logo />
+        Start camera
       </button>
       <div className="buttons">
         <button
@@ -21,4 +22,5 @@ const Splash = (props) => {
     </div>
   );
 };
+
 export default Splash;

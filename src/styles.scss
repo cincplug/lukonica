@@ -460,10 +460,6 @@ label {
   background: var(--color-black-light-semi);
   flex-direction: column;
   justify-content: space-evenly;
-  img {
-    max-width: 8rem;
-    margin: 1rem 1rem 0;
-  }
   h1 {
     margin: 0;
     letter-spacing: 0.1rem;
@@ -473,6 +469,36 @@ label {
   }
   h2 {
     margin: 0.5rem 0 0.7rem;
+  }
+}
+
+.logo {
+  max-width: 6rem;
+  height: auto;
+  display: block;
+  margin: var(--gap) 0;
+  path {
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center calc(100% - var(--gap)*4);
+  }
+
+  button:hover & {
+    .eye-left,
+    .eyebrow-left {
+      transform: translate(var(--gap-double), calc(-1 * var(--gap))) rotate(-30deg);
+    }
+
+    .eye-right,
+    .eyebrow-right {
+      transform: translate(calc(-1 * var(--gap-double)), calc(-1 * var(--gap))) rotate(30deg);
+    }
+
+    .nose {
+      transform: translateY(calc(-1 * var(--gap-half))) scale(0.5);
+    }
+    .mouth {
+      transform: translateY(calc(-1 * var(--gap)));
+    }
   }
 }
 
