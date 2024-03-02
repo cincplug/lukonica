@@ -461,7 +461,7 @@ label {
   flex-direction: column;
   justify-content: space-evenly;
   img {
-    max-width: 9rem;
+    max-width: 8rem;
     margin: 1rem 1rem 0;
   }
   h1 {
@@ -469,7 +469,7 @@ label {
     letter-spacing: 0.1rem;
     font-size: 3.8rem;
     text-shadow: 0 0.3rem 0.4rem #0006, 0 -0.1rem 0.1rem #fff8;
-    color: var(--color-black-light);
+    color: var(--color-black-light-semi);
   }
   h2 {
     margin: 0.5rem 0 0.7rem;
