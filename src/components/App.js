@@ -15,7 +15,6 @@ const targetResolution = {
   width: window.innerWidth,
   height: window.innerHeight
 };
-const DEFAULT_HAND_POINTS_COUNT = 21;
 
 const App = () => {
   const [isStarted, setIsStarted] = useState(false);
@@ -149,7 +148,8 @@ const App = () => {
     flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
   }
   if (setup.showsHands && points && points.length > 0 && handsCount > 0) {
-    const handsPointsTotal = handsCount * DEFAULT_HAND_POINTS_COUNT;
+    const pointsPerHand = 21;
+    const handsPointsTotal = handsCount * pointsPerHand;
     flatMask = flatMask.concat(
       ...Array.from(
         { length: handsPointsTotal },
@@ -191,6 +191,14 @@ const App = () => {
     >
       {isStarted && (
         <>
+          <svg
+            className="bg"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox={`0 0 ${width} ${height}`}
+            style={{ width, height }}
+          >
+            <rect width={width} height={height} fill={setup.bg}></rect>
+          </svg>
           <Webcam
             audio={false}
             ref={webcamRef}
@@ -215,7 +223,7 @@ const App = () => {
               />
             </div>
           )}
-          {isLoaded && (
+          {isLoaded && setup.pattern !== "canvas" && (
             <Drawing
               {...{
                 inputResolution,

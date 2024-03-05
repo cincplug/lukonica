@@ -38,7 +38,7 @@ const Cursor = (props) => {
           ></div>
         </>
       )}
-      {x && (
+      {x > 0 && (
         <div
           className={`cursor cursor--${
             isPinched ? "active" : "inactive"
