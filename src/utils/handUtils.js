@@ -26,7 +26,8 @@ export const processHands = ({
     minimum,
     pinchThreshold,
     usesButtonPinch,
-    showsFaces
+    showsFaces,
+    transitionArrangement
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {
@@ -97,16 +98,26 @@ export const processHands = ({
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       }
       if (isPinched) {
-        let targetLineWidth = (radius - thumbIndexDistance) * growth + minimum;
-
+        let targetLineWidth = Math.max(
+          (radius - thumbIndexDistance) * growth + minimum
+        );
         ctx.lineWidth = (targetLineWidth - ctx.lineWidth) / 2;
-
         ctx.strokeStyle = processColor(color, opacity);
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.bezierCurveTo(lastX, lastY, x, y, x, y);
-        ctx.stroke();
-
+        if (!lastX) {
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+        } else {
+          ctx.quadraticCurveTo(lastX, lastY, x, y);
+          ctx.lineJoin = "bevel";
+          ctx.stroke();
+          if (
+            getDistance({ x, y }, { x: lastX, y: lastY }) >
+            transitionArrangement * 5
+          ) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+          }
+        }
         lastX = x;
         lastY = y;
       } else {
