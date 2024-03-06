@@ -10,9 +10,9 @@
   appearance: none;
   height: var(--gap-double);
   width: var(--gap-double);
-  border: 1px solid var(--color-black-light);
+  border: 1px solid var(--color-skin-dark);
   border-radius: var(--radius);
-  background: var(--color-skin);
+  background: var(--color-skin-mid-light);
 }
 
 :root {
@@ -24,14 +24,17 @@
   --color-silver: #ccc;
   --color-blue-light: #0ce;
   --color-blue: #068;
-  --color-skin: #c68c7f;
-  --color-skin-light: #f7c496;
+  --color-skin-dark: #2d1f14;
+  --color-skin-mid-dark: #6d4931;
+  --color-skin-mid: #c49a68;
+  --color-skin-mid-light: #e6bc98;
+  --color-skin-light: #ffe7d1;
   --color-yellow: #ec2;
   --color-yellow-semi: #fd28;
   --color-red: #c22;
 
-  --bg: var(--color-black-light);
-  --bg-input: var(--color-skin);
+  --bg: var(--color-skin-dark);
+  --bg-input: var(--color-skin-mid-light);
   --bg-input-active: var(--color-skin-light);
 
   --gradient-dark: linear-gradient(
@@ -94,8 +97,8 @@ body {
 
 button {
   margin: 0;
-  background: var(--bg-input);
-  color: var(--color-black);
+  background: var(--color-skin-mid-light);
+  color: var(--color-skin-dark);
   border: none;
   border-radius: 2rem;
   font-size: var(--font-size-m);
@@ -122,15 +125,15 @@ button {
 
 input {
   border-radius: var(--radius);
-  background: var(--color-black-light);
-  border: 1px solid var(--color-skin);
+  background: transparent;
+  border: 1px solid var(--color-skin-mid);
   padding: var(--gap-half);
-  color: var(--color-skin);
+  color: var(--color-skin-mid);
   &[type="range"] {
     appearance: none;
     height: var(--gap-half);
     margin-top: var(--gap-half);
-    background: var(--color-grey);
+    background: var(--color-skin-mid-dark);
     border: none;
     padding: 0;
     &::-webkit-slider-thumb {
@@ -164,7 +167,7 @@ button {
   &:hover,
   &:active,
   &.highlight {
-    background: var(--color-skin-light);
+    background: var(--color-skin-mid);
   }
 }
 
@@ -189,7 +192,7 @@ input[type="checkbox"] {
       width: var(--gap);
       height: var(--gap);
       border-radius: var(--radius);
-      border: 1px solid var(--color-skin);
+      border: 1px solid var(--color-skin-mid);
     }
 
     &:hover:before {
@@ -233,7 +236,6 @@ legend {
 #root {
   display: flex;
   height: 100vh;
-  background: var(--gradient-dark);
 }
 
 .menu {
@@ -243,7 +245,7 @@ legend {
   width: var(--menu-width);
   height: 100vh;
   padding: var(--gap);
-  background: var(--gradient-dark);
+  background: var(--color-skin-dark);
   color: var(--color-silver);
   margin: 0;
   display: grid;
@@ -284,7 +286,6 @@ legend {
       grid-column: span 4;
       font-size: 1.7rem;
       padding: 0.4rem;
-      background: var(--color-skin);
       box-shadow: 0 0.3rem 0.4rem #0002,
         0 -0.1rem 0 0.05rem var(--color-skin-light);
       font-family: "Noto Emoji", sans-serif;
@@ -469,18 +470,23 @@ label {
   right: 0;
   bottom: 0;
   left: 0;
-  background: var(--color-black-light-semi);
+  background: var(--color-skin-mid);
   flex-direction: column;
   justify-content: space-evenly;
   h1 {
     margin: 0;
     letter-spacing: 0.1rem;
     font-size: 3.8rem;
-    text-shadow: 0 0.3rem 0.4rem #0006, 0 -0.1rem 0.1rem #fff8;
-    color: var(--color-black-light-semi);
+    text-shadow: 0 0.1rem 0.1rem var(--color-skin-dark),
+      0 -0.1rem 0.1rem var(--color-skin-light);
+    color: var(--color-skin-mid);
   }
   h2 {
     margin: 0.5rem 0 0.7rem;
+  }
+  button:hover {
+    background: var(--color-skin-mid-dark);
+    color: var(--color-skin-mid-light);
   }
 }
 
@@ -491,18 +497,20 @@ label {
   margin: var(--gap) 0;
   path {
     transition: transform 0.3s ease-in-out;
-    transform-origin: center calc(100% - var(--gap)*4);
+    transform-origin: center calc(100% - var(--gap) * 4);
   }
 
-  button:hover & {
+  button:not(:hover) & {
     .eye-left,
     .eyebrow-left {
-      transform: translate(var(--gap-double), calc(-1 * var(--gap))) rotate(-30deg);
+      transform: translate(var(--gap-double), calc(-1 * var(--gap)))
+        rotate(-30deg);
     }
 
     .eye-right,
     .eyebrow-right {
-      transform: translate(calc(-1 * var(--gap-double)), calc(-1 * var(--gap))) rotate(30deg);
+      transform: translate(calc(-1 * var(--gap-double)), calc(-1 * var(--gap)))
+        rotate(30deg);
     }
 
     .nose {
@@ -513,6 +521,7 @@ label {
     }
   }
 }
+
 
 .drawing {
   position: relative;
