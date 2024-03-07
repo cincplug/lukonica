@@ -1,9 +1,18 @@
 import React from "react";
 
 const Cursor = (props) => {
-  const { cursor, hasCursorFingertips } = props;
-  const { x, y, wrist, thumbTip, indexTip, middleDip, isPinched, isWagging } =
-    cursor;
+  const { cursor, hasCursor, hasCursorFingertips } = props;
+  const {
+    x,
+    y,
+    thumbTip,
+    indexTip,
+    middleTip,
+    ringyTip,
+    pinkyTip,
+    isPinched,
+    isWagging
+  } = cursor;
   return (
     <>
       {hasCursorFingertips && thumbTip && (
@@ -25,20 +34,27 @@ const Cursor = (props) => {
           <div
             className={`cursor cursor--fingertip`}
             style={{
-              left: middleDip?.x,
-              top: middleDip?.y
+              left: middleTip?.x,
+              top: middleTip?.y
             }}
           ></div>
           <div
             className={`cursor cursor--fingertip`}
             style={{
-              left: wrist?.x,
-              top: wrist?.y
+              left: ringyTip?.x,
+              top: ringyTip?.y
+            }}
+          ></div>
+          <div
+            className={`cursor cursor--fingertip`}
+            style={{
+              left: pinkyTip?.x,
+              top: pinkyTip?.y
             }}
           ></div>
         </>
       )}
-      {x > 0 && (
+      {hasCursor && x > 0 && (
         <div
           className={`cursor cursor--${
             isPinched ? "active" : "inactive"

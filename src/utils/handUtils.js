@@ -5,7 +5,7 @@ import {
   checkElementPinch
 } from "./index";
 
-let lastX, lastY;
+let lastX, lastY, lastTips;
 
 export const processHands = ({
   setupRef,
@@ -27,7 +27,8 @@ export const processHands = ({
     pinchThreshold,
     usesButtonPinch,
     showsFaces,
-    transitionArrangement
+    transitionArrangement,
+    hasCursorFingertips
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {
@@ -40,12 +41,14 @@ export const processHands = ({
   const wrist = hands[0]?.keypoints[0];
   const thumbTip = hands[0]?.keypoints[4];
   const indexTip = hands[0]?.keypoints[8];
-  const middleDip = hands[0]?.keypoints[11];
+  const middleTip = hands[0]?.keypoints[12];
+  const ringyTip = hands[0]?.keypoints[16];
+  const pinkyTip = hands[0]?.keypoints[20];
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = thumbIndexDistance < pinchThreshold;
   const isWagging =
     !isPinched &&
-    (wrist.y - indexTip.y) / (wrist.y - middleDip.y) > 2 &&
+    (wrist.y - indexTip.y) / (wrist.y - middleTip.y) > 2 &&
     (wrist.y - indexTip.y) / (wrist.x - indexTip.x) > 2;
   const x = (thumbTip.x + indexTip.x) / 2;
   const y = (thumbTip.y + indexTip.y) / 2;
@@ -59,10 +62,11 @@ export const processHands = ({
     return {
       x,
       y,
-      wrist,
       thumbTip,
       indexTip,
-      middleDip,
+      middleTip,
+      ringyTip,
+      pinkyTip,
       isWagging,
       isPinched: thumbIndexDistance < threshold
     };
@@ -96,8 +100,31 @@ export const processHands = ({
     if (pattern === "canvas" && ctx) {
       if (isWagging) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        lastX = undefined;
+        lastY = undefined;
+        lastTips = undefined;
       }
-      if (isPinched) {
+      if (hasCursorFingertips) {
+        const tips = {
+          thumbTip,
+          indexTip,
+          middleTip,
+          ringyTip,
+          pinkyTip
+        };
+        processScratchCanvas({
+          radius,
+          growth,
+          minimum,
+          ctx,
+          color,
+          opacity,
+          tips
+        });
+      } else {
+        lastTips = undefined;
+      }
+      if (isPinched && !hasCursorFingertips) {
         processPinchCanvas({
           radius,
           thumbIndexDistance,
@@ -166,4 +193,33 @@ const processPinchCanvas = ({
   }
   lastX = x;
   lastY = y;
+};
+
+const processScratchCanvas = ({
+  radius,
+  growth,
+  minimum,
+  ctx,
+  color,
+  opacity,
+  tips
+}) => {
+  let targetLineWidth = radius * growth + minimum;
+  ctx.strokeStyle = processColor(color, opacity);
+  if (lastTips) {
+    ctx.beginPath();
+    Object.keys(tips).forEach((tip, tipIndex) => {
+      ctx.moveTo(lastTips[tip].x, lastTips[tip].y);
+      ctx.lineWidth = targetLineWidth - ctx.lineWidth + tipIndex;
+      ctx.quadraticCurveTo(
+        lastTips[tip].x,
+        lastTips[tip].y,
+        tips[tip].x,
+        tips[tip].y
+      );
+      ctx.stroke();
+    });
+    ctx.lineJoin = "bevel";
+  }
+  lastTips = { ...tips };
 };

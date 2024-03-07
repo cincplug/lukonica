@@ -219,6 +219,7 @@ const App = () => {
               <canvas ref={canvasRef} width={width} height={height}></canvas>
               <Cursor
                 cursor={cursor}
+                hasCursor={setup.hasCursor}
                 hasCursorFingertips={setup.hasCursorFingertips}
               />
             </div>
