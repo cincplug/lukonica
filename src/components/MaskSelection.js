@@ -5,10 +5,11 @@ import DEFAULT_MASKS from "../data/defaultMasks.json";
 import DEFAULT_SETUP from "../_setup.json";
 import scenarios from "../data/scenarios.json";
 import { renderPath } from "../utils";
+import HandPointSelection from "./HandPointSelection";
 
 const MaskSelection = (props) => {
   const { setActiveMask, setup, setSetup, handleInputChange } = props;
-  const { activeMaskIndex, showsFaces } = setup;
+  const { activeMaskIndex, showsFaces, pattern } = setup;
   const [masks, setMasks] = useState(DEFAULT_MASKS);
 
   const fetchMoreMasks = () => {
@@ -101,6 +102,7 @@ const MaskSelection = (props) => {
           );
         })}
       </fieldset>
+      {!showsFaces && pattern === "canvas" && <HandPointSelection />}
       {showsFaces && (masks || DEFAULT_MASKS) && (
         <fieldset className="menu--masks">
           <legend>Masks</legend>

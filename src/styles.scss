@@ -522,7 +522,6 @@ label {
   }
 }
 
-
 .drawing {
   position: relative;
 }
@@ -583,4 +582,17 @@ label {
 
 .ball {
   fill: var(--color-yellow);
+}
+
+.hand-selection {
+  grid-column: 3 / span 8;
+}
+.hand-point {
+  fill: var(--color-skin-mid-dark);
+  &:hover {
+    fill: var(--color-skin-mid);
+  }
+  &.selected {
+    fill: var(--color-skin-light);
+  }
 }
