@@ -1,5 +1,5 @@
-import { processFaces } from "./faceUtils";
-import { processHands } from "./handUtils";
+import { processFaces } from "./processFaces";
+import { processHands } from "./processHands";
 
 export const runDetector = async ({
   video,

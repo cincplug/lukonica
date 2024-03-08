@@ -1,9 +1,10 @@
 import {
-  processColor,
   findClosestFacePointIndex,
   getDistance,
   checkElementPinch
 } from "./index";
+import { pinchCanvas } from './pinchCanvas';
+import { scratchCanvas } from './scratchCanvas';
 
 let lastX, lastY, lastTips;
 
@@ -113,7 +114,7 @@ export const processHands = ({
           ringyTip,
           pinkyTip
         };
-        processScratchCanvas({
+        lastTips = scratchCanvas({
           radius,
           growth,
           minimum,
@@ -121,13 +122,14 @@ export const processHands = ({
           color,
           opacity,
           tips,
-          scratchPattern
+          scratchPattern,
+          lastTips
         });
       } else {
         lastTips = undefined;
       }
       if (isPinched && !hasCursorFingertips) {
-        processPinchCanvas({
+        let result = pinchCanvas({
           radius,
           thumbIndexDistance,
           growth,
@@ -137,8 +139,12 @@ export const processHands = ({
           opacity,
           transitionArrangement,
           x,
-          y
+          y,
+          lastX,
+          lastY
         });
+        lastX = result.lastX;
+        lastY = result.lastY;
       } else {
         lastX = undefined;
         lastY = undefined;
@@ -159,101 +165,4 @@ export const processHands = ({
     }
   }
   return [...points, ...newPoints];
-};
-
-const processPinchCanvas = ({
-  radius,
-  thumbIndexDistance,
-  growth,
-  minimum,
-  ctx,
-  color,
-  opacity,
-  transitionArrangement,
-  x,
-  y
-}) => {
-  let targetLineWidth = Math.max(
-    (radius - thumbIndexDistance) * growth + minimum
-  );
-  ctx.lineWidth = (targetLineWidth - ctx.lineWidth) / 2;
-  ctx.strokeStyle = processColor(color, opacity);
-  if (!lastX) {
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-  } else {
-    ctx.quadraticCurveTo(lastX, lastY, x, y);
-    ctx.lineJoin = "bevel";
-    ctx.stroke();
-    if (
-      getDistance({ x, y }, { x: lastX, y: lastY }) >
-      transitionArrangement * 5
-    ) {
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-    }
-  }
-  lastX = x;
-  lastY = y;
-};
-
-const processScratchCanvas = ({
-  radius,
-  growth,
-  minimum,
-  ctx,
-  color,
-  opacity,
-  tips,
-  scratchPattern
-}) => {
-  let targetLineWidth = radius * growth + minimum;
-  ctx.strokeStyle = processColor(color, opacity);
-  if (lastTips) {
-    ctx.beginPath();
-    if (scratchPattern === "quadratics" || scratchPattern === "tetrics") {
-      const tipValues = Object.values(tips);
-      tipValues.forEach((tip, tipIndex) => {
-        const prevIndex = tipIndex === 0 ? tipValues.length - 1 : tipIndex - 1;
-        if (scratchPattern === "quadratics") {
-          ctx.quadraticCurveTo(
-            tipValues[tipIndex].x,
-            tipValues[tipIndex].y,
-            tipValues[prevIndex].x,
-            tipValues[prevIndex].y
-          );
-        } else {
-          ctx.rect(
-            tipValues[tipIndex].x,
-            tipValues[tipIndex].y,
-            tipValues[prevIndex].x - tipValues[tipIndex].x,
-            tipValues[prevIndex].y - tipValues[tipIndex].y
-          );
-        }
-      });
-    }
-    Object.keys(tips).forEach((tip, tipIndex) => {
-      ctx.moveTo(lastTips[tip].x, lastTips[tip].y);
-      ctx.lineWidth = targetLineWidth - ctx.lineWidth + tipIndex;
-      if (scratchPattern === "lines") {
-        ctx.quadraticCurveTo(
-          lastTips[tip].x,
-          lastTips[tip].y,
-          tips[tip].x,
-          tips[tip].y
-        );
-      }
-      if (scratchPattern === "rectangles") {
-        ctx.rect(
-          lastTips[tip].x,
-          lastTips[tip].y,
-          tips[tip].x - lastTips[tip].x,
-          tips[tip].y - lastTips[tip].y
-        );
-      }
-      ctx.stroke();
-    });
-    ctx.lineJoin = "bevel";
-  }
-  lastTips = { ...tips };
 };
