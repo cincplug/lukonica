@@ -169,6 +169,15 @@
     "options": ["lines", "arcs", "quadratics", "beziers", "bezinerves", "watermelons"]
   },
   {
+    "id": "scratchPattern",
+    "title": "Scratch pattern",
+    "description": "Sub-pattern of scratch canvas",
+    "value": "lines",
+    "type": "select",
+    "parentPattern": "canvas",
+    "options": ["lines", "rectangles", "quadratics", "tetrics"]
+  },
+  {
     "id": "showsFaces",
     "title": "Faces",
     "description": "Turns face recognition on / off",
