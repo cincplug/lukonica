@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import DEFAULT_FACE_POINTS from "../data/defaultFacePoints.json";
-import { renderPath, saveJson } from "../utils";
+import DEFAULT_FACE_POINTS from "../../data/defaultFacePoints.json";
+import { renderPath, saveJson } from "../../utils";
 
 function MaskEditor(props) {
   const { inputResolution, setIsEditing, activeMask } = props;

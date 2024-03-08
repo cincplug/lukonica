@@ -1,4 +1,4 @@
-import DEFAULT_HAND_POINTS from "../data/defaultHandPoints.json";
+import DEFAULT_HAND_POINTS from "../../data/defaultHandPoints.json";
 import React, { useState } from "react";
 
 function HandPointSelection() {

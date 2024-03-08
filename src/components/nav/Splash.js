@@ -1,4 +1,4 @@
-import { ReactComponent as Logo } from "../assets/lukonica-logo.svg";
+import { ReactComponent as Logo } from "../../assets/lukonica-logo.svg";
 
 const Splash = (props) => {
   const { setIsEditing, handlePlayButtonClick } = props;

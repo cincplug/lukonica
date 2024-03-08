@@ -4,10 +4,10 @@ import "@tensorflow/tfjs-backend-webgl";
 import DEFAULT_SETUP from "../_setup.json";
 import { runDetector } from "../utils/runDetector";
 import Webcam from "react-webcam";
+import Menu from "./nav/Menu";
+import MaskEditor from "./nav/MaskEditor";
+import Splash from "./nav/Splash";
 import Drawing from "./Drawing";
-import Menu from "./Menu";
-import MaskEditor from "./MaskEditor";
-import Splash from "./Splash";
 import Cursor from "./Cursor";
 import "../styles.scss";
 
