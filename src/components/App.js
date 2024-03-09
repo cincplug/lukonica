@@ -185,6 +185,20 @@ const App = () => {
       }
     }
   }, [cursor.isPinched, customMaskNewArea.length, scribbleNewArea.length]);
+  
+  const menu = (
+    <Menu
+      {...{
+        setup,
+        handleInputChange,
+        setSetup,
+        setActiveMask,
+        setPoints,
+        clearPaths,
+        activeMask: activeMask.concat(customMask)
+      }}
+    />
+  );
 
   return (
     <div
@@ -193,7 +207,7 @@ const App = () => {
       }`}
       style={{ width, height }}
     >
-      {isStarted && (
+      {isStarted ? (
         <>
           <svg
             className="bg"
@@ -218,12 +232,14 @@ const App = () => {
             mirrored={true}
             imageSmoothing={false}
           />
-          {setup.pattern === "canvas" && (
-            <div className="wrap">
-              <canvas ref={canvasRef} width={width} height={height}></canvas>
-            </div>
-          )}
-          {isLoaded && setup.pattern !== "canvas" && (
+          {setup.pattern === "canvas" ? (
+            <canvas
+              className="wrap"
+              ref={canvasRef}
+              width={width}
+              height={height}
+            ></canvas>
+          ) : (
             <Drawing
               {...{
                 inputResolution,
@@ -251,42 +267,13 @@ const App = () => {
             hasCursorFingertips={setup.hasCursorFingertips}
           />
         </>
+      ) : (
+        <Splash {...{ setIsEditing, handlePlayButtonClick }} />
       )}
-      {!isStarted && <Splash {...{ setIsEditing, handlePlayButtonClick }} />}
       <Router>
         <Routes>
-          <Route
-            path="/:scenario"
-            element={
-              <Menu
-                {...{
-                  setup,
-                  handleInputChange,
-                  setSetup,
-                  setActiveMask,
-                  setPoints,
-                  clearPaths,
-                  activeMask: activeMask.concat(customMask)
-                }}
-              />
-            }
-          />
-          <Route
-            path="/*"
-            element={
-              <Menu
-                {...{
-                  setup,
-                  handleInputChange,
-                  setSetup,
-                  setActiveMask,
-                  setPoints,
-                  clearPaths,
-                  activeMask: activeMask.concat(customMask)
-                }}
-              />
-            }
-          />
+          <Route path="/:scenario" element={menu} />
+          <Route path="/*" element={menu} />
         </Routes>
       </Router>
       {isEditing ? (
