@@ -549,18 +549,17 @@ label {
   border-radius: var(--gap);
   transform: translate(-50%, -50%);
   transition: all 0.1s ease-out;
-  &--active {
+  &.fingertip {
+    opacity: 0.7;
+    width: var(--gap);
+    height: var(--gap);
+  }
+  &.active {
     transform: translate(-50%, -50%) scale(0.5);
     background: var(--color-blue-light);
   }
-  &--wagging {
+  &.wagging {
     background: var(--color-red);
-  }
-  &--fingertip {
-    opacity: 0.7;
-    background: var(--color-black-light);
-    width: var(--gap);
-    height: var(--gap);
   }
 }
 

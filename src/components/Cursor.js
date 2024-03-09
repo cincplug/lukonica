@@ -13,40 +13,43 @@ const Cursor = (props) => {
     isPinched,
     isWagging
   } = cursor;
+
+  const pinchClass = isPinched ? "active" : "inactive";
+  const wagClass = isWagging ? "wagging" : "not-wagging";
   return (
     <>
       {hasCursorFingertips && thumbTip && (
         <>
           <div
-            className={`cursor cursor--fingertip`}
+            className={`cursor fingertip`}
             style={{
               left: thumbTip?.x,
               top: thumbTip?.y
             }}
           ></div>
           <div
-            className={`cursor cursor--fingertip`}
+            className={`cursor fingertip ${wagClass}`}
             style={{
               left: indexTip?.x,
               top: indexTip?.y
             }}
           ></div>
           <div
-            className={`cursor cursor--fingertip`}
+            className={`cursor fingertip`}
             style={{
               left: middleTip?.x,
               top: middleTip?.y
             }}
           ></div>
           <div
-            className={`cursor cursor--fingertip`}
+            className={`cursor fingertip`}
             style={{
               left: ringyTip?.x,
               top: ringyTip?.y
             }}
           ></div>
           <div
-            className={`cursor cursor--fingertip`}
+            className={`cursor fingertip`}
             style={{
               left: pinkyTip?.x,
               top: pinkyTip?.y
@@ -56,9 +59,7 @@ const Cursor = (props) => {
       )}
       {hasCursor && x > 0 && (
         <div
-          className={`cursor cursor--${
-            isPinched ? "active" : "inactive"
-          } cursor--${isWagging ? "wagging" : "not-wagging"}`}
+          className={`cursor ${pinchClass} ${wagClass}`}
           style={{ left: x, top: y }}
         ></div>
       )}

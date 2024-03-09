@@ -3,8 +3,8 @@ import {
   getDistance,
   checkElementPinch
 } from "./index";
-import { pinchCanvas } from './pinchCanvas';
-import { scratchCanvas } from './scratchCanvas';
+import { pinchCanvas } from "./pinchCanvas";
+import { scratchCanvas } from "./scratchCanvas";
 
 let lastX, lastY, lastTips;
 
@@ -40,12 +40,13 @@ export const processHands = ({
       }
     });
   }
-  const wrist = hands[0]?.keypoints[0];
-  const thumbTip = hands[0]?.keypoints[4];
-  const indexTip = hands[0]?.keypoints[8];
-  const middleTip = hands[0]?.keypoints[12];
-  const ringyTip = hands[0]?.keypoints[16];
-  const pinkyTip = hands[0]?.keypoints[20];
+  const handPoints = hands[0]?.keypoints;
+  const wrist = handPoints[0];
+  const thumbTip = handPoints[4];
+  const indexTip = handPoints[8];
+  const middleTip = handPoints[12];
+  const ringyTip = handPoints[16];
+  const pinkyTip = handPoints[20];
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = thumbIndexDistance < pinchThreshold;
   const isWagging =
@@ -61,17 +62,18 @@ export const processHands = ({
     if (usesButtonPinch && thumbIndexDistance < pinchThreshold * 4) {
       checkElementPinch({ x, y, isPinched });
     }
-    return {
-      x,
-      y,
-      thumbTip,
-      indexTip,
-      middleTip,
-      ringyTip,
-      pinkyTip,
-      isWagging,
-      isPinched: thumbIndexDistance < threshold
-    };
+    const nextCursor = hasCursorFingertips
+      ? {
+          thumbTip,
+          indexTip,
+          middleTip,
+          ringyTip,
+          pinkyTip
+        }
+      : { x, y };
+    nextCursor.isWagging = isWagging;
+    nextCursor.isPinched = thumbIndexDistance < threshold;
+    return nextCursor;
   });
 
   if (showsFaces && isPinched) {
