@@ -2,61 +2,23 @@ import React from "react";
 
 const Cursor = (props) => {
   const { cursor, hasCursor, hasCursorFingertips } = props;
-  const {
-    x,
-    y,
-    thumbTip,
-    indexTip,
-    middleTip,
-    ringyTip,
-    pinkyTip,
-    isPinched,
-    isWagging
-  } = cursor;
+  const { x, y, tips, isPinched, isWagging } = cursor;
 
   const pinchClass = isPinched ? "active" : "inactive";
   const wagClass = isWagging ? "wagging" : "not-wagging";
   return (
     <>
-      {hasCursorFingertips && thumbTip && (
-        <>
-          <div
-            className={`cursor fingertip`}
-            style={{
-              left: thumbTip?.x,
-              top: thumbTip?.y
-            }}
-          ></div>
+      {hasCursorFingertips &&
+        tips?.map((tip, tipIndex) => (
           <div
             className={`cursor fingertip ${wagClass}`}
+            key={tipIndex}
             style={{
-              left: indexTip?.x,
-              top: indexTip?.y
+              left: tip?.x,
+              top: tip?.y
             }}
           ></div>
-          <div
-            className={`cursor fingertip`}
-            style={{
-              left: middleTip?.x,
-              top: middleTip?.y
-            }}
-          ></div>
-          <div
-            className={`cursor fingertip`}
-            style={{
-              left: ringyTip?.x,
-              top: ringyTip?.y
-            }}
-          ></div>
-          <div
-            className={`cursor fingertip`}
-            style={{
-              left: pinkyTip?.x,
-              top: pinkyTip?.y
-            }}
-          ></div>
-        </>
-      )}
+        ))}
       {hasCursor && x > 0 && (
         <div
           className={`cursor ${pinchClass} ${wagClass}`}

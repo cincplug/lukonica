@@ -16,6 +16,7 @@ export const processHands = ({
   setCustomMaskNewArea,
   setCustomMask,
   setScribbleNewArea,
+  scratchPoints,
   ctx
 }) => {
   const {
@@ -40,13 +41,12 @@ export const processHands = ({
       }
     });
   }
-  const scratchPoints = hands[0]?.keypoints;
-  const wrist = scratchPoints[0];
-  const thumbTip = scratchPoints[4];
-  const indexTip = scratchPoints[8];
-  const middleTip = scratchPoints[12];
-  const ringyTip = scratchPoints[16];
-  const pinkyTip = scratchPoints[20];
+  const handPoints = hands[0]?.keypoints;
+  const wrist = handPoints[0];
+  const thumbTip = handPoints[4];
+  const indexTip = handPoints[8];
+  const middleTip = handPoints[12];
+  const tips = scratchPoints.map((point, index) => handPoints[point]);
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = thumbIndexDistance < pinchThreshold;
   const isWagging =
@@ -62,15 +62,7 @@ export const processHands = ({
     if (usesButtonPinch && thumbIndexDistance < pinchThreshold * 4) {
       checkElementPinch({ x, y, isPinched });
     }
-    const nextCursor = hasCursorFingertips
-      ? {
-          thumbTip,
-          indexTip,
-          middleTip,
-          ringyTip,
-          pinkyTip
-        }
-      : { x, y };
+    const nextCursor = hasCursorFingertips ? { tips } : { x, y };
     nextCursor.isWagging = isWagging;
     nextCursor.isPinched = thumbIndexDistance < threshold;
     return nextCursor;
@@ -109,13 +101,6 @@ export const processHands = ({
         lastTips = undefined;
       }
       if (hasCursorFingertips) {
-        const tips = {
-          thumbTip,
-          indexTip,
-          middleTip,
-          ringyTip,
-          pinkyTip
-        };
         lastTips = scratchCanvas({
           radius,
           growth,

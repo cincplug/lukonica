@@ -37,6 +37,7 @@ export const scratchCanvas = ({
       });
     }
     Object.keys(tips).forEach((tip, tipIndex) => {
+      if (!lastTips[tip]) return;
       ctx.moveTo(lastTips[tip].x, lastTips[tip].y);
       ctx.lineWidth = targetLineWidth - ctx.lineWidth + tipIndex;
       if (scratchPattern === "lines") {
