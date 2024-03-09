@@ -67,7 +67,7 @@ const App = () => {
     setPoints([]);
     setCustomMask([]);
     setCustomMaskNewArea([]);
-    if(canvasRef.current){
+    if (canvasRef.current) {
       const ctx = canvasRef.current.getContext("2d");
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
@@ -221,11 +221,6 @@ const App = () => {
           {setup.pattern === "canvas" && (
             <div className="wrap">
               <canvas ref={canvasRef} width={width} height={height}></canvas>
-              <Cursor
-                cursor={cursor}
-                hasCursor={setup.hasCursor}
-                hasCursorFingertips={setup.hasCursorFingertips}
-              />
             </div>
           )}
           {isLoaded && setup.pattern !== "canvas" && (
@@ -250,6 +245,11 @@ const App = () => {
           >
             Stop camera
           </button>
+          <Cursor
+            cursor={cursor}
+            hasCursor={setup.hasCursor}
+            hasCursorFingertips={setup.hasCursorFingertips}
+          />
         </>
       )}
       {!isStarted && <Splash {...{ setIsEditing, handlePlayButtonClick }} />}
