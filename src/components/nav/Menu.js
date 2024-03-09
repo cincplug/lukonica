@@ -3,7 +3,7 @@ import ControlGroup from "./Controls";
 import Buttons from "./Buttons";
 import MaskSelection from "./MaskSelection";
 import ScenarioSelection from "./ScenarioSelection";
-import HandPointSelection from "./HandPointSelection";
+import ScratchPointSelection from "./ScratchPointSelection";
 
 const Menu = (props) => {
   const {
@@ -12,7 +12,9 @@ const Menu = (props) => {
     handleInputChange,
     activeMask,
     setActiveMask,
-    clearPaths
+    clearPaths,
+    scratchPoints,
+    setScratchPoints
   } = props;
   const { showsFaces, pattern } = setup;
 
@@ -32,7 +34,9 @@ const Menu = (props) => {
       </nav>
       <nav className={`menu menu--secondary`}>
         <ScenarioSelection {...{ setup, setSetup, handleInputChange }} />
-        {!showsFaces && pattern === "canvas" && <HandPointSelection />}
+        {!showsFaces && pattern === "canvas" && (
+          <ScratchPointSelection {...{ scratchPoints, setScratchPoints }} />
+        )}
         {showsFaces && (
           <MaskSelection {...{ setActiveMask, setup, handleInputChange }} />
         )}

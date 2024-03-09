@@ -28,6 +28,7 @@ const App = () => {
   const [scribbleNewArea, setScribbleNewArea] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
   const [handsCount, setHandsCount] = useState(0);
+  const [scratchPoints, setScratchPoints] = useState([]);
 
   const storageSetupItem = "lukonicaSetup";
   const storedSetupRaw = sessionStorage.getItem(storageSetupItem);
@@ -116,6 +117,7 @@ const App = () => {
         setHandsCount,
         setScribble,
         setScribbleNewArea,
+        setScratchPoints,
         activeMask,
         ctx: ctx || null
       }).then((stop) => {
@@ -185,7 +187,7 @@ const App = () => {
       }
     }
   }, [cursor.isPinched, customMaskNewArea.length, scribbleNewArea.length]);
-  
+
   const menu = (
     <Menu
       {...{
@@ -195,7 +197,9 @@ const App = () => {
         setActiveMask,
         setPoints,
         clearPaths,
-        activeMask: activeMask.concat(customMask)
+        activeMask: activeMask.concat(customMask),
+        scratchPoints,
+        setScratchPoints,
       }}
     />
   );

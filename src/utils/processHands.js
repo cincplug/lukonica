@@ -40,13 +40,13 @@ export const processHands = ({
       }
     });
   }
-  const handPoints = hands[0]?.keypoints;
-  const wrist = handPoints[0];
-  const thumbTip = handPoints[4];
-  const indexTip = handPoints[8];
-  const middleTip = handPoints[12];
-  const ringyTip = handPoints[16];
-  const pinkyTip = handPoints[20];
+  const scratchPoints = hands[0]?.keypoints;
+  const wrist = scratchPoints[0];
+  const thumbTip = scratchPoints[4];
+  const indexTip = scratchPoints[8];
+  const middleTip = scratchPoints[12];
+  const ringyTip = scratchPoints[16];
+  const pinkyTip = scratchPoints[20];
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = thumbIndexDistance < pinchThreshold;
   const isWagging =

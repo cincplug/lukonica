@@ -1,14 +1,11 @@
-import DEFAULT_HAND_POINTS from "../../data/defaultHandPoints.json";
-import React, { useState } from "react";
+import DEFAULT_HAND_POINTS from "../../data/defaultScratchPoints.json";
 
-function HandPointSelection() {
-  const [handPoints, setHandPoints] = useState([]);
-
+function ScratchPointSelection({ scratchPoints, setScratchPoints }) {
   const handlePointClick = (index) => {
-    if (handPoints.includes(index)) {
-      setHandPoints(handPoints.filter((point) => point !== index));
+    if (scratchPoints.includes(index)) {
+      setScratchPoints(scratchPoints.filter((point) => point !== index));
     } else {
-      setHandPoints([...handPoints, index]);
+      setScratchPoints([...scratchPoints, index]);
     }
   };
 
@@ -26,7 +23,7 @@ function HandPointSelection() {
           r={20}
           onClick={() => handlePointClick(index)}
           className={`hand-point ${
-            handPoints.includes(index) ? "selected" : "not-selected"
+            scratchPoints.includes(index) ? "selected" : "not-selected"
           }`}
         >
           {index}
@@ -36,4 +33,4 @@ function HandPointSelection() {
   );
 }
 
-export default HandPointSelection;
+export default ScratchPointSelection;
