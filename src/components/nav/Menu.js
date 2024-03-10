@@ -24,6 +24,7 @@ const Menu = (props) => {
           controls={DEFAULT_SETUP.filter(
             (control) =>
               !control.isHidden &&
+              !control.parentScenario &&
               (!control.parentPattern ||
                 control.parentPattern === setup.pattern)
           )}
@@ -35,6 +36,13 @@ const Menu = (props) => {
         {!showsFaces && hasCursorFingertips && pattern === "canvas" && (
           <ScratchPointSelection {...{ setup, handleInputChange }} />
         )}
+        <ControlGroup
+          {...{ setup, handleInputChange }}
+          controls={DEFAULT_SETUP.filter(
+            (control) =>
+              !control.isHidden && control.parentScenario === "scratch-canvas"
+          )}
+        />
         {showsFaces && (
           <MaskSelection {...{ setActiveMask, setup, handleInputChange }} />
         )}

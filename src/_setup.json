@@ -165,7 +165,7 @@
     "description": "Sub-pattern of paths",
     "value": "lines",
     "type": "select",
-    "parentPattern": "paths",
+    "Pattern": "paths",
     "options": [
       "lines",
       "arcs",
@@ -176,25 +176,25 @@
     ]
   },
   {
-    "id": "scratchPattern",
-    "title": "Scratch pattern",
-    "description": "Sub-pattern of scratch canvas",
-    "value": "lines",
-    "type": "select",
-    "parentPattern": "canvas",
-    "options": ["lines", "rectangles", "quadratics", "tetrics"]
-  },
-  {
     "id": "squeezeRatio",
     "title": "Squeeze ratio",
     "description": "How much will the scratch pattern be squeezed for better accuracy",
     "value": 40,
     "type": "range",
     "isHidden": false,
-    "parentPattern": "canvas",
+    "parentScenario": "scratch-canvas",
     "min": 1,
     "max": 100,
     "step": 1
+  },
+  {
+    "id": "scratchPattern",
+    "title": "Scratch pattern",
+    "description": "Sub-pattern of scratch canvas",
+    "value": "lines",
+    "type": "select",
+    "parentScenario": "scratch-canvas",
+    "options": ["lines", "rectangles", "quadratics", "tetrics"]
   },
   {
     "id": "showsFaces",
