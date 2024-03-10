@@ -166,7 +166,14 @@
     "value": "lines",
     "type": "select",
     "parentPattern": "paths",
-    "options": ["lines", "arcs", "quadratics", "beziers", "bezinerves", "watermelons"]
+    "options": [
+      "lines",
+      "arcs",
+      "quadratics",
+      "beziers",
+      "bezinerves",
+      "watermelons"
+    ]
   },
   {
     "id": "scratchPattern",
@@ -176,6 +183,18 @@
     "type": "select",
     "parentPattern": "canvas",
     "options": ["lines", "rectangles", "quadratics", "tetrics"]
+  },
+  {
+    "id": "squeezeRatio",
+    "title": "Squeeze ratio",
+    "description": "How much will the scratch pattern be squeezed for better accuracy",
+    "value": 40,
+    "type": "range",
+    "isHidden": false,
+    "parentPattern": "canvas",
+    "min": 1,
+    "max": 100,
+    "step": 1
   },
   {
     "id": "showsFaces",
@@ -195,14 +214,14 @@
   },
   {
     "id": "hasCursor",
-    "title":"Cursor",
+    "title": "Cursor",
     "description": "Shows or hides cursor",
     "value": true,
     "type": "checkbox"
   },
   {
     "id": "hasCursorFingertips",
-    "title":"Fingertips",
+    "title": "Fingertips",
     "description": "Shows or hides thumb and forefinger tip",
     "value": false,
     "type": "checkbox"

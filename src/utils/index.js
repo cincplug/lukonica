@@ -25,6 +25,27 @@ export const getDistance = (point1, point2) => {
   return Math.sqrt(dx * dx + dy * dy);
 };
 
+export const squeezePoints = ({ points, squeezeRatio }) => {
+  if (points.length === 0) {
+    return null;
+  }
+  const center = points.reduce(
+    (total, point, index, array) => {
+      return {
+        x: total.x + point.x / array.length,
+        y: total.y + point.y / array.length
+      };
+    },
+    { x: 0, y: 0 }
+  );
+  return points.map((point) => {
+    return {
+      x: center.x + ((point.x - center.x) * squeezeRatio) / 100,
+      y: center.y + ((point.y - center.y) * squeezeRatio) / 100
+    };
+  });
+};
+
 export const processColor = (color, opacity) => {
   return `${color}${Math.min(255, Math.max(0, Math.round(opacity)))
     .toString(16)
@@ -77,7 +98,7 @@ export const saveSvg = () => {
   link.dispatchEvent(e);
 };
 
-export const checkElementPinch = ({x, y, isPinched}) => {
+export const checkElementPinch = ({ x, y, isPinched }) => {
   const element = document.elementFromPoint(x, y);
   if (!element) {
     return;
@@ -92,7 +113,7 @@ export const checkElementPinch = ({x, y, isPinched}) => {
   } else {
     clearHighlight();
   }
-}
+};
 
 const clearHighlight = () => {
   const highlightedElement = document.querySelector(".highlight");

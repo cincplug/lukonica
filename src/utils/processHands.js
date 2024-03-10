@@ -1,7 +1,8 @@
 import {
   findClosestFacePointIndex,
   getDistance,
-  checkElementPinch
+  checkElementPinch,
+  squeezePoints
 } from "./index";
 import { pinchCanvas } from "./pinchCanvas";
 import { scratchCanvas } from "./scratchCanvas";
@@ -31,7 +32,8 @@ export const processHands = ({
     transitionArrangement,
     hasCursorFingertips,
     scratchPattern,
-    scratchPoints
+    scratchPoints,
+    squeezeRatio
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {
@@ -46,7 +48,10 @@ export const processHands = ({
   const thumbTip = handPoints[4];
   const indexTip = handPoints[8];
   const middleTip = handPoints[12];
-  const tips = scratchPoints.map((point, index) => handPoints[point]);
+  const tips = squeezePoints({
+    points: scratchPoints.map((point, index) => handPoints[point]),
+    squeezeRatio
+  });
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = thumbIndexDistance < pinchThreshold;
   const isWagging =
