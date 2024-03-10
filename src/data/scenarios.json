@@ -610,6 +610,7 @@
     "text": "",
     "textLimit": 100,
     "ballSpeed": 0,
-    "usesButtonPinch": false
+    "usesButtonPinch": false,
+    "scratchPattern": "lines"
   }
 }
