@@ -10,7 +10,6 @@ export const runDetector = async ({
   setCursor,
   setHandsCount,
   setScribbleNewArea,
-  scratchPoints,
   ctx
 }) => {
   let frame = 0;
@@ -83,7 +82,6 @@ export const runDetector = async ({
           setCustomMaskNewArea,
           setCustomMask,
           setScribbleNewArea,
-          scratchPoints,
           ctx
         });
         points = [...points, ...handPoints];

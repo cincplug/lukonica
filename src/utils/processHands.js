@@ -16,7 +16,6 @@ export const processHands = ({
   setCustomMaskNewArea,
   setCustomMask,
   setScribbleNewArea,
-  scratchPoints,
   ctx
 }) => {
   const {
@@ -31,7 +30,8 @@ export const processHands = ({
     showsFaces,
     transitionArrangement,
     hasCursorFingertips,
-    scratchPattern
+    scratchPattern,
+    scratchPoints
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {

@@ -270,9 +270,17 @@
   {
     "id": "usesButtonPinch",
     "title": "Button pinch",
-    "description": "Simulate click / hover by pinch on buttons",
+    "description": "Simulates click / hover by pinch on buttons",
     "isHidden": true,
     "value": false,
     "type": "checkbox"
+  },
+  {
+    "id": "scratchPoints",
+    "title": "Scratch points",
+    "description": "Defines which hand points are used to draw on scratch canvas",
+    "isHidden": true,
+    "value": [4, 8, 12, 16, 20],
+    "type": "hidden"
   }
 ]

@@ -611,6 +611,7 @@
     "textLimit": 100,
     "ballSpeed": 0,
     "usesButtonPinch": false,
-    "scratchPattern": "lines"
+    "scratchPattern": "lines",
+    "scratchPoints": [4, 8, 12, 16, 20]
   }
 }

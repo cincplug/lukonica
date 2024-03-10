@@ -1,12 +1,19 @@
 import DEFAULT_HAND_POINTS from "../../data/defaultScratchPoints.json";
 
-function ScratchPointSelection({ scratchPoints, setScratchPoints }) {
+function ScratchPointSelection({ setup, handleInputChange }) {
+  const { scratchPoints } = setup;
   const handlePointClick = (index) => {
-    if (scratchPoints.includes(index)) {
-      setScratchPoints(scratchPoints.filter((point) => point !== index));
-    } else {
-      setScratchPoints([...scratchPoints, index]);
-    }
+    const newScratchPoints = scratchPoints.includes(index)
+      ? scratchPoints.filter((point) => point !== index)
+      : [...scratchPoints, index];
+
+    handleInputChange({
+      target: {
+        id: "scratchPoints",
+        value: newScratchPoints,
+        type: "hidden"
+      }
+    });
   };
 
   return (
