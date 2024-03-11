@@ -592,7 +592,7 @@
     "pinchThreshold": 46,
     "bg": "#e5e5e5",
     "color": "#141516",
-    "opacity": 71,
+    "opacity": 64,
     "videoOpacity": 48,
     "usesSvgAnimation": false,
     "usesCssAnimation": true,
