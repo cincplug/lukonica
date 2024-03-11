@@ -31,7 +31,6 @@ const Menu = (props) => {
               !control.isFaceRelated
           )}
         />
-        <br />
         <Buttons activeMask={activeMask} clearPaths={clearPaths} />
       </nav>
       <nav className={`menu menu--secondary`}>

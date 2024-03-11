@@ -1,5 +1,5 @@
 import React from "react";
-import bubble from "../../assets/bubble.png";
+import bubble from "../../assets/img/bubble.png";
 import { getDistance } from "../../utils";
 
 const Images = ({ points, flatMask, setup, cursor }) => {

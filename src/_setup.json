@@ -152,6 +152,14 @@
     "options": ["numbers", "paths", "images", "sentences", "kite", "canvas"]
   },
   {
+    "id": "theme",
+    "title": "Theme",
+    "description": "Just colors and font",
+    "value": "default",
+    "type": "select",
+    "options": ["default", "cognizant"]
+  },
+  {
     "id": "imageUrl",
     "title": "Image URL",
     "description": "URL of the particle image",

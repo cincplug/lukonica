@@ -204,7 +204,7 @@ const App = () => {
     <div
       className={`wrap wrap--main wrap--${
         isStarted && isLoaded ? "started" : "not-started"
-      }`}
+      } theme theme-${setup.theme}`}
       style={{ width, height }}
     >
       {isStarted ? (
