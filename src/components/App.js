@@ -234,7 +234,7 @@ const App = () => {
           />
           {setup.pattern === "canvas" ? (
             <canvas
-              className="wrap"
+              className="wrap canvas"
               ref={canvasRef}
               width={width}
               height={height}

@@ -1,4 +1,4 @@
-import { saveSvg, saveJson } from "../../utils";
+import { saveImage, saveJson } from "../../utils";
 
 const Buttons = ({ activeMask, clearPaths }) => {
   return (
@@ -6,10 +6,10 @@ const Buttons = ({ activeMask, clearPaths }) => {
       <button
         className="control control--button"
         onClick={() => {
-          saveSvg();
+          saveImage();
         }}
       >
-        Save SVG
+        Save Image
       </button>
       <button
         className="control control--button"
@@ -20,16 +20,16 @@ const Buttons = ({ activeMask, clearPaths }) => {
         Save mask
       </button>
       <button className="control control--button" onClick={clearPaths}>
-        Clear
+        Clear image
       </button>
       <button
         className="control control--button"
         onClick={() => {
           sessionStorage.clear();
-          window.location.reload();
+          window.location = "/";
         }}
       >
-        Reset
+        Reset all
       </button>
     </>
   );
