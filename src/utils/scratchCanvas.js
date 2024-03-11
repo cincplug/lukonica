@@ -11,7 +11,6 @@ export const scratchCanvas = ({
   scratchPattern,
   lastTips
 }) => {
-  let targetLineWidth = radius * growth + minimum;
   ctx.strokeStyle = processColor(color, opacity);
   if (lastTips) {
     ctx.beginPath();
@@ -39,7 +38,7 @@ export const scratchCanvas = ({
     Object.keys(tips).forEach((tip, tipIndex) => {
       if (!lastTips[tip]) return;
       ctx.moveTo(lastTips[tip].x, lastTips[tip].y);
-      ctx.lineWidth = targetLineWidth - ctx.lineWidth + tipIndex;
+      ctx.lineWidth = radius - ctx.lineWidth + tipIndex * growth;
       if (scratchPattern === "lines") {
         ctx.quadraticCurveTo(
           lastTips[tip].x,
