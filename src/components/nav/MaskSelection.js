@@ -52,7 +52,7 @@ const MaskSelection = (props) => {
               onClick={(event) => handleMaskButtonClick(event, mask, index)}
               key={`p-${index}`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox={`150 0 800 680`}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox={`220 30 640 640`}>
                 {mask.map((path, pathIndex) => (
                   <path
                     key={`pth-${pathIndex}`}
@@ -67,7 +67,7 @@ const MaskSelection = (props) => {
             </button>
           ))}
           <button
-            className="menu--masks__button"
+            className="menu--masks__button more"
             onClick={fetchMoreMasks}
             key={`p-more`}
           >
