@@ -419,11 +419,7 @@ legend {
       width: 100%;
     }
   }
-  &--imageUrl {
-    input {
-      max-width: 100%;
-    }
-  }
+  &--imageUrl,
   &--text {
     grid-column: span 12;
   }
@@ -654,7 +650,7 @@ label {
     transform: translate(-50%, -50%) scale(0.5);
     background: var(--color-blue-light);
   }
-  &.wagging {
+  &.wagging:first-of-type {
     background: var(--color-red);
   }
 }

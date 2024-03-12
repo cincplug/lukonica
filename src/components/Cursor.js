@@ -3,7 +3,6 @@ import React from "react";
 const Cursor = (props) => {
   const { cursor, hasCursor, isScratchCanvas } = props;
   const { x, y, tips, isPinched, isWagging } = cursor;
-
   const pinchClass = isPinched ? "active" : "inactive";
   const wagClass = isWagging ? "wagging" : "not-wagging";
   return (

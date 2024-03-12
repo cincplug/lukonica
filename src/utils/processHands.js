@@ -33,7 +33,8 @@ export const processHands = ({
     isScratchCanvas,
     scratchPattern,
     scratchPoints,
-    squeezeRatio
+    squeezeRatio,
+    dash
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {
@@ -98,6 +99,7 @@ export const processHands = ({
   }
   if (!showsFaces) {
     if (pattern === "canvas" && ctx) {
+      ctx.setLineDash(dash ? [dash, dash] : []);
       if (isWagging) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         lastX = undefined;

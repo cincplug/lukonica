@@ -303,7 +303,22 @@
     "id": "scratchPoints",
     "title": "Scratch points",
     "description": "Defines which hand points are used to draw on scratch canvas",
+    "isHandRelated": true,
+    "parentPattern": "canvas",
+    "isHidden": true,
     "value": [4, 8, 12, 16, 20],
     "type": "text"
+  },
+  {
+    "id": "dash",
+    "title": "Dash",
+    "description": "Dash pattern",
+    "value": 0,
+    "isHandRelated": true,
+    "parentPattern": "canvas",
+    "type": "range",
+    "min": 0,
+    "max": 100,
+    "step": 1
   }
 ]

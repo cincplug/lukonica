@@ -74,7 +74,6 @@ export const scratchCanvas = ({
         ctx.stroke();
       });
     }
-    ctx.lineJoin = "bevel";
   }
   lastTips = { ...tips };
   return lastTips;

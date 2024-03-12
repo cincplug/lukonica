@@ -35,9 +35,6 @@ const Menu = (props) => {
       </nav>
       <nav className={`menu menu--secondary`}>
         <ScenarioSelection {...{ setup, setSetup, handleInputChange }} />
-        {!showsFaces && isScratchCanvas && pattern === "canvas" && (
-          <ScratchPointSelection {...{ setup, handleInputChange }} />
-        )}
         <ControlGroup
           {...{ setup, handleInputChange }}
           controls={DEFAULT_SETUP.filter(
@@ -49,6 +46,9 @@ const Menu = (props) => {
                 (control.isFaceRelated && showsFaces))
           )}
         />
+        {!showsFaces && isScratchCanvas && pattern === "canvas" && (
+          <ScratchPointSelection {...{ setup, handleInputChange }} />
+        )}
         {showsFaces && (
           <MaskSelection {...{ setActiveMask, setup, handleInputChange }} />
         )}

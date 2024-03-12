@@ -179,7 +179,6 @@
     "showsHands": false,
     "isScratchCanvas": false,
     "activeMaskIndex": 14,
-    "text": "The fixed point that the element rotates around is also known as the transform origin.",
     "textLimit": 100,
     "usesButtonPinch": false
   },
@@ -341,7 +340,7 @@
   },
   "watermelon": {
     "icon": "🍉",
-    "transDur": 3.2,
+    "transDur": 10,
     "arrangement": 3,
     "radius": 81.5,
     "growth": 0.1,
@@ -357,6 +356,7 @@
     "blendMode": "hue",
     "pattern": "paths",
     "imageUrl": "",
+    "text": "...................................",
     "pathStroke": "watermelons",
     "showsFaces": false,
     "showsHands": true,
@@ -375,11 +375,11 @@
     "latency": 2,
     "pinchThreshold": 40,
     "color": "#000000",
-    "bg": "#e5e5e5",
+    "bg": "#e5d5a5",
     "opacity": 192,
     "videoOpacity": 48,
     "hasSvgAnim": false,
-    "hasCssAnim": false,
+    "hasCssAnim": true,
     "blendMode": "normal",
     "pattern": "sentences",
     "imageUrl": "",
@@ -581,9 +581,9 @@
     "showsHands": true,
     "isScratchCanvas": true,
     "usesButtonPinch": false,
-    "pinchThreshold": 100,
+    "pinchThreshold": 10,
     "scratchPattern": "lines",
     "scratchPoints": [4, 8, 12, 16, 20],
-    "squeezeRatio": 10
+    "squeezeRatio": 4
   }
 }
