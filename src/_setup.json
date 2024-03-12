@@ -284,7 +284,6 @@
     "title": "Text limit",
     "description": "Text limit length for sentences pattern",
     "value": 100,
-    "parentPattern": "sentences",
     "isHidden": true,
     "type": "range",
     "min": 1,

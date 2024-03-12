@@ -25,7 +25,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 3,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "sunglasses": {
@@ -51,7 +50,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 10,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "star-eyes": {
@@ -77,7 +75,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 15,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "eyelashes": {
@@ -103,7 +100,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 4,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "lipstick": {
@@ -153,7 +149,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 12,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "eyebrow-invaders": {
@@ -179,7 +174,6 @@
     "showsHands": false,
     "isScratchCanvas": false,
     "activeMaskIndex": 14,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "eyebrow-pinball": {
@@ -205,7 +199,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 13,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "face-plant": {
@@ -231,7 +224,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 3,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "face-wash": {
@@ -257,7 +249,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 3,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "too-much-beer": {
@@ -283,7 +274,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 5,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "pinch-paint": {
@@ -309,7 +299,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "pinch-paint-cloud": {
@@ -335,35 +324,31 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "watermelon": {
     "icon": "🍉",
     "transDur": 10,
     "arrangement": 3,
-    "radius": 81.5,
-    "growth": 0.1,
-    "minimum": 2,
+    "radius": 49,
+    "growth": 0.74,
+    "minimum": 0.3,
     "latency": 2,
     "pinchThreshold": 40,
-    "bg": "#7bbd00",
-    "color": "#fb605f",
-    "opacity": 145,
+    "opacity": 179,
     "videoOpacity": 30,
+    "bg": "#6aa300",
+    "color": "#ff4747",
+    "blendMode": "normal",
     "hasSvgAnim": false,
     "hasCssAnim": true,
-    "blendMode": "hue",
     "pattern": "paths",
     "imageUrl": "",
-    "text": "...................................",
     "pathStroke": "watermelons",
     "showsFaces": false,
     "showsHands": true,
-    "isScratchCanvas": false,
     "activeMaskIndex": 0,
-    "textLimit": 100,
-    "usesButtonPinch": false
+    "text": "⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫"
   },
   "typewriter": {
     "icon": "⌨️",
@@ -389,7 +374,6 @@
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
     "text": "The fixed point that the element rotates around is also known as the transform origin.",
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "kite": {
@@ -416,7 +400,6 @@
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
     "text": "◈ ---....._...._..._.._.__.___.____._____.",
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "railway": {
@@ -442,7 +425,6 @@
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
     "text": "🚂🚃🚋🚋🚃🚃🚃🚃🚋🚋🚃🚃🚃",
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "pinch-canvas-pen": {
@@ -468,7 +450,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "pinch-canvas-ballpen": {
@@ -494,7 +475,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "pinch-canvas-pencil": {
@@ -520,7 +500,6 @@
     "showsHands": true,
     "isScratchCanvas": false,
     "activeMaskIndex": 0,
-    "textLimit": 100,
     "usesButtonPinch": false
   },
   "scratch-canvas-wide": {
