@@ -148,8 +148,8 @@ const App = () => {
   };
 
   let flatMask = activeMask.flat();
-  if (flatMask.length && setup.transitionArrangement) {
-    flatMask = flatMask.slice(0, -setup.transitionArrangement - 1);
+  if (flatMask.length && setup.arrangement) {
+    flatMask = flatMask.slice(0, -setup.arrangement - 1);
   }
   if (setup.showsHands && points && points.length > 0 && handsCount > 0) {
     const pointsPerHand = 21;

@@ -5,20 +5,20 @@ const PATH_SPEED_MODIFIER = 10;
 const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
   const {
     radius,
-    transitionDuration,
-    usesCssAnimation,
-    usesSvgAnimation,
-    transitionArrangement
+    transDur,
+    hasCssAnim,
+    hasSvgAnim,
+    arrangement
   } = setup;
 
   useEffect(() => {
-    if (usesCssAnimation && pathRef && pathRef.current) {
+    if (hasCssAnim && pathRef && pathRef.current) {
       if (area && points && radius) {
         const newPath = renderPath({ area, points, radius });
         pathRef.current.setAttribute("d", newPath);
       }
     }
-  }, [area, pathRef, points, radius, usesCssAnimation]);
+  }, [area, pathRef, points, radius, hasCssAnim]);
 
   return (
     <path
@@ -31,17 +31,17 @@ const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
           : ""
       }
       style={
-        usesCssAnimation
+        hasCssAnim
           ? {
               transition: `d ${
-                transitionDuration / PATH_SPEED_MODIFIER
+                transDur / PATH_SPEED_MODIFIER
               }s ease-out`
             }
           : null
       }
       {...commonProps}
     >
-      {transitionArrangement && usesSvgAnimation && (
+      {arrangement && hasSvgAnim && (
         <animate
           attributeName="d"
           values={`${renderPath({
@@ -50,14 +50,14 @@ const Path = ({ area, points, className, pathRef, setup, ...commonProps }) => {
             radius
           })} Z;${renderPath({
             area: [
-              ...area.slice(transitionArrangement),
-              ...area.slice(0, transitionArrangement)
+              ...area.slice(arrangement),
+              ...area.slice(0, arrangement)
             ],
             points,
             radius
           })} Z`}
           keyTimes="0;1"
-          dur={`${setup.transitionDuration}s`}
+          dur={`${setup.transDur}s`}
           repeatCount="indefinite"
         />
       )}

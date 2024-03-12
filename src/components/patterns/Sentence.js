@@ -7,8 +7,8 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
     textLimit,
     color,
     opacity,
-    usesCssAnimation,
-    transitionDuration
+    hasCssAnim,
+    transDur
   } = setup;
 
   const textArray = Array.from(text);
@@ -24,10 +24,10 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
   }
 
   return area.map((point, index) => {
-    const style = usesCssAnimation
+    const style = hasCssAnim
       ? {
-          animation: `move-to ${transitionDuration}s linear infinite`,
-          animationDelay: `${-index * transitionDuration}s`,
+          animation: `move-to ${transDur}s linear infinite`,
+          animationDelay: `${-index * transDur}s`,
           "--dx": `${area[Math.max(0, index - 1)].x - point.x}px`,
           "--dy": `${area[Math.max(0, index - 1)].y - point.y}px`
         }

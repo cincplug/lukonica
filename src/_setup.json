@@ -1,6 +1,6 @@
 [
   {
-    "id": "transitionDuration",
+    "id": "transDur",
     "title": "Duration",
     "description": "Duration of transitions",
     "value": 2,
@@ -10,7 +10,7 @@
     "step": 0.1
   },
   {
-    "id": "transitionArrangement",
+    "id": "arrangement",
     "title": "Arrangement",
     "description": "Arrangement of elements in transition",
     "value": 0,
@@ -130,14 +130,14 @@
     ]
   },
   {
-    "id": "usesSvgAnimation",
+    "id": "hasSvgAnim",
     "title": "SVG animation",
     "description": "Achieve animation with SVG <animate> element",
     "value": false,
     "type": "checkbox"
   },
   {
-    "id": "usesCssAnimation",
+    "id": "hasCssAnim",
     "title": "CSS animation",
     "description": "Achieve animation with CSS animation property",
     "value": true,
@@ -303,7 +303,6 @@
     "id": "scratchPoints",
     "title": "Scratch points",
     "description": "Defines which hand points are used to draw on scratch canvas",
-    "isHidden": true,
     "value": [4, 8, 12, 16, 20],
     "type": "text"
   }

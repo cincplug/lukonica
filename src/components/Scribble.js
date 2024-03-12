@@ -10,8 +10,8 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
     color,
     opacity,
     pathStroke,
-    transitionArrangement,
-    transitionDuration,
+    arrangement,
+    transDur,
     text,
     radius,
     growth,
@@ -95,12 +95,12 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
                 fontSize={radius * minimum + scribbleAreaIndex}
               >
                 <textPath href={`#text-path-${scribbleAreaIndex}`}>
-                  {transitionArrangement > 0 && (
+                  {arrangement > 0 && (
                     <animate
                       attributeName="startOffset"
-                      to={`${transitionArrangement}%`}
-                      from={`${100 - transitionArrangement}%`}
-                      dur={transitionDuration * 10}
+                      to={`${arrangement}%`}
+                      from={`${100 - arrangement}%`}
+                      dur={transDur * 10}
                       repeatCount="indefinite"
                     />
                   )}
@@ -110,7 +110,7 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
             )}
             {imageUrl && scribbleArea.length && (
               <image width={radius * minimum} x={0} y={0} href={imageUrl}>
-                <animateMotion dur={transitionDuration * 10} repeatCount="indefinite" rotate="auto">
+                <animateMotion dur={transDur * 10} repeatCount="indefinite" rotate="auto">
                   <mpath href={`#text-path-${scribbleAreaIndex}`} />
                 </animateMotion>
               </image>

@@ -4,21 +4,21 @@ import { getDistance } from "../../utils";
 
 const Images = ({ points, flatMask, setup, cursor }) => {
   const {
-    transitionArrangement,
+    arrangement,
     radius,
     growth,
-    transitionDuration,
+    transDur,
     minimum,
     pinchThreshold,
-    usesSvgAnimation,
-    usesCssAnimation
+    hasSvgAnim,
+    hasCssAnim
   } = setup;
 
   return flatMask.map((flatMaskPoint, index) => {
     const pointFrom = points[flatMaskPoint];
     const pointTo =
       points[
-        (flatMaskPoint - transitionArrangement + points.length) % points.length
+        (flatMaskPoint - arrangement + points.length) % points.length
       ];
 
     if (!pointFrom || getDistance(cursor, pointFrom) < pinchThreshold) {
@@ -28,20 +28,20 @@ const Images = ({ points, flatMask, setup, cursor }) => {
       return (
         Math.max(
           minimum,
-          (point + radius) / ((index % transitionArrangement) + minimum)
+          (point + radius) / ((index % arrangement) + minimum)
         ) +
         radius * growth
       );
     };
     const animationProps = {
       keyTimes: "0;1",
-      dur: `${transitionDuration}s`,
+      dur: `${transDur}s`,
       repeatCount: "indefinite"
     };
     const opacityStyle = { opacity: setup.opacity / 255 };
-    const animationStyle = usesCssAnimation
+    const animationStyle = hasCssAnim
       ? {
-          animation: `move-to ${transitionDuration}s infinite`,
+          animation: `move-to ${transDur}s infinite`,
           "--dx": `${pointTo.x - pointFrom.x}px`,
           "--dy": `${pointTo.y - pointFrom.y}px`
         }
@@ -57,7 +57,7 @@ const Images = ({ points, flatMask, setup, cursor }) => {
         href={setup.imageUrl || bubble}
         style={style}
       >
-        {transitionArrangement && usesSvgAnimation && (
+        {arrangement && hasSvgAnim && (
           <>
             <animate
               attributeName="x"

@@ -38,7 +38,6 @@ const Menu = (props) => {
         {!showsFaces && isScratchCanvas && pattern === "canvas" && (
           <ScratchPointSelection {...{ setup, handleInputChange }} />
         )}
-        <br />
         <ControlGroup
           {...{ setup, handleInputChange }}
           controls={DEFAULT_SETUP.filter(

@@ -7,9 +7,9 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
     textLimit,
     color,
     opacity,
-    usesCssAnimation,
-    transitionDuration,
-    transitionArrangement
+    hasCssAnim,
+    transDur,
+    arrangement
   } = setup;
 
   const textArray = Array.from(text);
@@ -29,9 +29,9 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
     <svg>
       <path id="text-path" d={pathData} fill="none" />
       {textArray.map((letter, index) => {
-        const style = usesCssAnimation
+        const style = hasCssAnim
           ? {
-              animation: `move-to ${transitionDuration}s linear infinite`
+              animation: `move-to ${transDur}s linear infinite`
             }
           : null;
         const endOffset = (index / textArray.length) * 100;
@@ -44,12 +44,12 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
             style={style}
           >
             <textPath href="#text-path" startOffset={`${endOffset}%`}>
-              {transitionArrangement > 0 && (
+              {arrangement > 0 && (
                 <animate
                   attributeName="startOffset"
                   from={`${endOffset}%`}
-                  to={`${endOffset + transitionArrangement * radius}%`}
-                  dur={transitionDuration * 10}
+                  to={`${endOffset + arrangement * radius}%`}
+                  dur={transDur * 10}
                   repeatCount="indefinite"
                 />
               )}

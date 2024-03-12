@@ -8,7 +8,7 @@ export const pinchCanvas = ({
   ctx,
   color,
   opacity,
-  transitionArrangement,
+  arrangement,
   x,
   y,
   lastX,
@@ -28,7 +28,7 @@ export const pinchCanvas = ({
     ctx.stroke();
     if (
       getDistance({ x, y }, { x: lastX, y: lastY }) >
-      transitionArrangement * 5
+      arrangement * 5
     ) {
       ctx.beginPath();
       ctx.moveTo(x, y);

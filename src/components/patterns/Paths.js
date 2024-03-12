@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Path from "./Path";
 
 const Paths = ({ points, activeMask, setup, customMask, customMaskNewArea }) => {
-  const { transitionArrangement } = setup;
+  const { arrangement } = setup;
   const maskRefs = useRef(activeMask.map(() => React.createRef()));
   const customFaceAreaRefs = useRef(customMask.map(() => React.createRef()));
   const customMaskNewAreaRef = useRef(null);
@@ -17,8 +17,8 @@ const Paths = ({ points, activeMask, setup, customMask, customMaskNewArea }) => 
         <Path
           key={`m-${areaIndex}`}
           area={[
-            ...area.slice(transitionArrangement),
-            ...area.slice(0, transitionArrangement)
+            ...area.slice(arrangement),
+            ...area.slice(0, arrangement)
           ]}
           className="mask-path mask-path--default"
           pathRef={maskRefs.current[areaIndex]}
