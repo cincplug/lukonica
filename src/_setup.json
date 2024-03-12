@@ -292,17 +292,6 @@
     "step": 1
   },
   {
-    "id": "ballSpeed",
-    "title": "Ball speed",
-    "description": "Speed of the ball when it's there",
-    "value": 0,
-    "isHidden": true,
-    "type": "range",
-    "min": 0,
-    "max": 100,
-    "step": 1
-  },
-  {
     "id": "usesButtonPinch",
     "title": "Button pinch",
     "description": "Simulates click / hover by pinch on buttons",
@@ -316,6 +305,6 @@
     "description": "Defines which hand points are used to draw on scratch canvas",
     "isHidden": true,
     "value": [4, 8, 12, 16, 20],
-    "type": "hidden"
+    "type": "text"
   }
 ]

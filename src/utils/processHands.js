@@ -55,7 +55,6 @@ export const processHands = ({
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = thumbIndexDistance < pinchThreshold;
   const isWagging =
-    !isPinched &&
     (wrist.y - indexTip.y) / (wrist.y - middleTip.y) > 2 &&
     (wrist.y - indexTip.y) / (wrist.x - indexTip.x) > 2;
   const x = (thumbTip.x + indexTip.x) / 2;

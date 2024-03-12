@@ -82,10 +82,8 @@
     "hasCursorFingertips": false,
     "isAutoClosed": false,
     "activeMaskIndex": 15,
-    "activeScenarioIndex": 3,
     "text": "",
     "textLimit": 100,
-    "ballSpeed": 0,
     "usesButtonPinch": false
   },
   "eyelashes": {
@@ -167,10 +165,8 @@
     "hasCursorFingertips": false,
     "isAutoClosed": false,
     "activeMaskIndex": 12,
-    "activeScenarioIndex": 6,
     "text": "",
     "textLimit": 100,
-    "ballSpeed": 0,
     "usesButtonPinch": false
   },
   "eyebrow-invaders": {
@@ -229,7 +225,6 @@
     "activeMaskIndex": 13,
     "text": "",
     "textLimit": 100,
-    "ballSpeed": 30,
     "usesButtonPinch": false
   },
   "face-plant": {
@@ -398,10 +393,8 @@
     "hasCursorFingertips": false,
     "isAutoClosed": false,
     "activeMaskIndex": 0,
-    "activeScenarioIndex": 14,
     "text": "",
     "textLimit": 100,
-    "ballSpeed": 30,
     "usesButtonPinch": false
   },
   "typewriter": {
@@ -457,10 +450,8 @@
     "hasCursorFingertips": false,
     "isAutoClosed": false,
     "activeMaskIndex": 0,
-    "activeScenarioIndex": 16,
     "text": "◈ ---....._...._..._.._.__.___.____._____.",
     "textLimit": 100,
-    "ballSpeed": 0,
     "usesButtonPinch": false
   },
   "railway": {
@@ -517,7 +508,6 @@
     "activeMaskIndex": 0,
     "text": "",
     "textLimit": 100,
-    "ballSpeed": 0,
     "usesButtonPinch": false
   },
   "pinch-canvas-ballpen": {
@@ -547,7 +537,6 @@
     "activeMaskIndex": 0,
     "text": "",
     "textLimit": 100,
-    "ballSpeed": 0,
     "usesButtonPinch": false
   },
   "pinch-canvas-pencil": {
@@ -575,43 +564,74 @@
     "hasCursorFingertips": false,
     "isAutoClosed": false,
     "activeMaskIndex": 0,
-    "activeScenarioIndex": 20,
     "text": "",
     "textLimit": 100,
-    "ballSpeed": 0,
     "usesButtonPinch": false
   },
-  "scratch-canvas": {
+  "scratch-canvas-wide": {
     "icon": "🖐️",
-    "transitionDuration": 3.2,
-    "transitionArrangement": 3,
     "radius": 5,
     "growth": 0.19,
     "minimum": 1,
     "latency": 2,
-    "pinchThreshold": 46,
     "bg": "#e5e5e5",
     "color": "#141516",
     "opacity": 64,
     "videoOpacity": 48,
-    "usesSvgAnimation": false,
-    "usesCssAnimation": true,
     "blendMode": "normal",
     "pattern": "canvas",
-    "imageUrl": "",
-    "pathStroke": "beziers",
     "showsFaces": false,
     "showsHands": true,
     "hasCursor": false,
     "hasCursorFingertips": true,
-    "isAutoClosed": false,
-    "activeMaskIndex": 0,
-    "activeScenarioIndex": 20,
-    "text": "",
-    "textLimit": 100,
-    "ballSpeed": 0,
     "usesButtonPinch": false,
+    "pinchThreshold": 500,
+    "scratchPattern": "quadratics",
+    "scratchPoints": [12, 8, 4, 3, 2, 1, 0, 17, 18, 19, 20, 16],
+    "squeezeRatio": 100
+  },
+  "scratch-canvas-mid": {
+    "icon": "✋",
+    "radius": 5,
+    "growth": 0.19,
+    "minimum": 1,
+    "latency": 2,
+    "bg": "#e5e5e5",
+    "color": "#141516",
+    "opacity": 64,
+    "videoOpacity": 48,
+    "blendMode": "normal",
+    "pattern": "canvas",
+    "showsFaces": false,
+    "showsHands": true,
+    "hasCursor": false,
+    "hasCursorFingertips": true,
+    "usesButtonPinch": false,
+    "pinchThreshold": 500,
+    "scratchPattern": "charts",
+    "scratchPoints": [4, 12, 16, 0, 5, 17],
+    "squeezeRatio": 50
+  },
+  "scratch-canvas-narrow": {
+    "icon": "🤌",
+    "radius": 5,
+    "growth": 0.19,
+    "minimum": 1,
+    "latency": 2,
+    "bg": "#e5e5e5",
+    "color": "#141516",
+    "opacity": 64,
+    "videoOpacity": 48,
+    "blendMode": "normal",
+    "pattern": "canvas",
+    "showsFaces": false,
+    "showsHands": true,
+    "hasCursor": false,
+    "hasCursorFingertips": true,
+    "usesButtonPinch": false,
+    "pinchThreshold": 100,
     "scratchPattern": "lines",
-    "scratchPoints": [4, 8, 12, 16, 20]
+    "scratchPoints": [4, 8, 12, 16, 20],
+    "squeezeRatio": 10
   }
 }
