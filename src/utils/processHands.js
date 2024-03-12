@@ -115,7 +115,8 @@ export const processHands = ({
           opacity,
           tips,
           scratchPattern,
-          lastTips
+          lastTips,
+          pinchThreshold
         });
       } else {
         lastTips = undefined;

@@ -1,4 +1,4 @@
-import { processColor } from "./index";
+import { processColor, getAverageDistance } from "./index";
 
 export const scratchCanvas = ({
   radius,
@@ -9,15 +9,21 @@ export const scratchCanvas = ({
   opacity,
   tips,
   scratchPattern,
-  lastTips
+  lastTips,
+  pinchThreshold
 }) => {
   ctx.strokeStyle = processColor(color, opacity);
-  if (lastTips) {
+  const tipValues = Object.values(tips);
+  const tipDistance = getAverageDistance(tipValues);
+  if (lastTips && tipDistance < pinchThreshold) {
     ctx.beginPath();
     if (["quadratics", "charts", "joints"].includes(scratchPattern)) {
-      const tipValues = Object.values(tips);
       tipValues.forEach((tip, tipIndex) => {
-        ctx.lineWidth = radius - ctx.lineWidth + tipIndex * growth;
+        ctx.lineWidth = Math.max(
+          minimum,
+          (radius - ctx.lineWidth + tipIndex * growth) /
+            getAverageDistance(tipValues)
+        );
         const prevIndex = tipIndex === 0 ? tipValues.length - 1 : tipIndex - 1;
         if (scratchPattern === "quadratics") {
           ctx.quadraticCurveTo(
@@ -38,8 +44,8 @@ export const scratchCanvas = ({
             tipValues[tipIndex].x,
             tipValues[tipIndex].y,
             radius,
-            2 * Math.PI / tipValues[tipIndex].y,
-            Math.abs(tips[tipIndex].x - tipValues[prevIndex].x),
+            (2 * Math.PI) / tipValues[tipIndex].y,
+            Math.abs(tips[tipIndex].x - tipValues[prevIndex].x)
           );
         }
         ctx.stroke();

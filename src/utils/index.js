@@ -25,6 +25,15 @@ export const getDistance = (point1, point2) => {
   return Math.sqrt(dx * dx + dy * dy);
 };
 
+export const getAverageDistance = (points) => {
+  const distances = points.flatMap((point1, index1) =>
+    points.slice(index1 + 1).map((point2) => getDistance(point1, point2))
+  );
+
+  const totalDistance = distances.reduce((a, b) => a + b, 0);
+  return totalDistance / distances.length;
+};
+
 export const squeezePoints = ({ points, squeezeRatio }) => {
   if (points.length === 0) {
     return null;
