@@ -524,7 +524,7 @@
     "dash": 0.5
   },
   "pinch-canvas-pencil": {
-    "icon": "✏️",
+    "icon": "📝",
     "transDur": 3.2,
     "arrangement": 3,
     "radius": 11.5,
@@ -547,6 +547,25 @@
     "isScratchCanvas": false,
     "usesButtonPinch": false,
     "dash": 0
+  },
+  "pinch-canvas-brush": {
+    "icon": "🖌️",
+    "radius": 53,
+    "growth": 1.26,
+    "minimum": 1,
+    "latency": 2,
+    "pinchThreshold": 46,
+    "opacity": 174,
+    "videoOpacity": 48,
+    "bg": "#e5e5e5",
+    "color": "#00751d",
+    "blendMode": "normal",
+    "pattern": "canvas",
+    "showsFaces": false,
+    "showsHands": true,
+    "hasCursor": true,
+    "isScratchCanvas": false,
+    "dash": 1
   },
   "scratch-canvas-wide": {
     "icon": "🖐️",
