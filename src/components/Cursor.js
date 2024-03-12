@@ -1,14 +1,14 @@
 import React from "react";
 
 const Cursor = (props) => {
-  const { cursor, hasCursor, hasCursorFingertips } = props;
+  const { cursor, hasCursor, isScratchCanvas } = props;
   const { x, y, tips, isPinched, isWagging } = cursor;
 
   const pinchClass = isPinched ? "active" : "inactive";
   const wagClass = isWagging ? "wagging" : "not-wagging";
   return (
     <>
-      {hasCursorFingertips &&
+      {isScratchCanvas &&
         tips?.map((tip, tipIndex) => (
           <div
             className={`cursor fingertip ${wagClass}`}

@@ -232,9 +232,9 @@
     "type": "checkbox"
   },
   {
-    "id": "hasCursorFingertips",
-    "title": "Fingertips",
-    "description": "Shows or hides thumb and forefinger tip",
+    "id": "isScratchCanvas",
+    "title": "Scratch canvas",
+    "description": "Selected hand points (scratch points) are used for drawing",
     "value": false,
     "isHidden": true,
     "type": "checkbox"

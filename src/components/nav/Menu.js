@@ -14,7 +14,7 @@ const Menu = (props) => {
     setActiveMask,
     clearPaths
   } = props;
-  const { showsFaces, pattern, hasCursorFingertips } = setup;
+  const { showsFaces, pattern, isScratchCanvas } = setup;
 
   return (
     <>
@@ -35,7 +35,7 @@ const Menu = (props) => {
       </nav>
       <nav className={`menu menu--secondary`}>
         <ScenarioSelection {...{ setup, setSetup, handleInputChange }} />
-        {!showsFaces && hasCursorFingertips && pattern === "canvas" && (
+        {!showsFaces && isScratchCanvas && pattern === "canvas" && (
           <ScratchPointSelection {...{ setup, handleInputChange }} />
         )}
         <br />

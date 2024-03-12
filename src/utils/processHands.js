@@ -30,7 +30,7 @@ export const processHands = ({
     usesButtonPinch,
     showsFaces,
     transitionArrangement,
-    hasCursorFingertips,
+    isScratchCanvas,
     scratchPattern,
     scratchPoints,
     squeezeRatio
@@ -66,7 +66,7 @@ export const processHands = ({
     if (usesButtonPinch && thumbIndexDistance < pinchThreshold * 4) {
       checkElementPinch({ x, y, isPinched });
     }
-    const nextCursor = hasCursorFingertips ? { tips } : { x, y };
+    const nextCursor = isScratchCanvas ? { tips } : { x, y };
     nextCursor.isWagging = isWagging;
     nextCursor.isPinched = thumbIndexDistance < threshold;
     return nextCursor;
@@ -104,7 +104,7 @@ export const processHands = ({
         lastY = undefined;
         lastTips = undefined;
       }
-      if (hasCursorFingertips) {
+      if (isScratchCanvas) {
         lastTips = scratchCanvas({
           radius,
           growth,
@@ -120,7 +120,7 @@ export const processHands = ({
       } else {
         lastTips = undefined;
       }
-      if (isPinched && !hasCursorFingertips) {
+      if (isPinched && !isScratchCanvas) {
         let result = pinchCanvas({
           radius,
           thumbIndexDistance,

@@ -239,6 +239,7 @@ const App = () => {
             ref={canvasRef}
             width={width}
             height={height}
+            style={{ mixBlendMode: setup.blendMode }}
           ></canvas>
           {setup.pattern !== "canvas" && (
             <Drawing
@@ -265,7 +266,7 @@ const App = () => {
           <Cursor
             cursor={cursor}
             hasCursor={setup.hasCursor}
-            hasCursorFingertips={setup.hasCursorFingertips}
+            isScratchCanvas={setup.isScratchCanvas}
           />
         </>
       ) : (
