@@ -205,7 +205,7 @@
     "value": "lines",
     "type": "select",
     "parentPattern": "canvas",
-    "options": ["lines", "rectangles", "quadratics", "tetrics"]
+    "options": ["lines", "rectangles", "quadratics", "charts", "joints"]
   },
   {
     "id": "showsFaces",
