@@ -33,7 +33,6 @@ export const processHands = ({
     isScratchCanvas,
     scratchPattern,
     scratchPoints,
-    squeezeRatio,
     dash
   } = setupRef.current;
   let newPoints = [];
@@ -51,7 +50,7 @@ export const processHands = ({
   const middleTip = handPoints[12];
   const tips = squeezePoints({
     points: scratchPoints.map((point, index) => handPoints[point]),
-    squeezeRatio
+    squeezeRatio: pinchThreshold
   });
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = thumbIndexDistance < pinchThreshold;

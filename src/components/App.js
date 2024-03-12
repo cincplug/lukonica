@@ -83,9 +83,6 @@ const App = () => {
         nextSetup[id] = ["number", "range"].includes(type) ? value / 1 : value;
       }
       sessionStorage.setItem(storageSetupItem, JSON.stringify(nextSetup));
-      if (id === "hasCursor") {
-        console.info(nextSetup);
-      }
       return nextSetup;
     });
   };
