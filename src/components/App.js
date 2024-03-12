@@ -118,8 +118,8 @@ const App = () => {
         setScribbleNewArea,
         activeMask,
         ctx: ctx || null
-      }).then((stop) => {
-        setStopDetector(() => stop);
+      }).then((stopDetectorCallback) => {
+        setStopDetector(() => stopDetectorCallback);
       });
     }
     setIsLoaded(true);
@@ -232,14 +232,15 @@ const App = () => {
             mirrored={true}
             imageSmoothing={false}
           />
-          {setup.pattern === "canvas" ? (
-            <canvas
-              className="wrap canvas"
-              ref={canvasRef}
-              width={width}
-              height={height}
-            ></canvas>
-          ) : (
+          <canvas
+            className={`wrap canvas ${
+              setup.pattern !== "canvas" ? "hidden" : ""
+            }`}
+            ref={canvasRef}
+            width={width}
+            height={height}
+          ></canvas>
+          {setup.pattern !== "canvas" && (
             <Drawing
               {...{
                 inputResolution,
