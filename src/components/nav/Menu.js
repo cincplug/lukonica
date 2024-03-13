@@ -42,7 +42,9 @@ const Menu = (props) => {
               !control.isHidden &&
               (!control.parentPattern ||
                 control.parentPattern.includes(pattern)) &&
-              ((control.isHandRelated && !showsFaces) ||
+              ((control.isHandRelated &&
+                !showsFaces &&
+                (isScratchCanvas || !control.isScratchCanvasRelated)) ||
                 (control.isFaceRelated && showsFaces))
           )}
         />

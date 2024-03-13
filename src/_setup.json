@@ -194,6 +194,7 @@
     "title": "Scratch pattern",
     "description": "Sub-pattern of scratch canvas",
     "isHandRelated": true,
+    "isScratchCanvas": true,
     "value": "lines",
     "type": "select",
     "parentPattern": "canvas",
