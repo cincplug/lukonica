@@ -33,7 +33,8 @@ export const processHands = ({
     scratchPattern,
     scratchPoints,
     dash,
-    isSpacePressed
+    isSpacePressed,
+    composite
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {
@@ -99,6 +100,7 @@ export const processHands = ({
   if (!showsFaces) {
     if (pattern === "canvas" && ctx) {
       ctx.setLineDash(dash ? [dash, dash] : []);
+      ctx.globalCompositeOperation = composite;
       if (isWagging) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         lastX = undefined;

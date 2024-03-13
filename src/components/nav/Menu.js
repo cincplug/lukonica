@@ -18,7 +18,7 @@ const Menu = (props) => {
 
   return (
     <>
-      <nav className={`menu menu--controls menu--stretched`}>
+      <nav className={`menu menu--controls`}>
         <ControlGroup
           {...{ setup, handleInputChange }}
           controls={DEFAULT_SETUP.filter(

@@ -399,6 +399,7 @@ legend {
   grid-column: span 6;
   border: none;
   padding: 0;
+  margin: 0 0 var(--gap-half);
   font-size: var(--font-size-m);
   &--checkbox {
     flex-direction: row;
@@ -676,8 +677,9 @@ label {
 }
 
 .hand-selection {
-  grid-column: 3 / span 8;
+  grid-column: 1 / span 6;
 }
+
 .hand-point {
   fill: var(--color-skin-mid-dark);
   &:hover {

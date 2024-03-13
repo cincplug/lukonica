@@ -20,7 +20,7 @@ function ScratchPointSelection({ setup, handleInputChange }) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="hand-selection"
-      viewBox="0 0 500 500"
+      viewBox="-20 0 480 500"
     >
       {DEFAULT_HAND_POINTS.map((point, index) => (
         <circle

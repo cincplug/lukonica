@@ -320,5 +320,41 @@
     "min": 0,
     "max": 100,
     "step": 0.5
+  },
+  {
+    "id": "composite",
+    "title": "Composite",
+    "description": "Composite operation (blending mode within the canvas)",
+    "isHandRelated": true,
+    "parentPattern": "canvas",
+    "value": "source-over",
+    "type": "select",
+    "options": [
+      "source-over",
+      "source-in",
+      "source-out",
+      "source-atop",
+      "destination-over",
+      "destination-in",
+      "destination-out",
+      "destination-atop",
+      "lighter",
+      "copy",
+      "xor",
+      "multiply",
+      "screen",
+      "overlay",
+      "darken",
+      "lighten",
+      "color-dodge",
+      "color-burn",
+      "hard-light",
+      "soft-light",
+      "difference",
+      "exclusion",
+      "hue",
+      "saturation",
+      "color"
+    ]
   }
 ]
