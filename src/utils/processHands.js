@@ -35,7 +35,7 @@ export const processHands = ({
     dash,
     isSpacePressed,
     composite,
-    dynamics
+    dispersion
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {
@@ -122,7 +122,7 @@ export const processHands = ({
           lastTips,
           pinchThreshold,
           isSpacePressed,
-          dynamics
+          dispersion
         });
       } else {
         lastTips = undefined;
@@ -141,7 +141,7 @@ export const processHands = ({
           y,
           lastX,
           lastY,
-          dynamics
+          dispersion
         });
         lastX = result.lastX;
         lastY = result.lastY;

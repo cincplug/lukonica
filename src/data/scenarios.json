@@ -455,7 +455,7 @@
   },
   "zipper": {
     "icon": "👖",
-    "radius": 124,
+    "radius": 74,
     "growth": 0.3,
     "minimum": 5,
     "latency": 2,
