@@ -1,7 +1,7 @@
 import React from "react";
 import pathStrokes from "./patterns/path-strokes";
 import { processColor } from "../utils";
-import Sentence from "./patterns/Sentence";
+import Hose from "./patterns/Hose";
 import Kite from "./patterns/Kite";
 
 const Scribble = ({ scribble, scribbleNewArea, setup }) => {
@@ -22,9 +22,9 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
 
   const textArray = Array.from(text);
 
-  if (pattern === "sentences") {
+  if (pattern === "hose") {
     return (
-      <Sentence
+      <Hose
         scribble={scribble}
         scribbleNewArea={scribbleNewArea}
         setup={setup}

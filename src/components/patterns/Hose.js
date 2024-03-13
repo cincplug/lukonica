@@ -1,7 +1,7 @@
 import React from "react";
 import { processColor } from "../../utils";
 
-const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
+const Hose = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
   const {
     text,
     textLimit,
@@ -49,4 +49,4 @@ const Sentence = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
   });
 };
 
-export default Sentence;
+export default Hose;

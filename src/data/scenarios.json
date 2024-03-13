@@ -276,7 +276,7 @@
     "activeMaskIndex": 5,
     "usesButtonPinch": false
   },
-  "pinch-paint": {
+  "pinch-paint-svg": {
     "icon": "👌",
     "transDur": 3.2,
     "arrangement": 1,
@@ -301,7 +301,7 @@
     "activeMaskIndex": 0,
     "usesButtonPinch": false
   },
-  "pinch-paint-cloud": {
+  "pinch-paint-svg-cloud": {
     "icon": "☁️",
     "transDur": 3.2,
     "arrangement": 1,
@@ -392,7 +392,7 @@
     "hasSvgAnim": false,
     "hasCssAnim": true,
     "blendMode": "normal",
-    "pattern": "sentences",
+    "pattern": "hose",
     "imageUrl": "",
     "pathStroke": "lines",
     "showsFaces": false,
@@ -455,8 +455,6 @@
   },
   "zipper": {
     "icon": "👖",
-    "transDur": 3.2,
-    "arrangement": 7,
     "radius": 124,
     "growth": 0.3,
     "minimum": 5,
@@ -467,8 +465,6 @@
     "bg": "#2465ff",
     "color": "#ffe9ad",
     "blendMode": "normal",
-    "hasSvgAnim": false,
-    "hasCssAnim": true,
     "pattern": "canvas",
     "showsFaces": false,
     "showsHands": true,
@@ -478,7 +474,6 @@
   "pinch-canvas-pen": {
     "icon": "🖋️",
     "transDur": 3.2,
-    "arrangement": 5,
     "radius": 40,
     "growth": 0.16,
     "minimum": 5,
@@ -488,12 +483,8 @@
     "color": "#160594",
     "opacity": 192,
     "videoOpacity": 48,
-    "hasSvgAnim": false,
-    "hasCssAnim": true,
     "blendMode": "normal",
     "pattern": "canvas",
-    "imageUrl": "",
-    "pathStroke": "beziers",
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
@@ -502,8 +493,6 @@
   },
   "pinch-canvas-ballpen": {
     "icon": "🖊️",
-    "transDur": 3.2,
-    "arrangement": 7,
     "radius": 33.5,
     "growth": 0.4,
     "minimum": 2,
@@ -527,8 +516,6 @@
   },
   "pinch-canvas-pencil": {
     "icon": "📝",
-    "transDur": 3.2,
-    "arrangement": 3,
     "radius": 11.5,
     "growth": 0.8,
     "minimum": 1,
@@ -538,16 +525,11 @@
     "color": "#141516",
     "opacity": 71,
     "videoOpacity": 48,
-    "hasSvgAnim": false,
-    "hasCssAnim": true,
     "blendMode": "normal",
     "pattern": "canvas",
-    "imageUrl": "",
-    "pathStroke": "beziers",
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
-    "usesButtonPinch": false,
     "dash": 0
   },
   "pinch-canvas-brush": {
@@ -565,7 +547,6 @@
     "pattern": "canvas",
     "showsFaces": false,
     "showsHands": true,
-    "hasCursor": true,
     "isScratchCanvas": false,
     "dash": 1
   },
@@ -584,7 +565,6 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": true,
-    "usesButtonPinch": false,
     "pinchThreshold": 150,
     "scratchPattern": "joints",
     "scratchPoints": [12, 8, 4, 3, 2, 1, 0, 17, 18, 19, 20, 16],
@@ -605,7 +585,6 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": true,
-    "usesButtonPinch": false,
     "pinchThreshold": 100,
     "scratchPattern": "quadratics",
     "scratchPoints": [12, 8, 4, 3, 2, 1, 0, 17, 18, 19, 20, 16],
@@ -623,15 +602,11 @@
     "color": "#141516",
     "blendMode": "normal",
     "pattern": "canvas",
-    "imageUrl": "",
-    "pathStroke": "lines",
     "pinchThreshold": 127,
     "scratchPattern": "charts",
     "showsFaces": false,
     "showsHands": true,
-    "hasCursor": true,
     "isScratchCanvas": true,
-    "isAutoClosed": false,
     "scratchPoints": [5, 17, 9, 13, 8, 12, 16, 20],
     "dash": 6
   },
@@ -650,7 +625,6 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": true,
-    "usesButtonPinch": false,
     "pinchThreshold": 10,
     "scratchPattern": "lines",
     "scratchPoints": [4, 8, 12, 16, 20],

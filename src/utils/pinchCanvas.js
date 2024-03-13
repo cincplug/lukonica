@@ -8,7 +8,7 @@ export const pinchCanvas = ({
   ctx,
   color,
   opacity,
-  arrangement,
+  pinchThreshold,
   x,
   y,
   lastX,
@@ -26,10 +26,7 @@ export const pinchCanvas = ({
     ctx.quadraticCurveTo(lastX, lastY, x, y);
     ctx.lineJoin = "bevel";
     ctx.stroke();
-    if (
-      getDistance({ x, y }, { x: lastX, y: lastY }) >
-      arrangement * 5
-    ) {
+    if (getDistance({ x, y }, { x: lastX, y: lastY }) > pinchThreshold) {
       ctx.beginPath();
       ctx.moveTo(x, y);
     }

@@ -1,23 +1,19 @@
 [
   {
-    "id": "transDur",
-    "title": "Duration",
-    "description": "Duration of transitions",
-    "value": 2,
-    "type": "range",
-    "min": 0.1,
-    "max": 5,
-    "step": 0.1
+    "id": "theme",
+    "title": "Theme",
+    "description": "Just colors and font",
+    "value": "default",
+    "type": "select",
+    "options": ["default", "cognizant"]
   },
   {
-    "id": "arrangement",
-    "title": "Arrangement",
-    "description": "Arrangement of elements in transition",
-    "value": 0,
-    "type": "range",
-    "min": 0,
-    "max": 10,
-    "step": 1
+    "id": "pattern",
+    "title": "Pattern",
+    "description": "What will be drawn on points",
+    "value": "numbers",
+    "type": "select",
+    "options": ["numbers", "images", "paths", "hose", "kite", "canvas"]
   },
   {
     "id": "radius",
@@ -133,6 +129,7 @@
     "id": "hasSvgAnim",
     "title": "SVG animation",
     "description": "Achieve animation with SVG <animate> element",
+    "parentPattern": ["images", "paths", "hose", "kite"],
     "value": false,
     "type": "checkbox"
   },
@@ -140,24 +137,31 @@
     "id": "hasCssAnim",
     "title": "CSS animation",
     "description": "Achieve animation with CSS animation property",
+    "parentPattern": ["images", "paths", "hose", "kite"],
     "value": true,
     "type": "checkbox"
   },
   {
-    "id": "pattern",
-    "title": "Pattern",
-    "description": "What will be drawn on points",
-    "value": "numbers",
-    "type": "select",
-    "options": ["numbers", "paths", "images", "sentences", "kite", "canvas"]
+    "id": "transDur",
+    "title": "Duration",
+    "description": "Duration of transitions",
+    "parentPattern": ["images", "paths", "hose", "kite"],
+    "value": 2,
+    "type": "range",
+    "min": 0.1,
+    "max": 5,
+    "step": 0.1
   },
   {
-    "id": "theme",
-    "title": "Theme",
-    "description": "Just colors and font",
-    "value": "default",
-    "type": "select",
-    "options": ["default", "cognizant"]
+    "id": "arrangement",
+    "title": "Arrangement",
+    "description": "Arrangement of elements in transition",
+    "parentPattern": ["images", "paths", "hose", "kite"],
+    "value": 0,
+    "type": "range",
+    "min": 0,
+    "max": 10,
+    "step": 1
   },
   {
     "id": "imageUrl",
@@ -261,16 +265,16 @@
   {
     "id": "text",
     "title": "Text",
-    "description": "Text for sentences pattern",
+    "description": "Text for hose pattern",
     "isHandRelated": true,
-    "parentPattern": ["paths", "sentences", "kite"],
+    "parentPattern": ["paths", "hose", "kite"],
     "value": "The fixed point that the element rotates around is also known as the transform origin.",
     "type": "text"
   },
   {
     "id": "textLimit",
     "title": "Text limit",
-    "description": "Text limit length for sentences pattern",
+    "description": "Text limit length for hose pattern",
     "value": 100,
     "isHidden": true,
     "type": "range",
