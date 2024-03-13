@@ -9,16 +9,18 @@ const Buttons = ({ activeMask, clearPaths }) => {
           saveImage();
         }}
       >
-        Save Image
+        Save image
       </button>
-      <button
-        className="control control--button"
-        onClick={() => {
-          saveJson(activeMask);
-        }}
-      >
-        Save mask
-      </button>
+      {activeMask && (
+        <button
+          className="control control--button"
+          onClick={() => {
+            saveJson(activeMask);
+          }}
+        >
+          Save mask
+        </button>
+      )}
       <button className="control control--button" onClick={clearPaths}>
         Clear image
       </button>

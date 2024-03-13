@@ -83,6 +83,7 @@ export const renderPath = ({ area, points, radius }) =>
     .join(" ");
 
 export const saveJson = (areas) => {
+  navigator.clipboard.writeText(areas);
   console.info(areas);
   const data = JSON.stringify(areas);
   fetch("/api/save", {

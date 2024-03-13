@@ -101,7 +101,7 @@ function MaskEditor(props) {
           className="control control--button"
           onClick={() => saveJson(mask)}
         >
-          Save
+          Save mask
         </button>
         <button
           className="control control--button"
