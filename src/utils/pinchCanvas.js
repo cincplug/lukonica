@@ -14,9 +14,7 @@ export const pinchCanvas = ({
   lastX,
   lastY
 }) => {
-  let targetLineWidth = Math.max(
-    (radius - thumbIndexDistance) * growth + minimum
-  );
+  let targetLineWidth = (radius - thumbIndexDistance) * growth + minimum;
   ctx.lineWidth = (targetLineWidth - ctx.lineWidth) / 2;
   ctx.strokeStyle = processColor(color, opacity);
   if (!lastX) {
@@ -24,9 +22,8 @@ export const pinchCanvas = ({
     ctx.moveTo(x, y);
   } else {
     ctx.quadraticCurveTo(lastX, lastY, x, y);
-    ctx.lineJoin = "bevel";
     ctx.stroke();
-    if (getDistance({ x, y }, { x: lastX, y: lastY }) > pinchThreshold) {
+    if (getDistance({ x, y }, { x: lastX, y: lastY }) > minimum) {
       ctx.beginPath();
       ctx.moveTo(x, y);
     }

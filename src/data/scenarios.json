@@ -477,7 +477,7 @@
     "radius": 40,
     "growth": 0.16,
     "minimum": 5,
-    "latency": 1,
+    "latency": 2,
     "pinchThreshold": 50,
     "bg": "#e5e5e5",
     "color": "#160594",
@@ -488,7 +488,6 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
-    "usesButtonPinch": false,
     "dash": 0
   },
   "pinch-canvas-ballpen": {
@@ -511,7 +510,6 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
-    "usesButtonPinch": false,
     "dash": 0.5
   },
   "pinch-canvas-pencil": {
