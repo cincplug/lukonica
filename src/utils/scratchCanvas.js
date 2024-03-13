@@ -10,15 +10,16 @@ export const scratchCanvas = ({
   tips,
   scratchPattern,
   lastTips,
-  pinchThreshold
+  pinchThreshold,
+  isSpacePressed
 }) => {
   ctx.strokeStyle = processColor(color, opacity);
   const tipValues = Object.values(tips);
   const tipDistance = getAverageDistance(tipValues);
-  if (lastTips && tipDistance < pinchThreshold) {
+  if (lastTips && (isSpacePressed || tipDistance < pinchThreshold)) {
     ctx.beginPath();
     if (["quadratics", "charts", "joints"].includes(scratchPattern)) {
-      tipValues.forEach((tip, tipIndex) => {
+      tipValues.forEach((_tip, tipIndex) => {
         ctx.lineWidth = Math.max(
           minimum,
           (radius - ctx.lineWidth + tipIndex * growth) /

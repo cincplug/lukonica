@@ -194,7 +194,7 @@
     "title": "Scratch pattern",
     "description": "Sub-pattern of scratch canvas",
     "isHandRelated": true,
-    "isScratchCanvas": true,
+    "isScratchCanvasRelated": true,
     "value": "lines",
     "type": "select",
     "parentPattern": "canvas",
@@ -287,6 +287,14 @@
     "id": "usesButtonPinch",
     "title": "Button pinch",
     "description": "Simulates click / hover by pinch on buttons",
+    "isHidden": true,
+    "value": false,
+    "type": "checkbox"
+  },
+  {
+    "id": "isSpacePressed",
+    "title": "Is space pressed",
+    "description": "Tells if space is pressed",
     "isHidden": true,
     "value": false,
     "type": "checkbox"

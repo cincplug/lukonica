@@ -32,7 +32,8 @@ export const processHands = ({
     isScratchCanvas,
     scratchPattern,
     scratchPoints,
-    dash
+    dash,
+    isSpacePressed
   } = setupRef.current;
   let newPoints = [];
   if (!["paths"].includes(pattern)) {
@@ -52,7 +53,7 @@ export const processHands = ({
     squeezeRatio: pinchThreshold
   });
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
-  const isPinched = thumbIndexDistance < pinchThreshold;
+  const isPinched = isSpacePressed || thumbIndexDistance < pinchThreshold;
   const isWagging =
     (wrist.y - indexTip.y) / (wrist.y - middleTip.y) > 2 &&
     (wrist.y - indexTip.y) / (wrist.x - indexTip.x) > 2;
@@ -115,7 +116,8 @@ export const processHands = ({
           tips,
           scratchPattern,
           lastTips,
-          pinchThreshold
+          pinchThreshold,
+          isSpacePressed
         });
       } else {
         lastTips = undefined;

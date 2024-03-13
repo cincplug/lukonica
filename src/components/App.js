@@ -44,11 +44,24 @@ const App = () => {
   }, [setup]);
 
   useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === " ") {
+        setSetup((prevSetup) => {
+          return { ...prevSetup, isSpacePressed: true };
+        });
+      }
+    };
     const handleKeyUp = (event) => {
+      if (event.key === " ") {
+        setSetup((prevSetup) => {
+          return { ...prevSetup, isSpacePressed: false };
+        });
+      }
       if (event.key === "Backspace") {
         clearPaths();
       }
     };
+    window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
     return () => {
       window.removeEventListener("keyup", handleKeyUp);
