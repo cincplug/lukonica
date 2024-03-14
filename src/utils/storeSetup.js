@@ -9,11 +9,18 @@ export const getStoredSetup = () => {
   DEFAULT_SETUP.forEach((item) => {
     initialSetup[item.id] = storedSetup ? storedSetup[item.id] : item.value;
   });
-  
-  console.warn(initialSetup);
   return initialSetup;
-}
+};
 
 export const storeSetup = (nextSetup) => {
-  sessionStorage.setItem(storageSetupItem, JSON.stringify(nextSetup));
+  let omittedKeys = DEFAULT_SETUP.filter((item) => item.isStoringPrevented).map(
+    (item) => item.id
+  );
+  let filteredNextSetup = Object.keys(nextSetup)
+    .filter((key) => !omittedKeys.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = nextSetup[key];
+      return obj;
+    }, {});
+  sessionStorage.setItem(storageSetupItem, JSON.stringify(filteredNextSetup));
 };

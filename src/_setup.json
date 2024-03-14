@@ -295,6 +295,7 @@
     "id": "isSpacePressed",
     "title": "Is space pressed",
     "description": "Tells if space is pressed",
+    "isStoringPrevented": true,
     "isHidden": true,
     "value": false,
     "type": "checkbox"
