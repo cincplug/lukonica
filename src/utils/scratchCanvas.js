@@ -1,5 +1,19 @@
 import { processColor, getAverageDistance } from "./index";
 
+const getLineWidth = ({
+  minimum,
+  radius,
+  growth,
+  tipDistance,
+  tipIndex,
+  dispersion
+}) => {
+  return Math.max(
+    minimum,
+    ((radius * growth) / tipDistance) * tipIndex * dispersion
+  );
+};
+
 export const scratchCanvas = ({
   radius,
   growth,
@@ -21,11 +35,14 @@ export const scratchCanvas = ({
     ctx.beginPath();
     if (["quadratics", "charts", "joints"].includes(scratchPattern)) {
       tipValues.forEach((_tip, tipIndex) => {
-        ctx.lineWidth = Math.max(
+        ctx.lineWidth = getLineWidth({
+          tipIndex,
           minimum,
-          (radius - ctx.lineWidth + tipIndex * dispersion * growth) /
-            getAverageDistance(tipValues)
-        );
+          radius,
+          growth,
+          tipDistance,
+          dispersion
+        });
         const prevIndex = tipIndex === 0 ? tipValues.length - 1 : tipIndex - 1;
         if (scratchPattern === "quadratics") {
           ctx.quadraticCurveTo(
@@ -56,7 +73,14 @@ export const scratchCanvas = ({
       Object.keys(tips).forEach((tip, tipIndex) => {
         if (!lastTips[tip]) return;
         ctx.moveTo(lastTips[tip].x, lastTips[tip].y);
-        ctx.lineWidth = radius - ctx.lineWidth + tipIndex * growth;
+        ctx.lineWidth = getLineWidth({
+          tipIndex,
+          minimum,
+          radius,
+          growth,
+          tipDistance,
+          dispersion
+        });
         if (scratchPattern === "lines") {
           ctx.quadraticCurveTo(
             lastTips[tip].x,

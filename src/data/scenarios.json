@@ -469,6 +469,7 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
+    "dispersion": 37,
     "dash": 3
   },
   "pinch-canvas-pen": {
@@ -481,13 +482,14 @@
     "pinchThreshold": 50,
     "bg": "#e5e5e5",
     "color": "#160594",
-    "opacity": 192,
+    "opacity": 128,
     "videoOpacity": 48,
     "blendMode": "normal",
     "pattern": "canvas",
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
+    "dispersion": 30,
     "dash": 0
   },
   "pinch-canvas-ballpen": {
@@ -499,7 +501,7 @@
     "pinchThreshold": 46,
     "bg": "#e5e5e5",
     "color": "#4030b0",
-    "opacity": 120,
+    "opacity": 192,
     "videoOpacity": 48,
     "hasSvgAnim": false,
     "hasCssAnim": true,
@@ -510,6 +512,7 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
+    "dispersion": 5,
     "dash": 0.5
   },
   "pinch-canvas-pencil": {
@@ -528,6 +531,7 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
+    "dispersion": 0,
     "dash": 0
   },
   "pinch-canvas-brush": {
@@ -546,6 +550,7 @@
     "showsFaces": false,
     "showsHands": true,
     "isScratchCanvas": false,
+    "dispersion": 20,
     "dash": 1
   },
   "scratch-canvas-mid": {
@@ -566,6 +571,7 @@
     "pinchThreshold": 100,
     "scratchPattern": "quadratics",
     "scratchPoints": [12, 8, 4, 3, 2, 1, 0, 17, 18, 19, 20, 16],
+    "dispersion": 1,
     "dash": 0
   },
   "scratch-canvas-wide": {
@@ -586,6 +592,7 @@
     "pinchThreshold": 150,
     "scratchPattern": "joints",
     "scratchPoints": [12, 8, 4, 3, 2, 1, 0, 17, 18, 19, 20, 16],
+    "dispersion": 20,
     "dash": 0
   },
   "scratch-canvas-fist": {
@@ -606,6 +613,7 @@
     "showsHands": true,
     "isScratchCanvas": true,
     "scratchPoints": [5, 17, 9, 13, 8, 12, 16, 20],
+    "dispersion": 10,
     "dash": 6
   },
   "scratch-canvas-narrow": {
@@ -626,6 +634,7 @@
     "pinchThreshold": 10,
     "scratchPattern": "lines",
     "scratchPoints": [4, 8, 12, 16, 20],
+    "dispersion": 1,
     "dash": 0
   }
 }

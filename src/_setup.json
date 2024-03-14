@@ -331,7 +331,7 @@
     "parentPattern": "canvas",
     "isScratchCanvasRelated": false,
     "type": "range",
-    "min": 1,
+    "min": 0,
     "max": 50,
     "step": 1
   },

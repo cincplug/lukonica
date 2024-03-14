@@ -15,7 +15,7 @@ export const pinchCanvas = ({
   lastY
 }) => {
   let targetLineWidth = (radius - thumbIndexDistance) * growth + minimum;
-  ctx.lineWidth = (targetLineWidth - ctx.lineWidth) / 2;
+  ctx.lineWidth = (targetLineWidth * 2 - ctx.lineWidth) / 3;
   ctx.strokeStyle = processColor(color, opacity);
   if (!lastX) {
     ctx.beginPath();
