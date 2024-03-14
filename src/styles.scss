@@ -224,7 +224,7 @@ input[type="checkbox"] {
       background: var(--color-skin-light);
       content: "✔️";
       color: var(--color-black);
-      font-size: var(--font-size-s);
+      font-size: var(--font-size-);
       line-height: var(--font-size-m);
       text-align: center;
     }
@@ -703,7 +703,14 @@ label {
 
 .info {
   grid-column: span 12;
-  background: var(--color-skin-mid-dark);
-  padding: var(--gap-half);
-  font-size: 1rem;
+  font-size: var(--font-size-m);
+  background: inherit;
+  color: var(--color-skin-light);
+  p {
+    margin: var(--gap-half) 0;
+  }
+  ul {
+    list-style-position: inside;
+    padding-left: 0;
+  }
 }

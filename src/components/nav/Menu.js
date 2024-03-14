@@ -1,7 +1,7 @@
-import React, { useState } from "react";
 import DEFAULT_SETUP from "../../_setup.json";
 import ControlGroup from "./Controls";
 import Buttons from "./Buttons";
+import Info from "./Info";
 import MaskSelection from "./MaskSelection";
 import ScenarioSelection from "./ScenarioSelection";
 import ScratchPointSelection from "./ScratchPointSelection";
@@ -31,9 +31,7 @@ const Menu = (props) => {
           )}
         />
         <Buttons activeMask={activeMask} clearPaths={clearPaths} />
-        <div className="info">
-           info
-        </div>
+        <Info {...{ setup }} />
       </nav>
       <nav className={`menu menu--secondary`}>
         <ScenarioSelection {...{ setup, setSetup, handleInputChange }} />

@@ -2,7 +2,7 @@
   {
     "id": "theme",
     "title": "Theme",
-    "description": "Just colors and font",
+    "description": "Colors and font",
     "value": "default",
     "type": "select",
     "options": ["default", "cognizant"]
@@ -10,7 +10,7 @@
   {
     "id": "pattern",
     "title": "Pattern",
-    "description": "What will be drawn on points",
+    "description": "What sort of graphics is used",
     "value": "numbers",
     "type": "select",
     "options": ["numbers", "images", "paths", "hose", "kite", "canvas"]
@@ -18,7 +18,7 @@
   {
     "id": "radius",
     "title": "Radius",
-    "description": "Initial radius",
+    "description": "Size of things",
     "value": 10,
     "type": "range",
     "min": 0.5,
@@ -38,7 +38,7 @@
   {
     "id": "minimum",
     "title": "Minimum",
-    "description": "Minimum",
+    "description": "Minimal line width",
     "value": 5,
     "type": "range",
     "min": 0,
@@ -48,7 +48,7 @@
   {
     "id": "latency",
     "title": "Latency",
-    "description": "On how many frames it refreshes",
+    "description": "Similar to frame rate. The bigger the latency, the smaller the frame rate",
     "value": 2,
     "type": "range",
     "min": 1,
@@ -69,7 +69,7 @@
   {
     "id": "opacity",
     "title": "Opacity",
-    "description": "Initial opacity of shapes",
+    "description": "Opacity of foreground",
     "value": 128,
     "type": "range",
     "min": 0,
@@ -96,14 +96,14 @@
   {
     "id": "color",
     "title": "Fg",
-    "description": "Color of particles",
+    "description": "Foreground color",
     "value": "#000000",
     "type": "color"
   },
   {
     "id": "blendMode",
     "title": "Blend mode",
-    "description": "Blending mode with the background",
+    "description": "Blending mode of foreground with the video",
     "value": "normal",
     "type": "select",
     "options": [
@@ -175,7 +175,7 @@
   {
     "id": "pathStroke",
     "title": "Path stroke",
-    "description": "Sub-pattern of paths",
+    "description": "What kind of paths is being used",
     "value": "lines",
     "type": "select",
     "isHandRelated": true,
@@ -266,7 +266,7 @@
   {
     "id": "text",
     "title": "Text",
-    "description": "Text for hose pattern",
+    "description": "Text for hose, kite, and paths patterns",
     "isHandRelated": true,
     "parentPattern": ["paths", "hose", "kite"],
     "value": "The fixed point that the element rotates around is also known as the transform origin.",
@@ -313,7 +313,7 @@
   {
     "id": "dash",
     "title": "Dash",
-    "description": "Dash pattern",
+    "description": "Length of dashes in a line",
     "value": 0,
     "isHandRelated": true,
     "parentPattern": "canvas",
@@ -325,7 +325,7 @@
   {
     "id": "dispersion",
     "title": "Dispersion",
-    "description": "How much line remembers its previous width",
+    "description": "How much the line disperses as you draw",
     "value": 1,
     "isHandRelated": true,
     "parentPattern": "canvas",
