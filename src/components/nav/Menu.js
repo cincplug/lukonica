@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import DEFAULT_SETUP from "../../_setup.json";
 import ControlGroup from "./Controls";
 import Buttons from "./Buttons";
@@ -15,7 +16,6 @@ const Menu = (props) => {
     clearPaths
   } = props;
   const { showsFaces, pattern, isScratchCanvas } = setup;
-
   return (
     <>
       <nav className={`menu menu--controls`}>
@@ -24,7 +24,6 @@ const Menu = (props) => {
           controls={DEFAULT_SETUP.filter(
             (control) =>
               !control.isHidden &&
-              !control.parentScenario &&
               (!control.parentPattern ||
                 control.parentPattern.includes(pattern)) &&
               !control.isHandRelated &&
@@ -32,6 +31,9 @@ const Menu = (props) => {
           )}
         />
         <Buttons activeMask={activeMask} clearPaths={clearPaths} />
+        <div className="info">
+           info
+        </div>
       </nav>
       <nav className={`menu menu--secondary`}>
         <ScenarioSelection {...{ setup, setSetup, handleInputChange }} />

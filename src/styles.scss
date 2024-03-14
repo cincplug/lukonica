@@ -401,6 +401,7 @@ legend {
   padding: 0;
   margin: 0 0 var(--gap-half);
   font-size: var(--font-size-m);
+  position: relative;
   &--checkbox {
     flex-direction: row;
     align-self: center;
@@ -427,6 +428,16 @@ legend {
   &--button {
     height: 2rem;
     align-items: center;
+  }
+  &:hover::after {
+    content: attr(title);
+    position: fixed;
+    padding: var(--gap); 
+    box-sizing: border-box;
+    bottom: 0; 
+    left: 0; 
+    width: var(--menu-width);
+    color: var(--color-skin-light);
   }
 }
 
@@ -688,4 +699,11 @@ label {
   &.selected {
     fill: var(--color-skin-light);
   }
+}
+
+.info {
+  grid-column: span 12;
+  background: var(--color-skin-mid-dark);
+  padding: var(--gap-half);
+  font-size: 1rem;
 }
