@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "@tensorflow/tfjs-backend-webgl";
-import DEFAULT_SETUP from "../_setup.json";
 import { runDetector } from "../utils/runDetector";
+import { getStoredSetup, storeSetup } from "../utils/storeSetup";
 import Webcam from "react-webcam";
 import Menu from "./nav/Menu";
 import MaskEditor from "./nav/MaskEditor";
@@ -15,6 +15,7 @@ const targetResolution = {
   width: window.innerWidth,
   height: window.innerHeight
 };
+const initialSetup = getStoredSetup();
 
 const App = () => {
   const [isStarted, setIsStarted] = useState(false);
@@ -28,14 +29,6 @@ const App = () => {
   const [scribbleNewArea, setScribbleNewArea] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
   const [handsCount, setHandsCount] = useState(0);
-
-  const storageSetupItem = "lukonicaSetup";
-  const storedSetupRaw = sessionStorage.getItem(storageSetupItem);
-  const storedSetup = storedSetupRaw ? JSON.parse(storedSetupRaw) : null;
-  const initialSetup = {};
-  DEFAULT_SETUP.forEach((item) => {
-    initialSetup[item.id] = storedSetup ? storedSetup[item.id] : item.value;
-  });
   const [setup, setSetup] = useState(initialSetup);
 
   const setupRef = useRef(setup);
@@ -95,7 +88,7 @@ const App = () => {
       } else {
         nextSetup[id] = ["number", "range"].includes(type) ? value / 1 : value;
       }
-      sessionStorage.setItem(storageSetupItem, JSON.stringify(nextSetup));
+      storeSetup(nextSetup);
       return nextSetup;
     });
   };
