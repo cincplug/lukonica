@@ -13,7 +13,8 @@ const Menu = (props) => {
     handleInputChange,
     activeMask,
     setActiveMask,
-    clearPaths
+    clearPaths,
+    setIsEditing
   } = props;
   const { showsFaces, pattern, isScratchCanvas } = setup;
   return (
@@ -30,7 +31,7 @@ const Menu = (props) => {
               !control.isFaceRelated
           )}
         />
-        <Buttons activeMask={activeMask} clearPaths={clearPaths} />
+        <Buttons {...{ activeMask, clearPaths, setActiveMask, setIsEditing }} />
         <Info {...{ setup }} />
       </nav>
       <nav className={`menu menu--secondary`}>

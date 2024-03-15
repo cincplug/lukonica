@@ -10,9 +10,9 @@ const Info = (props) => {
             <>
               <p>Paths are drawn across selected face points.</p>
               <ul>
-                <li>Select among Masks to change face points.</li>
+                <li>Select among masks to change face points.</li>
                 <li>
-                  Change Radius, Arrangement and other properties for different
+                  Change radius, arrangement and other properties for different
                   behaviour.
                 </li>
               </ul>
@@ -22,11 +22,11 @@ const Info = (props) => {
             <>
               <p>Images are displayed across your selected face points.</p>
               <ul>
-                <li>Select among Masks to change face points.</li>
+                <li>Select among masks to change face points.</li>
                 <li>
-                  Use Radius, Growth and other properties to change behaviour.
+                  Use radius, growth and other properties to change behaviour.
                 </li>
-                <li>Use Image URL for different image.</li>
+                <li>Use image URL for different image.</li>
               </ul>
             </>
           )}
@@ -57,9 +57,9 @@ const Info = (props) => {
             <ul>
               <li>Hold space bar to draw, release it to stop drawing.</li>
               <li>Choose finger points with which to draw, and the scratch pattern</li>
-              <li>Use Pinch to scale your finger "brush"</li>
+              <li>Use pinch to scale your finger "brush"</li>
               <li>Wag your forefinger like this 👆 to delete what you drew.</li>
-              <li>Use Dispersion and Dash for different feeling of the stroke.</li>
+              <li>Use dispersion and dash for different feeling of the stroke.</li>
             </ul>
           )}
         </>

@@ -198,7 +198,8 @@ const App = () => {
         setActiveMask,
         setPoints,
         clearPaths,
-        activeMask: activeMask.concat(customMask)
+        activeMask: activeMask.concat(customMask),
+        setIsEditing
       }}
     />
   );

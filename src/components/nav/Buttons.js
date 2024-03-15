@@ -1,6 +1,6 @@
-import { saveImage, saveJson } from "../../utils";
+import { saveImage } from "../../utils";
 
-const Buttons = ({ activeMask, clearPaths }) => {
+const Buttons = ({ activeMask, clearPaths, setActiveMask, setIsEditing }) => {
   return (
     <>
       <button
@@ -16,11 +16,12 @@ const Buttons = ({ activeMask, clearPaths }) => {
         <button
           className="control control--button"
           onClick={() => {
-            saveJson(activeMask);
+            setActiveMask(activeMask);
+            setIsEditing(true);
           }}
-          title="Save mask you just drawn on your face (it will copy coordinates into clipboard)"
+          title="Edit the mask you just drawn on your face"
         >
-          Save mask
+          Edit mask
         </button>
       )}
 

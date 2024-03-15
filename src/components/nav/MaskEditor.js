@@ -55,6 +55,7 @@ function MaskEditor(props) {
   };
 
   const handleMouseMove = (event) => {
+    if (!event.pageX) return;
     setMouseX(event.pageX || event.touches[0].pageX);
     setMouseY(event.pageY || event.touches[0].pageY);
   };

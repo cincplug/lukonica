@@ -17,7 +17,7 @@ const Splash = (props) => {
             setIsEditing(true);
           }}
         >
-          Create mask
+          Edit mask
         </button>
       </div>
     </div>
