@@ -54,6 +54,7 @@ const ScenarioSelection = ({ setup, setSetup, handleInputChange }) => {
             className={`menu--scenarios__button ${
               index === setup.activeScenarioIndex ? "active" : "inactive"
             }`}
+            title={scenario?.description}
             key={`scn-${index}`}
             onClick={(event) =>
               handleScenarioButtonClick(event, scenarioKey, index)

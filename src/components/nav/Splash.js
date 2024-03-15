@@ -5,13 +5,14 @@ const Splash = (props) => {
   return (
     <div className="wrap splash">
       <h1>Lukonica</h1>
-      <button className="splash-button" onClick={handlePlayButtonClick}>
+      <button className="splash-button" title="Start the app" onClick={handlePlayButtonClick}>
         <Logo />
         Start camera
       </button>
       <div className="buttons">
         <button
           className="splash-button"
+          title="Edit selected face mask"
           onClick={() => {
             setIsEditing(true);
           }}

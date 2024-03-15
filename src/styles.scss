@@ -429,16 +429,19 @@ legend {
     height: 2rem;
     align-items: center;
   }
-  &:hover::after {
-    content: attr(title);
-    position: fixed;
-    padding: var(--gap); 
-    box-sizing: border-box;
-    bottom: 0; 
-    left: 0; 
-    width: var(--menu-width);
-    color: var(--color-skin-light);
-  }
+}
+
+[title]:hover::after {
+  content: attr(title);
+  font-size: var(--font-size-m);
+  text-align: left;
+  position: fixed;
+  padding: var(--gap); 
+  box-sizing: border-box;
+  bottom: 0; 
+  left: 0; 
+  width: var(--menu-width);
+  color: var(--color-skin-light);
 }
 
 label {

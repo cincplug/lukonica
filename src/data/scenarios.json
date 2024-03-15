@@ -1,6 +1,7 @@
 {
   "/": null,
   "face-features": {
+    "description": "Basic face contours, video hidden",
     "icon": "🧔‍♂️",
     "transDur": 1.6,
     "arrangement": 1,
@@ -26,6 +27,7 @@
     "usesButtonPinch": false
   },
   "sunglasses": {
+    "description": "Try some sunglasses",
     "icon": "😎",
     "transDur": 1.2,
     "arrangement": 2,
@@ -51,6 +53,7 @@
     "usesButtonPinch": false
   },
   "star-eyes": {
+    "description": "Look like your favorite emoji",
     "icon": "🤩",
     "transDur": 1.2,
     "arrangement": 2,
@@ -76,6 +79,7 @@
     "usesButtonPinch": false
   },
   "eyelashes": {
+    "description": "Try some eyeliner",
     "icon": "👁️",
     "transDur": 2,
     "arrangement": 2,
@@ -101,6 +105,7 @@
     "usesButtonPinch": false
   },
   "lipstick": {
+    "description": "Try some lipstick",
     "icon": "👄",
     "transDur": 2,
     "arrangement": 2,
@@ -125,6 +130,7 @@
     "activeMaskIndex": 8
   },
   "helicopter": {
+    "description": "Make your eyebrows spin like helicopter rotors",
     "icon": "🚁",
     "transDur": 0.2,
     "arrangement": 3,
@@ -150,6 +156,7 @@
     "usesButtonPinch": false
   },
   "eyebrow-invaders": {
+    "description": "Shoot space invaders with your forehead",
     "icon": "👾",
     "transDur": 1,
     "arrangement": 1,
@@ -175,6 +182,7 @@
     "usesButtonPinch": false
   },
   "eyebrow-pinball": {
+    "description": "Use your eyebrows as pinball flippers",
     "icon": "🎱",
     "transDur": 1,
     "arrangement": 1,
@@ -200,6 +208,7 @@
     "usesButtonPinch": false
   },
   "face-plant": {
+    "description": "Turn your face into some garden herb",
     "icon": "🌿",
     "transDur": 3.4,
     "arrangement": 5,
@@ -225,6 +234,7 @@
     "usesButtonPinch": false
   },
   "face-wash": {
+    "description": "Wash your face with soap bubbles",
     "icon": "🛁",
     "transDur": 3,
     "arrangement": 6,
@@ -250,6 +260,7 @@
     "usesButtonPinch": false
   },
   "too-much-beer": {
+    "description": "Exhale some bubbles after having beer",
     "icon": "🍺",
     "transDur": 3.2,
     "arrangement": 6,
@@ -275,6 +286,7 @@
     "usesButtonPinch": false
   },
   "pinch-paint-svg": {
+    "description": "Draw with your pinched fingers",
     "icon": "👌",
     "transDur": 3.2,
     "arrangement": 1,
@@ -300,6 +312,7 @@
     "usesButtonPinch": false
   },
   "pinch-paint-svg-cloud": {
+    "description": "Draw clouds with your pinched fingers",
     "icon": "☁️",
     "transDur": 3.2,
     "arrangement": 1,
@@ -325,6 +338,7 @@
     "usesButtonPinch": false
   },
   "watermelon": {
+    "description": "Draw watermelon slices with your pinched fingers",
     "icon": "🍉",
     "transDur": 10,
     "arrangement": 3,
@@ -350,6 +364,7 @@
     "text": "⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫"
   },
   "bicycle": {
+    "description": "Draw bicycle chain with your pinched fingers",
     "icon": "🚲",
     "transDur": 5,
     "arrangement": 3,
@@ -375,6 +390,7 @@
     "text": "................................"
   },
   "typewriter": {
+    "description": "Spill letters with your pinched fingers",
     "icon": "⌨️",
     "transDur": 1,
     "arrangement": 1,
@@ -401,6 +417,7 @@
     "usesButtonPinch": false
   },
   "kite": {
+    "description": "Play with kite with your pinched fingers",
     "icon": "🪁",
     "transDur": 1.7,
     "arrangement": 1,
@@ -427,6 +444,7 @@
     "usesButtonPinch": false
   },
   "railway": {
+    "description": "Make model railways with your pinched fingers",
     "icon": "🚂",
     "transDur": 1.6,
     "arrangement": 1,
@@ -452,6 +470,7 @@
     "usesButtonPinch": false
   },
   "zipper": {
+    "description": "Make stitches or zippers with your pinched fingers",
     "icon": "👖",
     "radius": 74,
     "growth": 0.3,
@@ -471,6 +490,7 @@
     "dash": 3
   },
   "pinch-canvas-pen": {
+    "description": "Use the pinch as canvas pen",
     "icon": "🖋️",
     "transDur": 3.2,
     "radius": 40,
@@ -491,6 +511,7 @@
     "dash": 0
   },
   "pinch-canvas-ballpen": {
+    "description": "Use the pinch as canvas ball pen",
     "icon": "🖊️",
     "radius": 33.5,
     "growth": 0.4,
@@ -514,6 +535,7 @@
     "dash": 0.5
   },
   "pinch-canvas-pencil": {
+    "description": "Use the pinch as canvas pencil",
     "icon": "📝",
     "radius": 11.5,
     "growth": 0.8,
@@ -533,6 +555,7 @@
     "dash": 0
   },
   "pinch-canvas-brush": {
+    "description": "Use the pinch as canvas paintbrush",
     "icon": "🖌️",
     "radius": 53,
     "growth": 1.26,
@@ -552,6 +575,7 @@
     "dash": 1
   },
   "scratch-canvas-mid": {
+    "description": "Draw curves with more fingers",
     "icon": "✋",
     "radius": 5,
     "growth": 0.19,
@@ -573,6 +597,7 @@
     "dash": 0
   },
   "scratch-canvas-wide": {
+    "description": "Draw some joints with expanded fingers",
     "icon": "🖐️",
     "radius": 5,
     "growth": 0.19,
@@ -594,6 +619,7 @@
     "dash": 0
   },
   "scratch-canvas-fist": {
+    "description": "Draw some charts with more fingers",
     "icon": "✊",
     "radius": 5,
     "growth": 0.19,
@@ -615,6 +641,7 @@
     "dash": 6
   },
   "scratch-canvas-narrow": {
+    "description": "Draw with pinched fingers, but all of them",
     "icon": "🤌",
     "radius": 5,
     "growth": 0.19,

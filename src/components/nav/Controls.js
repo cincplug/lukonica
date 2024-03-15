@@ -1,4 +1,4 @@
-const ControlGroup = ({ controls, setup, handleInputChange }) =>
+const Controls = ({ controls, setup, handleInputChange }) =>
   controls.map((item, index) => {
     const { id, type, min, max, step, title, description, options } = item;
     let value = setup[id];
@@ -40,4 +40,4 @@ const ControlGroup = ({ controls, setup, handleInputChange }) =>
     );
   });
 
-export default ControlGroup;
+export default Controls;

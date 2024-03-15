@@ -8,6 +8,7 @@ const Buttons = ({ activeMask, clearPaths }) => {
         onClick={() => {
           saveImage();
         }}
+        title="Save image to your machine"
       >
         Save image
       </button>
@@ -17,15 +18,22 @@ const Buttons = ({ activeMask, clearPaths }) => {
           onClick={() => {
             saveJson(activeMask);
           }}
+          title="Save mask you just drawn on your face (it will copy coordinates into clipboard)"
         >
           Save mask
         </button>
       )}
-      <button className="control control--button" onClick={clearPaths}>
+
+      <button
+        className="control control--button"
+        title="Clear what you've just drawn (you can also wag your finger)"
+        onClick={clearPaths}
+      >
         Clear image
       </button>
       <button
         className="control control--button"
+        title="Reset all settings to defaults"
         onClick={() => {
           sessionStorage.clear();
           window.location = "/";
