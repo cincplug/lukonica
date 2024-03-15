@@ -1,7 +1,5 @@
 {
-  "/": {
-    "hasCursor": false
-  },
+  "/": null,
   "face-features": {
     "icon": "🧔‍♂️",
     "transDur": 1.6,
@@ -24,7 +22,7 @@
     "showsFaces": true,
     "showsHands": true,
     "isScratchCanvas": false,
-    "activeMaskIndex": 3,
+    "activeMaskIndex": 17,
     "usesButtonPinch": false
   },
   "sunglasses": {
