@@ -100,8 +100,15 @@ export const saveJson = (areas) => {
 
 export const saveImage = () => {
   const link = document.createElement("a");
+  const svgElement = document.querySelector(".drawing");
   const canvasElement = document.querySelector(".canvas");
-  if (canvasElement) {
+  if (svgElement) {
+    link.download = "lukonica-scribble.svg";
+    const base64doc = Buffer.from(unescape(encodeURIComponent(svgElement.outerHTML))).toString('base64');
+    const e = new MouseEvent("click");
+    link.href = "data:image/svg+xml;base64," + base64doc;
+    link.dispatchEvent(e);
+  } else {
     link.download = "lukonica-canvas.png";
     link.setAttribute(
       "href",
@@ -110,13 +117,6 @@ export const saveImage = () => {
         .replace("image/png", "image/octet-stream")
     );
     link.click();
-  } else {
-    link.download = "lukonica-scribble.svg";
-    const svg = document.querySelector(".drawing");
-    const base64doc = btoa(unescape(encodeURIComponent(svg.outerHTML)));
-    const e = new MouseEvent("click");
-    link.href = "data:image/svg+xml;base64," + base64doc;
-    link.dispatchEvent(e);
   }
 };
 
