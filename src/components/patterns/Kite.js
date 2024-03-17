@@ -2,20 +2,11 @@ import React from "react";
 import { processColor } from "../../utils";
 
 const Kite = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
-  const {
-    text,
-    textLimit,
-    color,
-    opacity,
-    hasCssAnim,
-    transDur,
-    arrangement
-  } = setup;
+  const { text, color, opacity, hasCssAnim, transDur, arrangement } =
+    setup;
 
   const textArray = Array.from(text);
-  const area = [...scribble, scribbleNewArea]
-    .flat()
-    .slice(-Math.min(textLimit, textArray.length));
+  const area = [...scribble, scribbleNewArea].flat();
 
   const pathData = area.length
     ? area
@@ -40,7 +31,7 @@ const Kite = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
             className={`number-mask`}
             fill={processColor(color, opacity)}
             key={`sent-${index}`}
-            fontSize={radius  + textArray.length - index** growth}
+            fontSize={radius + textArray.length - index ** growth}
             style={style}
           >
             <textPath href="#text-path" startOffset={`${endOffset}%`}>

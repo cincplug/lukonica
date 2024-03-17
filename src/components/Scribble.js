@@ -16,11 +16,8 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
     radius,
     growth,
     minimum,
-    textLimit,
     imageUrl
   } = setup;
-
-  const textArray = Array.from(text);
 
   if (pattern === "hose") {
     return (
@@ -47,8 +44,7 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
   return (
     <>
       {[...scribble, scribbleNewArea].map((scribbleArea, scribbleAreaIndex) => {
-        const fullArea = scribbleArea.flat().reverse();
-        const area = fullArea.slice(-Math.min(textLimit, textArray.length));
+        const area = scribbleArea.flat().reverse();
         const pathData =
           area
             .map((point, index) => {

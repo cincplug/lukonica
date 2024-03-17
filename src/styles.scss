@@ -283,7 +283,7 @@ legend {
       background: var(--bg-input-active);
     }
   }
-  
+
   p {
     grid-column: span 12;
   }
@@ -440,10 +440,10 @@ legend {
   font-size: var(--font-size-m);
   text-align: left;
   position: fixed;
-  padding: var(--gap); 
+  padding: var(--gap);
   box-sizing: border-box;
-  bottom: 0; 
-  left: 0; 
+  bottom: 0;
+  left: 0;
   width: var(--menu-width);
   color: var(--color-skin-light);
 }
@@ -718,6 +718,15 @@ label {
   }
   ul {
     list-style-type: none;
+    padding-left: 0;
+  }
+}
+
+.update {
+  font-size: var(--font-size-m);
+  color: var(--color-skin-mid-light);
+  ul {
+    list-style-position: inside;
     padding-left: 0;
   }
 }

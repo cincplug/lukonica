@@ -4,7 +4,6 @@ import { processColor } from "../../utils";
 const Hose = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
   const {
     text,
-    textLimit,
     color,
     opacity,
     hasCssAnim,
@@ -13,8 +12,7 @@ const Hose = ({ scribble, scribbleNewArea, setup, radius, growth }) => {
 
   const textArray = Array.from(text);
   const area = [...scribble, scribbleNewArea]
-    .flat()
-    .slice(-Math.min(textLimit, textArray.length));
+    .flat();
 
   let shiftedTextArray = textArray;
   if (area.length >= textArray.length) {
