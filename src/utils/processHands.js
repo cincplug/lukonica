@@ -51,14 +51,14 @@ export const processHands = ({
   const indexTip = handPoints[8];
   const middleTip = handPoints[12];
   const tips = squeezePoints({
-    points: scratchPoints.map((point, index) => handPoints[point]),
+    points: scratchPoints.map((point) => handPoints[point]),
     squeezeRatio: pinchThreshold
   });
   const thumbIndexDistance = getDistance(thumbTip, indexTip);
   const isPinched = isSpacePressed || thumbIndexDistance < pinchThreshold;
   const isWagging =
-    (wrist.y - indexTip.y) / (wrist.y - middleTip.y) > 2 &&
-    (wrist.y - indexTip.y) / (wrist.x - indexTip.x) > 2;
+    (wrist.y - indexTip.y) / (wrist.y - middleTip.y) > 3 &&
+    (wrist.y - indexTip.y) / (wrist.x - indexTip.x) > 3;
   const x = (thumbTip.x + indexTip.x) / 2;
   const y = (thumbTip.y + indexTip.y) / 2;
   setCursor((prevCursor) => {
