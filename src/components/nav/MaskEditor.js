@@ -101,15 +101,18 @@ function MaskEditor(props) {
         <button
           className="control control--button"
           onClick={() => saveJson(mask)}
+          title="Save to database or at least copy to clipboard"
         >
           Save mask
         </button>
         <button
           className="control control--button"
           onClick={() => setIsEditing(false)}
+          title="Close without saving"
         >
           Close
         </button>
+        <p>Click on dots to add / remove points from custom masks</p>
       </nav>
     </div>
   );

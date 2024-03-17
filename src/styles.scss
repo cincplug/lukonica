@@ -283,6 +283,10 @@ legend {
       background: var(--bg-input-active);
     }
   }
+  
+  p {
+    grid-column: span 12;
+  }
 
   &--masks {
     legend {
@@ -713,7 +717,7 @@ label {
     margin: var(--gap-half) 0;
   }
   ul {
-    list-style-position: inside;
+    list-style-type: none;
     padding-left: 0;
   }
 }

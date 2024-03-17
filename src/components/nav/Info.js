@@ -8,26 +8,13 @@ const Info = (props) => {
           <p>Face detection is ON.</p>
           {pattern === "paths" && (
             <>
-              <p>Paths are drawn across selected face points.</p>
-              <ul>
-                <li>Select among masks to change face points.</li>
-                <li>
-                  Change radius, arrangement and other properties for different
-                  behaviour.
-                </li>
-              </ul>
+              <p>Select masks to change face points</p>
             </>
           )}
           {pattern === "images" && (
             <>
-              <p>Images are displayed across your selected face points.</p>
-              <ul>
-                <li>Select among masks to change face points.</li>
-                <li>
-                  Use radius, growth and other properties to change behaviour.
-                </li>
-                <li>Use image URL for different image.</li>
-              </ul>
+              <p>Select masks to change face points</p>
+              <p>Use image URL for different image</p>
             </>
           )}
         </>
@@ -35,32 +22,27 @@ const Info = (props) => {
       {!showsFaces && (
         <>
           <p>
-            Face detection is OFF, for better performance of hand detection.
+            Face detection is OFF
           </p>
           {["paths", "hose", "kite", "canvas"].includes(pattern) &&
             !isScratchCanvas && (
-              <ul>
-                <li>
-                  Pinch your thumb and forefinger like this 👌 and drag them to
-                  draw.
-                </li>
-                <li>Release the pinch to stop drawing.</li>
-                <li>
-                  Wag your forefinger like this 👆 to delete what you drew.
-                </li>
+              <>
+                <p>Pinch thumb and forefinger 👌 to draw</p>
+                <p>Release the pinch to stop drawing</p>
+                <p>Wag your forefinger 👆 to delete</p>
                 {pattern !== "canvas" && (
-                  <li>You can add text along the path.</li>
+                  <p>Add text along the path if you want</p>
                 )}
-              </ul>
+              </>
             )}
           {isScratchCanvas && (
-            <ul>
-              <li>Hold space bar to draw, release it to stop drawing.</li>
-              <li>Choose finger points with which to draw, and the scratch pattern</li>
-              <li>Use pinch to scale your finger "brush"</li>
-              <li>Wag your forefinger like this 👆 to delete what you drew.</li>
-              <li>Use dispersion and dash for different feeling of the stroke.</li>
-            </ul>
+            <>
+              <p>Hold space bar to draw</p>
+              <p>Choose finger points that draw</p>
+              <p>Use pinch to scale the "brush"</p>
+              <p>Wag forefinger 👆 to delete</p>
+              <p>Use dispersion and dash for feeling</p>
+            </>
           )}
         </>
       )}
