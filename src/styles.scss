@@ -97,10 +97,10 @@
 
 * {
   box-sizing: border-box;
-  font-family: var(--font-family);
 }
 
 html {
+  font-family: var(--font-family);
   font-size: 16px;
   @include until {
     font-size: 14px;

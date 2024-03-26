@@ -15,7 +15,7 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
     text,
     radius,
     growth,
-    minimum,
+    minimum
   } = setup;
 
   if (pattern === "hose") {
@@ -88,6 +88,7 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
                 className={`number-mask`}
                 fill={processColor(color, opacity)}
                 fontSize={radius * minimum + scribbleAreaIndex}
+                dominantBaseline="text-after-edge"
               >
                 <textPath href={`#text-path-${scribbleAreaIndex}`}>
                   {arrangement > 0 && (
