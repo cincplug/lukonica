@@ -16,7 +16,6 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
     radius,
     growth,
     minimum,
-    imageUrl
   } = setup;
 
   if (pattern === "hose") {
@@ -103,13 +102,6 @@ const Scribble = ({ scribble, scribbleNewArea, setup }) => {
                   {text}
                 </textPath>
               </text>
-            )}
-            {imageUrl && scribbleArea.length && (
-              <image width={radius * minimum} x={0} y={0} href={imageUrl}>
-                <animateMotion dur={transDur * 10} repeatCount="indefinite" rotate="auto">
-                  <mpath href={`#text-path-${scribbleAreaIndex}`} />
-                </animateMotion>
-              </image>
             )}
           </React.Fragment>
         );
