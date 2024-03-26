@@ -107,7 +107,9 @@ const App = () => {
     if (isLoaded) return;
     if (shouldRunDetector) {
       const { videoWidth, videoHeight } = video;
-      setInputResolution({ width: videoWidth, height: videoHeight });
+      if(inputResolution.width >= 768) {
+        setInputResolution({ width: videoWidth, height: videoHeight });
+      }
       const ctx = canvasRef.current?.getContext("2d");
       runDetector({
         setupRef,
