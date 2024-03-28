@@ -55,16 +55,17 @@
 
   --radius: 0.2rem;
 
-  --font-family: "Figtree", sans-serif;
   --font-size-s: 0.5rem;
   --font-size-m: 0.8rem;
   --font-size-l: 1rem;
+  --font-family: "Figtree", sans-serif;
 }
 
 .theme {
   --bg: var(--color-skin-dark);
   --bg-input: var(--color-skin-mid);
   --bg-input-active: var(--color-skin-mid-light);
+  font-family: var(--font-family);
 }
 
 .theme-cognizant {
@@ -100,7 +101,6 @@
 }
 
 html {
-  font-family: var(--font-family);
   font-size: 16px;
   @include until {
     font-size: 14px;
@@ -183,6 +183,7 @@ input[type="range"],
 input[type="color"],
 select,
 button {
+  font-family: var(--font-family);
   &:hover,
   &:active,
   &.highlight {
@@ -489,9 +490,9 @@ label {
   h1 {
     margin: 0;
     letter-spacing: 0.1rem;
-    font-size: 3.8rem;
-    text-shadow: 0 0.1rem 0.1rem var(--color-skin-dark),
-      0 -0.1rem 0.1rem var(--color-skin-mid-light);
+    font-size: 2rem;
+    text-shadow: 0 0.2rem 0.2rem var(--color-skin-dark),
+      0 -0.2rem 0.2rem var(--color-skin-mid-light);
     color: var(--color-skin-mid-dark);
   }
   h2 {
