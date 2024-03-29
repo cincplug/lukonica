@@ -194,7 +194,8 @@
     "imageUrl": "",
     "pathStroke": "lines",
     "showsFaces": true,
-    "showsHands": true,
+    "showsHands": false,
+    "hasCursor": false,
     "isScratchCanvas": false,
     "activeMaskIndex": 13,
     "usesButtonPinch": false

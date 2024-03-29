@@ -16,7 +16,8 @@ const Drawing = (props) => {
     customMaskNewArea,
     activeMask,
     scribble,
-    scribbleNewArea
+    scribbleNewArea,
+    ball
   } = props;
   const { width, height } = inputResolution;
   const { radius, growth, pattern, showsFaces, activeScenarioIndex } = setup;
@@ -85,7 +86,7 @@ const Drawing = (props) => {
           d={`M${muzzle.x}, ${muzzle.y} V0`}
         ></path>
       )}
-      {points.length && activeScenarioIndex === 8 && <Ball setup={setup} />}
+      {points.length && activeScenarioIndex === 8 && <Ball setup={setup} ball={ball} />}
     </svg>
   );
 };

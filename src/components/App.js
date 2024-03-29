@@ -30,6 +30,11 @@ const App = () => {
   const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
   const [handsCount, setHandsCount] = useState(0);
   const [setup, setSetup] = useState(initialSetup);
+  const [ball, setBall] = useState({
+    x: targetResolution.width / 2,
+    y: targetResolution.height / 2,
+    angle: 45
+  });
 
   const setupRef = useRef(setup);
   useEffect(() => {
@@ -122,6 +127,7 @@ const App = () => {
         setScribble,
         setScribbleNewArea,
         activeMask,
+        setBall,
         ctx: ctx || null
       }).then((stopDetectorCallback) => {
         setStopDetector(() => stopDetectorCallback);
@@ -259,7 +265,8 @@ const App = () => {
                 customMaskNewArea,
                 activeMask,
                 scribble,
-                scribbleNewArea
+                scribbleNewArea,
+                ball
               }}
             />
           )}

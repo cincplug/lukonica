@@ -624,6 +624,7 @@ label {
 
 .ball {
   fill: var(--color-yellow);
+  transition: all 0.05s linear;
 }
 
 .hand-selection {

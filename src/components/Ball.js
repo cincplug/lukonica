@@ -1,5 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
-
 const screenResolution = {
   width: window.innerWidth,
   height: window.innerHeight
@@ -11,7 +9,7 @@ const board = {
   top: wallOffset,
   size: height - wallOffset * 2
 };
-const speed = 10;
+const speed = 60;
 
 const checkCollision = (ball, pathElement) => {
   let pathLength = pathElement.getTotalLength();
@@ -29,7 +27,7 @@ const checkCollision = (ball, pathElement) => {
   return { collision: false };
 };
 
-const getBall = (prevState) => {
+export const getBall = (prevState) => {
   const { x, y, angle } = prevState;
   let newX = x + speed * Math.cos((angle * Math.PI) / 180);
   let newY = y + speed * Math.sin((angle * Math.PI) / 180);
@@ -68,23 +66,8 @@ const getBall = (prevState) => {
 };
 
 const Ball = (props) => {
-  const { setup } = props;
-  const [ball, setBall] = useState({
-    x: width / 2,
-    y: height / 2,
-    angle: 45
-  });
+  const { setup, ball } = props;
 
-  const rafRef = useRef();
-
-  useEffect(() => {
-    const animate = () => {
-      setBall((prevState) => getBall(prevState));
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, []);
   const boardStyleProps = {
     strokeWidth: setup.minimum / 2,
     stroke: setup.color,
@@ -103,20 +86,6 @@ const Ball = (props) => {
           height={board.size}
           {...boardStyleProps}
         />
-        <circle
-          className="mask-path"
-          cx={board.left + board.size / 3}
-          cy={height / 3}
-          r={setup.minimum * setup.radius * 3}
-          {...boardStyleProps}
-        ></circle>
-        <circle
-          className="mask-path"
-          cx={board.left + (board.size / 3) * 2}
-          cy={height / 3}
-          r={setup.minimum * setup.radius * 4}
-          {...boardStyleProps}
-        ></circle>
         <circle
           className="mask-path"
           cx={board.left + board.size / 3}

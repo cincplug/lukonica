@@ -1,5 +1,6 @@
 import { processFaces } from "./processFaces";
 import { processHands } from "./processHands";
+import { getBall } from "../components/Ball";
 
 export const runDetector = async ({
   video,
@@ -7,6 +8,7 @@ export const runDetector = async ({
   setPoints,
   setCustomMask,
   setCustomMaskNewArea,
+  setBall,
   setCursor,
   setHandsCount,
   setScribbleNewArea,
@@ -106,6 +108,7 @@ export const runDetector = async ({
     if (shouldContinue) {
       animationFrameId = requestAnimationFrame(detect);
     }
+    setBall((prevState) => getBall(prevState));
   };
   animationFrameId = requestAnimationFrame(detect);
 
