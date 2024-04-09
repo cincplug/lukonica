@@ -12,7 +12,8 @@ export const runDetector = async ({
   setCursor,
   setHandsCount,
   setScribbleNewArea,
-  ctx
+  ctx,
+  setMessage
 }) => {
   let shouldContinue = true;
 
@@ -29,10 +30,18 @@ export const runDetector = async ({
       runtime: "tfjs",
       refineLandmarks: false
     };
-    facesDetector = await faceLandmarksDetectionModule.createDetector(
-      facesModel,
-      facesDetectorConfig
-    );
+    try {
+      facesDetector = await faceLandmarksDetectionModule.createDetector(
+        facesModel,
+        facesDetectorConfig
+      );
+    } catch (error) {
+      console.error("Error creating detector", error);
+      setMessage(
+        "Something's wrong with fetching data. It's not us, it's them 🥸"
+      );
+      return;
+    }
   }
 
   if (setupRef.current.showsHands) {
@@ -44,10 +53,18 @@ export const runDetector = async ({
       runtime: "tfjs",
       modelType: "lite"
     };
-    handsDetector = await handPoseDetectionModule.createDetector(
-      handsModel,
-      handsDetectorConfig
-    );
+    try {
+      handsDetector = await handPoseDetectionModule.createDetector(
+        handsModel,
+        handsDetectorConfig
+      );
+    } catch (error) {
+      console.error("Error creating detector", error);
+      setMessage(
+        "Something's wrong with fetching data. It's not us, it's them 🥸"
+      );
+      return;
+    }
   }
 
   let lastTime = 0;
@@ -74,6 +91,7 @@ export const runDetector = async ({
         hands = await handsDetector.estimateHands(video, estimationConfig);
       }
     } catch (error) {
+      setMessage("I don't see well, is it too dark? 🥸");
       console.error("Error estimating faces or hands", error);
       return;
     }

@@ -654,3 +654,24 @@ label {
     padding-left: 0;
   }
 }
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 20rem;
+  text-align: center;
+  background: var(--color-skin-light);
+  border: 2px solid var(--color-skin-mid);
+  color: var(--color-skin-dark);
+  padding: var(--gap);
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.2rem 0.4rem;
+    transform: translate(50%, -50%);
+    font-size: 1rem;
+  }
+}

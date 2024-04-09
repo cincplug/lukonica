@@ -7,6 +7,7 @@ import Webcam from "react-webcam";
 import Menu from "./nav/Menu";
 import MaskEditor from "./nav/MaskEditor";
 import Splash from "./nav/Splash";
+import Message from "./nav/Message";
 import Drawing from "./Drawing";
 import Cursor from "./Cursor";
 import "../styles.scss";
@@ -35,6 +36,7 @@ const App = () => {
     y: targetResolution.height / 2,
     angle: 45
   });
+  const [message, setMessage] = useState("");
 
   const setupRef = useRef(setup);
   useEffect(() => {
@@ -112,7 +114,7 @@ const App = () => {
     if (isLoaded) return;
     if (shouldRunDetector) {
       const { videoWidth, videoHeight } = video;
-      if(inputResolution.width >= 768) {
+      if (inputResolution.width >= 768) {
         setInputResolution({ width: videoWidth, height: videoHeight });
       }
       const ctx = canvasRef.current?.getContext("2d");
@@ -128,7 +130,8 @@ const App = () => {
         setScribbleNewArea,
         activeMask,
         setBall,
-        ctx: ctx || null
+        ctx: ctx || null,
+        setMessage
       }).then((stopDetectorCallback) => {
         setStopDetector(() => stopDetectorCallback);
       });
@@ -285,6 +288,7 @@ const App = () => {
       ) : (
         <Splash {...{ setIsEditing, handlePlayButtonClick }} />
       )}
+      {message && <Message {...{ message, setMessage }} />}
       <Router>
         <Routes>
           <Route path="/:scenario" element={menu} />
