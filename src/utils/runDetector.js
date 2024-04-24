@@ -18,14 +18,15 @@ export const runDetector = async ({
   );
   const facesModel =
     faceLandmarksDetectionModule.SupportedModels.MediaPipeFaceMesh;
+  // const facesDetectorConfig = {
+  //   runtime: "tfjs",
+  //   refineLandmarks: false
+  // };
   const facesDetectorConfig = {
-    runtime: "tfjs",
+    runtime: "mediapipe",
+    solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh",
     refineLandmarks: false
   };
-  // const facesDetectorConfig = {
-  //   runtime: "mediapipe",
-  //   solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"
-  // };
   try {
     facesDetector = await faceLandmarksDetectionModule.createDetector(
       facesModel,

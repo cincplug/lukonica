@@ -2,14 +2,16 @@ const screenResolution = {
   width: window.innerWidth,
   height: window.innerHeight
 };
+const menuWidth = 260;
 const { width, height } = screenResolution;
-const wallOffset = 50;
 const board = {
-  left: width / 2 - height / 2 - wallOffset / 2,
-  top: wallOffset,
-  size: height - wallOffset * 2
+  left: menuWidth,
+  top: 0,
+  width: width - 2 * menuWidth,
+  height
 };
-const speed = 60;
+const gridCol = board.width / 12;
+const speed = 40;
 
 const checkCollision = (ball, pathElement) => {
   let pathLength = pathElement.getTotalLength();
@@ -48,8 +50,8 @@ export const getBall = (prevState) => {
   } else {
     const rectX = board.left;
     const rectY = board.top;
-    const rectWidth = board.size;
-    const rectHeight = board.size;
+    const rectWidth = board.width;
+    const rectHeight = board.height;
     if (newX < rectX || newX > rectX + rectWidth) {
       newAngle = 180 - newAngle;
     }
@@ -82,24 +84,39 @@ const Ball = (props) => {
           y={board.top}
           rx={setup.minimum * setup.radius}
           ry={setup.minimum * setup.radius}
-          width={board.size}
-          height={board.size}
+          width={board.width}
+          height={board.height}
           {...boardStyleProps}
         />
         <circle
           className="mask-path"
-          cx={board.left + board.size / 3}
-          cy={(height / 3) * 2}
-          r={setup.minimum * setup.radius * 4}
+          cx={board.left + gridCol * 4}
+          cy={ gridCol * 4}
+          r={gridCol}
           {...boardStyleProps}
         ></circle>
         <circle
           className="mask-path"
-          cx={board.left + (board.size / 3) * 2}
-          cy={(height / 3) * 2}
-          r={setup.minimum * setup.radius * 3}
+          cx={board.left + gridCol * 8}
+          cy={ gridCol * 4}
+          r={gridCol}
           {...boardStyleProps}
         ></circle>
+        <circle
+          className="mask-path"
+          cx={board.left + gridCol * 4}
+          cy={board.height - gridCol * 4}
+          r={gridCol}
+          {...boardStyleProps}
+        ></circle>
+        <circle
+          className="mask-path"
+          cx={board.left + gridCol * 8}
+          cy={board.height - gridCol * 4}
+          r={gridCol}
+          {...boardStyleProps}
+        ></circle>
+
         <circle
           className="ball"
           cx={ball.x}
