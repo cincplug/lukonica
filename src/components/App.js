@@ -9,7 +9,6 @@ import MaskEditor from "./nav/MaskEditor";
 import Splash from "./nav/Splash";
 import Message from "./nav/Message";
 import Drawing from "./Drawing";
-import Cursor from "./Cursor";
 import "../styles.scss";
 
 const targetResolution = {
@@ -26,10 +25,6 @@ const App = () => {
   const [customMask, setCustomMask] = useState([]);
   const [customMaskNewArea, setCustomMaskNewArea] = useState([]);
   const [activeMask, setActiveMask] = useState([]);
-  const [scribble, setScribble] = useState([]);
-  const [scribbleNewArea, setScribbleNewArea] = useState([]);
-  const [cursor, setCursor] = useState({ x: 0, y: 0, isPinched: false });
-  const [handsCount, setHandsCount] = useState(0);
   const [setup, setSetup] = useState(initialSetup);
   const [ball, setBall] = useState({
     x: targetResolution.width / 2,
@@ -68,22 +63,10 @@ const App = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (cursor.isWagging && setup.pattern !== "canvas") {
-      clearPaths();
-    }
-  }, [cursor.isWagging, setup.pattern]);
-
   const clearPaths = () => {
-    setScribble([]);
-    setScribbleNewArea([]);
     setPoints([]);
     setCustomMask([]);
     setCustomMaskNewArea([]);
-    if (canvasRef.current) {
-      const ctx = canvasRef.current.getContext("2d");
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    }
   };
 
   const handleInputChange = (event) => {
@@ -101,7 +84,6 @@ const App = () => {
   };
 
   const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
 
   const [stopDetector, setStopDetector] = useState(null);
   const [shouldRunDetector, setShouldRunDetector] = useState(false);
@@ -117,20 +99,14 @@ const App = () => {
       if (inputResolution.width >= 768) {
         setInputResolution({ width: videoWidth, height: videoHeight });
       }
-      const ctx = canvasRef.current?.getContext("2d");
       runDetector({
         setupRef,
         video,
         setPoints,
         setCustomMask,
         setCustomMaskNewArea,
-        setCursor,
-        setHandsCount,
-        setScribble,
-        setScribbleNewArea,
         activeMask,
         setBall,
-        ctx: ctx || null,
         setMessage
       }).then((stopDetectorCallback) => {
         setStopDetector(() => stopDetectorCallback);
@@ -152,9 +128,7 @@ const App = () => {
         }
         setShouldRunDetector(!prevIsStarted);
         return {
-          ...prevSetup,
-          showsFaces: prevSetup.showsFaces,
-          showsHands: true
+          ...prevSetup
         };
       });
       return !prevIsStarted;
@@ -165,40 +139,6 @@ const App = () => {
   if (flatMask.length && setup.arrangement) {
     flatMask = flatMask.slice(0, -setup.arrangement - 1);
   }
-  if (setup.showsHands && points && points.length > 0 && handsCount > 0) {
-    const pointsPerHand = 21;
-    const handsPointsTotal = handsCount * pointsPerHand;
-    flatMask = flatMask.concat(
-      ...Array.from(
-        { length: handsPointsTotal },
-        (_, i) => i + points.length - handsPointsTotal
-      )
-    );
-  }
-
-  useEffect(() => {
-    if (
-      !cursor.isPinched &&
-      (customMaskNewArea.length > 0 || scribbleNewArea.length > 0)
-    ) {
-      if (customMaskNewArea.length > 0) {
-        setCustomMaskNewArea((prevCustomMaskNewArea) => {
-          setCustomMask((prevCustomMask) => {
-            return [...prevCustomMask, prevCustomMaskNewArea];
-          });
-          return [];
-        });
-      }
-      if (scribbleNewArea.length > 0) {
-        setScribbleNewArea((prevScribbleNewArea) => {
-          setScribble((prevScribble) => {
-            return [...prevScribble, prevScribbleNewArea];
-          });
-          return [];
-        });
-      }
-    }
-  }, [cursor.isPinched, customMaskNewArea.length, scribbleNewArea.length]);
 
   const menu = (
     <Menu
@@ -247,15 +187,6 @@ const App = () => {
             mirrored={true}
             imageSmoothing={false}
           />
-          <canvas
-            className={`wrap canvas ${
-              setup.pattern !== "canvas" ? "hidden" : ""
-            }`}
-            ref={canvasRef}
-            width={width}
-            height={height}
-            style={{ mixBlendMode: setup.blendMode }}
-          ></canvas>
           {setup.pattern !== "canvas" && (
             <Drawing
               {...{
@@ -263,12 +194,9 @@ const App = () => {
                 setup,
                 points,
                 flatMask,
-                cursor,
                 customMask,
                 customMaskNewArea,
                 activeMask,
-                scribble,
-                scribbleNewArea,
                 ball
               }}
             />
@@ -279,11 +207,6 @@ const App = () => {
           >
             Stop camera
           </button>
-          <Cursor
-            cursor={cursor}
-            hasCursor={setup.hasCursor}
-            isScratchCanvas={setup.isScratchCanvas}
-          />
         </>
       ) : (
         <Splash {...{ setIsEditing, handlePlayButtonClick }} />
@@ -298,7 +221,6 @@ const App = () => {
       {isEditing ? (
         <MaskEditor {...{ inputResolution, setIsEditing, activeMask }} />
       ) : null}
-      {/* <pre>{JSON.stringify(scribbleNewArea, null, 4)}</pre> */}
     </div>
   );
 };

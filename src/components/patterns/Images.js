@@ -1,15 +1,13 @@
 import React from "react";
 import bubble from "../../assets/img/bubble.png";
-import { getDistance } from "../../utils";
 
-const Images = ({ points, flatMask, setup, cursor }) => {
+const Images = ({ points, flatMask, setup }) => {
   const {
     arrangement,
     radius,
     growth,
     transDur,
     minimum,
-    pinchThreshold,
     hasSvgAnim,
     hasCssAnim
   } = setup;
@@ -21,9 +19,6 @@ const Images = ({ points, flatMask, setup, cursor }) => {
         (flatMaskPoint - arrangement + points.length) % points.length
       ];
 
-    if (!pointFrom || getDistance(cursor, pointFrom) < pinchThreshold) {
-      return null;
-    }
     const getSize = (point = index) => {
       return (
         Math.max(

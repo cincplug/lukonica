@@ -101,22 +101,12 @@ export const saveJson = (areas) => {
 export const saveImage = () => {
   const link = document.createElement("a");
   const svgElement = document.querySelector(".drawing");
-  const canvasElement = document.querySelector(".canvas");
   if (svgElement) {
     link.download = "lukonica-scribble.svg";
     const base64doc = Buffer.from(unescape(encodeURIComponent(svgElement.outerHTML))).toString('base64');
     const e = new MouseEvent("click");
     link.href = "data:image/svg+xml;base64," + base64doc;
     link.dispatchEvent(e);
-  } else {
-    link.download = "lukonica-canvas.png";
-    link.setAttribute(
-      "href",
-      canvasElement
-        .toDataURL("image/png")
-        .replace("image/png", "image/octet-stream")
-    );
-    link.click();
   }
 };
 

@@ -1,70 +1,42 @@
 import { processFaces } from "./processFaces";
-import { processHands } from "./processHands";
 import { getBall } from "../components/Ball";
 
 export const runDetector = async ({
   video,
   setupRef,
   setPoints,
-  setCustomMask,
-  setCustomMaskNewArea,
   setBall,
   setCursor,
-  setHandsCount,
-  setScribbleNewArea,
-  ctx,
   setMessage
 }) => {
   let shouldContinue = true;
 
   let facesDetector = null;
-  let handsDetector = null;
 
-  if (setupRef.current.showsFaces) {
-    const faceLandmarksDetectionModule = await import(
-      "@tensorflow-models/face-landmarks-detection"
+  const faceLandmarksDetectionModule = await import(
+    "@tensorflow-models/face-landmarks-detection"
+  );
+  const facesModel =
+    faceLandmarksDetectionModule.SupportedModels.MediaPipeFaceMesh;
+  const facesDetectorConfig = {
+    runtime: "tfjs",
+    refineLandmarks: false
+  };
+  // const facesDetectorConfig = {
+  //   runtime: "mediapipe",
+  //   solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"
+  // };
+  try {
+    facesDetector = await faceLandmarksDetectionModule.createDetector(
+      facesModel,
+      facesDetectorConfig
     );
-    const facesModel =
-      faceLandmarksDetectionModule.SupportedModels.MediaPipeFaceMesh;
-    const facesDetectorConfig = {
-      runtime: "tfjs",
-      refineLandmarks: false
-    };
-    try {
-      facesDetector = await faceLandmarksDetectionModule.createDetector(
-        facesModel,
-        facesDetectorConfig
-      );
-    } catch (error) {
-      console.error("Error creating detector", error);
-      setMessage(
-        "Something's wrong with fetching data. It's not us, it's them 🥸"
-      );
-      return;
-    }
-  }
-
-  if (setupRef.current.showsHands) {
-    const handPoseDetectionModule = await import(
-      "@tensorflow-models/hand-pose-detection"
+  } catch (error) {
+    console.error("Error creating detector", error);
+    setMessage(
+      "Something's wrong with fetching data. It's not us, it's them 🥸"
     );
-    const handsModel = handPoseDetectionModule.SupportedModels.MediaPipeHands;
-    const handsDetectorConfig = {
-      runtime: "tfjs",
-      modelType: "lite"
-    };
-    try {
-      handsDetector = await handPoseDetectionModule.createDetector(
-        handsModel,
-        handsDetectorConfig
-      );
-    } catch (error) {
-      console.error("Error creating detector", error);
-      setMessage(
-        "Something's wrong with fetching data. It's not us, it's them 🥸"
-      );
-      return;
-    }
+    return;
   }
 
   let lastTime = 0;
@@ -79,26 +51,19 @@ export const runDetector = async ({
     }
     lastTime = timeStamp;
 
-    const { showsFaces, showsHands } = setupRef.current;
     const estimationConfig = { flipHorizontal: true, staticImageMode: false };
     let faces = null;
-    let hands = null;
     try {
-      if (showsFaces && facesDetector) {
-        faces = await facesDetector.estimateFaces(video, estimationConfig);
-      }
-      if (showsHands && handsDetector) {
-        hands = await handsDetector.estimateHands(video, estimationConfig);
-      }
+      faces = await facesDetector.estimateFaces(video, estimationConfig);
     } catch (error) {
       setMessage("I don't see well, is it too dark? 🥸");
-      console.error("Error estimating faces or hands", error);
+      console.error("Error estimating faces", error);
       return;
     }
 
     let points = [];
 
-    if (showsFaces && faces?.length) {
+    if (faces?.length) {
       const facePoints = processFaces({
         faces,
         setCursor
@@ -106,20 +71,6 @@ export const runDetector = async ({
       points = [...points, ...facePoints];
     }
 
-    if (showsHands && hands?.length) {
-      const handPoints = processHands({
-        setupRef,
-        hands,
-        points,
-        setCursor,
-        setCustomMaskNewArea,
-        setCustomMask,
-        setScribbleNewArea,
-        ctx
-      });
-      points = [...points, ...handPoints];
-    }
-    setHandsCount(hands ? hands.length : 0);
     if (points.length) {
       setPoints(points);
     }
