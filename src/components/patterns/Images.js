@@ -12,13 +12,13 @@ const Images = ({ points, flatMask, setup }) => {
     hasCssAnim
   } = setup;
 
+  if (!flatMask || flatMask.length === 0) return null;
+
   return flatMask.map((flatMaskPoint, index) => {
     const pointFrom = points[flatMaskPoint];
     const pointTo =
-      points[
-        (flatMaskPoint - arrangement + points.length) % points.length
-      ];
-
+      points[(flatMaskPoint - arrangement + points.length) % points.length];
+    if (!pointFrom || !pointTo) return null;
     const getSize = (point = index) => {
       return (
         Math.max(
