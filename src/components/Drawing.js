@@ -24,7 +24,12 @@ const Drawing = (props) => {
       className="drawing"
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${width} ${height}`}
-      style={{ mixBlendMode: setup.blendMode, width, height }}
+      style={{
+        mixBlendMode: setup.blendMode,
+        width,
+        height,
+        transform: `scale(${setup.zoom})`
+      }}
     >
       {(() => {
         switch (pattern) {
@@ -34,7 +39,7 @@ const Drawing = (props) => {
                 {...{
                   points,
                   flatMask,
-                  setup,
+                  setup
                 }}
               />
             );

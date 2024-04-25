@@ -179,7 +179,8 @@ const App = () => {
             height={height}
             style={{
               opacity: setup.videoOpacity / 255,
-              position: "absolute"
+              position: "absolute",
+              transform: `scale(${setup.zoom}, ${setup.zoom})`
             }}
             videoConstraints={inputResolution}
             forceScreenshotSourceSize={true}
