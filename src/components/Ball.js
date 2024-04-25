@@ -2,16 +2,25 @@ const screenResolution = {
   width: window.innerWidth,
   height: window.innerHeight
 };
-const menuWidth = 260;
+
 const { width, height } = screenResolution;
-const board = {
+const isMobile = width <= 375;
+const menuWidth = 260;
+const menuHeight = 98;
+const board = isMobile ? {
+  left: 0,
+  top: menuHeight,
+  width,
+  height
+} :
+{
   left: menuWidth,
   top: 0,
   width: width - 2 * menuWidth,
   height
 };
 const gridCol = board.width / 12;
-const speed = 40;
+const speed = 30;
 
 const checkCollision = (ball, pathElement) => {
   let pathLength = pathElement.getTotalLength();
