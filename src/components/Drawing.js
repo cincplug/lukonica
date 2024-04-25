@@ -77,7 +77,7 @@ const Drawing = (props) => {
           d={`M${muzzle.x}, ${muzzle.y} V0`}
         ></path>
       )} */}
-      {points.length && activeScenarioIndex === 8 && (
+      {points.length && [8,9].includes(activeScenarioIndex) && (
         <Ball setup={setup} ball={ball} />
       )}
     </svg>

@@ -66,13 +66,15 @@ const MaskSelection = (props) => {
               </svg>
             </button>
           ))}
-          <button
-            className="menu--masks__button more"
-            onClick={fetchMoreMasks}
-            key={`p-more`}
-          >
-            More
-          </button>
+          {activeMaskIndex > 20 && (
+            <button
+              className="menu--masks__button more"
+              onClick={fetchMoreMasks}
+              key={`p-more`}
+            >
+              More
+            </button>
+          )}
         </fieldset>
       )}
     </>
