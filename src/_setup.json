@@ -3,7 +3,7 @@
     "id": "theme",
     "title": "Theme",
     "description": "Colors and font",
-    "value": "cognizant",
+    "value": "default",
     "type": "select",
     "options": ["default", "cognizant"]
   },
